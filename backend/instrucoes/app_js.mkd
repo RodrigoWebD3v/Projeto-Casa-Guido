@@ -1,0 +1,13 @@
+### `app.js`
+Este é o ponto de entrada principal da aplicação. Ele inicializa o Express e carrega os loaders.
+
+#### Exemplo:
+```javascript
+const express = require("express");
+const loaders = require("./loaders");
+
+const app = express();
+loaders.init(app);
+
+module.exports = app;
+```

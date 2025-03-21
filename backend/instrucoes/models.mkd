@@ -1,0 +1,11 @@
+## 📂 `models/` - Modelos do Banco de Dados
+Responsável por interagir com o banco através do **Prisma ORM**.
+
+#### Exemplo de Arquivo: `user.js`
+```javascript
+const prisma = require("../config/database");
+
+exports.findUserByEmail = async (email) => {
+  return prisma.user.findUnique({ where: { email } });
+};
+```

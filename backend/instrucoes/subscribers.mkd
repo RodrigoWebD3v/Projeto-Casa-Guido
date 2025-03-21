@@ -1,0 +1,14 @@
+## 📂 `subscribers/` - Manipuladores de Eventos
+Gerencia eventos assíncronos, como envio de e-mails ou notificações.
+
+#### Exemplo de Arquivo: `emailSubscriber.js`
+```javascript
+const eventEmitter = require("events");
+const emitter = new eventEmitter();
+
+emitter.on("userRegistered", (user) => {
+  console.log(`Email enviado para ${user.email}`);
+});
+
+module.exports = emitter;
+```

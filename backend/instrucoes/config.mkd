@@ -1,0 +1,10 @@
+## 📂 `config/` - Configurações Gerais
+Armazena configurações importantes, como a conexão com o banco de dados.
+
+#### Exemplo de Arquivo: `database.js`
+```javascript
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
+
+module.exports = prisma;
+```

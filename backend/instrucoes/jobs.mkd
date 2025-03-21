@@ -1,0 +1,11 @@
+## 📂 `jobs/` - Tarefas Agendadas
+Aqui ficam os **cron jobs** e outras tarefas assíncronas que precisam rodar periodicamente.
+
+#### Exemplo de Arquivo: `exampleJob.js`
+```javascript
+const cron = require("node-cron");
+
+cron.schedule("0 0 * * *", () => {
+  console.log("Rodando tarefa diária às 00:00");
+});
+```

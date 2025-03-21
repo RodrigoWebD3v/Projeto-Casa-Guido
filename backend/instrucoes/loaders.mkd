@@ -1,0 +1,15 @@
+## 📂 `loaders/` - Inicialização Modular
+Carrega configurações, middlewares e módulos essenciais para o funcionamento da aplicação.
+
+#### Exemplo de Arquivo: `index.js`
+```javascript
+const express = require("express");
+const cors = require("cors");
+const routes = require("../routes");
+
+exports.init = (app) => {
+  app.use(cors());
+  app.use(express.json());
+  app.use("/api", routes);
+};
+```

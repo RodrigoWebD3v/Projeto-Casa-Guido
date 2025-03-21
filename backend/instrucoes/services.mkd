@@ -1,0 +1,13 @@
+## 📂 `services/` - Lógica de Negócio
+Contém a lógica de processamento dos dados da aplicação.
+
+#### Exemplo de Arquivo: `userService.js`
+```javascript
+const prisma = require("../config/database");
+const bcrypt = require("bcryptjs");
+
+exports.createUser = async (data) => {
+  const hashedPassword = await bcrypt.hash(data.password, 10);
+  return prisma.user.create({ data: { ...data, password: hashedPassword } });
+};
+```
