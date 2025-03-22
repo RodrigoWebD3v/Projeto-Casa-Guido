@@ -1,0 +1,34 @@
+
+const { hashPassword, comparePassword } = require('../utils/bcrypt');
+const { gerarToken, gerarRefresToken } = require('../utils/jwt');
+const { criarUsuario, buscarUsuarioPorEmail, buscarUsuarioPorId } = require('../repository/userRepository');
+
+const registerUser = async (name, email, password) => {
+    const hashedPassword = await hashPassword(password);
+    const user = await criarUsuario(name, email, hashedPassword);
+    return user;
+};
+
+const loginUser = async (email, password) => {
+    const user = await buscarUsuarioPorEmail(email);
+    if (!user) throw new Error('User not found');
+  
+    const isValidPassword = await comparePassword(password, user.password);
+    if (!isValidPassword) throw new Error('Invalid password');
+  
+    const token = gerarToken(user.id);
+    const refreshToken = gerarRefresToken(user.id);
+  
+    return { token, refreshToken };
+};
+
+const refreshToken = async (refreshToken) => {
+    const decoded = verifyToken(refreshToken);
+    const user = await  buscarUsuarioPorId(decoded.userId); 
+    if (!user) throw new Error('User not found');
+  
+    const newToken = gerarToken(user.id);
+    return { token: newToken };
+};
+
+module.exports = { registerUser, loginUser, refreshToken };
