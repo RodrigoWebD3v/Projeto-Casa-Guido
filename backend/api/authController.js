@@ -1,7 +1,7 @@
 const {
   registerUser,
   loginUser,
-  refreshToken,
+  refreshTokenFunc
 } = require("../services/authServices");
 
 const registrar = async (req, res) => {
@@ -27,7 +27,7 @@ const login = async (req, res) => {
 const refresh = async (req, res) => {
   try {
     const { refreshToken } = req.body;
-    const tokens = await refreshToken(refreshToken);
+    const tokens = await refreshTokenFunc(refreshToken);
     res.status(200).json(tokens);
   } catch (error) {
     res.status(400).json({ error: error.message });

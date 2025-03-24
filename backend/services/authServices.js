@@ -1,6 +1,6 @@
 
-const { hashPassword, comparePassword } = require('../utils/bcrypt');
-const { gerarToken, gerarRefresToken } = require('../utils/jwt');
+const { hashPassword, comparaPassword } = require('../utils/bcrypt');
+const { gerarToken, gerarRefresToken, verificarToken} = require('../utils/jwt');
 const { criarUsuario, buscarUsuarioPorEmail, buscarUsuarioPorId } = require('../repository/userRepository');
 
 const registerUser = async (name, email, password) => {
@@ -13,7 +13,7 @@ const loginUser = async (email, password) => {
     const user = await buscarUsuarioPorEmail(email);
     if (!user) throw new Error('User not found');
   
-    const isValidPassword = await comparePassword(password, user.password);
+    const isValidPassword = await comparaPassword(password, user.password);
     if (!isValidPassword) throw new Error('Invalid password');
   
     const token = gerarToken(user.id);
@@ -22,8 +22,8 @@ const loginUser = async (email, password) => {
     return { token, refreshToken };
 };
 
-const refreshToken = async (refreshToken) => {
-    const decoded = verifyToken(refreshToken);
+const refreshTokenFunc = async (refreshToken) => {
+    const decoded = verificarToken(refreshToken);
     const user = await  buscarUsuarioPorId(decoded.userId); 
     if (!user) throw new Error('User not found');
   
@@ -31,4 +31,4 @@ const refreshToken = async (refreshToken) => {
     return { token: newToken };
 };
 
-module.exports = { registerUser, loginUser, refreshToken };
+module.exports = { registerUser, loginUser, refreshTokenFunc };
