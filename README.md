@@ -3,7 +3,7 @@ Projeto casa Guido juntamente com a Unesc
 
 
 🔹 1. Stack Tecnológica
- - Frontend: React.js (com Vite para mais agilidade)
+ - Frontend: React.js (com Vite para mais agilidade) (NEXT JS como framework)
  - Backend: Node.js (com Express.js, mais leve)
  - Banco de Dados: PostgreSQL (rodando via Docker)
  - Autenticação: JWT (com Refresh Token opcional)
