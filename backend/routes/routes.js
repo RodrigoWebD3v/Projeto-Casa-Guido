@@ -1,7 +1,9 @@
 const express = require('express');
-const { register, login, refresh } = require('../api/authController');
 
-const router = express.Router();
+const { buscarUsuarioController } = require('../api/usuarioController');
 
+const routes = express.Router();
 
-module.exports = router;
+routes.get('/usuario', buscarUsuarioController);
+
+module.exports = routes;
