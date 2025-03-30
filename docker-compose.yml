@@ -1,19 +1,19 @@
-version: '3.8'
+version: '3.8' # Especifica a versão do arquivo docker-compose.
 
-services:
-  postgres:
-    image: postgres:14.2-alpine
-    container_name: casa_guido_postgres
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: guido123456
-      POSTGRES_DB: casa_guido
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+services: # Define os serviços que serão executados.
+  postgres: # Define o serviço PostgreSQL.
+    image: postgres:14.2-alpine # Define a imagem do Docker a ser usada (PostgreSQL versão 14.2 com imagem alpine).
+    container_name: casa_guido_postgres # Define o nome do container que será criado.
+    restart: always # Define que o container deve reiniciar automaticamente se parar.
+    environment: # Define as variáveis de ambiente do container.
+      POSTGRES_USER: postgres # Define o nome de usuário padrão do PostgreSQL.
+      POSTGRES_PASSWORD: guido123456 # Define a senha do usuário padrão do PostgreSQL.
+      POSTGRES_DB: casa_guido # Define o nome do banco de dados inicial.
+    ports: # Define o mapeamento de portas entre o host e o container.
+      - "5432:5432" # Mapeia a porta 5432 do host para a porta 5432 do container.
+    volumes: # Define os volumes para persistência de dados.
+      - postgres_data:/var/lib/postgresql/data # Monta o volume 'postgres_data' no diretório de dados do PostgreSQL dentro do container.
 
-volumes:
-  postgres_data:
-    driver: local
+volumes: # Define os volumes a serem usados.
+  postgres_data: # Define o volume 'postgres_data'.
+    driver: local # Define que o volume sera local.
