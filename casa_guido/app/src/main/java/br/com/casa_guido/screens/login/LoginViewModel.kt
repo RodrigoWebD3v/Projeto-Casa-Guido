@@ -1,32 +1,22 @@
 package br.com.casa_guido.screens.login
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import br.com.casa_guido.dto.LoginResponse
-import br.com.casa_guido.repository.LoginRepository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
+import br.com.casa_guido.navigation.root.ViewModelAuthMananger
+import br.com.casa_guido.repository.AuthRepository
 
 class LoginViewModel(
-    private val repository: LoginRepository
+    private val repository: AuthRepository,
+    private val viewModelAuthManager: ViewModelAuthMananger
 ) : ViewModel() {
 
-    private val _data = MutableStateFlow<LoginResponse?>(null)
-    val data = _data.asStateFlow()
 
-    private fun login() {
-        try {
-            viewModelScope.launch {
-                val resposta = repository.loginUsuario("joao11@example.com", "senha123")
-                _data.value = resposta
-            }
-        } catch (e: Exception) {
-            println("Erro ao buscar dados: ${e.message}")
-        }
+    fun login(email: String, password: String, context: Context) {
+        viewModelAuthManager.login(context, email, password)
     }
 
+
     init {
-        login()
+        //login()
     }
 }
