@@ -6,20 +6,25 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
-import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.json.Json
 import io.ktor.client.request.headers
 import io.ktor.http.ContentType
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 
 class ClienteApi {
 
-    val endPoint = "https://jsonplaceholder.typicode.com/todos/1"
+    var localHost: Boolean = true
+
+    var endpointPrincipal = if (localHost) "http://10.0.2.2:3000" else "http://192.168.101.14:3000"
+
+
+    val authEndpoint = "${endpointPrincipal}/api/v1/auth"
 
     val client = HttpClient(Android) {
         install(ContentNegotiation) {
             json(
                 Json { ignoreUnknownKeys = true },
-            ) // Ignora campos desconhecidos
+            )
         }
         install(Logging) {
             level = LogLevel.INFO
