@@ -20,7 +20,7 @@ fun AuthNavHost(navHostController: NavHostController, paddingValues: PaddingValu
        composable<AuthRoutes.LoginRoute> {
            Login(paddingValues = paddingValues, onLoginSuccess = {
                navHostController.navigate(
-                   Routes.Home
+                   Routes.DashBoard
                )
            })
        }

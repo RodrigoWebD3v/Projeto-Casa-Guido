@@ -15,22 +15,27 @@ fun RootNavHost(
     paddingValues: PaddingValues,
     ) {
 
-    val viewModelAuthMananger = koinViewModel<ViewModelAuthMananger>()
-    val isAuthenticated = viewModelAuthMananger.isAuthenticated.collectAsState()
+//    val viewModelAuthMananger = koinViewModel<ViewModelAuthMananger>()
+//    val isAuthenticated = viewModelAuthMananger.isAuthenticated.collectAsState()
+//
+//    LaunchedEffect(
+//        Unit
+//    ) { viewModelAuthMananger.refreshToken(rootNavHostController.context) }
+//
+//    if (isAuthenticated.value) {
+//        AppNavHost(
+//            navHostController = rootNavHostController,
+//            paddingValues = paddingValues
+//        )
+//    } else {
+//        AuthNavHost(
+//            navHostController = rootNavHostController,
+//            paddingValues = paddingValues
+//        )
+//    }
 
-    LaunchedEffect(
-        Unit
-    ) { viewModelAuthMananger.refreshToken(rootNavHostController.context) }
-
-    if (isAuthenticated.value) {
-        AppNavHost(
-            navHostController = rootNavHostController,
-            paddingValues = paddingValues
-        )
-    } else {
-        AuthNavHost(
-            navHostController = rootNavHostController,
-            paddingValues = paddingValues
-        )
-    }
+    AppNavHost(
+        navHostController = rootNavHostController,
+        paddingValues = paddingValues
+    )
 }
