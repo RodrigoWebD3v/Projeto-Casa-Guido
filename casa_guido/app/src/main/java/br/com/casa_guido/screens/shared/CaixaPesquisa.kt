@@ -7,6 +7,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -40,7 +41,7 @@ fun CaixaPesquisa(
 
     val focusManager = LocalFocusManager.current
 
-    OutlinedTextField(
+    TextField(
         modifier = modifier
             .fillMaxWidth()
             .padding(10.dp),
