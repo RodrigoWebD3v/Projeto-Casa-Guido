@@ -12,7 +12,6 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun RootNavHost(
     rootNavHostController: NavHostController,
-    paddingValues: PaddingValues,
     ) {
 
 //    val viewModelAuthMananger = koinViewModel<ViewModelAuthMananger>()
@@ -36,6 +35,5 @@ fun RootNavHost(
 
     AppNavHost(
         navHostController = rootNavHostController,
-        paddingValues = paddingValues
     )
 }

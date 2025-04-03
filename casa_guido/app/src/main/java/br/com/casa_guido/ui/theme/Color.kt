@@ -1,6 +1,5 @@
 package br.com.casa_guido.ui.theme
 
-import android.text.Highlights
 import androidx.compose.ui.graphics.Color
 
 val Purple80 = Color(0xFFD0BCFF)
@@ -18,7 +17,7 @@ val BackgroundColor = Color(0xff004643)
 val Headline = Color(0xfffffffe)
 val Paragraph = Color(0xffabd1c6)
 val Button = Color(0xfff9bc60)
-val ButtonText = Color(0xff001e1d)
+val GreenBlack = Color(0xff001e1d)
 
 
 val ButtonDisabled = Color(0xff001e1d)

@@ -57,6 +57,10 @@ dependencies {
     implementation("io.ktor:ktor-client-logging:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
+    implementation("androidx.compose.material:material:1.7.8")
+
+    implementation("androidx.compose.material:material-icons-extended:1.5.1")
+
 
     // Corrutinas para chamadas assíncronas
     implementation(libs.kotlinx.coroutines.core)

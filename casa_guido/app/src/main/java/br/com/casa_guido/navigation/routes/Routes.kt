@@ -1,19 +1,25 @@
-package br.com.casa_guido.navigation.routes
 
-import kotlinx.serialization.Serializable
+sealed class Routes (
+    val route: String
+){
 
-sealed class Routes {
+    data object DashBoardScreenRoute: Routes(
+        route = "dashboard"
+    )
 
-    @Serializable
-    data object DashBoard: Routes()
+    data object PacientesScreenRoute : Routes(
+        route = "pacientes"
+    )
 
-    @Serializable
-    data object Pacientes: Routes()
+    data object AgendaScreenRoute: Routes(
+        route = "agenda"
+    )
 
-    @Serializable
-    data object Agenda: Routes()
+    data object ConfiguracoesScreenRoute: Routes(
+        route = "configuracoes"
+    )
 
-    @Serializable
-    data object Configuracoes: Routes()
-
+    data object CadastroScreenRoute : Routes(
+        route = "cadastro"
+    )
 }

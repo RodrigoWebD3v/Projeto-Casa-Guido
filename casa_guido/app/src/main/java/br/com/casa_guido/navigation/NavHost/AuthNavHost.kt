@@ -6,7 +6,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import br.com.casa_guido.navigation.authRoutes.AuthRoutes
-import br.com.casa_guido.navigation.routes.Routes
 import br.com.casa_guido.screens.login.Login
 
 
@@ -20,7 +19,7 @@ fun AuthNavHost(navHostController: NavHostController, paddingValues: PaddingValu
        composable<AuthRoutes.LoginRoute> {
            Login(paddingValues = paddingValues, onLoginSuccess = {
                navHostController.navigate(
-                   Routes.DashBoard
+                   Routes.DashBoardScreenRoute
                )
            })
        }
