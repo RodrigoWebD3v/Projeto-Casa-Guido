@@ -1,4 +1,4 @@
-package br.com.casa_guido.navigation.NavHost
+package br.com.casa_guido.navigation.navHost
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable

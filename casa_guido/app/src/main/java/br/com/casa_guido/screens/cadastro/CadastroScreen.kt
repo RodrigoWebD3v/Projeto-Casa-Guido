@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MedicalInformation
 import androidx.compose.material.icons.filled.PersonAddAlt
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -19,6 +18,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,35 +28,36 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import br.com.casa_guido.navigation.NavHost.itemNavBar
+import br.com.casa_guido.navigation.navHost.itemNavBar
 import br.com.casa_guido.screens.cadastro.components.CamposPaciente.CamposPaciente
 import br.com.casa_guido.screens.cadastro.components.CamposPaciente.CamposPacienteUiState
 import br.com.casa_guido.screens.scaffold_components.TopAppBarComp
 import br.com.casa_guido.screens.shared.DropDownMenu
-import br.com.casa_guido.screens.shared.DropDownMenuItem
 import br.com.casa_guido.ui.theme.Button
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
+import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CadastroScreen(
     modifier: Modifier = Modifier,
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    userId: String? = null
 ) {
 
-    val opcoes = listOf(
-        DropDownMenuItem(nome = "Paciente", icone = Icons.Default.PersonAddAlt),
-        DropDownMenuItem(nome = "Prontuário", icone = Icons.Default.MedicalInformation)
-    )
-
-    var itemSelecionado by remember { mutableStateOf<DropDownMenuItem?>(null) }
+    val viewModel = koinViewModel<CadastroScreenViewModel>()
+    val state by viewModel.uiState.collectAsState()
 
     var camposPaciente by remember {
         mutableStateOf(
             CamposPacienteUiState()
         )
+    }
+
+    if (userId != null) {
+        viewModel.getUsuario(id = userId)
     }
 
     Scaffold(
@@ -97,9 +98,11 @@ fun CadastroScreen(
                     .fillMaxWidth(.6f)
                     .padding(start = 20.dp)
                     .padding(vertical = 10.dp),
-                opcoes = opcoes,
+                opcoes = state.opcoes,
                 onSelected = { item ->
-                    itemSelecionado = item
+                    viewModel.setItemSelecionado(
+                        item
+                    )
                 }
             )
 
@@ -112,21 +115,27 @@ fun CadastroScreen(
                     .padding(vertical = 10.dp),
                 horizontalAlignment = Alignment.Start
             ) {
-                when (itemSelecionado) {
-                    opcoes[0] -> {
-                        CamposPaciente() {
-                            camposPaciente = it
-                        }
+                when (state.itemSelecionado) {
+                    state.opcoes[0] -> {
+                        CamposPaciente(
+                            paciente = state.paciente,
+                            onChange = {
+                                camposPaciente = it
+                            }
+                        )
                     }
 
-                    opcoes[1] -> {
+                    state.opcoes[1] -> {
                         // CamposProntuario()
                     }
 
                     else -> {
-                        CamposPaciente() {
-                            camposPaciente = it
-                        }
+                        CamposPaciente(
+                            paciente = state.paciente,
+                            onChange = {
+                                camposPaciente = it
+                            }
+                        )
                     }
                 }
             }
@@ -135,10 +144,12 @@ fun CadastroScreen(
 }
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
 private fun CadastroScreenPrev() {
     CadastroScreen(
+        userId = null,
         navHostController = NavHostController(context = androidx.compose.ui.platform.LocalContext.current)
     )
 }

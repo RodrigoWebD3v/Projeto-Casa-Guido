@@ -32,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.com.casa_guido.screens.Paciente
 import br.com.casa_guido.screens.shared.DataPicker
 import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
@@ -42,11 +43,18 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun CamposPaciente(modifier: Modifier = Modifier, onChange: (CamposPacienteUiState) -> Unit) {
+fun CamposPaciente(
+    modifier: Modifier = Modifier,
+    paciente: Paciente,
+    onChange: (CamposPacienteUiState) -> Unit
+) {
 
     val viewModel = koinViewModel<CamposPacienteViewModel>()
     val state by viewModel.uiState.collectAsState()
 
+    if (paciente != Paciente()) {
+        viewModel.setPaciente(paciente)
+    }
 
 
     Card(

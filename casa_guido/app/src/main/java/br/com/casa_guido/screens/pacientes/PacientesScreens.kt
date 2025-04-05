@@ -23,7 +23,8 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun PacientesScreens(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onEditePaciente: (String) -> Unit
 ) {
     val viewModel = koinViewModel<PacientesViewModel>()
     val state by viewModel.uiState.collectAsState()
@@ -57,7 +58,9 @@ fun PacientesScreens(
 
         ListagemPacientes(
             lista = state.listaPacientesFiltrada,
-        )
+        ) { id ->
+            onEditePaciente(id)
+        }
     }
 }
 
@@ -65,6 +68,6 @@ fun PacientesScreens(
 @Composable
 private fun PacientesPrev() {
     PacientesScreens(
-
+        onEditePaciente = {}
     )
 }

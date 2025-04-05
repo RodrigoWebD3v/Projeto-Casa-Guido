@@ -1,13 +1,8 @@
 package br.com.casa_guido.navigation.root
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.navigation.NavHostController
-import br.com.casa_guido.navigation.NavHost.AppNavHost
-import br.com.casa_guido.navigation.NavHost.AuthNavHost
-import org.koin.androidx.compose.koinViewModel
+import br.com.casa_guido.navigation.navHost.AppNavHost
 
 @Composable
 fun RootNavHost(

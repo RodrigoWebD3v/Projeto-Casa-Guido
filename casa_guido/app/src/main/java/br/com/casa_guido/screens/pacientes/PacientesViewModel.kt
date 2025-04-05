@@ -2,8 +2,8 @@ package br.com.casa_guido.screens.pacientes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.casa_guido.screens.listaPacientes
 import br.com.casa_guido.screens.pacientes.uistate.PacientesUiState
+import br.com.casa_guido.util.ListaMemoria
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -21,8 +21,8 @@ class PacientesViewModel() : ViewModel() {
         viewModelScope.launch {
             _uiState.update { state ->
                 state.copy(
-                    pacientes = listaPacientes,
-                    listaPacientesFiltrada = listaPacientes,
+                    pacientes = ListaMemoria.pacientesLista,
+                    listaPacientesFiltrada = ListaMemoria.pacientesLista,
                 )
             }
             _loading.value = false

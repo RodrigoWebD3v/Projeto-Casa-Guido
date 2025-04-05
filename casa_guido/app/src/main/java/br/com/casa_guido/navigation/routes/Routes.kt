@@ -19,7 +19,9 @@ sealed class Routes (
         route = "configuracoes"
     )
 
-    data object CadastroScreenRoute : Routes(
-        route = "cadastro"
-    )
+    data object CadastroScreenRoute : Routes("cadastro?userId={userId}") {
+        fun parametroOpicional(userId: String? = null): String {
+            return if (userId != null) "cadastro?userId=$userId" else "cadastro"
+        }
+    }
 }

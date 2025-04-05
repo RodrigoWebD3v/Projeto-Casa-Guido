@@ -1,6 +1,7 @@
 package br.com.casa_guido.screens.pacientes.componentes
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -36,7 +37,7 @@ import br.com.casa_guido.util.Utils
 
 
 @Composable
-fun PacienteItem(paciente: Paciente) {
+fun PacienteItem(paciente: Paciente, onUpId: (String) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -46,6 +47,11 @@ fun PacienteItem(paciente: Paciente) {
                 elevation = 4.dp,
                 shape = RoundedCornerShape(10.dp),
             )
+            .clickable {
+                onUpId(
+                    paciente.id
+                )
+            }
     ) {
         Row(
             modifier = Modifier
@@ -132,7 +138,8 @@ private fun PacienteItemPrev() {
             nome = "João da Silva",
             telefone = "(48) 99999-9999",
             status = true
-        )
+        ),
+        onUpId = TODO()
     )
 }
 
@@ -144,6 +151,7 @@ private fun PacienteItemPrev2() {
             nome = "João da Silva",
             telefone = "(48) 99999-9999",
             status = false
-        )
+        ),
+        onUpId = TODO()
     )
 }

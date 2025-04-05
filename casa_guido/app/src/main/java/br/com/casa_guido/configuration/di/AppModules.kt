@@ -4,6 +4,7 @@ package br.com.casa_guido.configuration.di
 import br.com.casa_guido.configuration.ClienteApi
 import br.com.casa_guido.navigation.root.ViewModelAuthMananger
 import br.com.casa_guido.repository.AuthRepository
+import br.com.casa_guido.screens.cadastro.CadastroScreenViewModel
 import br.com.casa_guido.screens.cadastro.components.CamposPaciente.CamposPacienteViewModel
 import br.com.casa_guido.screens.home.HomeViewModel
 import br.com.casa_guido.screens.login.LoginViewModel
@@ -18,6 +19,7 @@ val appModule = module {
     viewModelOf(::PacientesViewModel)
     viewModelOf(::HomeViewModel)
     viewModelOf(::CamposPacienteViewModel)
+    viewModelOf(::CadastroScreenViewModel)
     singleOf(::ClienteApi)
     singleOf(::AuthRepository)
 }

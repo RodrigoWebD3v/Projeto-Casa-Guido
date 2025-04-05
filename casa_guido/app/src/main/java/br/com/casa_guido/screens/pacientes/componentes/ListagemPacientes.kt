@@ -17,6 +17,7 @@ import br.com.casa_guido.ui.theme.Main
 fun ListagemPacientes(
     modifier: Modifier = Modifier,
     lista: List<Paciente>,
+    onUpId: (String) -> Unit = {}
 ) {
 
     val listState = rememberLazyListState()
@@ -39,7 +40,9 @@ fun ListagemPacientes(
         items(lista, contentType = { it.id }) { paciente ->
             PacienteItem(
                 paciente
-            )
+            ) { id ->
+                onUpId(id)
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package br.com.casa_guido.screens.cadastro.components.CamposPaciente
 
 import androidx.lifecycle.ViewModel
+import br.com.casa_guido.screens.Paciente
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
@@ -51,6 +52,20 @@ class CamposPacienteViewModel() : ViewModel() {
 
     fun onLimparCampos() {
         _uiState.value = CamposPacienteUiState()
+    }
+
+    fun setPaciente(paciente: Paciente) {
+        _uiState.value = _uiState.value.copy(
+            nomePaciente = paciente.nome,
+            dataNascimento = paciente.dataNascimento,
+            nomeMae = paciente.nomeMae,
+            nomePai = paciente.nomePai,
+            nomeResponsavel = paciente.nomeResponsavel,
+            cpf = paciente.cpf,
+            rg = paciente.rg,
+            cartaoSus = paciente.cartaoSus,
+            celular = paciente.celular
+        )
     }
 
 

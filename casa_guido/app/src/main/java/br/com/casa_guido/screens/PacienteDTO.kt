@@ -14,9 +14,17 @@ data class Agendamento(
 
 @Immutable
 data class Paciente(
-    val nome: String,
-    val telefone: String,
-    val status: Boolean,
+    val nome: String = "",
+    val telefone: String = "",
+    val status: Boolean = false,
+    val dataNascimento: String = "",
+    val nomeMae: String = "",
+    val nomePai: String = "",
+    val nomeResponsavel: String = "",
+    val cpf: String = "",
+    val rg: String = "",
+    val cartaoSus: String = "",
+    val celular: String = "",
     val id : String = UUID.randomUUID().toString()
 )
 
@@ -62,106 +70,4 @@ val listaAgendamentos = listOf(
         tipo = "Consulta inicial",
         status = false
     )
-
-
-)
-
-val listaPacientes = listOf(
-    Paciente(
-        nome = "Ana Silva",
-        telefone = "(48) 99999-9999",
-        status = false
-    ),
-    Paciente(
-        nome = "Pedro Costa",
-        telefone = "(48) 99999-9999",
-        status = true
-    ),
-    Paciente(
-        nome = "Mariana Santos",
-        telefone = "(48) 99999-9999",
-        status = false
-    ),
-    Paciente(
-        nome = "Juliana Lima",
-        telefone = "(48) 99999-9999",
-        status = true
-    ),
-    Paciente(
-        nome = "Pedro Costa",
-        telefone = "(48) 99999-9999",
-        status = false
-    ),
-    Paciente(
-        nome = "Ana Silva",
-        telefone = "(48) 99999-9999",
-        status = true
-    ),
-    Paciente(
-        nome = "Juliana Lima",
-        telefone = "(48) 99999-9999",
-        status = true
-    ),
-    Paciente(
-        nome = "Ana Silva",
-        telefone = "(48) 99999-9999",
-        status = true
-    ),
-    Paciente(
-        nome = "Ana Silva",
-        telefone = "(48) 99999-9999",
-        status = false
-    ),
-    Paciente(
-        nome = "Pedro Costa",
-        telefone = "(48) 99999-9999",
-        status = true
-    ),
-    Paciente(
-        nome = "Ana Silva",
-        telefone = "(48) 99999-9999",
-        status = false
-    ),
-    Paciente(
-        nome = "Ana Silva",
-        telefone = "(48) 99999-9999",
-        status = true
-    ),
-    Paciente(
-        nome = "Pedro Costa",
-        telefone = "(48) 99999-9999",
-        status = false
-    ),
-    Paciente(
-        nome = "Ana Silva",
-        telefone = "(48) 99999-9999",
-        status = true
-    ),
-    Paciente(
-        nome = "Ana Silva",
-        telefone = "(48) 99999-9999",
-        status = false
-    ),
-    Paciente(
-        nome = "Mariana Santos",
-        telefone = "(48) 99999-9999",
-        status = true
-    ),
-    Paciente(
-        nome = "Ana Silva",
-        telefone = "(48) 99999-9999",
-        status = true
-    ),
-    Paciente(
-        nome = "Juliana Lima",
-        telefone = "(48) 99999-9999",
-        status = false
-    ),
-    Paciente(
-        nome = "Ana Silva",
-        telefone = "(48) 99999-9999",
-        status = true
-    )
-
-
 )
