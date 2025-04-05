@@ -7,5 +7,5 @@ data class PacientesUiState(
     val loading: Boolean = false,
     val error: String = "",
     val pacientes: List<Paciente> = emptyList(),
-    val buscaPaciente: (String) -> Unit = {},
+    val listaPacientesFiltrada : List<Paciente> = emptyList(),
 )

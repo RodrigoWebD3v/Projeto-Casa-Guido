@@ -1,80 +1,110 @@
 package br.com.casa_guido.screens.shared
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PersonAddAlt
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.unit.dp
+import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.Main
+import java.util.UUID
+
+
+data class DropDownMenuItem(
+    val id: String = UUID.randomUUID().toString(),
+    val nome: String,
+    val icone: ImageVector
+)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DropDownMenu(modifier: Modifier = Modifier) {
+fun DropDownMenu(
+    modifier: Modifier = Modifier,
+    opcoes: List<DropDownMenuItem> = emptyList(),
+    onSelected: (DropDownMenuItem) -> Unit
+) {
 
-    val lista = listOf(
-        "Nome",
-        "Idade",
-        "Data de Nascimento",
-        "Sexo",
-        "Telefone",
-        "Endereço",
-        "Cidade",
-        "Estado",
-        "CEP"
-    )
 
-    var selectedItem by remember { mutableStateOf(lista.first()) }
+    var selectedItem by remember { mutableStateOf(opcoes.first()) }
     var isExpanded by remember { mutableStateOf(false) }
-
+    val focusManager = LocalFocusManager.current
 
     Box(
         modifier = modifier
+            .fillMaxWidth(.8f),
+        contentAlignment = Alignment.Center
     ) {
         ExposedDropdownMenuBox(
             expanded = isExpanded,
             onExpandedChange = {
                 isExpanded = !isExpanded
-            }
+            },
         ) {
-            androidx.compose.material3.TextField(
-                value = selectedItem,
+            TextField(
+                value = selectedItem.nome,
                 onValueChange = {},
                 readOnly = true,
-                modifier = Modifier.menuAnchor(),
-                label = { Text("Selecione um campo") },
+                modifier = Modifier
+                    .menuAnchor()
+                    .fillMaxWidth(),
+                label = { Text("Selecione uma opcao") },
                 trailingIcon = {
                     ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded)
-                }
+                },
+                colors = TextFieldDefaults.colors(
+                    unfocusedIndicatorColor = BackgroundColor,
+                    focusedContainerColor = BackgroundColor,
+                    unfocusedContainerColor = BackgroundColor
+                ),
+                shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
             )
             ExposedDropdownMenu(
                 expanded = isExpanded,
-                onDismissRequest = { isExpanded = false }
+                onDismissRequest = {
+                    isExpanded = false
+                },
+                modifier = Modifier.background(BackgroundColor),
+                shape = RoundedCornerShape(bottomStart = 12.dp, bottomEnd = 12.dp)
             ) {
-                lista.forEach { item ->
+                opcoes.forEach { item ->
                     DropdownMenuItem(
-                        text = { Text(item) },
+                        text = { Text(item.nome) },
                         onClick = {
                             selectedItem = item
                             isExpanded = false
+                            onSelected(item)
                         },
                         leadingIcon = {
-                            Icon(
-                                imageVector = Icons.Default.PersonAddAlt,
-                                contentDescription = "Ícone de cadastro",
-                                tint = Main
-                            )
+                            if (
+                                item == selectedItem
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Check,
+                                    contentDescription = "Ícone de cadastro",
+                                    tint = Main
+                                )
+                            }
                         },
-                        contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
+                        contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
                     )
                 }
             }

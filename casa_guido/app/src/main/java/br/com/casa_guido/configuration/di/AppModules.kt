@@ -2,9 +2,9 @@ package br.com.casa_guido.configuration.di
 
 
 import br.com.casa_guido.configuration.ClienteApi
-import br.com.casa_guido.navigation.NavHost.AppNavHostViewModel
 import br.com.casa_guido.navigation.root.ViewModelAuthMananger
 import br.com.casa_guido.repository.AuthRepository
+import br.com.casa_guido.screens.cadastro.components.CamposPaciente.CamposPacienteViewModel
 import br.com.casa_guido.screens.home.HomeViewModel
 import br.com.casa_guido.screens.login.LoginViewModel
 import br.com.casa_guido.screens.pacientes.PacientesViewModel
@@ -17,7 +17,7 @@ val appModule = module {
     viewModelOf(::ViewModelAuthMananger)
     viewModelOf(::PacientesViewModel)
     viewModelOf(::HomeViewModel)
-    viewModelOf(::AppNavHostViewModel)
+    viewModelOf(::CamposPacienteViewModel)
     singleOf(::ClienteApi)
     singleOf(::AuthRepository)
 }

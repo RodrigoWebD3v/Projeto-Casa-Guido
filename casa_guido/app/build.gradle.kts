@@ -7,6 +7,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        create("release") {
+            storeFile = file("C:/Users/Digo/Documents/keystore/key.jks")
+            storePassword = "Rodrigozkgyrd1@"
+            keyAlias = "casaGuido"
+            keyPassword = "Rodrigozkgyrd1@"
+        }
+    }
     namespace = "br.com.casa_guido"
     compileSdk = 35
 
@@ -18,6 +26,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig = signingConfigs.getByName("release")
     }
 
     buildTypes {
@@ -66,6 +75,9 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
 
     implementation(libs.androidx.security.crypto)
+
+    implementation("io.github.vanpra.compose-material-dialogs:datetime:0.8.1-rc")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.6")
 
 
     implementation(libs.androidx.core.ktx)

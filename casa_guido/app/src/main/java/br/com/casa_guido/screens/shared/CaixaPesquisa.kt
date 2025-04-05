@@ -37,11 +37,9 @@ fun CaixaPesquisa(
     onValueChange: (String) -> Unit = {}
 ) {
 
-
-
     val focusManager = LocalFocusManager.current
 
-    TextField(
+    OutlinedTextField(
         modifier = modifier
             .fillMaxWidth()
             .padding(10.dp),

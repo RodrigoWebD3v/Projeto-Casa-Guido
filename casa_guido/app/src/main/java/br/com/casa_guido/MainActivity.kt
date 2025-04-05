@@ -27,9 +27,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             Casa_guidoTheme {
                 val navController = rememberNavController()
-                    RootNavHost(
-                        rootNavHostController = navController,
-                    )
+                RootNavHost(
+                    rootNavHostController = navController,
+                )
             }
         }
     }

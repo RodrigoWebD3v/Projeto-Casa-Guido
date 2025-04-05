@@ -14,29 +14,36 @@ class PacientesViewModel() : ViewModel() {
     private val _uiState = MutableStateFlow<PacientesUiState>(PacientesUiState())
     val uiState = _uiState.asStateFlow()
 
+    private val _loading = MutableStateFlow(true)
+    val loading = _loading.asStateFlow()
+
     private fun carregarPacientes() {
         viewModelScope.launch {
             _uiState.update { state ->
                 state.copy(
-                    pacientes = listaPacientes
+                    pacientes = listaPacientes,
+                    listaPacientesFiltrada = listaPacientes,
+                )
+            }
+            _loading.value = false
+        }
+    }
+
+
+    fun filtrarPacientes(nome: String) {
+        viewModelScope.launch {
+            _uiState.update { state ->
+                state.copy(
+                    nome = nome,
+                    listaPacientesFiltrada = state.pacientes.filter { paciente ->
+                        paciente.nome.contains(nome, ignoreCase = true)
+                    }
                 )
             }
         }
     }
 
     init {
-        viewModelScope.launch {
-            _uiState.update {
-                it.copy(
-                    buscaPaciente = { nome ->
-                        _uiState.update { state ->
-                            state.copy(nome = nome)
-                        }
-                    },
-                )
-            }
-        }
-
         carregarPacientes()
     }
 }

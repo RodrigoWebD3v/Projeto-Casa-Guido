@@ -1,6 +1,5 @@
 package br.com.casa_guido.screens.scaffold_components
 
-import Routes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,13 +22,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.com.casa_guido.navigation.NavHost.itemNavBar
 import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.Main
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBarComp(modifier: Modifier = Modifier, onClickIcon: () -> Unit, itemNavBar: itemNavBar) {
+fun TopAppBarComp(modifier: Modifier = Modifier, arrowBack: Boolean, itemNavBar: itemNavBar, navHostController: NavHostController) {
 
     CenterAlignedTopAppBar(
 
@@ -60,13 +60,13 @@ fun TopAppBarComp(modifier: Modifier = Modifier, onClickIcon: () -> Unit, itemNa
             }
         },
         navigationIcon = {
-            if (itemNavBar.rota == Routes.CadastroScreenRoute.route) {
+            if (arrowBack) {
                 Column(
                     Modifier.fillMaxHeight(),
                     verticalArrangement = Arrangement.Center
                 ) {
                     IconButton(onClick = {
-                        onClickIcon()
+                        navHostController.popBackStack()
                     }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
