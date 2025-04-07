@@ -28,7 +28,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
-import br.com.casa_guido.navigation.navHost.itemNavBar
+import br.com.casa_guido.screens.cadastro.itemNavBar
+
 import br.com.casa_guido.screens.home.HomeScreen
 import br.com.casa_guido.screens.pacientes.PacientesScreens
 import br.com.casa_guido.screens.scaffold_components.TopAppBarComp

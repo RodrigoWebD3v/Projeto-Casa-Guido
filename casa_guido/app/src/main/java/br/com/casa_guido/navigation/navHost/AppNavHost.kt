@@ -14,11 +14,7 @@ import br.com.casa_guido.screens.cadastro.CadastroScreen
 import br.com.casa_guido.screens.main.Main
 
 
-data class itemNavBar(
-    val texto: String,
-    val icon: ImageVector,
-    val id: Int
-)
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable

@@ -65,18 +65,6 @@ class AuthRepository(
         }
     }
 
-//    suspend fun fetchData(): String? {
-//        return try {
-//
-//            withContext(Dispatchers.IO) {
-//                val response =
-//                    clienteApi.client.get("https://webhook.site/5d7b00dd-5604-4b11-b832-162bde9134df")
-//                response.body<String>()
-//            }
-//        } catch (e: Exception) {
-//            println("Erro ao buscar dados: ${e.message}")
-//            null
-//        }
-//    }
+
 
 }

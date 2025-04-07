@@ -14,14 +14,9 @@ val Pink40 = Color(0xFF7D5260)
 
 
 val BackgroundColor = Color(0xff004643)
-val Headline = Color(0xfffffffe)
 val Paragraph = Color(0xffabd1c6)
 val Button = Color(0xfff9bc60)
 val GreenBlack = Color(0xff001e1d)
-
-
-val ButtonDisabled = Color(0xff001e1d)
 val Main = Color(0xffe8e4e6)
 val Highlight = Color(0xfff9bc60)
-val Secondary = Color(0xffabd1c6)
-val Tertiary = Color(0xffe16162)
+val Alert = Color(0xffe16162)

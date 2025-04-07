@@ -21,7 +21,6 @@ import androidx.navigation.NavHostController
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
-import br.com.casa_guido.ui.theme.Secondary
 
 @Composable
 fun BottomAppBarComp(
@@ -35,7 +34,7 @@ fun BottomAppBarComp(
             .fillMaxHeight(.1f)
             .border(
                 width = 1.dp,
-                color = Secondary,
+                color = Paragraph,
                 shape = androidx.compose.foundation.shape.RoundedCornerShape(0.dp)
             ),
 

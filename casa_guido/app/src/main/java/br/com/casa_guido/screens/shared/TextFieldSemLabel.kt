@@ -1,4 +1,4 @@
-package br.com.casa_guido.screens.cadastro.components.CamposPaciente
+package br.com.casa_guido.screens.shared
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,8 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -23,28 +23,16 @@ import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Paragraph
 
 @Composable
-fun TextFieldSimples(
+fun TextFieldSemLabel(
     modifier: Modifier = Modifier,
     nomeCampo: String,
     valorPreenchido: String,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     onChange: (String) -> Unit
 ) {
     Column(
         modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp),
-        verticalArrangement = Arrangement.spacedBy(5.dp),
-        horizontalAlignment = Alignment.Start
     ) {
-        Text(
-            nomeCampo, style = TextStyle(
-                fontSize = 14.sp,
-                color = GreenBlack,
-                fontWeight = FontWeight.Medium,
-                textAlign = TextAlign.Start
-            )
-        )
-
         OutlinedTextField(
             modifier = modifier
                 .fillMaxWidth(),
@@ -65,6 +53,7 @@ fun TextFieldSimples(
                     )
                 )
             },
+
             colors = androidx.compose.material.TextFieldDefaults.textFieldColors(
                 focusedIndicatorColor = Paragraph,
                 unfocusedIndicatorColor = Paragraph,
@@ -73,9 +62,10 @@ fun TextFieldSimples(
                 textColor = GreenBlack
             ),
             shape = RoundedCornerShape(5.dp),
-            maxLines = 1
+            maxLines = 1,
+            visualTransformation = visualTransformation,
         )
     }
-
-
 }
+
+

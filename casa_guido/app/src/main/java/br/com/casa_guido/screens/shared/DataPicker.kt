@@ -2,6 +2,20 @@ package br.com.casa_guido.screens.shared
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CalendarToday
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -9,9 +23,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import br.com.casa_guido.ui.theme.BackgroundColor
+import br.com.casa_guido.ui.theme.GreenBlack
+import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
@@ -24,7 +46,11 @@ import java.time.format.DateTimeFormatter
 fun DataPicker(
     modifier: Modifier = Modifier,
     showDataPicker: Boolean,
+    onCancelar: () -> Unit,
     onChange: (String) -> Unit,
+    onClick: () -> Unit,
+    valorPreenchido: String,
+    titulo: String,
     pickedDatePaciente: LocalDate = LocalDate.now()
 ) {
 
@@ -56,14 +82,79 @@ fun DataPicker(
         )
     }
 
+    Column(
+        modifier = modifier
+            .padding(horizontal = 20.dp),
+        verticalArrangement = Arrangement.spacedBy(5.dp),
+    ) {
+        Text(
+            titulo, style = TextStyle(
+                fontSize = 14.sp,
+                color = GreenBlack,
+                fontWeight = FontWeight.Medium,
+                textAlign = TextAlign.Start
+            )
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(
+                    width = 1.dp,
+                    color = Paragraph,
+                    shape = RoundedCornerShape(5.dp)
+                )
+                .height(50.dp)
+                .clickable {
+                    onClick()
+                },
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = if(valorPreenchido == "") formattedDate else valorPreenchido,
+                style = TextStyle(
+                    fontSize = 16.sp,
+                    color = BackgroundColor,
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Start
+                ),
+                modifier = Modifier
+                    .padding(start = 10.dp)
+            )
+
+            Icon(
+                imageVector = Icons.Default.CalendarToday,
+                contentDescription = "Ícone de calendário",
+                tint = BackgroundColor,
+                modifier = Modifier
+                    .padding(end = 10.dp)
+                    .size(20.dp)
+            )
+        }
+    }
+
     MaterialDialog(
         dialogState = dateDialogState,
-        buttons = {
-            positiveButton(text = "Selecionar") {
+        onCloseRequest = {
 
-            }
-            negativeButton(text = "Cancelar")
         },
+
+        buttons = {
+            positiveButton(
+                text = "Selecionar",
+                textStyle = TextStyle(color = Main)
+            ) {
+                onCancelar()
+            }
+            negativeButton(
+                text = "Cancelar",
+                textStyle = TextStyle(color = Main)
+            ) {
+                onCancelar()
+            }
+        },
+
+        backgroundColor = BackgroundColor
 
         ) {
         datepicker(

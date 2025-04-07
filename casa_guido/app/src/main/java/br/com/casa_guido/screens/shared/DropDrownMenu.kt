@@ -43,10 +43,8 @@ fun DropDownMenu(
     onSelected: (DropDownMenuItem) -> Unit
 ) {
 
-
     var selectedItem by remember { mutableStateOf(opcoes.first()) }
     var isExpanded by remember { mutableStateOf(false) }
-    val focusManager = LocalFocusManager.current
 
     Box(
         modifier = modifier
@@ -75,7 +73,7 @@ fun DropDownMenu(
                     focusedContainerColor = BackgroundColor,
                     unfocusedContainerColor = BackgroundColor
                 ),
-                shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
+               // shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
             )
             ExposedDropdownMenu(
                 expanded = isExpanded,
@@ -83,7 +81,7 @@ fun DropDownMenu(
                     isExpanded = false
                 },
                 modifier = Modifier.background(BackgroundColor),
-                shape = RoundedCornerShape(bottomStart = 12.dp, bottomEnd = 12.dp)
+                //shape = RoundedCornerShape(bottomStart = 12.dp, bottomEnd = 12.dp)
             ) {
                 opcoes.forEach { item ->
                     DropdownMenuItem(

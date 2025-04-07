@@ -60,6 +60,7 @@ fun PacientesScreens(
             lista = state.listaPacientesFiltrada,
         ) { id ->
             onEditePaciente(id)
+            viewModel.filtrarPacientes("")
         }
     }
 }

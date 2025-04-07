@@ -1,0 +1,14 @@
+package br.com.casa_guido.screens.cadastro.formularios.socioEconomico
+
+enum class CamposSocioEconomico {
+
+    ESCOLA_ANO,
+    NOME_ESCOLA,
+    REMUNERACAO,
+    REMUNERACAO_OPT,
+    VALOR_BPC,
+    TAMANHO_ROUPA,
+    TAMANHO_CALCADO,
+
+}
+

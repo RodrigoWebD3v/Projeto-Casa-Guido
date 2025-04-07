@@ -11,13 +11,9 @@ import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-class ClienteApi {
+class ApiViaCepConfig {
 
-    var localHost: Boolean = true
-
-    var endpointPrincipal = if (localHost) "http://10.0.2.2:3000" else "http://192.168.101.14:3000"
-
-    val authEndpoint = "${endpointPrincipal}/api/v1/auth"
+    val _endpointViaCep = "https://viacep.com.br/ws/"
 
     val client = HttpClient(Android) {
         install(ContentNegotiation) {
@@ -36,4 +32,5 @@ class ClienteApi {
         }
 
     }
+
 }
