@@ -1,6 +1,7 @@
 package br.com.casa_guido.screens.cadastro.formularios.cirurgia
 
 import android.os.Build
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
@@ -16,18 +17,24 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowDropUp
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -41,13 +48,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.screens.Cirurgia
-import br.com.casa_guido.screens.Paciente
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.shared.DataPicker
 import br.com.casa_guido.screens.shared.RadioButtonComLabel
@@ -56,6 +63,7 @@ import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
+import java.time.LocalDate
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -71,11 +79,10 @@ fun Cirurgia(
         mutableStateOf(false)
     }
 
-    val listaCirurgias = remember {
-        mutableStateListOf(Cirurgia())
-    }
+    val listaCirurgias = remember { mutableStateListOf<Cirurgia>() }
 
-    var cirurgia by remember {
+
+    var cirurgiaEdicao by remember {
         mutableStateOf(Cirurgia())
     }
 
@@ -86,9 +93,7 @@ fun Cirurgia(
                 elevation = 5.dp,
                 shape = RoundedCornerShape(10.dp)
             )
-            .clickable {
-                onCollapse()
-            }
+
 
     ) {
         Column(
@@ -99,7 +104,10 @@ fun Cirurgia(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(10.dp),
+                    .padding(10.dp)
+                    .clickable {
+                        onCollapse()
+                    },
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
@@ -159,10 +167,6 @@ fun Cirurgia(
                         .fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    var cirurgiaNome by remember {
-                        mutableStateOf("")
-                    }
-
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -172,9 +176,9 @@ fun Cirurgia(
                     ) {
                         TextFieldSimples(
                             nomeCampo = "Nome da cirurgia",
-                            valorPreenchido = cirurgia.nome,
+                            valorPreenchido = cirurgiaEdicao.nome,
                             onChange = {
-                                cirurgia = cirurgia.copy(
+                                cirurgiaEdicao = cirurgiaEdicao.copy(
                                     nome = it
                                 )
                             }
@@ -189,7 +193,7 @@ fun Cirurgia(
                                 toggleDataPickerCirurgia = false
                             },
                             onChange = {
-                                cirurgia = cirurgia.copy(
+                                cirurgiaEdicao = cirurgiaEdicao.copy(
                                     data = it
                                 )
                             },
@@ -254,16 +258,15 @@ fun Cirurgia(
                             ) {
                                 DataPicker(
                                     modifier = Modifier.fillMaxWidth(.5f),
-                                    showDataPicker = false,
-                                    valorPreenchido = "",
+                                    showDataPicker = toggleDataPickerCirurgia,
+                                    valorPreenchido = cirurgiaEdicao.dataQuimioInicio,
                                     titulo = "Data inicio",
                                     onCancelar = {
                                         toggleDataPickerCirurgia = false
                                     },
                                     onChange = {
-                                        onChangeCampo(
-                                            CamposEndereco.CEP,
-                                            it
+                                        cirurgiaEdicao = cirurgiaEdicao.copy(
+                                            dataQuimioInicio = it
                                         )
                                     },
                                     onClick = {
@@ -273,17 +276,16 @@ fun Cirurgia(
 
 
                                 DataPicker(
-                                    modifier = Modifier.fillMaxWidth(.5f),
-                                    showDataPicker = false,
-                                    valorPreenchido = "",
-                                    titulo = "Data inicio",
+                                    modifier = Modifier.weight(1f),
+                                    showDataPicker = toggleDataPickerCirurgia,
+                                    valorPreenchido = cirurgiaEdicao.dataQuimioUltima,
+                                    titulo = "Data fim",
                                     onCancelar = {
                                         toggleDataPickerCirurgia = false
                                     },
                                     onChange = {
-                                        onChangeCampo(
-                                            CamposEndereco.CEP,
-                                            it
+                                        cirurgiaEdicao = cirurgiaEdicao.copy(
+                                            dataQuimioUltima = it
                                         )
                                     },
                                     onClick = {
@@ -294,19 +296,29 @@ fun Cirurgia(
 
                         }
 
+                        val context = LocalContext.current
                         Button(
                             onClick = {
-                                listaCirurgias.add(cirurgia)
+                                if(cirurgiaEdicao.nome.isNotEmpty() ){
+                                    val existente = listaCirurgias.indexOfFirst { it.id == cirurgiaEdicao.id }
+                                    if (existente != -1) {
+                                        listaCirurgias.removeAt(existente)
+                                    }
+                                    listaCirurgias.add(cirurgiaEdicao)
+                                    cirurgiaEdicao = Cirurgia()
+                                } else{
+                                    Toast.makeText(context, "Preencha o nome da cirurgia", Toast.LENGTH_SHORT).show()
+                                }
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 20.dp)
                                 .padding(top = 10.dp)
                                 .clip(RoundedCornerShape(10.dp))
-                                .background(GreenBlack),
+                                .background(BackgroundColor),
                             shape = RoundedCornerShape(10.dp),
                             colors = ButtonDefaults.buttonColors(
-                                containerColor = GreenBlack,
+                                containerColor = BackgroundColor,
                                 contentColor = Color.White
                             )
                         ) {
@@ -314,32 +326,66 @@ fun Cirurgia(
                                 text = "Adicionar cirurgia",
                                 style = TextStyle(
                                     fontSize = 16.sp,
-                                    color = Color.White,
+                                    color = br.com.casa_guido.ui.theme.Button,
                                     fontWeight = FontWeight.SemiBold,
                                     textAlign = TextAlign.Center
                                 )
                             )
                         }
 
-                        Card {
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(10.dp)
-                            ) {
-                                listaCirurgias.forEach { cirurgia ->
-                                    Text(
-                                        text = "${cirurgia.nome} - ${cirurgia.data}",
-                                        style = TextStyle(
-                                            fontSize = 16.sp,
-                                            color = Color.Black,
-                                            fontWeight = FontWeight.SemiBold,
-                                            textAlign = TextAlign.Start
-                                        )
-                                    )
+                        if(listaCirurgias.size > 0){
+                            Card {
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .background(Main),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    listaCirurgias.forEach { cirurgia ->
+                                        Column(
+                                            Modifier.fillMaxWidth(.90f).padding(top = 10.dp).height(50.dp).clip(
+                                                RoundedCornerShape(10.dp)
+                                            ).background(Paragraph).verticalScroll(
+                                                rememberScrollState()
+                                            ),
+                                            horizontalAlignment = Alignment.CenterHorizontally,
+                                            verticalArrangement = Arrangement.Center
+                                        ) {
+                                            Row(
+                                                 Modifier.fillMaxWidth().fillMaxHeight().padding(horizontal = 10.dp),
+                                                verticalAlignment = Alignment.CenterVertically,
+                                                horizontalArrangement = Arrangement.SpaceBetween,
+
+                                            ) {
+                                                Text(
+                                                    text = "${cirurgia.nome} - ${cirurgia.data}",
+                                                    style = TextStyle(
+                                                        fontSize = 16.sp,
+                                                        color = Color.Black,
+                                                        fontWeight = FontWeight.SemiBold,
+                                                        textAlign = TextAlign.Start
+                                                    )
+                                                )
+
+                                                IconButton(onClick = {
+                                                     cirurgiaEdicao = cirurgia
+                                                }, modifier = Modifier.clip(
+                                                    RoundedCornerShape(10.dp)).background(
+                                                    br.com.casa_guido.ui.theme.Button).size(40.dp)) {
+                                                    Icon(
+                                                        imageVector = Icons.Default.Edit,
+                                                        contentDescription = "Editar",
+                                                        tint = GreenBlack
+                                                    )
+                                                }
+                                            }
+                                        }
+
+                                    }
                                 }
                             }
                         }
+
 
                     }
                 }

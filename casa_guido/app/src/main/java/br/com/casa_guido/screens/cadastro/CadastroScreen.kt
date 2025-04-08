@@ -2,6 +2,7 @@ package br.com.casa_guido.screens.cadastro
 
 
 import android.os.Build
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
@@ -34,6 +35,8 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowDropUp
 import androidx.compose.material.icons.filled.PersonAddAlt
 import androidx.compose.material.icons.filled.Save
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -146,24 +149,24 @@ fun CadastroScreen(
             )
         },
 
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    viewModel.save()
-                    viewModel.showToast(
-                        context = context,
-                        message = if (userId != null) "Paciente editado com sucesso" else "Paciente cadastrado com sucesso"
-                    )
-                },
-                containerColor = Button
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Save,
-                    contentDescription = "Adicionar",
-                    tint = GreenBlack
-                )
-            }
-        },
+//        floatingActionButton = {
+//            FloatingActionButton(
+//                onClick = {
+//                    viewModel.save()
+//                    viewModel.showToast(
+//                        context = context,
+//                        message = if (userId != null) "Paciente editado com sucesso" else "Paciente cadastrado com sucesso"
+//                    )
+//                },
+//                containerColor = Button
+//            ) {
+//                Icon(
+//                    imageVector = Icons.Default.Save,
+//                    contentDescription = "Adicionar",
+//                    tint = GreenBlack
+//                )
+//            }
+//        },
 
 
 
@@ -393,6 +396,41 @@ fun CadastroScreen(
                         }
                     }
                 )
+
+                Button(
+                    onClick = {
+                        viewModel.save()
+
+                        coroutineScope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = "Paciente salvo com sucesso",
+                                duration = SnackbarDuration.Short,
+                                actionLabel = "Fechar"
+                            )
+                        }
+
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp)
+                        .padding(top = 10.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .background(BackgroundColor),
+                    shape = RoundedCornerShape(10.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = BackgroundColor,
+                    )
+                ) {
+                    Text(
+                        text = "Salvar Cadastro",
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            color = Button,
+                            fontWeight = FontWeight.SemiBold,
+                            textAlign = TextAlign.Center
+                        )
+                    )
+                }
 
             }
         }

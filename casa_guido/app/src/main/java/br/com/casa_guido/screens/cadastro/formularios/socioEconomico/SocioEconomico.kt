@@ -60,10 +60,6 @@ fun SocioEconomico(
                 elevation = 5.dp,
                 shape = RoundedCornerShape(10.dp)
             )
-            .clickable {
-                onCollapse()
-            }
-
     ) {
         Column(
             modifier = modifier
@@ -73,7 +69,10 @@ fun SocioEconomico(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(10.dp),
+                    .padding(10.dp)
+                    .clickable {
+                        onCollapse()
+                    },
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {

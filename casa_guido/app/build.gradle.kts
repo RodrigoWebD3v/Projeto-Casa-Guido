@@ -1,3 +1,8 @@
+
+
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -6,13 +11,23 @@ plugins {
     kotlin("plugin.serialization") version "2.1.0"
 }
 
+// Create a variable called keystorePropertiesFile, and initialize it to your
+// keystore.properties file, in the rootProject folder.
+val keystorePropertiesFile = rootProject.file("local.properties")
+
+// Initialize a new Properties() object called keystoreProperties.
+val keystoreProperties = Properties()
+
+// Load your keystore.properties file into the keystoreProperties object.
+keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+
 android {
     signingConfigs {
         create("release") {
-            storeFile = file("C:/Users/Digo/Documents/keystore/key.jks")
-            storePassword = "Rodrigozkgyrd1@"
-            keyAlias = "casaGuido"
-            keyPassword = "Rodrigozkgyrd1@"
+            keyAlias = keystoreProperties["keyAlias"] as String
+            keyPassword = keystoreProperties["keyPassword"] as String
+            storeFile = file(keystoreProperties["storeFile"] as String)
+            storePassword = keystoreProperties["storePassword"] as String
         }
     }
     namespace = "br.com.casa_guido"

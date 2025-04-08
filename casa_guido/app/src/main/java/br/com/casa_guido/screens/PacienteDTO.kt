@@ -72,6 +72,7 @@ data class Cirurgia(
     val dataQuimioUltima: String = "",
     val dataRadioInicio: String = "",
     val dataRadioUltima: String = "",
+    val id : String = UUID.randomUUID().toString()
 )
 
 val listaAgendamentos = listOf(
