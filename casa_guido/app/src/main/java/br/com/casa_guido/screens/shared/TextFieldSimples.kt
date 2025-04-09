@@ -1,10 +1,13 @@
 package br.com.casa_guido.screens.shared
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material3.Text
@@ -12,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
@@ -38,7 +42,8 @@ fun TextFieldSimples(
         horizontalAlignment = Alignment.Start
     ) {
         Text(
-            nomeCampo, style = TextStyle(
+            nomeCampo,
+            style = TextStyle(
                 fontSize = 14.sp,
                 color = GreenBlack,
                 fontWeight = FontWeight.Medium,
@@ -46,39 +51,41 @@ fun TextFieldSimples(
             )
         )
 
-        OutlinedTextField(
-            modifier = modifier
-                .fillMaxWidth(),
-            value = valorPreenchido,
-            onValueChange = {
-                onChange(it)
-            },
-            textStyle = LocalTextStyle.current.copy(
-                textAlign = TextAlign.Left,
-                fontSize = 18.sp,
-                color = BackgroundColor
-            ),
-            placeholder = {
-                Text(
-                    text = nomeCampo,
-                    style = LocalTextStyle.current.copy(
-                        textAlign = TextAlign.Right, color = BackgroundColor
-                    )
+        androidx.compose.foundation.layout.Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(45.dp)
+                .border(
+                    width = 1.5.dp,
+                    color = Paragraph,
+                    shape = RoundedCornerShape(8.dp)
                 )
-            },
-
-            colors = androidx.compose.material.TextFieldDefaults.textFieldColors(
-                focusedIndicatorColor = Paragraph,
-                unfocusedIndicatorColor = Paragraph,
-                cursorColor = BackgroundColor,
-                backgroundColor = Color.Transparent,
-                textColor = GreenBlack
-            ),
-            shape = RoundedCornerShape(5.dp),
-            maxLines = 1,
-            visualTransformation = visualTransformation,
-        )
+                .padding(horizontal = 12.dp, vertical = 4.dp)
+        ) {
+            BasicTextField(
+                value = valorPreenchido,
+                onValueChange = { onChange(it) },
+                textStyle = LocalTextStyle.current.copy(
+                    color = GreenBlack,
+                    fontSize = 16.sp
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.CenterStart),
+                cursorBrush = SolidColor(BackgroundColor),
+                visualTransformation = visualTransformation,
+                singleLine = true,
+                decorationBox = { innerTextField ->
+                    if (valorPreenchido.isEmpty()) {
+                        Text(
+                            text = nomeCampo,
+                            color = BackgroundColor,
+                            fontSize = 16.sp
+                        )
+                    }
+                    innerTextField()
+                }
+            )
+        }
     }
 }
-
-

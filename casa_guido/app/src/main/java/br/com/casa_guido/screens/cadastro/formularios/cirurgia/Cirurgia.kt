@@ -27,8 +27,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.ArrowDropUp
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -46,7 +44,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
@@ -63,13 +60,11 @@ import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
-import java.time.LocalDate
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Cirurgia(
     modifier: Modifier = Modifier,
-    selectedItem: Boolean,
     onChangeCampo: (CamposEndereco, String) -> Unit,
     onCollapse: () -> Unit,
 ) {
@@ -86,16 +81,7 @@ fun Cirurgia(
         mutableStateOf(Cirurgia())
     }
 
-    Card(
-        modifier
-            .fillMaxWidth(.95f)
-            .shadow(
-                elevation = 5.dp,
-                shape = RoundedCornerShape(10.dp)
-            )
 
-
-    ) {
         Column(
             modifier = modifier
                 .fillMaxWidth()
@@ -131,34 +117,17 @@ fun Cirurgia(
                         )
                     )
                 }
-                Icon(
-                    imageVector = if (selectedItem) Icons.Default.ArrowDropUp else Icons.Default.ArrowDropDown,
-                    contentDescription = "Adicionar",
-                    tint = GreenBlack,
-                    modifier = Modifier
-                        .padding(end = 10.dp)
-                        .size(20.dp)
-                )
             }
         }
 
-        AnimatedVisibility(
-            visible = (selectedItem),
-            enter = expandVertically(
-                animationSpec = tween(
-                    durationMillis = 400,
-                    easing = FastOutSlowInEasing
-                )
-            ),
-            exit = shrinkVertically() + fadeOut(),
 
-            ) {
-            Column(
+    Column(
                 modifier = modifier
                     .fillMaxWidth()
                     .background(Main)
                     .animateContentSize()
-                    .padding(vertical = 10.dp),
+                    .padding(vertical = 10.dp)
+                    .padding(bottom = 10.dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp),
                 horizontalAlignment = Alignment.Start
             ) {
@@ -251,8 +220,16 @@ fun Cirurgia(
 
 
 
-                        if (selecionadoQuimio == 1) {
-
+                        AnimatedVisibility(
+                            visible = selecionadoQuimio == 1,
+                            enter = expandVertically(
+                                animationSpec = tween(
+                                    durationMillis = 400,
+                                    easing = FastOutSlowInEasing
+                                )
+                            ),
+                            exit = shrinkVertically() + fadeOut(),
+                        ) {
                             Row(
                                 Modifier.fillMaxWidth(),
                             ) {
@@ -333,7 +310,17 @@ fun Cirurgia(
                             )
                         }
 
-                        if(listaCirurgias.size > 0){
+                        AnimatedVisibility(
+                            visible = listaCirurgias.size > 0,
+                            enter = expandVertically(
+                                animationSpec = tween(
+                                    durationMillis = 400,
+                                    easing = FastOutSlowInEasing
+                                )
+                            ),
+                            exit = shrinkVertically() + fadeOut(),
+
+                            ) {
                             Card {
                                 Column(
                                     modifier = Modifier
@@ -343,20 +330,29 @@ fun Cirurgia(
                                 ) {
                                     listaCirurgias.forEach { cirurgia ->
                                         Column(
-                                            Modifier.fillMaxWidth(.90f).padding(top = 10.dp).height(50.dp).clip(
-                                                RoundedCornerShape(10.dp)
-                                            ).background(Paragraph).verticalScroll(
-                                                rememberScrollState()
-                                            ),
+                                            Modifier
+                                                .fillMaxWidth(.90f)
+                                                .padding(top = 10.dp)
+                                                .height(50.dp)
+                                                .clip(
+                                                    RoundedCornerShape(10.dp)
+                                                )
+                                                .background(Paragraph)
+                                                .verticalScroll(
+                                                    rememberScrollState()
+                                                ),
                                             horizontalAlignment = Alignment.CenterHorizontally,
                                             verticalArrangement = Arrangement.Center
                                         ) {
                                             Row(
-                                                 Modifier.fillMaxWidth().fillMaxHeight().padding(horizontal = 10.dp),
+                                                Modifier
+                                                    .fillMaxWidth()
+                                                    .fillMaxHeight()
+                                                    .padding(horizontal = 10.dp),
                                                 verticalAlignment = Alignment.CenterVertically,
                                                 horizontalArrangement = Arrangement.SpaceBetween,
 
-                                            ) {
+                                                ) {
                                                 Text(
                                                     text = "${cirurgia.nome} - ${cirurgia.data}",
                                                     style = TextStyle(
@@ -367,11 +363,18 @@ fun Cirurgia(
                                                     )
                                                 )
 
-                                                IconButton(onClick = {
-                                                     cirurgiaEdicao = cirurgia
-                                                }, modifier = Modifier.clip(
-                                                    RoundedCornerShape(10.dp)).background(
-                                                    br.com.casa_guido.ui.theme.Button).size(40.dp)) {
+                                                IconButton(
+                                                    onClick = {
+                                                        cirurgiaEdicao = cirurgia
+                                                    }, modifier = Modifier
+                                                        .clip(
+                                                            RoundedCornerShape(10.dp)
+                                                        )
+                                                        .background(
+                                                            br.com.casa_guido.ui.theme.Button
+                                                        )
+                                                        .size(40.dp)
+                                                ) {
                                                     Icon(
                                                         imageVector = Icons.Default.Edit,
                                                         contentDescription = "Editar",
@@ -385,14 +388,9 @@ fun Cirurgia(
                                 }
                             }
                         }
-
-
                     }
                 }
-
             }
-        }
-    }
 
 }
 

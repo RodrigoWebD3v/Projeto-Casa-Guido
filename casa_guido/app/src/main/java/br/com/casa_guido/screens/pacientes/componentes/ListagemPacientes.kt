@@ -17,6 +17,7 @@ import br.com.casa_guido.ui.theme.Main
 fun ListagemPacientes(
     modifier: Modifier = Modifier,
     lista: List<Paciente>,
+    composable: @Composable () -> Unit,
     onUpId: (String) -> Unit = {}
 ) {
 
@@ -30,13 +31,18 @@ fun ListagemPacientes(
         state = listState,
         modifier = modifier
             .fillMaxSize()
-            .padding(top = 16.dp)
+            .padding(top = 10.dp)
             .border(
                 width = 1.dp,
                 color = Main,
                 shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp)
             )
     ) {
+        item {
+            composable(
+
+            )
+        }
         items(lista, contentType = { it.id }) { paciente ->
             PacienteItem(
                 paciente

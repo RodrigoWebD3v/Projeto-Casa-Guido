@@ -2,7 +2,6 @@ package br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -11,13 +10,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.ArrowDropUp
-import androidx.compose.material3.Card
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,7 +18,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -37,7 +28,6 @@ import br.com.casa_guido.customizacao.VisualTransformationCustom
 import br.com.casa_guido.screens.Paciente
 import br.com.casa_guido.screens.shared.DataPicker
 import br.com.casa_guido.screens.shared.TextFieldSimples
-import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
 
@@ -46,21 +36,10 @@ import br.com.casa_guido.ui.theme.Paragraph
 fun IdentificacaoPaciente(
     modifier: Modifier = Modifier,
     paciente: Paciente,
-    selectedItem: Boolean,
     onChangeCampo: (CamposIdentificacao, String) -> Unit,
     onCollapse: () -> Unit,
 ) {
-
-    Card(
-        modifier
-            .fillMaxWidth(.95f)
-            .shadow(
-                elevation = 5.dp,
-                shape = RoundedCornerShape(10.dp)
-            )
-
-    ) {
-        Column(
+    Column(
             modifier = modifier
                 .fillMaxWidth()
                 .background(Paragraph)
@@ -96,30 +75,20 @@ fun IdentificacaoPaciente(
                         )
                     )
                 }
-                Icon(
-                    imageVector = if (selectedItem) Icons.Default.ArrowDropUp else Icons.Default.ArrowDropDown,
-                    contentDescription = "Adicionar",
-                    tint = GreenBlack,
-                    modifier = Modifier
-                        .padding(end = 10.dp)
-                        .size(20.dp)
-                )
             }
         }
 
-        AnimatedVisibility(
-            visible = (selectedItem)
-        ) {
-            Column(
+    Column(
                 modifier = modifier
                     .fillMaxWidth()
                     .background(Main)
-                    .padding(vertical = 10.dp),
+                    .padding(vertical = 10.dp)
+                    .padding(bottom = 10.dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp),
                 horizontalAlignment = Alignment.Start
             ) {
                 TextFieldSimples(
-                    nomeCampo = "NOME COMPLETO",
+                    nomeCampo = "Nome Completo",
                     valorPreenchido = paciente.nome,
                     onChange = {
                         onChangeCampo(
@@ -152,7 +121,7 @@ fun IdentificacaoPaciente(
                 )
 
                 TextFieldSimples(
-                    nomeCampo = "MÃE",
+                    nomeCampo = "Mãe",
                     valorPreenchido = paciente.nomeMae,
                     onChange = {
                         onChangeCampo(
@@ -163,7 +132,7 @@ fun IdentificacaoPaciente(
                 )
 
                 TextFieldSimples(
-                    nomeCampo = "PAI",
+                    nomeCampo = "Pai",
                     valorPreenchido = paciente.nomePai,
                     onChange = {
                         onChangeCampo(
@@ -174,7 +143,7 @@ fun IdentificacaoPaciente(
                 )
 
                 TextFieldSimples(
-                    nomeCampo = "OUTRO",
+                    nomeCampo = "Outro",
                     valorPreenchido = paciente.nomeResponsavel,
                     onChange = {
                         onChangeCampo(
@@ -185,7 +154,7 @@ fun IdentificacaoPaciente(
                 )
 
                 TextFieldSimples(
-                    nomeCampo = "CPF",
+                    nomeCampo = "Cpf",
                     valorPreenchido = paciente.cpf,
                     visualTransformation = VisualTransformationCustom.CpfVisualTransformation(),
                     onChange = {
@@ -197,7 +166,7 @@ fun IdentificacaoPaciente(
                 )
 
                 TextFieldSimples(
-                    nomeCampo = "RG",
+                    nomeCampo = "Rg",
                     valorPreenchido = paciente.rg,
                     visualTransformation = VisualTransformationCustom.RgVisualTransformation(),
                     onChange = {
@@ -209,7 +178,7 @@ fun IdentificacaoPaciente(
                 )
 
                 TextFieldSimples(
-                    nomeCampo = "CARTÃO SUS",
+                    nomeCampo = "Cartão do sus",
                     valorPreenchido = paciente.cartaoSus,
                     visualTransformation = VisualTransformationCustom.CartSusVisualTransformation(),
                     onChange = {
@@ -221,7 +190,7 @@ fun IdentificacaoPaciente(
                 )
 
                 TextFieldSimples(
-                    nomeCampo = "CELULAR",
+                    nomeCampo = "Celular",
                     valorPreenchido = paciente.telefone,
                     visualTransformation = VisualTransformationCustom.PhoneVisualTransformation(),
                     onChange = {
@@ -233,6 +202,3 @@ fun IdentificacaoPaciente(
                 )
             }
         }
-    }
-
-}
