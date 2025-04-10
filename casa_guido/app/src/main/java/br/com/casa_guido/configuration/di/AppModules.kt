@@ -7,6 +7,13 @@ import br.com.casa_guido.navigation.root.ViewModelAuthMananger
 import br.com.casa_guido.repository.AuthRepository
 import br.com.casa_guido.repository.ViaCepRepository
 import br.com.casa_guido.screens.cadastro.CadastroScreenViewModel
+import br.com.casa_guido.screens.cadastro.formularios.Quimio.QuimioViewModel
+import br.com.casa_guido.screens.cadastro.formularios.cirurgia.CirurgiaViewModel
+import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.ComposicaoFamiliarViewModel
+import br.com.casa_guido.screens.cadastro.formularios.endereco.EnderecoViewModel
+import br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente.IdentificacaoViewModel
+import br.com.casa_guido.screens.cadastro.formularios.responsavel.ResponsavelViewModel
+import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.SocioEconomicoViewModel
 
 import br.com.casa_guido.screens.home.HomeViewModel
 import br.com.casa_guido.screens.login.LoginViewModel
@@ -22,6 +29,14 @@ val appModule = module {
     viewModelOf(::PacientesViewModel)
     viewModelOf(::HomeViewModel)
     viewModelOf(::CadastroScreenViewModel)
+    viewModelOf(::CirurgiaViewModel)
+    viewModelOf(::ComposicaoFamiliarViewModel)
+    viewModelOf(::SocioEconomicoViewModel)
+    viewModelOf(::EnderecoViewModel)
+    viewModelOf(::IdentificacaoViewModel)
+    viewModelOf(::QuimioViewModel)
+    viewModelOf(::ResponsavelViewModel)
+
     singleOf(::ClienteApi)
     singleOf(::ApiViaCepConfig)
     singleOf(::ViaCepRepository)

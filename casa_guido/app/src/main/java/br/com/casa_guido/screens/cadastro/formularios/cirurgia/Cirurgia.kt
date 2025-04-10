@@ -16,6 +16,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -35,10 +36,10 @@ import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.shared.DataPicker
 import br.com.casa_guido.screens.shared.TextFieldSimples
 import br.com.casa_guido.ui.theme.BackgroundColor
-import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
 import br.com.casa_guido.util.Utils
+import org.koin.androidx.compose.koinViewModel
 import java.time.LocalDate
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -49,13 +50,8 @@ fun Cirurgia(
     onCollapse: () -> Unit,
 ) {
 
-
-    var toggleDataPickerCirurgia by remember {
-        mutableStateOf(false)
-    }
-
-    val listaCirurgias = remember { mutableStateListOf<Cirurgia>() }
-
+    val viewModel = koinViewModel<CirurgiaViewModel>()
+    val state by viewModel.uiState.collectAsState()
 
     var cirurgiaEdicao by remember {
         mutableStateOf(Cirurgia())
@@ -141,11 +137,11 @@ fun Cirurgia(
 
 
                     DataPicker(
-                        showDataPicker = toggleDataPickerCirurgia,
+                        showDataPicker = state.toggleDataPickerCirurgia,
                         valorPreenchido = cirurgiaEdicao.data,
                         titulo = "Data da cirurgia",
                         onCancelar = {
-                            toggleDataPickerCirurgia = false
+                            viewModel.toggleDatePickerCirurgia()
                         },
                         onChange = {
                             cirurgiaEdicao = cirurgiaEdicao.copy(
@@ -153,7 +149,7 @@ fun Cirurgia(
                             )
                         },
                         onClick = {
-                            toggleDataPickerCirurgia = true
+                            viewModel.toggleDatePickerCirurgia()
                         },
                     )
                 }
@@ -163,7 +159,7 @@ fun Cirurgia(
             Button(
                 onClick = {
                     if (cirurgiaEdicao.nome.isNotEmpty()) {
-                        listaCirurgias.add(cirurgiaEdicao)
+                        viewModel.addCirurgia(cirurgiaEdicao)
                         cirurgiaEdicao = Cirurgia(
                             data = Utils.formatData(LocalDate.now())!!
                         )
@@ -194,13 +190,13 @@ fun Cirurgia(
 
 
             Column {
-                listaCirurgias.forEachIndexed {
+                state.listaCirurgias.forEachIndexed {
                     index, item ->
                     ItemCirurgia(
                         nomeCirurgia = item.nome,
                         data = item.data
                     ) {
-                        listaCirurgias.removeAt(index)
+                        viewModel.RemoveIndex(index)
                     }
                 }
             }
@@ -208,5 +204,7 @@ fun Cirurgia(
     }
 
 }
+
+
 
 
