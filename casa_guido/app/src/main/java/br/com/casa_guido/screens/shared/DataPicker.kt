@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarToday
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,6 +36,7 @@ import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
+import br.com.casa_guido.util.Utils
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
@@ -60,9 +62,9 @@ fun DataPicker(
 
     val formattedDate by remember {
         derivedStateOf {
-            DateTimeFormatter
-                .ofPattern("dd/MM/yyyy")
-                .format(pickedDate)
+            Utils.formatData(
+                pickedDate
+            )
         }
     }
 
@@ -78,7 +80,7 @@ fun DataPicker(
 
     LaunchedEffect(Unit){
         onChange(
-            formattedDate
+            formattedDate!!
         )
     }
 
@@ -103,7 +105,7 @@ fun DataPicker(
                     color = Paragraph,
                     shape = RoundedCornerShape(5.dp)
                 )
-                .height(50.dp)
+                .height(45.dp)
                 .clickable {
                     onClick()
                 },
@@ -111,7 +113,7 @@ fun DataPicker(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = if(valorPreenchido == "") formattedDate else valorPreenchido,
+                text = if(valorPreenchido == "") formattedDate!! else valorPreenchido,
                 style = TextStyle(
                     fontSize = 16.sp,
                     color = BackgroundColor,
@@ -172,7 +174,7 @@ fun DataPicker(
         ) {
             pickedDate = it
             onChange(
-                formattedDate
+                formattedDate!!
             )
         }
     }

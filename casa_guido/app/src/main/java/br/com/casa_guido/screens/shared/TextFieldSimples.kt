@@ -1,8 +1,11 @@
 package br.com.casa_guido.screens.shared
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -31,13 +34,15 @@ fun TextFieldSimples(
     modifier: Modifier = Modifier,
     nomeCampo: String,
     valorPreenchido: String,
+    paddingValues: PaddingValues = PaddingValues(20.dp,0.dp),
+    placeholder: String,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     onChange: (String) -> Unit
 ) {
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp),
+            .padding(paddingValues),
         verticalArrangement = Arrangement.spacedBy(5.dp),
         horizontalAlignment = Alignment.Start
     ) {
@@ -51,7 +56,7 @@ fun TextFieldSimples(
             )
         )
 
-        androidx.compose.foundation.layout.Box(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(45.dp)
@@ -78,7 +83,7 @@ fun TextFieldSimples(
                 decorationBox = { innerTextField ->
                     if (valorPreenchido.isEmpty()) {
                         Text(
-                            text = nomeCampo,
+                            text = placeholder,
                             color = BackgroundColor,
                             fontSize = 16.sp
                         )

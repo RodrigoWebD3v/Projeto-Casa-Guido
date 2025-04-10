@@ -1,5 +1,11 @@
 package br.com.casa_guido.util
 
+import android.os.Build
+import androidx.annotation.RequiresApi
+import java.time.format.DateTimeFormatter
+import java.time.temporal.Temporal
+import java.time.temporal.TemporalAccessor
+
 object Utils {
 
     fun getInitials(name: String): String {
@@ -10,7 +16,10 @@ object Utils {
     fun formatCPF(input: String): String {
         val digits = input.filter { it.isDigit() }.take(11)
         return digits.chunked(3).joinToString(".").let {
-            if (digits.length > 9) it.replaceAfterLast(".", it.takeLast(3) + "-" + digits.takeLast(2))
+            if (digits.length > 9) it.replaceAfterLast(
+                ".",
+                it.takeLast(3) + "-" + digits.takeLast(2)
+            )
             else it
         }.take(14)
     }
@@ -30,9 +39,29 @@ object Utils {
         return when {
             digits.length <= 2 -> "(${digits}"
             digits.length <= 6 -> "(${digits.substring(0, 2)}) ${digits.substring(2)}"
-            digits.length <= 10 -> "(${digits.substring(0, 2)}) ${digits.substring(2, 7)}-${digits.substring(7)}"
-            else -> "(${digits.substring(0, 2)}) ${digits.substring(2, 7)}-${digits.substring(7, 11)}"
+            digits.length <= 10 -> "(${digits.substring(0, 2)}) ${
+                digits.substring(
+                    2,
+                    7
+                )
+            }-${digits.substring(7)}"
+
+            else -> "(${digits.substring(0, 2)}) ${digits.substring(2, 7)}-${
+                digits.substring(
+                    7,
+                    11
+                )
+            }"
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun formatData(
+        data: TemporalAccessor
+    ): String? {
+      return  DateTimeFormatter
+            .ofPattern("dd/MM/yyyy")
+            .format(data)
     }
 
 }

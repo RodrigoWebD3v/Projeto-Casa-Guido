@@ -31,116 +31,116 @@ fun Endereco(
 ) {
 
     Column(
-            modifier = modifier
+        modifier = modifier
+            .fillMaxWidth()
+            .background(Paragraph)
+    ) {
+        Row(
+            modifier = Modifier
                 .fillMaxWidth()
-                .background(Paragraph)
+                .padding(10.dp)
+                .clickable {
+                    onCollapse()
+                },
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(10.dp)
-                    .clickable {
-                        onCollapse()
-                    },
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Column {
-                    Text(
-                        "2. Endereço",
-                        style = TextStyle(
-                            fontSize = 18.sp,
-                            color = Color.Black,
-                            fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Start
-                        )
+            Column {
+                Text(
+                    "2. Endereço", style = TextStyle(
+                        fontSize = 18.sp,
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Start
                     )
-                    Text(
-                        "Informações de endereço do paciente",
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            color = Color.Black,
-                            fontWeight = FontWeight.Medium,
-                            textAlign = TextAlign.Start
-                        )
+                )
+                Text(
+                    "Informações de endereço do paciente", style = TextStyle(
+                        fontSize = 12.sp,
+                        color = Color.Black,
+                        fontWeight = FontWeight.Medium,
+                        textAlign = TextAlign.Start
                     )
-                }
+                )
             }
         }
+    }
 
     Column(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .background(Main)
-                    .animateContentSize()
-                    .padding(vertical = 10.dp)
-                    .padding(bottom = 10.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp),
-                horizontalAlignment = Alignment.Start
-            ) {
-                TextFieldSimples(
-                    nomeCampo = "Cep",
-                    valorPreenchido = paciente.endereco.cep,
-                    onChange = {
-                        onChangeCampo(
-                            CamposEndereco.CEP,
-                            it
-                        )
-                    }
+        modifier = modifier
+            .fillMaxWidth()
+            .background(Main)
+            .animateContentSize()
+            .padding(vertical = 10.dp)
+            .padding(bottom = 10.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+        horizontalAlignment = Alignment.Start
+    ) {
+        TextFieldSimples(
+            nomeCampo = "Cep",
+            valorPreenchido = paciente.endereco.cep,
+            placeholder = "88815-200",
+            onChange = {
+                onChangeCampo(
+                    CamposEndereco.CEP, it
                 )
-                TextFieldSimples(
-                    nomeCampo = "Logradouro",
-                    valorPreenchido = paciente.endereco.logradouro,
-                    onChange = {
-                       onChangeCampo(
-                            CamposEndereco.LOGRADOURO,
-                            it
-                        )
-                    }
+            })
+        TextFieldSimples(
+            nomeCampo = "Logradouro",
+            valorPreenchido = paciente.endereco.logradouro,
+            placeholder = "Rua miguel patricio de souza",
+            onChange = {
+                onChangeCampo(
+                    CamposEndereco.LOGRADOURO, it
                 )
+            })
 
-                TextFieldSimples(
-                    nomeCampo = "Bairro",
-                    valorPreenchido = paciente.endereco.bairro,
-                    onChange = {
-                        onChangeCampo(
-                            CamposEndereco.LOGRADOURO,
-                            it
-                        )
-                    }
+        TextFieldSimples(
+            nomeCampo = "Bairro",
+            valorPreenchido = paciente.endereco.bairro,
+            placeholder = "Jardim Maristela",
+            onChange = {
+                onChangeCampo(
+                    CamposEndereco.LOGRADOURO, it
                 )
+            })
 
-                TextFieldSimples(
-                    nomeCampo = "Complemento",
-                    valorPreenchido = paciente.endereco.complemento,
-                    onChange = {
-                        onChangeCampo(
-                            CamposEndereco.COMPLEMENTO,
-                            it
-                        )
-                    }
+        TextFieldSimples(
+            nomeCampo = "Complemento",
+            valorPreenchido = paciente.endereco.complemento,
+            placeholder = "Ao lado do supermercado",
+            onChange = {
+                onChangeCampo(
+                    CamposEndereco.COMPLEMENTO, it
                 )
+            })
 
-                TextFieldSimples(
-                    nomeCampo = "Localidade",
-                    valorPreenchido = paciente.endereco.localidade,
-                    onChange = {
-                        onChangeCampo(
-                            CamposEndereco.LOCALIDADE,
-                            it
-                        )
-                    }
-                )
+        Row {
+            TextFieldSimples(
+                nomeCampo = "Localidade",
+                valorPreenchido = paciente.endereco.localidade,
+                placeholder = "Criciúma",
+                onChange = {
+                    onChangeCampo(
+                        CamposEndereco.LOCALIDADE, it
+                    )
+                },
+                modifier = Modifier.fillMaxWidth(.75f)
+            )
 
-                TextFieldSimples(
-                    nomeCampo = "UF",
-                    valorPreenchido = paciente.endereco.uf,
-                    onChange = {
-                        onChangeCampo(
-                            CamposEndereco.UF,
-                            it
-                        )
-                    }
+            TextFieldSimples(
+                nomeCampo = "UF",
+                valorPreenchido = paciente.endereco.uf,
+                placeholder = "SC",
+                onChange = {
+                    onChangeCampo(
+                        CamposEndereco.UF, it
+                    )
+                },
+                modifier = Modifier.weight(1f)
                 )
         }
+
+
     }
+}

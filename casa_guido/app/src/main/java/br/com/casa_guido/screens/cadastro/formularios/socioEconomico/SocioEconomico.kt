@@ -1,5 +1,6 @@
 package br.com.casa_guido.screens.cadastro.formularios.socioEconomico
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -39,196 +40,212 @@ fun SocioEconomico(
     onChangeCampo: (CamposSocioEconomico, String) -> Unit,
     onCollapse: () -> Unit,
 ) {
-        Column(
-            modifier = modifier
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(Paragraph)
+    ) {
+        Row(
+            modifier = Modifier
                 .fillMaxWidth()
-                .background(Paragraph)
+                .padding(10.dp)
+                .clickable {
+                    onCollapse()
+                },
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(10.dp)
-                    .clickable {
-                        onCollapse()
-                    },
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Column {
-                    Text(
-                        "3. Sócio econômico",
-                        style = TextStyle(
-                            fontSize = 18.sp,
-                            color = Color.Black,
-                            fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Start
-                        )
+            Column {
+                Text(
+                    "3. Sócio econômico",
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Start
                     )
-                    Text(
-                        "Informações sócio econômicas do paciente",
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            color = Color.Black,
-                            fontWeight = FontWeight.Medium,
-                            textAlign = TextAlign.Start
-                        )
+                )
+                Text(
+                    "Informações sócio econômicas do paciente",
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        color = Color.Black,
+                        fontWeight = FontWeight.Medium,
+                        textAlign = TextAlign.Start
                     )
-                }
+                )
             }
         }
+    }
 
     Column(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .background(Main)
-                    .animateContentSize()
-                    .padding(vertical = 10.dp)
-                    .padding(bottom = 10.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp),
-                horizontalAlignment = Alignment.Start
-            ) {
-                TextFieldSimples(
-                    nomeCampo = "Remuneração",
-                    valorPreenchido = paciente.socioEconomico.remuneracao,
-                    onChange = {
-                        onChangeCampo(
-                            CamposSocioEconomico.REMUNERACAO,
-                            it
-                        )
-                    }
-                )
-
-                var selecionado by remember {
-                    mutableIntStateOf(paciente.socioEconomico.bpc)
-                }
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Box(
-                        Modifier
-                            .size(50.dp, 35.dp)
-                            .clip(RoundedCornerShape(10.dp))
-                            .background(Paragraph),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "BPC",
-                            style = TextStyle(
-                                fontSize = 16.sp,
-                                color = BackgroundColor,
-                                fontWeight = FontWeight.SemiBold,
-                                textAlign = TextAlign.Center
-                            )
-                        )
-                    }
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        RadioButtonComLabel(
-                            label = "Sim",
-                            selected = selecionado == 1,
-                            onClickListener = {
-                                selecionado = 1
-
-                                onChangeCampo(
-                                    CamposSocioEconomico.REMUNERACAO_OPT,
-                                    selecionado.toString()
-                                )
-                            }
-                        )
-
-                        RadioButtonComLabel(
-                            label = "Não",
-                            selected = selecionado == 0,
-                            onClickListener = {
-                                selecionado = 0
-
-                                onChangeCampo(
-                                    CamposSocioEconomico.REMUNERACAO_OPT,
-                                    selecionado.toString()
-                                )
-                            }
-                        )
-
-                        RadioButtonComLabel(
-                            label = "Apto a receber",
-                            selected = selecionado == 2,
-                            onClickListener = {
-                                selecionado = 2
-
-                                onChangeCampo(
-                                    CamposSocioEconomico.REMUNERACAO_OPT,
-                                    selecionado.toString()
-                                )
-                            }
-                        )
-
-                    }
-                }
-
-                if (selecionado == 1) {
-                    TextFieldSimples(
-                        nomeCampo = "Valor",
-                        valorPreenchido = paciente.socioEconomico.valorBpc,
-                        onChange = {
-                            onChangeCampo(
-                                CamposSocioEconomico.VALOR_BPC,
-                                it
-                            )
-                        }
-                    )
-                }
-
-                TextFieldSimples(
-                    nomeCampo = "Escola",
-                    valorPreenchido = paciente.socioEconomico.escolaNome,
-                    onChange = {
-                        onChangeCampo(
-                            CamposSocioEconomico.NOME_ESCOLA,
-                            it
-                        )
-                    }
-                )
-
-                TextFieldSimples(
-                    nomeCampo = "Ano",
-                    valorPreenchido = paciente.socioEconomico.escolaAno,
-                    onChange = {
-                        onChangeCampo(
-                            CamposSocioEconomico.ESCOLA_ANO,
-                            it
-                        )
-                    }
-                )
-
-                TextFieldSimples(
-                    nomeCampo = "Tam. Roupa",
-                    valorPreenchido = paciente.socioEconomico.tamRoupa.toString(),
-                    onChange = {
-                        onChangeCampo(
-                            CamposSocioEconomico.TAMANHO_ROUPA,
-                            it
-                        )
-                    }
-                )
-
-                TextFieldSimples(
-                    nomeCampo = "Tam. Calçado",
-                    valorPreenchido = paciente.socioEconomico.tamCalcado.toString(),
-                    onChange = {
-                        onChangeCampo(
-                            CamposSocioEconomico.TAMANHO_CALCADO,
-                            it
-                        )
-                    }
+        modifier = modifier
+            .fillMaxWidth()
+            .background(Main)
+            .animateContentSize()
+            .padding(vertical = 10.dp)
+            .padding(bottom = 10.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+        horizontalAlignment = Alignment.Start
+    ) {
+        TextFieldSimples(
+            nomeCampo = "Remuneração",
+            valorPreenchido = paciente.socioEconomico.remuneracao,
+            placeholder = "1.500",
+            onChange = {
+                onChangeCampo(
+                    CamposSocioEconomico.REMUNERACAO,
+                    it
                 )
             }
+        )
+
+        var selecionado by remember {
+            mutableIntStateOf(paciente.socioEconomico.bpc)
         }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Box(
+                Modifier
+                    .size(50.dp, 35.dp)
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(Paragraph),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "BPC",
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        color = BackgroundColor,
+                        fontWeight = FontWeight.SemiBold,
+                        textAlign = TextAlign.Center
+                    )
+                )
+            }
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                RadioButtonComLabel(
+                    label = "Sim",
+                    selected = selecionado == 1,
+                    onClickListener = {
+                        selecionado = 1
+
+                        onChangeCampo(
+                            CamposSocioEconomico.REMUNERACAO_OPT,
+                            selecionado.toString()
+                        )
+                    }
+                )
+
+                RadioButtonComLabel(
+                    label = "Não",
+                    selected = selecionado == 0,
+                    onClickListener = {
+                        selecionado = 0
+
+                        onChangeCampo(
+                            CamposSocioEconomico.REMUNERACAO_OPT,
+                            selecionado.toString()
+                        )
+                    }
+                )
+
+                RadioButtonComLabel(
+                    label = "Apto a receber",
+                    selected = selecionado == 2,
+                    onClickListener = {
+                        selecionado = 2
+
+                        onChangeCampo(
+                            CamposSocioEconomico.REMUNERACAO_OPT,
+                            selecionado.toString()
+                        )
+                    }
+                )
+
+            }
+        }
+
+        AnimatedVisibility(
+            visible = selecionado == 1
+        ) {
+            TextFieldSimples(
+                nomeCampo = "Valor",
+                valorPreenchido = paciente.socioEconomico.valorBpc,
+                placeholder = "180",
+                onChange = {
+                    onChangeCampo(
+                        CamposSocioEconomico.VALOR_BPC,
+                        it
+                    )
+                }
+            )
+        }
+
+        TextFieldSimples(
+            nomeCampo = "Escola",
+            valorPreenchido = paciente.socioEconomico.escolaNome,
+            placeholder = "E.E.B Ignacio Stakowski",
+            onChange = {
+                onChangeCampo(
+                    CamposSocioEconomico.NOME_ESCOLA,
+                    it
+                )
+            }
+        )
+
+        Row {
+            TextFieldSimples(
+                nomeCampo = "Ano",
+                valorPreenchido = paciente.socioEconomico.escolaAno,
+                placeholder = "3",
+                onChange = {
+                    onChangeCampo(
+                        CamposSocioEconomico.ESCOLA_ANO,
+                        it
+                    )
+                },
+                modifier = Modifier.weight(1f)
+            )
+
+            TextFieldSimples(
+                nomeCampo = "Tam. Roupa",
+                valorPreenchido = paciente.socioEconomico.tamRoupa.toString(),
+                placeholder = "44",
+                onChange = {
+                    onChangeCampo(
+                        CamposSocioEconomico.TAMANHO_ROUPA,
+                        it
+                    )
+                },
+                modifier = Modifier.weight(1f)
+            )
+
+            TextFieldSimples(
+                nomeCampo = "Tam. Calçado",
+                placeholder = "32",
+                valorPreenchido = paciente.socioEconomico.tamCalcado.toString(),
+                onChange = {
+                    onChangeCampo(
+                        CamposSocioEconomico.TAMANHO_CALCADO,
+                        it
+                    )
+                },
+                modifier = Modifier.weight(1f)
+            )
+        }
+
+
+    }
+}
 

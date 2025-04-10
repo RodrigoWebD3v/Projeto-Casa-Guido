@@ -19,7 +19,7 @@ import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Paragraph
 
 @Composable
-fun RadioButtonComLabel(
+fun RadioButtonComLabelWidthIn(
     modifier: Modifier = Modifier,
     label: String,
     selected: Boolean,
@@ -36,8 +36,9 @@ fun RadioButtonComLabel(
             fontSize = 14.sp,
             fontWeight = FontWeight.SemiBold,
             textAlign = TextAlign.Start
-        ))
-
+        ),
+            modifier = Modifier.widthIn(110.dp, 120.dp))
+        
         RadioButton(
             modifier = modifier,
             selected = selected,
