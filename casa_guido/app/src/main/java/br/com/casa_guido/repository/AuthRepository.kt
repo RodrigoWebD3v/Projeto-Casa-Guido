@@ -18,7 +18,7 @@ class AuthRepository(
 ) {
 
 
-    suspend fun loginUsuario(context: Context, email: String, senha: String): LoginResponse {
+    suspend fun loginUsuario(email: String, senha: String): LoginResponse {
 
         val loginRequest = LoginRequest(
             email = email,
@@ -31,11 +31,6 @@ class AuthRepository(
                     clienteApi.client.post("${clienteApi.authEndpoint}/login") {
                         setBody(loginRequest)
                     }
-                SecureStorage.saveToken(context, response.body<LoginResponse>().token)
-                SecureStorage.saveRefreshToken(
-                    context,
-                    response.body<LoginResponse>().refreshToken
-                )
                 response.body<LoginResponse>()
             }
         } catch (e: Exception) {
@@ -64,7 +59,5 @@ class AuthRepository(
             throw Exception("Erro ao buscar dados: ${e.message} - ${e.cause}")
         }
     }
-
-
 
 }

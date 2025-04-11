@@ -1,6 +1,7 @@
 package br.com.casa_guido.screens.main
 
 import Routes
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
@@ -27,7 +28,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
+import br.com.casa_guido.configuration.Sessao
 import br.com.casa_guido.screens.cadastro.itemNavBar
 
 import br.com.casa_guido.screens.home.HomeScreen
@@ -43,6 +46,8 @@ fun Main(
     modifier: Modifier = Modifier,
     navHostController: NavHostController
 ) {
+
+    val contexto = LocalContext.current
 
     val items = listOf(
         itemNavBar("Dashboard", Icons.Default.Dashboard, 0),
@@ -157,7 +162,9 @@ fun Main(
                 }
 
                 2 -> {
-                    Box() {
+                    Box(Modifier.clickable {
+                        Sessao.clearSession(contexto)
+                    }) {
                         Text("Agenda")
                     }
                 }

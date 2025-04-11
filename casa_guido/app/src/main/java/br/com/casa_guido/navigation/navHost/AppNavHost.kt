@@ -19,8 +19,6 @@ import br.com.casa_guido.screens.main.Main
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AppNavHost(navHostController: NavHostController) {
-
-
     NavHost(
             navController = navHostController,
             startDestination = Routes.DashBoardScreenRoute.route,

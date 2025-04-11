@@ -7,7 +7,6 @@ import br.com.casa_guido.navigation.root.ViewModelAuthMananger
 import br.com.casa_guido.repository.AuthRepository
 import br.com.casa_guido.repository.ViaCepRepository
 import br.com.casa_guido.screens.cadastro.CadastroScreenViewModel
-import br.com.casa_guido.screens.cadastro.formularios.Quimio.QuimioViewModel
 import br.com.casa_guido.screens.cadastro.formularios.cirurgia.CirurgiaViewModel
 import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.ComposicaoFamiliarViewModel
 import br.com.casa_guido.screens.cadastro.formularios.endereco.EnderecoViewModel
@@ -18,6 +17,7 @@ import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.SocioEconom
 import br.com.casa_guido.screens.home.HomeViewModel
 import br.com.casa_guido.screens.login.LoginViewModel
 import br.com.casa_guido.screens.pacientes.PacientesViewModel
+import br.com.casa_guido.service.AuthService
 import br.com.casa_guido.service.ViaCepService
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
@@ -34,7 +34,6 @@ val appModule = module {
     viewModelOf(::SocioEconomicoViewModel)
     viewModelOf(::EnderecoViewModel)
     viewModelOf(::IdentificacaoViewModel)
-    viewModelOf(::QuimioViewModel)
     viewModelOf(::ResponsavelViewModel)
 
     singleOf(::ClienteApi)
@@ -42,4 +41,6 @@ val appModule = module {
     singleOf(::ViaCepRepository)
     singleOf(::ViaCepService)
     singleOf(::AuthRepository)
+    singleOf(::AuthService)
+
 }

@@ -10,14 +10,14 @@ import br.com.casa_guido.screens.login.Login
 
 
 @Composable
-fun AuthNavHost(navHostController: NavHostController, paddingValues: PaddingValues) {
+fun AuthNavHost(navHostController: NavHostController) {
 
     NavHost(
         navController = navHostController,
         startDestination = AuthRoutes.LoginRoute
     ) {
        composable<AuthRoutes.LoginRoute> {
-           Login(paddingValues = paddingValues, onLoginSuccess = {
+           Login( onLoginSuccess = {
                navHostController.navigate(
                    Routes.DashBoardScreenRoute
                )

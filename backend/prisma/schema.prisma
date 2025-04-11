@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,11 +7,156 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id       String  @id @default(uuid())
-  name     String
-  email    String  @unique
-  password String
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
   createdAt DateTime @default(now())
+}
+
+model Pessoa {
+  id               String             @id @default(uuid())
+  nome             String
+  data_nascimento  DateTime
+  cpf              String?            @unique
+  identidade       String?
+  naturalidade     String?
+  genero           String?
+  escolaridade     String?
+  contato          String?
+  enderecoId       String?
+  conjuge          Conjuge[]
+  outroResponsavel OutroResponsavel[]
+  paciente         Paciente?
+  endereco         Endereco?          @relation(fields: [enderecoId], references: [id])
+  responsavel      Responsavel?
+}
+
+model Endereco {
+  id          String   @id @default(uuid())
+  cep         String
+  logradouro  String
+  bairro      String
+  cidade      String
+  estado      String   @db.Char(2)
+  referencia  String?
+  complemento String?
+  numero      String?
+  pessoas     Pessoa[]
+}
+
+model Paciente {
+  id                 String               @id @default(uuid())
+  pessoaId           String               @unique
+  cartao_sus         String?
+  remuneracao        Decimal?
+  recebe_bpc         Boolean?
+  bpc_valor          Decimal?
+  diagnostico        String?
+  medico_responsavel String?
+  escola             String?
+  tamanho_roupa      String?
+  tamanho_calcado    String?
+  ano_escolar        String?
+  origem_info_ong    String?
+  observacoes        String?
+  cirurgias          Cirurgia[]
+  composicaoFamiliar ComposicaoFamiliar[]
+  historicoSaude     HistoricoSaude[]
+  outroResponsaveis  OutroResponsavel[]
+  pessoa             Pessoa               @relation(fields: [pessoaId], references: [id])
+  responsaveis       Responsavel[]
+  tratamentos        Tratamento[]
+}
+
+model Responsavel {
+  id                    String                 @id @default(uuid())
+  pessoaId              String                 @unique
+  pacienteId            String
+  tipo_responsavel      String?
+  estado_civil          Int?
+  situacao_profissional Int?
+  salario               Decimal?
+  conjuge               Conjuge[]
+  paciente              Paciente               @relation(fields: [pacienteId], references: [id])
+  pessoa                Pessoa                 @relation(fields: [pessoaId], references: [id])
+  situacaoHabitacional  SituacaoHabitacional[]
+}
+
+model Conjuge {
+  id            String      @id @default(uuid())
+  responsavelId String
+  pessoaId      String
+  pessoa        Pessoa      @relation(fields: [pessoaId], references: [id])
+  responsavel   Responsavel @relation(fields: [responsavelId], references: [id])
+}
+
+model OutroResponsavel {
+  id           String   @id @default(uuid())
+  pacienteId   String
+  pessoaId     String
+  tipo_vinculo String?
+  paciente     Paciente @relation(fields: [pacienteId], references: [id])
+  pessoa       Pessoa   @relation(fields: [pessoaId], references: [id])
+}
+
+model Cirurgia {
+  id         String    @id @default(uuid())
+  pacienteId String
+  data       DateTime?
+  descricao  String?
+  paciente   Paciente  @relation(fields: [pacienteId], references: [id])
+}
+
+model Tratamento {
+  id                 String    @id @default(uuid())
+  pacienteId         String
+  tipo               String?
+  data_inicio        DateTime?
+  data_ultima_sessao DateTime?
+  observacoes        String?
+  paciente           Paciente  @relation(fields: [pacienteId], references: [id])
+}
+
+model HistoricoSaude {
+  id                        String   @id @default(uuid())
+  pacienteId                String
+  recebe_beneficio          Boolean?
+  beneficio_descricao       String?
+  medicamentos_uso_continuo String?
+  local_procura_ajuda       String?
+  doencas                   Json?
+  paciente                  Paciente @relation(fields: [pacienteId], references: [id])
+}
+
+model SituacaoHabitacional {
+  id                String      @id @default(uuid())
+  responsavelId     String
+  tipo_moradia      String?
+  propriedade       Boolean?
+  area              String?
+  caracteristicas   String?
+  eletrodomesticos  String?
+  bens_imovel       String?
+  meios_transporte  String?
+  meios_comunicacao String?
+  possui_banheiro   Boolean?
+  dentro_de_casa    Boolean?
+  destino_lixo      String?
+  tipo_agua         String?
+  valor_total       Decimal?
+  responsavel       Responsavel @relation(fields: [responsavelId], references: [id])
+}
+
+model ComposicaoFamiliar {
+  id              String    @id @default(uuid())
+  pacienteId      String
+  nome            String?
+  parentesco      String?
+  data_nascimento DateTime?
+  escolaridade    String?
+  trabalha        Boolean?
+  renda           Decimal?
+  paciente        Paciente  @relation(fields: [pacienteId], references: [id])
 }

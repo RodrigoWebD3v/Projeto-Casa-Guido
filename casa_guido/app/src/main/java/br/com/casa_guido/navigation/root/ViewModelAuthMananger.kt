@@ -6,12 +6,14 @@ import androidx.lifecycle.viewModelScope
 import br.com.casa_guido.configuration.Sessao
 import br.com.casa_guido.dto.RefreshTokenResponse
 import br.com.casa_guido.repository.AuthRepository
+import br.com.casa_guido.service.AuthService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class ViewModelAuthMananger(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val authService: AuthService
 ) : ViewModel() {
 
     private val _isAuthenticated = MutableStateFlow(false)
@@ -21,7 +23,7 @@ class ViewModelAuthMananger(
         viewModelScope.launch {
             try {
                 val response: RefreshTokenResponse = authRepository.refreshToken(context)
-                Sessao.setaStatusSessao(context, true)
+
                 _isAuthenticated.value = true
             } catch (e: Exception) {
                 Sessao.setaStatusSessao(context, false)
@@ -34,8 +36,7 @@ class ViewModelAuthMananger(
     fun login(context: Context, email: String, password: String) {
         viewModelScope.launch {
             try {
-                val response = authRepository.loginUsuario(context, email, password)
-                Sessao.setaStatusSessao(context, true)
+                authService.login(context, email, password)
                 checkSession(context)
             } catch (e: Exception) {
                 Sessao.setaStatusSessao(context, false)
@@ -49,6 +50,7 @@ class ViewModelAuthMananger(
     }
 
     private fun checkSession(context: Context) {
+        println("CHECK SESSAO"+ Sessao.isAuthenticated(context))
         _isAuthenticated.value = Sessao.isAuthenticated(context)
     }
 

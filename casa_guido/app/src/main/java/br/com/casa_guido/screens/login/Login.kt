@@ -21,7 +21,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Login(modifier: Modifier = Modifier, paddingValues: PaddingValues, onLoginSuccess: () -> Unit) {
+fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit) {
 
     val context = LocalContext.current
     val viewModelAuthMananger = koinViewModel<ViewModelAuthMananger>()
@@ -37,14 +37,13 @@ fun Login(modifier: Modifier = Modifier, paddingValues: PaddingValues, onLoginSu
 
     Box(
         modifier = modifier
-            .padding(paddingValues)
             .fillMaxSize()
             .background(Color.DarkGray)
     ) {
         Button(
             onClick = {
                 viewModel.login(
-                    "joao11@example.com",
+                    "joao1@example.com",
                     "senha123",
                     context
                 )
@@ -61,7 +60,6 @@ fun Login(modifier: Modifier = Modifier, paddingValues: PaddingValues, onLoginSu
 private fun LoginPreview() {
     Login(
         modifier = Modifier,
-        paddingValues = PaddingValues(0.dp),
         onLoginSuccess = { }
     )
 }
