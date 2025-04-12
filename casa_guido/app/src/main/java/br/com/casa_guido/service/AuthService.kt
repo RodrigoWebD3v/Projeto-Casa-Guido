@@ -14,6 +14,7 @@ class AuthService(
         try {
             Sessao.setaStatusSessao(context, true)
             val response = authRepository.loginUsuario(email, password)
+
             saveToken(context, response.token, response.refreshToken)
             return response
         } catch (e: Exception) {

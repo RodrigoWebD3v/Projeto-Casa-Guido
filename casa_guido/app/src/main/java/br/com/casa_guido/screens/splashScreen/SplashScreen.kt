@@ -1,6 +1,8 @@
 package br.com.casa_guido.screens.splashScreen
 
+import android.content.Context
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -24,61 +26,54 @@ import kotlinx.coroutines.coroutineScope
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun SplashScreen(modifier: Modifier = Modifier, onSuccessLogin: () -> Unit, onLogin: () -> Unit) {
+fun SplashScreen(modifier: Modifier = Modifier, setResultado: (Resultado) -> Unit) {
     val viewModelAuthMananger = koinViewModel<ViewModelAuthMananger>()
     val state by viewModelAuthMananger.status.collectAsState()
 
     val composition by rememberLottieComposition(LottieCompositionSpec.Asset("loading.json"))
 
-    val composeInteracao by
     val progress by animateLottieCompositionAsState(
         composition,
-        iterations = ,
+        iterations = LottieConstants.IterateForever,
         isPlaying = true
     )
 
     val context = LocalContext.current
 
-    suspend fun verificaLogin(){
+    suspend fun verificarLogin(context : Context){
         coroutineScope {
             viewModelAuthMananger.refreshToken(context)
         }
     }
 
     LaunchedEffect(Unit) {
-        verificaLogin()
+        verificarLogin(context)
     }
 
-    LaunchedEffect(state, ) {
-        when (state) {
+
+    LaunchedEffect(state) {
+        when(state){
             Resultado.Carregando -> {
 
             }
-
             is Resultado.Erro -> {
-
-                   // onLogin()
-
-
+                setResultado(Resultado.Erro(""))
             }
-
             is Resultado.Sucesso -> {
-               // onSuccessLogin()
+                setResultado(Resultado.Sucesso(""))
             }
         }
     }
 
-    LaunchedEffect(progress) {
-        println(
-            "iteracao $progress"
-        )
-    }
-
-
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Paragraph),
+            .background(Paragraph)
+            .clickable {
+                setResultado(
+                    Resultado.Sucesso("")
+                )
+            },
         contentAlignment = Alignment.Center
     ) {
         LottieAnimation(
@@ -94,5 +89,5 @@ fun SplashScreen(modifier: Modifier = Modifier, onSuccessLogin: () -> Unit, onLo
 @Preview
 @Composable
 private fun SplashScreenPrev() {
-    SplashScreen(onSuccessLogin = {}, onLogin = {})
+    SplashScreen(setResultado = {})
 }

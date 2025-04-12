@@ -34,6 +34,7 @@ class AuthRepository(
                 response.body<LoginResponse>()
             }
         } catch (e: Exception) {
+            println("Erro ao realizar login ${e.message}")
             throw Exception("Erro ao buscar dados: ${e.message}")
         }
     }

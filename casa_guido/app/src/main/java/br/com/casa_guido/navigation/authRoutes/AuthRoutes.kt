@@ -1,13 +1,9 @@
 package br.com.casa_guido.navigation.authRoutes
 
-import kotlinx.serialization.Serializable
+sealed class AuthRoutes (
+    val route: String
+){
+    data object LoginRoute: AuthRoutes(route = "login")
 
-sealed class AuthRoutes {
-
-    @Serializable
-    data object LoginRoute: AuthRoutes()
-
-
-    @Serializable
-    data object SplashScreenRoute: AuthRoutes()
+    data object SplashScreenRoute: AuthRoutes(route = "splash")
 }
