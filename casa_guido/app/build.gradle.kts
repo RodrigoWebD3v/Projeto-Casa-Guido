@@ -86,6 +86,9 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.5.1")
 
 
+    implementation("com.airbnb.android:lottie-compose:6.6.6")
+
+
     // Corrutinas para chamadas assíncronas
     implementation(libs.kotlinx.coroutines.core)
 

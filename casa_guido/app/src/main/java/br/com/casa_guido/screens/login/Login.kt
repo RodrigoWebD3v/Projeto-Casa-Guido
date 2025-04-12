@@ -27,13 +27,6 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit) {
     val viewModelAuthMananger = koinViewModel<ViewModelAuthMananger>()
     val viewModel = koinViewModel<LoginViewModel>()
 
-    val isAuthenticated = viewModelAuthMananger.isAuthenticated.collectAsState()
-
-    LaunchedEffect(isAuthenticated.value) {
-        if (isAuthenticated.value) {
-            onLoginSuccess()
-        }
-    }
 
     Box(
         modifier = modifier

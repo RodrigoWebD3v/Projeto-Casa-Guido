@@ -15,148 +15,51 @@ model User {
   createdAt DateTime @default(now())
 }
 
-model Pessoa {
-  id               String             @id @default(uuid())
-  nome             String
-  data_nascimento  DateTime
-  cpf              String?            @unique
-  identidade       String?
-  naturalidade     String?
-  genero           String?
-  escolaridade     String?
-  contato          String?
-  enderecoId       String?
-  conjuge          Conjuge[]
-  outroResponsavel OutroResponsavel[]
-  paciente         Paciente?
-  endereco         Endereco?          @relation(fields: [enderecoId], references: [id])
-  responsavel      Responsavel?
+model categoriaproduto {
+  idcategoria  Int       @id
+  descategoria String?   @db.VarChar(50)
+  produto      produto[]
 }
 
-model Endereco {
-  id          String   @id @default(uuid())
-  cep         String
-  logradouro  String
-  bairro      String
-  cidade      String
-  estado      String   @db.Char(2)
-  referencia  String?
-  complemento String?
-  numero      String?
-  pessoas     Pessoa[]
+model cliente {
+  idcliente   Int      @id
+  nomecliente String?  @db.VarChar(50)
+  rua         String?  @db.VarChar(50)
+  numero      String?  @db.VarChar(5)
+  bairro      String?  @db.VarChar(50)
+  cidade      String?  @db.VarChar(50)
+  uf          String?  @db.VarChar(2)
+  cep         String?  @db.VarChar(9)
+  complemento String?  @db.VarChar(20)
+  fone        String?  @db.VarChar(14)
+  status      String?  @db.VarChar(5)
+  vllimite    Decimal? @db.Decimal(12, 2)
+  pedido      pedido[]
 }
 
-model Paciente {
-  id                 String               @id @default(uuid())
-  pessoaId           String               @unique
-  cartao_sus         String?
-  remuneracao        Decimal?
-  recebe_bpc         Boolean?
-  bpc_valor          Decimal?
-  diagnostico        String?
-  medico_responsavel String?
-  escola             String?
-  tamanho_roupa      String?
-  tamanho_calcado    String?
-  ano_escolar        String?
-  origem_info_ong    String?
-  observacoes        String?
-  cirurgias          Cirurgia[]
-  composicaoFamiliar ComposicaoFamiliar[]
-  historicoSaude     HistoricoSaude[]
-  outroResponsaveis  OutroResponsavel[]
-  pessoa             Pessoa               @relation(fields: [pessoaId], references: [id])
-  responsaveis       Responsavel[]
-  tratamentos        Tratamento[]
+model pedido {
+  nrpedido    Int          @id
+  dtpedido    DateTime?    @db.Date
+  idcliente   Int?
+  cliente     cliente?     @relation(fields: [idcliente], references: [idcliente], onDelete: NoAction, onUpdate: NoAction)
+  pedidoitens pedidoitens?
 }
 
-model Responsavel {
-  id                    String                 @id @default(uuid())
-  pessoaId              String                 @unique
-  pacienteId            String
-  tipo_responsavel      String?
-  estado_civil          Int?
-  situacao_profissional Int?
-  salario               Decimal?
-  conjuge               Conjuge[]
-  paciente              Paciente               @relation(fields: [pacienteId], references: [id])
-  pessoa                Pessoa                 @relation(fields: [pessoaId], references: [id])
-  situacaoHabitacional  SituacaoHabitacional[]
+model pedidoitens {
+  nrpedido   Int      @id
+  nritem     Int?
+  idproduto  Int?
+  quantidade Decimal? @db.Decimal(12, 2)
+  vlproduto  Decimal? @db.Decimal(12, 2)
+  produto    produto? @relation(fields: [idproduto], references: [idproduto], onDelete: NoAction, onUpdate: NoAction)
+  pedido     pedido   @relation(fields: [nrpedido], references: [nrpedido], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model Conjuge {
-  id            String      @id @default(uuid())
-  responsavelId String
-  pessoaId      String
-  pessoa        Pessoa      @relation(fields: [pessoaId], references: [id])
-  responsavel   Responsavel @relation(fields: [responsavelId], references: [id])
-}
-
-model OutroResponsavel {
-  id           String   @id @default(uuid())
-  pacienteId   String
-  pessoaId     String
-  tipo_vinculo String?
-  paciente     Paciente @relation(fields: [pacienteId], references: [id])
-  pessoa       Pessoa   @relation(fields: [pessoaId], references: [id])
-}
-
-model Cirurgia {
-  id         String    @id @default(uuid())
-  pacienteId String
-  data       DateTime?
-  descricao  String?
-  paciente   Paciente  @relation(fields: [pacienteId], references: [id])
-}
-
-model Tratamento {
-  id                 String    @id @default(uuid())
-  pacienteId         String
-  tipo               String?
-  data_inicio        DateTime?
-  data_ultima_sessao DateTime?
-  observacoes        String?
-  paciente           Paciente  @relation(fields: [pacienteId], references: [id])
-}
-
-model HistoricoSaude {
-  id                        String   @id @default(uuid())
-  pacienteId                String
-  recebe_beneficio          Boolean?
-  beneficio_descricao       String?
-  medicamentos_uso_continuo String?
-  local_procura_ajuda       String?
-  doencas                   Json?
-  paciente                  Paciente @relation(fields: [pacienteId], references: [id])
-}
-
-model SituacaoHabitacional {
-  id                String      @id @default(uuid())
-  responsavelId     String
-  tipo_moradia      String?
-  propriedade       Boolean?
-  area              String?
-  caracteristicas   String?
-  eletrodomesticos  String?
-  bens_imovel       String?
-  meios_transporte  String?
-  meios_comunicacao String?
-  possui_banheiro   Boolean?
-  dentro_de_casa    Boolean?
-  destino_lixo      String?
-  tipo_agua         String?
-  valor_total       Decimal?
-  responsavel       Responsavel @relation(fields: [responsavelId], references: [id])
-}
-
-model ComposicaoFamiliar {
-  id              String    @id @default(uuid())
-  pacienteId      String
-  nome            String?
-  parentesco      String?
-  data_nascimento DateTime?
-  escolaridade    String?
-  trabalha        Boolean?
-  renda           Decimal?
-  paciente        Paciente  @relation(fields: [pacienteId], references: [id])
+model produto {
+  idproduto        Int               @id
+  desproduto       String?           @db.VarChar(50)
+  preco            Decimal?          @db.Decimal(12, 2)
+  idcategoria      Int?
+  pedidoitens      pedidoitens[]
+  categoriaproduto categoriaproduto? @relation(fields: [idcategoria], references: [idcategoria], onDelete: NoAction, onUpdate: NoAction)
 }

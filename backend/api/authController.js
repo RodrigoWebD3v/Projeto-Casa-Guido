@@ -16,11 +16,14 @@ const registrar = async (req, res) => {
 };
 
 const login = async (req, res) => {
+  console.log("Login request received:", req.body);
   try {
     const { email, password } = req.body;
     const tokens = await loginUser(email, password);
+    console.log("Login successful:", tokens);
     res.status(200).json(tokens);
   } catch (error) {
+    console.error("Login error:", error);
     res.status(400).json({ error: error.message });
   }
 };
