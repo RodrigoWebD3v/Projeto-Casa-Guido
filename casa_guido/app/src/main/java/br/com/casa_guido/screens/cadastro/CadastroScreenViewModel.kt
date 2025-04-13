@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.casa_guido.screens.Paciente
+import br.com.casa_guido.service.PacienteService
 import br.com.casa_guido.service.ViaCepService
 import br.com.casa_guido.util.ListaMemoria
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +13,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class CadastroScreenViewModel(
-    private val viaCepService: ViaCepService
+    private val viaCepService: ViaCepService,
+    private val pacienteService: PacienteService
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<CadastroScreenUiState>(CadastroScreenUiState())
     val uiState = _uiState.asStateFlow()
@@ -72,7 +74,7 @@ class CadastroScreenViewModel(
 
     fun onChangeOutro(outro: String) {
         _paciente.value = _paciente.value.copy(
-            nomeResponsavel = outro
+            nomeOutro = outro
         )
     }
 
@@ -114,6 +116,8 @@ class CadastroScreenViewModel(
                 ListaMemoria.pacientesLista.add(_paciente.value)
                 _paciente.value = Paciente()
             }
+
+            pacienteService.createPaciente(_paciente.value)
 
         }
     }

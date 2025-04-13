@@ -16,7 +16,7 @@ class ClienteApi {
 
     var localHost: Boolean = true
 
-    var endpointPrincipal = if (localHost) "http://10.0.2.2:3000" else "http://192.168.101.14:3000"
+    var endpointPrincipal = if (localHost) "http://192.168.101.5:3000" else "http://192.168.101.14:3000"
 
     val authEndpoint = "${endpointPrincipal}/api/v1/auth"
 

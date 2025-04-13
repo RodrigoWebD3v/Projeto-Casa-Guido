@@ -9,9 +9,14 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.Snackbar
+import androidx.compose.material.SnackbarDuration
+import androidx.compose.material.SnackbarHost
+import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Dashboard
@@ -38,7 +43,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import br.com.casa_guido.configuration.Resultado
 import br.com.casa_guido.configuration.Sessao
 import br.com.casa_guido.navigation.root.ViewModelAuthMananger
 import br.com.casa_guido.screens.cadastro.itemNavBar
@@ -55,11 +62,14 @@ import org.koin.androidx.compose.koinViewModel
 fun Main(
     modifier: Modifier = Modifier,
     onNavigateToLogin: () -> Unit,
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    mensagemSucesso: Resultado
 ) {
 
     val authViewModel = koinViewModel<ViewModelAuthMananger>()
     val statusUsuario by authViewModel.statusUsuario.collectAsState()
+
+    val snackbarHostState = remember { SnackbarHostState() }
 
     val contexto = LocalContext.current
 
@@ -77,7 +87,7 @@ fun Main(
 
     var dadosParaSincronizar by remember {
         mutableStateOf(
-            true
+            false
         )
     }
 
@@ -116,7 +126,35 @@ fun Main(
 
     }
 
+    LaunchedEffect(mensagemSucesso) {
+        val mensagem = (mensagemSucesso as? Resultado.Sucesso)?.mensagem
+        mensagem?.let {
+            snackbarHostState.showSnackbar(
+                message = it,
+                actionLabel = "Fechar",
+                duration = SnackbarDuration.Short
+            )
+        }
+    }
+
     Scaffold(
+        snackbarHost = {
+            SnackbarHost(
+                hostState = snackbarHostState,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp),
+                snackbar = { snackbarData ->
+                    Snackbar(
+                        snackbarData = snackbarData,
+                        actionColor = GreenBlack,
+                        contentColor = GreenBlack,
+                        backgroundColor = Paragraph
+                    )
+                }
+            )
+        },
+
         topBar = {
             TopAppBarComp(
                 itemNavBar = selectedItem,

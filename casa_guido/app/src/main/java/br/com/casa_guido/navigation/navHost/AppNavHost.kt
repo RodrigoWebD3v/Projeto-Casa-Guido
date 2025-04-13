@@ -9,13 +9,14 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import br.com.casa_guido.configuration.Resultado
 import br.com.casa_guido.screens.cadastro.CadastroScreen
 import br.com.casa_guido.screens.main.Main
 
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun AppNavHost(navHostController: NavHostController, onLogout: () -> Unit) {
+fun AppNavHost(navHostController: NavHostController, onLogout: () -> Unit, mensagemSucesso: Resultado) {
     NavHost(
             navController = navHostController,
             startDestination = Routes.DashBoardScreenRoute.route,
@@ -25,7 +26,8 @@ fun AppNavHost(navHostController: NavHostController, onLogout: () -> Unit) {
                 navHostController = navHostController,
                 onNavigateToLogin = {
                     onLogout()
-                }
+                },
+                mensagemSucesso = mensagemSucesso
             )
         }
 

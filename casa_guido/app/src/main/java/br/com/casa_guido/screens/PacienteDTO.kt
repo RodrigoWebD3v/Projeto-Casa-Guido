@@ -13,22 +13,37 @@ data class Agendamento(
     val id : String = UUID.randomUUID().toString()
 )
 
-@Immutable
-data class Paciente(
+data class Pessoa(
     val nome: String = "",
     val telefone: String = "",
-    val status: Boolean = false,
     val dataNascimento: String = "",
-    val nomeMae: String = "",
-    val nomePai: String = "",
-    val nomeResponsavel: String = "",
     val cpf: String = "",
     val rg: String = "",
-    val cartaoSus: String = "",
-    val id: String = UUID.randomUUID().toString(),
     val endereco: Endereco = Endereco(),
+)
+
+
+@Immutable
+data class Paciente(
+    val id: String = UUID.randomUUID().toString(),
+    val status: Boolean = false,
+    val nomeMae: String = "",
+    val nomePai: String = "",
+    val nomeOutro: String = "",
+    val cartaoSus: String = "",
     val cirurgias: List<Cirurgia> = emptyList(),
-    val socioEconomico: SocioEconomico = SocioEconomico(),
+    val remuneracao: String = "",
+    val bpc: Int = 0,
+    val valorBpc: String = "",
+    val escolaNome: String = "",
+    val escolaAno: String = "",
+    val tamRoupa: Int = 0,
+    val tamCalcado: Int = 0,
+    val diagnostico: String = "",
+    val medico_responsavel: String = "",
+    val origen_info_ong: String = "",
+    val observacoes: String,
+
 )
 
 @Serializable
@@ -49,17 +64,6 @@ data class Endereco(
     val ddd: String = "",
     val siafi: String = "",
     val pais: String = "Brasil",
-)
-
-@Serializable
-data class SocioEconomico(
-    val remuneracao: String = "",
-    val bpc: Int = 0,
-    val valorBpc: String = "",
-    val escolaNome: String = "",
-    val escolaAno: String = "",
-    val tamRoupa: Int = 0,
-    val tamCalcado: Int = 0,
 )
 
 

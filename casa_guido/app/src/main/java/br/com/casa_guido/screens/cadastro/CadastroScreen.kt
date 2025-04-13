@@ -31,6 +31,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DoubleArrow
 import androidx.compose.material.icons.filled.PersonAddAlt
+import androidx.compose.material.icons.filled.Save
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -476,7 +477,12 @@ fun CadastroScreen(
                         Modifier
                             .padding(horizontal = 20.dp)
                             .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        horizontalArrangement = if(pagerState.currentPage == 0){
+                            Arrangement.End
+                        }
+                        else{
+                            Arrangement.SpaceBetween
+                        }
                     ) {
                         if (pagerState.currentPage > 0) {
 
@@ -574,6 +580,52 @@ fun CadastroScreen(
                                     Icon(
                                         imageVector = Icons.Default.DoubleArrow,
                                         contentDescription = "Proxima tela",
+                                        tint = Main,
+                                    )
+                                }
+                            }
+                        }
+                        else{
+                            Row(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(10.dp))
+                                    .clickable(
+                                        onClick = {
+                                            coroutineScope.launch {
+
+                                            }
+                                        },
+                                        interactionSource = remember { MutableInteractionSource() },
+                                        indication = LocalIndication.current
+                                    )
+                            ) {
+                                Box(
+                                    Modifier
+                                        .background(Paragraph)
+                                        .padding(5.dp)
+                                        .height(40.dp),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        "Salvar Paciente",
+                                        style = TextStyle(
+                                            fontSize = 18.sp,
+                                            color = GreenBlack,
+                                            fontWeight = FontWeight.Bold,
+                                            textAlign = TextAlign.Start
+                                        )
+                                    )
+                                }
+                                Box(
+                                    Modifier
+                                        .background(GreenBlack)
+                                        .padding(5.dp)
+                                        .height(40.dp),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Save,
+                                        contentDescription = "Salvar",
                                         tint = Main,
                                     )
                                 }

@@ -53,7 +53,8 @@ fun RootNavHost(
                 navHostController = rootNavHostController,
                 onLogout = {
                     viewModelAuthMananger.setStatus(Resultado.Desconectado("Sessão finalziada com sucesso"))
-                }
+                },
+                mensagemSucesso = state
             )
         }
 

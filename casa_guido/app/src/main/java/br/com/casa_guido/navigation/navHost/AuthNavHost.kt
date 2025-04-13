@@ -27,7 +27,7 @@ fun AuthNavHost(
        ){
            Login(onLoginSuccess = {
                sucessoAutenticacao(
-                   Resultado.Sucesso("")
+                   Resultado.Sucesso("Login realizado com sucesso")
                )
            },
                resultado = resultado

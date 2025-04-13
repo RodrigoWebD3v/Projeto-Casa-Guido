@@ -25,7 +25,7 @@ object ListaMemoria {
             dataNascimento = "01/01/2000",
             nomeMae = "Maria Silva",
             nomePai = "João Silva",
-            nomeResponsavel = "Ana Silva",
+            nomeOutro = "Ana Silva",
             cpf = "123.456.789-00",
             rg = "12.345.678-9",
             cartaoSus = "123456789012345"
@@ -37,7 +37,7 @@ object ListaMemoria {
             dataNascimento = "15/03/1995",
             nomeMae = "Luciana Rocha",
             nomePai = "Carlos Rocha",
-            nomeResponsavel = "Luciana Rocha",
+            nomeOutro = "Luciana Rocha",
             cpf = "234.567.890-11",
             rg = "23.456.789-0",
             cartaoSus = "234567890123456"
@@ -49,7 +49,7 @@ object ListaMemoria {
             dataNascimento = "09/07/1988",
             nomeMae = "Helena Fernandes",
             nomePai = "Rogério Fernandes",
-            nomeResponsavel = "Helena Fernandes",
+            nomeOutro = "Helena Fernandes",
             cpf = "345.678.901-22",
             rg = "34.567.890-1",
             cartaoSus = "345678901234567"
@@ -61,7 +61,7 @@ object ListaMemoria {
             dataNascimento = "23/11/2002",
             nomeMae = "Renata Castro",
             nomePai = "Fabiano Castro",
-            nomeResponsavel = "Renata Castro",
+            nomeOutro = "Renata Castro",
             cpf = "456.789.012-33",
             rg = "45.678.901-2",
             cartaoSus = "456789012345678"
@@ -73,7 +73,7 @@ object ListaMemoria {
             dataNascimento = "04/05/1999",
             nomeMae = "Sandra Lima",
             nomePai = "Marcos Lima",
-            nomeResponsavel = "Sandra Lima",
+            nomeOutro = "Sandra Lima",
             cpf = "567.890.123-44",
             rg = "56.789.012-3",
             cartaoSus = "567890123456789"
@@ -85,7 +85,7 @@ object ListaMemoria {
             dataNascimento = "18/08/1991",
             nomeMae = "Elaine Melo",
             nomePai = "Roberto Melo",
-            nomeResponsavel = "Elaine Melo",
+            nomeOutro = "Elaine Melo",
             cpf = "678.901.234-55",
             rg = "67.890.123-4",
             cartaoSus = "678901234567890"
@@ -97,7 +97,7 @@ object ListaMemoria {
             dataNascimento = "12/12/1985",
             nomeMae = "Vera Martins",
             nomePai = "Ricardo Martins",
-            nomeResponsavel = "Vera Martins",
+            nomeOutro = "Vera Martins",
             cpf = "789.012.345-66",
             rg = "78.901.234-5",
             cartaoSus = "789012345678901"
@@ -109,7 +109,7 @@ object ListaMemoria {
             dataNascimento = "27/02/1993",
             nomeMae = "Joana Oliveira",
             nomePai = "Bruno Oliveira",
-            nomeResponsavel = "Joana Oliveira",
+            nomeOutro = "Joana Oliveira",
             cpf = "890.123.456-77",
             rg = "89.012.345-6",
             cartaoSus = "890123456789012"
@@ -121,7 +121,7 @@ object ListaMemoria {
             dataNascimento = "03/06/2001",
             nomeMae = "Patrícia Costa",
             nomePai = "Sérgio Costa",
-            nomeResponsavel = "Patrícia Costa",
+            nomeOutro = "Patrícia Costa",
             cpf = "901.234.567-88",
             rg = "90.123.456-7",
             cartaoSus = "901234567890123"
@@ -133,7 +133,7 @@ object ListaMemoria {
             dataNascimento = "31/10/1997",
             nomeMae = "Silvana Nunes",
             nomePai = "José Nunes",
-            nomeResponsavel = "Silvana Nunes",
+            nomeOutro = "Silvana Nunes",
             cpf = "012.345.678-99",
             rg = "01.234.567-8",
             cartaoSus = "012345678901234"
@@ -145,7 +145,7 @@ object ListaMemoria {
             dataNascimento = "01/01/2000",
             nomeMae = "Maria Silva",
             nomePai = "João Silva",
-            nomeResponsavel = "Ana Silva",
+            nomeOutro = "Ana Silva",
             cpf = "123.456.789-00",
             rg = "12.345.678-9",
             cartaoSus = "123456789012345"
@@ -157,7 +157,7 @@ object ListaMemoria {
             dataNascimento = "15/03/1995",
             nomeMae = "Luciana Rocha",
             nomePai = "Carlos Rocha",
-            nomeResponsavel = "Luciana Rocha",
+            nomeOutro = "Luciana Rocha",
             cpf = "234.567.890-11",
             rg = "23.456.789-0",
             cartaoSus = "234567890123456"
@@ -169,7 +169,7 @@ object ListaMemoria {
             dataNascimento = "09/07/1988",
             nomeMae = "Helena Fernandes",
             nomePai = "Rogério Fernandes",
-            nomeResponsavel = "Helena Fernandes",
+            nomeOutro = "Helena Fernandes",
             cpf = "345.678.901-22",
             rg = "34.567.890-1",
             cartaoSus = "345678901234567"
@@ -181,7 +181,7 @@ object ListaMemoria {
             dataNascimento = "23/11/2002",
             nomeMae = "Renata Castro",
             nomePai = "Fabiano Castro",
-            nomeResponsavel = "Renata Castro",
+            nomeOutro = "Renata Castro",
             cpf = "456.789.012-33",
             rg = "45.678.901-2",
             cartaoSus = "456789012345678"
@@ -193,7 +193,7 @@ object ListaMemoria {
             dataNascimento = "04/05/1999",
             nomeMae = "Sandra Lima",
             nomePai = "Marcos Lima",
-            nomeResponsavel = "Sandra Lima",
+            nomeOutro = "Sandra Lima",
             cpf = "567.890.123-44",
             rg = "56.789.012-3",
             cartaoSus = "567890123456789"
@@ -205,7 +205,7 @@ object ListaMemoria {
             dataNascimento = "18/08/1991",
             nomeMae = "Elaine Melo",
             nomePai = "Roberto Melo",
-            nomeResponsavel = "Elaine Melo",
+            nomeOutro = "Elaine Melo",
             cpf = "678.901.234-55",
             rg = "67.890.123-4",
             cartaoSus = "678901234567890"
@@ -217,7 +217,7 @@ object ListaMemoria {
             dataNascimento = "12/12/1985",
             nomeMae = "Vera Martins",
             nomePai = "Ricardo Martins",
-            nomeResponsavel = "Vera Martins",
+            nomeOutro = "Vera Martins",
             cpf = "789.012.345-66",
             rg = "78.901.234-5",
             cartaoSus = "789012345678901"
@@ -229,7 +229,7 @@ object ListaMemoria {
             dataNascimento = "27/02/1993",
             nomeMae = "Joana Oliveira",
             nomePai = "Bruno Oliveira",
-            nomeResponsavel = "Joana Oliveira",
+            nomeOutro = "Joana Oliveira",
             cpf = "890.123.456-77",
             rg = "89.012.345-6",
             cartaoSus = "890123456789012"
@@ -241,7 +241,7 @@ object ListaMemoria {
             dataNascimento = "03/06/2001",
             nomeMae = "Patrícia Costa",
             nomePai = "Sérgio Costa",
-            nomeResponsavel = "Patrícia Costa",
+            nomeOutro = "Patrícia Costa",
             cpf = "901.234.567-88",
             rg = "90.123.456-7",
             cartaoSus = "901234567890123"
@@ -252,7 +252,7 @@ object ListaMemoria {
             dataNascimento = "01/01/2000",
             nomeMae = "Maria Silva",
             nomePai = "João Silva",
-            nomeResponsavel = "Ana Silva",
+            nomeOutro = "Ana Silva",
             cpf = "123.456.789-00",
             rg = "12.345.678-9",
             cartaoSus = "123456789012345"
@@ -264,7 +264,7 @@ object ListaMemoria {
             dataNascimento = "15/03/1995",
             nomeMae = "Luciana Rocha",
             nomePai = "Carlos Rocha",
-            nomeResponsavel = "Luciana Rocha",
+            nomeOutro = "Luciana Rocha",
             cpf = "234.567.890-11",
             rg = "23.456.789-0",
             cartaoSus = "234567890123456"
@@ -276,7 +276,7 @@ object ListaMemoria {
             dataNascimento = "09/07/1988",
             nomeMae = "Helena Fernandes",
             nomePai = "Rogério Fernandes",
-            nomeResponsavel = "Helena Fernandes",
+            nomeOutro = "Helena Fernandes",
             cpf = "345.678.901-22",
             rg = "34.567.890-1",
             cartaoSus = "345678901234567"
@@ -288,7 +288,7 @@ object ListaMemoria {
             dataNascimento = "23/11/2002",
             nomeMae = "Renata Castro",
             nomePai = "Fabiano Castro",
-            nomeResponsavel = "Renata Castro",
+            nomeOutro = "Renata Castro",
             cpf = "456.789.012-33",
             rg = "45.678.901-2",
             cartaoSus = "456789012345678"
@@ -300,7 +300,7 @@ object ListaMemoria {
             dataNascimento = "04/05/1999",
             nomeMae = "Sandra Lima",
             nomePai = "Marcos Lima",
-            nomeResponsavel = "Sandra Lima",
+            nomeOutro = "Sandra Lima",
             cpf = "567.890.123-44",
             rg = "56.789.012-3",
             cartaoSus = "567890123456789"
@@ -312,7 +312,7 @@ object ListaMemoria {
             dataNascimento = "18/08/1991",
             nomeMae = "Elaine Melo",
             nomePai = "Roberto Melo",
-            nomeResponsavel = "Elaine Melo",
+            nomeOutro = "Elaine Melo",
             cpf = "678.901.234-55",
             rg = "67.890.123-4",
             cartaoSus = "678901234567890"
@@ -324,7 +324,7 @@ object ListaMemoria {
             dataNascimento = "12/12/1985",
             nomeMae = "Vera Martins",
             nomePai = "Ricardo Martins",
-            nomeResponsavel = "Vera Martins",
+            nomeOutro = "Vera Martins",
             cpf = "789.012.345-66",
             rg = "78.901.234-5",
             cartaoSus = "789012345678901"
@@ -336,7 +336,7 @@ object ListaMemoria {
             dataNascimento = "27/02/1993",
             nomeMae = "Joana Oliveira",
             nomePai = "Bruno Oliveira",
-            nomeResponsavel = "Joana Oliveira",
+            nomeOutro = "Joana Oliveira",
             cpf = "890.123.456-77",
             rg = "89.012.345-6",
             cartaoSus = "890123456789012"
@@ -348,7 +348,7 @@ object ListaMemoria {
             dataNascimento = "03/06/2001",
             nomeMae = "Patrícia Costa",
             nomePai = "Sérgio Costa",
-            nomeResponsavel = "Patrícia Costa",
+            nomeOutro = "Patrícia Costa",
             cpf = "901.234.567-88",
             rg = "90.123.456-7",
             cartaoSus = "901234567890123"

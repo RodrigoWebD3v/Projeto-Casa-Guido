@@ -149,7 +149,7 @@ fun IdentificacaoPaciente(
 
         TextFieldSimples(
             nomeCampo = "Outro",
-            valorPreenchido = paciente.nomeResponsavel,
+            valorPreenchido = paciente.nomeOutro,
             placeholder = "Maria Aparecida",
             onChange = {
                 onChangeCampo(

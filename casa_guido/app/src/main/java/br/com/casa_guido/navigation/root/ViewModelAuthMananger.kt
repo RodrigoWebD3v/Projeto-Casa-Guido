@@ -16,6 +16,7 @@ import br.com.casa_guido.configuration.Sessao
 import br.com.casa_guido.configuration.Sessao.errosApp
 import br.com.casa_guido.repository.AuthRepository
 import br.com.casa_guido.service.AuthService
+import br.com.casa_guido.service.PacienteService
 import br.com.casa_guido.util.Utils
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -44,7 +45,7 @@ class ViewModelAuthMananger(
                     _conexao.update { Conexao.SemConexao }
                     if (OfflinePermitido(context)) {
                         _status.update {
-                            Resultado.Sucesso("Login realizado com sucesso")
+                            Resultado.Sucesso("Conexão offline permitida")
                         }
                         Log.i("AuthMananger", "Entrou  Offline permitido")
                         return@launch
@@ -58,7 +59,7 @@ class ViewModelAuthMananger(
                 }
                 authService.refreshToken(context)
                 _status.update {
-                    Resultado.Sucesso("Login realizado com sucesso")
+                    Resultado.Sucesso("Sessão valida")
                 }
                 setaTempoOfflinePermitido(context)
                 Log.i("AuthMananger", "Login realizado com sucesso via refresh token")
@@ -94,14 +95,14 @@ class ViewModelAuthMananger(
     fun login(context: Context, email: String, password: String) {
         viewModelScope.launch {
             try {
-                if (!Utils.verificarConexao(context)) {
-                    Log.i("AuthMananger", "LOGIN  Sem conexão")
-                    _conexao.update { Conexao.SemConexao }
-                    setStatus(Resultado.Erro("Sem conexão com a internet"))
-                    return@launch
-                } else {
-                    _conexao.update { Conexao.Conectado }
-                }
+//                if (!Utils.verificarConexao(context)) {
+//                    Log.i("AuthMananger", "Login Sem conexão")
+//                    _conexao.update { Conexao.SemConexao }
+//                    setStatus(Resultado.Erro("Sem conexão com a internet"))
+//                    return@launch
+//                } else {
+//                    _conexao.update { Conexao.Conectado }
+//                }
                 authService.login(context, email, password)
                 _status.update {
                     Resultado.Sucesso("Login realizado com sucesso")
