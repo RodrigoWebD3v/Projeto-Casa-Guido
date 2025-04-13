@@ -19,8 +19,7 @@ class ViaCepRepository(
                 response.body<Endereco>()
             }
         } catch (e: Exception) {
-            println("Erro ao buscar dados: ${e.message}")
-            null
+            throw Exception(e)
         }
     }
 

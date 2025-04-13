@@ -1,6 +1,12 @@
 package br.com.casa_guido.screens.main
 
 import Routes
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -12,6 +18,7 @@ import androidx.compose.material.icons.filled.Dashboard
 import androidx.compose.material.icons.filled.EditCalendar
 import androidx.compose.material.icons.filled.Groups
 import androidx.compose.material.icons.filled.PersonAddAlt
+import androidx.compose.material.icons.filled.Sync
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -21,6 +28,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,11 +36,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import br.com.casa_guido.configuration.Sessao
+import br.com.casa_guido.navigation.root.ViewModelAuthMananger
 import br.com.casa_guido.screens.cadastro.itemNavBar
-
 import br.com.casa_guido.screens.home.HomeScreen
 import br.com.casa_guido.screens.pacientes.PacientesScreens
 import br.com.casa_guido.screens.scaffold_components.TopAppBarComp
@@ -40,12 +49,17 @@ import br.com.casa_guido.ui.theme.Button
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Paragraph
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun Main(
     modifier: Modifier = Modifier,
+    onNavigateToLogin: () -> Unit,
     navHostController: NavHostController
 ) {
+
+    val authViewModel = koinViewModel<ViewModelAuthMananger>()
+    val statusUsuario by authViewModel.statusUsuario.collectAsState()
 
     val contexto = LocalContext.current
 
@@ -61,6 +75,22 @@ fun Main(
         )
     }
 
+    var dadosParaSincronizar by remember {
+        mutableStateOf(
+            true
+        )
+    }
+
+    val infiniteTransition = rememberInfiniteTransition(label = "sync")
+    val rotation by infiniteTransition.animateFloat(
+        initialValue = 360f,
+        targetValue = 0f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 1000, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        ), label = "rotation"
+    )
+
     val pagerState = rememberPagerState(pageCount = {
         3
     })
@@ -70,6 +100,20 @@ fun Main(
 
     LaunchedEffect(pagerState.currentPage) {
         selectedItem = items.first { it.id == pagerState.currentPage }
+    }
+
+    LaunchedEffect(statusUsuario) {
+
+        when (statusUsuario) {
+            true -> {
+
+            }
+
+            false -> {
+                onNavigateToLogin()
+            }
+        }
+
     }
 
     Scaffold(
@@ -84,7 +128,21 @@ fun Main(
         floatingActionButton = {
             when (selectedItem) {
                 items[0] -> {
-
+                    if (dadosParaSincronizar) {
+                        FloatingActionButton(
+                            onClick = {},
+                            containerColor = Button,
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Sync,
+                                contentDescription = "Sincronizar",
+                                tint = GreenBlack,
+                                modifier = Modifier.graphicsLayer {
+                                    rotationZ = rotation
+                                }
+                            )
+                        }
+                    }
                 }
 
                 items[1] -> {
@@ -104,7 +162,9 @@ fun Main(
 
                 items[2] -> {
                     FloatingActionButton(
-                        onClick = { /*TODO*/ },
+                        onClick = {
+                            authViewModel.logout(contexto)
+                        },
                         containerColor = Button
                     ) {
                         Icon(
@@ -171,5 +231,4 @@ fun Main(
             }
         }
     }
-
 }

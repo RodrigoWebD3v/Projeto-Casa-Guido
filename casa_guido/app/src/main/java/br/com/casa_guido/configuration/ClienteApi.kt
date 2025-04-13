@@ -2,6 +2,7 @@ package br.com.casa_guido.configuration
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
@@ -28,6 +29,12 @@ class ClienteApi {
         install(Logging) {
             level = LogLevel.INFO
         }
+        install(HttpTimeout) {
+            requestTimeoutMillis = 15000  // Timeout total da requisição (15 segundos)
+            connectTimeoutMillis = 10000  // Tempo para estabelecer conexão (10 segundos)
+            //socketTimeoutMillis = 15000   // Tempo de inatividade da conexão (15 segundos)
+        }
+
 
         defaultRequest {
             headers {

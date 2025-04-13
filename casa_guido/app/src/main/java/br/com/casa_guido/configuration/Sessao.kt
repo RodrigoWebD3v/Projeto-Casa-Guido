@@ -3,6 +3,7 @@ package br.com.casa_guido.configuration
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import br.com.casa_guido.configuration.exception.AppException
 
 object Sessao {
 
@@ -25,5 +26,26 @@ object Sessao {
 
     fun clearSession(context: Context) {
         getPreferences(context).edit() { clear() }
+    }
+
+    fun errosApp(e: Exception): AppException {
+        return when (e) {
+            is io.ktor.client.plugins.ServerResponseException -> {
+                if (e.response.status.value == 401) {
+                    AppException.SessaoExpirada()
+                } else {
+                    AppException.ErroDesconhecido()
+                }
+            }
+            is io.ktor.client.plugins.ClientRequestException -> {
+                if (e.response.status.value == 401) {
+                    AppException.SessaoExpirada()
+                } else {
+                    AppException.ErroDesconhecido()
+                }
+            }
+            is io.ktor.utils.io.errors.IOException -> AppException.SemConexao()
+            else -> AppException.ErroDesconhecido()
+        }
     }
 }

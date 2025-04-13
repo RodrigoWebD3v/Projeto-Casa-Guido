@@ -1,5 +1,7 @@
 package br.com.casa_guido.navigation.navHost
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -9,8 +11,13 @@ import br.com.casa_guido.navigation.authRoutes.AuthRoutes
 import br.com.casa_guido.screens.login.Login
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun AuthNavHost(navHostController: NavHostController, sucessoAutenticacao: (Resultado) -> Unit) {
+fun AuthNavHost(
+    navHostController: NavHostController,
+    sucessoAutenticacao: (Resultado) -> Unit,
+    resultado: Resultado
+) {
     NavHost(
         navController = navHostController,
         startDestination = AuthRoutes.LoginRoute.route
@@ -22,7 +29,10 @@ fun AuthNavHost(navHostController: NavHostController, sucessoAutenticacao: (Resu
                sucessoAutenticacao(
                    Resultado.Sucesso("")
                )
-           })
+           },
+               resultado = resultado
+           )
+
        }
     }
 }

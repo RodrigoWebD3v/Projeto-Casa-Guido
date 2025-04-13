@@ -4,7 +4,6 @@ import Routes
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -14,11 +13,9 @@ import br.com.casa_guido.screens.cadastro.CadastroScreen
 import br.com.casa_guido.screens.main.Main
 
 
-
-
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun AppNavHost(navHostController: NavHostController) {
+fun AppNavHost(navHostController: NavHostController, onLogout: () -> Unit) {
     NavHost(
             navController = navHostController,
             startDestination = Routes.DashBoardScreenRoute.route,
@@ -26,6 +23,9 @@ fun AppNavHost(navHostController: NavHostController) {
         composable(Routes.DashBoardScreenRoute.route) {
             Main(
                 navHostController = navHostController,
+                onNavigateToLogin = {
+                    onLogout()
+                }
             )
         }
 

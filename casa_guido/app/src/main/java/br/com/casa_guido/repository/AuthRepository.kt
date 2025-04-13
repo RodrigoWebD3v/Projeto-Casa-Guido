@@ -34,16 +34,13 @@ class AuthRepository(
                 response.body<LoginResponse>()
             }
         } catch (e: Exception) {
-            println("Erro ao realizar login ${e.message}")
-            throw Exception("Erro ao buscar dados: ${e.message}")
+            throw Exception(e)
         }
     }
 
-    suspend fun refreshToken(context: Context): RefreshTokenResponse {
+    suspend fun refreshToken(context: Context, refreshToken: String): RefreshTokenResponse {
 
-        val refreshToken: String = SecureStorage.getRefreshToken(context).toString()
-
-        val refreshTokenReq = RefreshTokenRequest(
+        val refreshTokenRequest = RefreshTokenRequest(
             refreshToken = refreshToken
         )
 
@@ -51,13 +48,13 @@ class AuthRepository(
             withContext(Dispatchers.IO) {
                 val response =
                     clienteApi.client.post("${clienteApi.authEndpoint}/refresh") {
-                        setBody(refreshTokenReq)
+                        setBody(refreshTokenRequest)
                     }
                 SecureStorage.saveToken(context, response.body<RefreshTokenResponse>().token)
                 response.body<RefreshTokenResponse>()
             }
         } catch (e: Exception) {
-            throw Exception("Erro ao buscar dados: ${e.message} - ${e.cause}")
+            throw Exception(e)
         }
     }
 
