@@ -24,7 +24,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ViewModelAuthMananger(
-    private val authRepository: AuthRepository,
     private val authService: AuthService,
 ) : ViewModel() {
 

@@ -24,5 +24,5 @@ interface HistoricoSaudeDao {
     fun getAll(): Flow<List<HistoricoSaude>>
 
     @Query("SELECT * FROM historico_saude WHERE id = :id")
-    suspend fun getById(id: Long): HistoricoSaude?
+    suspend fun getById(id: String): HistoricoSaude?
 }

@@ -22,28 +22,35 @@ data class Pessoa(
     val endereco: Endereco = Endereco(),
 )
 
-
 @Immutable
 data class Paciente(
     val id: String = UUID.randomUUID().toString(),
+    val pessoa: Pessoa = Pessoa(),
     val status: Boolean = false,
     val nomeMae: String = "",
     val nomePai: String = "",
     val nomeOutro: String = "",
     val cartaoSus: String = "",
     val cirurgias: List<Cirurgia> = emptyList(),
+    val quimios: List<Quimio> = emptyList(),
+    val radios: List<Radio> = emptyList(),
     val remuneracao: String = "",
     val bpc: Int = 0,
     val valorBpc: String = "",
     val escolaNome: String = "",
     val escolaAno: String = "",
-    val tamRoupa: Int = 0,
+    val tamRoupa: String = "",
     val tamCalcado: Int = 0,
     val diagnostico: String = "",
     val medico_responsavel: String = "",
     val origen_info_ong: String = "",
-    val observacoes: String,
-
+    val observacoes: String = "",
+    val reponsavel: Pessoa = Pessoa(),
+    val conjugeResponsavel: Pessoa = Pessoa(),
+    val outroResponsavel: Pessoa = Pessoa(),
+    val doenca: List<Doenca> = emptyList(),
+    val tratamento: List<Tratamento> = emptyList(),
+    val profissionalResponsavel: List<ProfissionalResponsavel> = emptyList(),
 )
 
 @Serializable
@@ -66,18 +73,46 @@ data class Endereco(
     val pais: String = "Brasil",
 )
 
-
 data class Cirurgia(
     val nome: String = "",
     val data: String = "",
-    val quimio: Boolean = false,
-    val radio: Boolean = false,
-    val dataQuimioInicio: String = "",
-    val dataQuimioUltima: String = "",
-    val dataRadioInicio: String = "",
-    val dataRadioUltima: String = "",
     val id : String = UUID.randomUUID().toString()
 )
+
+data class Quimio(
+    val dataInicio: String = "",
+    val dataUltimaSessao: String = "",
+    val id : String = UUID.randomUUID().toString()
+)
+
+data class Radio(
+    val dataInicio: String = "",
+    val dataUltimaSessao: String = "",
+    val id : String = UUID.randomUUID().toString()
+)
+
+data class Doenca(
+    val nome: String = "",
+    val id : String = UUID.randomUUID().toString()
+)
+
+data class Tratamento(
+    val tipo: String = "",
+    val data_inicio: String = "",
+    val data_ultima_sessao: String = "",
+    val observacoes: String = "",
+    val outros_tratamentos: String = "",
+    val id : String = UUID.randomUUID().toString()
+)
+
+data class ProfissionalResponsavel(
+    val tipo: String = "",
+    val nome: String = "",
+    val crm: String = "",
+    val id : String = UUID.randomUUID().toString()
+)
+
+
 
 val listaAgendamentos = listOf(
     Agendamento(

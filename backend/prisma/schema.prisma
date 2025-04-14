@@ -15,51 +15,191 @@ model User {
   createdAt DateTime @default(now())
 }
 
-model categoriaproduto {
-  idcategoria  Int       @id
-  descategoria String?   @db.VarChar(50)
-  produto      produto[]
+model Pessoa {
+   id               String             @id @default(uuid())
+   nome             String
+   data_nascimento  DateTime
+   cpf              String?            @unique
+   identidade       String?
+   naturalidade     String?
+   genero           String?
+   escolaridade     String?
+   contato          String?
+   enderecoId       String?
+   estado_civil     Int?
+   situacao_profissional Int?
+   endereco         Endereco?          @relation("EnderecoToPessoa")
+   paciente         Paciente?          @relation("PessoaToPaciente")
+   telefone         Telefone[]         @relation("PessoaToTelefone")
+   entrevistado     Entrevista[]       @relation("PessoaToEntrevista")
 }
 
-model cliente {
-  idcliente   Int      @id
-  nomecliente String?  @db.VarChar(50)
-  rua         String?  @db.VarChar(50)
-  numero      String?  @db.VarChar(5)
-  bairro      String?  @db.VarChar(50)
-  cidade      String?  @db.VarChar(50)
-  uf          String?  @db.VarChar(2)
-  cep         String?  @db.VarChar(9)
-  complemento String?  @db.VarChar(20)
-  fone        String?  @db.VarChar(14)
-  status      String?  @db.VarChar(5)
-  vllimite    Decimal? @db.Decimal(12, 2)
-  pedido      pedido[]
+model Endereco {
+   id          String   @id @default(uuid())
+   pessoaId    String   @unique
+   cep         String
+   logradouro  String
+   bairro      String
+   cidade      String
+   estado      String   @db.Char(2)
+   referencia  String?
+   complemento String?
+   numero      String?
+   pessoa      Pessoa               @relation(fields: [pessoaId], references: [id] , name: "EnderecoToPessoa")
 }
 
-model pedido {
-  nrpedido    Int          @id
-  dtpedido    DateTime?    @db.Date
-  idcliente   Int?
-  cliente     cliente?     @relation(fields: [idcliente], references: [idcliente], onDelete: NoAction, onUpdate: NoAction)
-  pedidoitens pedidoitens?
+model Paciente {
+   id                 String               @id @default(uuid())
+   pessoaId           String               @unique
+   cartao_sus         String?
+   remuneracao        Decimal?
+   recebe_bpc         Boolean?
+   bpc_valor          Decimal?
+   diagnostico        String?
+   medico_responsavel String?
+   escola             String?
+   tamanho_roupa      String?
+   tamanho_calcado    String?
+   ano_escolar        String?
+   responsavelId      String?
+   conjugeResponsavelId String?
+   outroContatoId     String?
+   pessoa             Pessoa               @relation(fields: [pessoaId], references: [id], name: "PessoaToPaciente")
+   doencas            Doencas[]            @relation("PacienteToDoencas")
+   historicoSaude     HistoricoSaude[]     @relation("PacienteToHistoricoSaude")
+   composicaoFamiliar ComposicaoFamiliar[] @relation("PacienteToComposicaoFamiliar")
+   cirurgia           Cirurgia[]           @relation("PacienteToCirurgia")
+   quimioterapia      Quimioterapia[]      @relation("PacienteToQuimioterapia")
+   radioterapia       Radioterapia[]       @relation("PacienteToRadioterapia")
+   tratamento         Tratamento[]        @relation("PacienteToTratamento")
+   profissionais      ProfissionalResponsavel[] @relation("PacienteToProfissionais")
+   entrevistas        Entrevista[] @relation("PacienteToEntrevista")
 }
 
-model pedidoitens {
-  nrpedido   Int      @id
-  nritem     Int?
-  idproduto  Int?
-  quantidade Decimal? @db.Decimal(12, 2)
-  vlproduto  Decimal? @db.Decimal(12, 2)
-  produto    produto? @relation(fields: [idproduto], references: [idproduto], onDelete: NoAction, onUpdate: NoAction)
-  pedido     pedido   @relation(fields: [nrpedido], references: [nrpedido], onDelete: NoAction, onUpdate: NoAction)
+model ComposicaoFamiliar {
+    id              String    @id @default(uuid())
+    pacienteId      String
+    nome            String?
+    parentesco      String?
+    data_nascimento DateTime?
+    escolaridade    String?
+    trabalha        Boolean?
+    renda           Decimal?
+    paciente        Paciente  @relation(fields: [pacienteId], references: [id] , name: "PacienteToComposicaoFamiliar") 
 }
 
-model produto {
-  idproduto        Int               @id
-  desproduto       String?           @db.VarChar(50)
-  preco            Decimal?          @db.Decimal(12, 2)
-  idcategoria      Int?
-  pedidoitens      pedidoitens[]
-  categoriaproduto categoriaproduto? @relation(fields: [idcategoria], references: [idcategoria], onDelete: NoAction, onUpdate: NoAction)
+model Cirurgia{
+    id         String    @id @default(uuid())
+    pacienteId String
+    data       DateTime?
+    descricao  String?
+    paciente   Paciente  @relation(fields: [pacienteId], references: [id] , name: "PacienteToCirurgia")
+}
+
+model Quimioterapia{
+    id         String    @id @default(uuid())
+    pacienteId String
+    dataInicio       DateTime?
+    dataUltimaSessao DateTime?
+    paciente   Paciente  @relation(fields: [pacienteId], references: [id] , name: "PacienteToQuimioterapia")
+}
+
+model Radioterapia{
+    id         String    @id @default(uuid())
+    pacienteId String
+    dataInicio       DateTime?
+    dataUltimaSessao DateTime?
+    paciente   Paciente  @relation(fields: [pacienteId], references: [id] , name: "PacienteToRadioterapia")
+}
+
+model Telefone {
+    id         String    @id @default(uuid())
+    pessoaId   String
+    numero     String?
+    tipo       String?
+    pessoa   Pessoa  @relation(fields: [pessoaId], references: [id] , name: "PessoaToTelefone")
+}
+
+model Tratamento {
+   id                 String    @id @default(uuid())
+   pacienteId         String
+   tipo               String?
+   data_inicio        DateTime?
+   data_ultima_sessao DateTime?
+   observacoes        String?
+   outros_tratamentos String? 
+   paciente           Paciente  @relation(fields: [pacienteId], references: [id] , name: "PacienteToTratamento")
+}
+
+model HistoricoSaude {
+    id                        String   @id @default(uuid())
+    pacienteId                String
+    recebe_beneficio          Boolean?
+    beneficio_descricao       String?
+    medicamentos_uso_continuo String?
+    local_procura_atendimento String?
+    paciente                  Paciente @relation(fields: [pacienteId], references: [id], name: "PacienteToHistoricoSaude")
+}
+
+
+model Doencas {
+    id         String   @id @default(uuid())
+    pacienteId String
+    alcoolismo Boolean?
+    def_fisica  Boolean?
+    def_intelectual Boolean?
+    def_auditiva Boolean?
+    def_visual Boolean?
+    cardiopatia Boolean?
+    bronquite Boolean?
+    hipertensao Boolean?
+    toxoplasmose Boolean?
+    drogadito Boolean?
+    epilepsia Boolean?
+    desnutricao Boolean?
+    diabetes Boolean?
+    cancer Boolean?
+    paciente   Paciente @relation(fields: [pacienteId], references: [id], name: "PacienteToDoencas")
+}
+
+
+ model SituacaoHabitacional {
+   id                String      @id @default(uuid())
+   responsavelId     String
+   tipo_moradia      String? //"Tipo de moradia" (própria, alugada, cedida, ocupação, abrigo...)
+   propriedade       Boolean? //Derivado de "A moradia é própria?" (sim/não)
+   area              String? //publica ou particular (não entendi, só repliquei)
+   caracteristicas   String? //Características físicas (reboco, telhado, piso, ventilação...)
+   eletrodomesticos  String? //Lista: geladeira, TV, fogão, máquina de lavar, etc. (checkbox)
+   bens_imovel       String? //Terreno, carro.
+   meios_transporte  String? //Meio transporte mais usado. ex carro, onibus etc
+   meios_comunicacao String? //Como a pessoa se informa, tv radio ou internet, o mais usado
+   possui_banheiro   Boolean? //Possui banheiro? (sim/não)
+   dentro_de_casa    Boolean? //Banheiro dentro de casa? (sim/não)
+   destino_lixo      String? //Como o lixo é descartado? (coleta, entulho, queimado, enterrado)
+   tipo_agua         String? //Tipo de água (encanada, fervida, filtrada, clorada)
+   valor_total       Decimal? //Sem info
+ }
+ 
+
+ model ProfissionalResponsavel {
+   id           String   @id @default(uuid())
+   pacienteId   String
+   tipo         String   // ex: "Médico", "Psicólogo", "Assistente Social", "Outro"
+   nome         String
+   crm          String?
+   paciente     Paciente @relation(fields: [pacienteId], references: [id], name: "PacienteToProfissionais")
+}
+
+model Entrevista {
+  id              String   @id @default(uuid())
+  pacienteId      String
+  entrevistadoId  String?   // Pessoa (ex: responsável)
+  cidade          String?
+  data            DateTime  @default(now())
+  como_soube      String?   // campo: "Como ficou sabendo da ONG GUIDO?"
+  observacoes     String?
+  entrevistador   String?
+  entrevistado    Pessoa?  @relation(fields: [entrevistadoId], references: [id] , name: "PessoaToEntrevista")     
+  paciente        Paciente @relation(fields: [pacienteId], references: [id], name: "PacienteToEntrevista")
 }

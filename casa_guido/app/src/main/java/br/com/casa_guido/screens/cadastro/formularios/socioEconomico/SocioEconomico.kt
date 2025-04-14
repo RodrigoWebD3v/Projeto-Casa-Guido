@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.screens.Paciente
+import br.com.casa_guido.screens.Pessoa
 import br.com.casa_guido.screens.shared.RadioButtonComLabel
 import br.com.casa_guido.screens.shared.TextFieldSimples
 import br.com.casa_guido.ui.theme.BackgroundColor
@@ -90,7 +91,7 @@ fun SocioEconomico(
     ) {
         TextFieldSimples(
             nomeCampo = "Remuneração",
-            valorPreenchido = paciente.socioEconomico.remuneracao,
+            valorPreenchido = paciente.remuneracao,
             placeholder = "1.500",
             onChange = {
                 onChangeCampo(
@@ -101,7 +102,7 @@ fun SocioEconomico(
         )
 
         var selecionado by remember {
-            mutableIntStateOf(paciente.socioEconomico.bpc)
+            mutableIntStateOf(paciente.bpc)
         }
 
         Row(
@@ -181,7 +182,7 @@ fun SocioEconomico(
         ) {
             TextFieldSimples(
                 nomeCampo = "Valor",
-                valorPreenchido = paciente.socioEconomico.valorBpc,
+                valorPreenchido = paciente.valorBpc,
                 placeholder = "180",
                 onChange = {
                     onChangeCampo(
@@ -194,7 +195,7 @@ fun SocioEconomico(
 
         TextFieldSimples(
             nomeCampo = "Escola",
-            valorPreenchido = paciente.socioEconomico.escolaNome,
+            valorPreenchido = paciente.escolaNome,
             placeholder = "E.E.B Ignacio Stakowski",
             onChange = {
                 onChangeCampo(
@@ -207,7 +208,7 @@ fun SocioEconomico(
         Row {
             TextFieldSimples(
                 nomeCampo = "Ano",
-                valorPreenchido = paciente.socioEconomico.escolaAno,
+                valorPreenchido = paciente.escolaAno,
                 placeholder = "3",
                 onChange = {
                     onChangeCampo(
@@ -220,7 +221,7 @@ fun SocioEconomico(
 
             TextFieldSimples(
                 nomeCampo = "Tam. Roupa",
-                valorPreenchido = paciente.socioEconomico.tamRoupa.toString(),
+                valorPreenchido = paciente.tamRoupa,
                 placeholder = "44",
                 onChange = {
                     onChangeCampo(
@@ -234,7 +235,7 @@ fun SocioEconomico(
             TextFieldSimples(
                 nomeCampo = "Tam. Calçado",
                 placeholder = "32",
-                valorPreenchido = paciente.socioEconomico.tamCalcado.toString(),
+                valorPreenchido = paciente.tamCalcado.toString(),
                 onChange = {
                     onChangeCampo(
                         CamposSocioEconomico.TAMANHO_CALCADO,

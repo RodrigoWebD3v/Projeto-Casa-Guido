@@ -48,7 +48,7 @@ import androidx.navigation.NavHostController
 import br.com.casa_guido.configuration.Resultado
 import br.com.casa_guido.configuration.Sessao
 import br.com.casa_guido.navigation.root.ViewModelAuthMananger
-import br.com.casa_guido.screens.cadastro.itemNavBar
+import br.com.casa_guido.screens.cadastro.ItemNavBar
 import br.com.casa_guido.screens.home.HomeScreen
 import br.com.casa_guido.screens.pacientes.PacientesScreens
 import br.com.casa_guido.screens.scaffold_components.TopAppBarComp
@@ -74,9 +74,9 @@ fun Main(
     val contexto = LocalContext.current
 
     val items = listOf(
-        itemNavBar("Dashboard", Icons.Default.Dashboard, 0),
-        itemNavBar("Pacientes", Icons.Default.Groups, 1),
-        itemNavBar("Agenda", Icons.Default.CalendarMonth, 2)
+        ItemNavBar("Dashboard", Icons.Default.Dashboard, 0),
+        ItemNavBar("Pacientes", Icons.Default.Groups, 1),
+        ItemNavBar("Agenda", Icons.Default.CalendarMonth, 2)
     )
 
     var selectedItem by remember {

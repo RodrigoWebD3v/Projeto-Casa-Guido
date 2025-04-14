@@ -19,13 +19,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.screens.Paciente
+import br.com.casa_guido.screens.Pessoa
 import br.com.casa_guido.screens.shared.TextFieldSimples
 import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
 
 @Composable
 fun Endereco(
-    modifier: Modifier = Modifier, paciente: Paciente,
+    modifier: Modifier = Modifier, pessoa: Pessoa,
     onChangeCampo: (CamposEndereco, String) -> Unit,
     onCollapse: () -> Unit,
 ) {
@@ -78,7 +79,7 @@ fun Endereco(
     ) {
         TextFieldSimples(
             nomeCampo = "Cep",
-            valorPreenchido = paciente.endereco.cep,
+            valorPreenchido = pessoa.endereco.cep,
             placeholder = "88815-200",
             onChange = {
                 onChangeCampo(
@@ -87,7 +88,7 @@ fun Endereco(
             })
         TextFieldSimples(
             nomeCampo = "Logradouro",
-            valorPreenchido = paciente.endereco.logradouro,
+            valorPreenchido = pessoa.endereco.logradouro,
             placeholder = "Rua miguel patricio de souza",
             onChange = {
                 onChangeCampo(
@@ -97,7 +98,7 @@ fun Endereco(
 
         TextFieldSimples(
             nomeCampo = "Bairro",
-            valorPreenchido = paciente.endereco.bairro,
+            valorPreenchido = pessoa.endereco.bairro,
             placeholder = "Jardim Maristela",
             onChange = {
                 onChangeCampo(
@@ -107,7 +108,7 @@ fun Endereco(
 
         TextFieldSimples(
             nomeCampo = "Complemento",
-            valorPreenchido = paciente.endereco.complemento,
+            valorPreenchido = pessoa.endereco.complemento,
             placeholder = "Ao lado do supermercado",
             onChange = {
                 onChangeCampo(
@@ -118,7 +119,7 @@ fun Endereco(
         Row {
             TextFieldSimples(
                 nomeCampo = "Localidade",
-                valorPreenchido = paciente.endereco.localidade,
+                valorPreenchido = pessoa.endereco.localidade,
                 placeholder = "Criciúma",
                 onChange = {
                     onChangeCampo(
@@ -130,7 +131,7 @@ fun Endereco(
 
             TextFieldSimples(
                 nomeCampo = "UF",
-                valorPreenchido = paciente.endereco.uf,
+                valorPreenchido = pessoa.endereco.uf,
                 placeholder = "SC",
                 onChange = {
                     onChangeCampo(

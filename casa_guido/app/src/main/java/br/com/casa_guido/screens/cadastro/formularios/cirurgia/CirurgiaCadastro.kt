@@ -2,26 +2,38 @@ package br.com.casa_guido.screens.cadastro.formularios.cirurgia
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,6 +48,7 @@ import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.shared.DataPicker
 import br.com.casa_guido.screens.shared.TextFieldSimples
 import br.com.casa_guido.ui.theme.BackgroundColor
+import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
 import br.com.casa_guido.util.Utils
@@ -44,7 +57,7 @@ import java.time.LocalDate
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun Cirurgia(
+fun CirurgiaCadastro(
     modifier: Modifier = Modifier,
     onChangeCampo: (CamposEndereco, String) -> Unit,
     onCollapse: () -> Unit,
@@ -52,11 +65,6 @@ fun Cirurgia(
 
     val viewModel = koinViewModel<CirurgiaViewModel>()
     val state by viewModel.uiState.collectAsState()
-
-    var cirurgiaEdicao by remember {
-        mutableStateOf(Cirurgia())
-    }
-
 
     Column(
         modifier = modifier
@@ -124,11 +132,13 @@ fun Cirurgia(
                 ) {
                     TextFieldSimples(
                         nomeCampo = "Nome da cirurgia",
-                        valorPreenchido = cirurgiaEdicao.nome,
+                        valorPreenchido = state.cirurgiaEdicao.nome,
                         placeholder = "Nefrectomia",
                         onChange = {
-                            cirurgiaEdicao = cirurgiaEdicao.copy(
+                            viewModel.onChangeCirurgiaEdicao(
+                                state.cirurgiaEdicao.copy(
                                 nome = it
+                                )
                             )
                         },
                         modifier = Modifier.fillMaxWidth(.6f),
@@ -138,14 +148,16 @@ fun Cirurgia(
 
                     DataPicker(
                         showDataPicker = state.toggleDataPickerCirurgia,
-                        valorPreenchido = cirurgiaEdicao.data,
+                        valorPreenchido = state.cirurgiaEdicao.data,
                         titulo = "Data da cirurgia",
                         onCancelar = {
                             viewModel.toggleDatePickerCirurgia()
                         },
                         onChange = {
-                            cirurgiaEdicao = cirurgiaEdicao.copy(
-                                data = it
+                            viewModel.onChangeCirurgiaEdicao(
+                                state.cirurgiaEdicao.copy(
+                                    data = it
+                                )
                             )
                         },
                         onClick = {
@@ -158,10 +170,12 @@ fun Cirurgia(
 
             Button(
                 onClick = {
-                    if (cirurgiaEdicao.nome.isNotEmpty()) {
-                        viewModel.addCirurgia(cirurgiaEdicao)
-                        cirurgiaEdicao = Cirurgia(
-                            data = Utils.formatData(LocalDate.now())!!
+                    if (state.cirurgiaEdicao.nome.isNotEmpty()) {
+                        viewModel.addCirurgia(state.cirurgiaEdicao)
+                        viewModel.onChangeCirurgiaEdicao(
+                            Cirurgia(
+                                data = Utils.formatData(LocalDate.now())!!
+                            )
                         )
                     }
                 },
@@ -188,18 +202,92 @@ fun Cirurgia(
                 )
             }
 
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp)
+                    .padding(vertical = 20.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            Paragraph,
+                            shape = RoundedCornerShape(10.dp)
+                        )
+                        .padding(12.dp)
+                        .clickable {
+                            viewModel.toggleList()
+                        },
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = "Lista de quimios",
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            color = BackgroundColor,
+                            fontWeight = FontWeight.SemiBold,
+                            textAlign = TextAlign.Center
+                        )
+                    )
 
-            Column {
-                state.listaCirurgias.forEachIndexed {
-                    index, item ->
-                    ItemCirurgia(
-                        nomeCirurgia = item.nome,
-                        data = item.data
+                    Text(
+                        text = "Quantidade: ${state.listaCirurgias.size}",
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            color = GreenBlack,
+                            fontWeight = FontWeight.Medium,
+                            textAlign = TextAlign.Start
+                        )
+                    )
+
+                    Icon(
+                        modifier = Modifier
+                            .size(35.dp)
+                            .padding(start = 10.dp)
+                            .clickable {
+                                viewModel.toggleList()
+                            },
+                        imageVector = if (state.onVisibleList) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,
+                        contentDescription = "Seta para baixo",
+                        tint = Color.Black
+                    )
+                }
+                AnimatedVisibility(
+                    visible = state.onVisibleList,
+                    enter = expandVertically(
+                        animationSpec = tween(
+                            durationMillis = 400,
+                            easing = FastOutSlowInEasing
+                        )
+                    ),
+                    exit = shrinkVertically() + fadeOut(),
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .heightIn(min = 0.dp, max = 450.dp)
                     ) {
-                        viewModel.RemoveIndex(index)
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .verticalScroll(rememberScrollState())
+                                .padding(8.dp)
+                        ) {
+                            state.listaCirurgias.forEachIndexed { index, item ->
+                                ItemCirurgia(
+                                    nomeCirurgia = item.nome,
+                                    data = item.data
+                                ) {
+                                    viewModel.RemoveIndex(index)
+                                }
+                            }
+                        }
                     }
                 }
             }
+
         }
     }
 

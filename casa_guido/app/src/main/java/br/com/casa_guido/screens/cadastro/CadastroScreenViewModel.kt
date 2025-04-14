@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.casa_guido.screens.Paciente
+import br.com.casa_guido.screens.Pessoa
 import br.com.casa_guido.service.PacienteService
 import br.com.casa_guido.service.ViaCepService
 import br.com.casa_guido.util.ListaMemoria
@@ -21,7 +22,6 @@ class CadastroScreenViewModel(
 
     private val _paciente = MutableStateFlow<Paciente>(Paciente())
     val paciente = _paciente.asStateFlow()
-
 
     fun getUsuario(id: String) {
         var paciente = ListaMemoria.pacientesLista.filter { item ->
@@ -50,13 +50,17 @@ class CadastroScreenViewModel(
 
     fun onChangeData(data: String) {
         _paciente.value = _paciente.value.copy(
-            dataNascimento = data
+            pessoa = _paciente.value.pessoa.copy(
+                dataNascimento = data
+            )
         )
     }
 
     fun onChangeNome(nome: String) {
         _paciente.value = _paciente.value.copy(
-            nome = nome
+            pessoa = _paciente.value.pessoa.copy(
+                nome = nome
+            )
         )
     }
 
@@ -80,13 +84,17 @@ class CadastroScreenViewModel(
 
     fun onChangeCpf(cpf: String) {
         _paciente.value = _paciente.value.copy(
-            cpf = cpf
+            pessoa = _paciente.value.pessoa.copy(
+                cpf = cpf
+            )
         )
     }
 
     fun onChangeRg(rg: String) {
         _paciente.value = _paciente.value.copy(
-            rg = rg
+            pessoa = _paciente.value.pessoa.copy(
+                rg = rg
+            )
         )
     }
 
@@ -99,7 +107,9 @@ class CadastroScreenViewModel(
 
     fun onChangeTelefone(telefone: String) {
         _paciente.value = _paciente.value.copy(
-            telefone = telefone
+            pessoa = _paciente.value.pessoa.copy(
+                telefone = telefone
+            )
         )
     }
 
@@ -128,17 +138,18 @@ class CadastroScreenViewModel(
 
     fun onChangeCep(cep: String) {
         _paciente.value = _paciente.value.copy(
-            endereco = _paciente.value.endereco.copy(cep = cep)
+            pessoa = _paciente.value.pessoa.copy(
+                endereco = _paciente.value.pessoa.endereco.copy(cep = cep)
+            )
         )
 
         if (cep.length == 8) {
             viewModelScope.launch {
                 val endereco = viaCepService.buscaCep(cep)
-                println(
-                    "Endereco: ${endereco.logradouro} - ${endereco.bairro} - ${endereco.localidade} - ${endereco.uf}"
-                )
                 _paciente.value = _paciente.value.copy(
-                    endereco = endereco
+                    pessoa = _paciente.value.pessoa.copy(
+                        endereco = endereco
+                    )
                 )
             }
         }
@@ -146,97 +157,115 @@ class CadastroScreenViewModel(
 
     fun onChangeLogradouro(logradouro: String) {
         _paciente.value = _paciente.value.copy(
-            endereco = _paciente.value.endereco.copy(logradouro = logradouro)
+            pessoa = _paciente.value.pessoa.copy(
+                endereco = _paciente.value.pessoa.endereco.copy(logradouro = logradouro)
+            )
         )
     }
 
     fun onChangeComplemento(complemento: String) {
         _paciente.value = _paciente.value.copy(
-            endereco = _paciente.value.endereco.copy(complemento = complemento)
+            pessoa = _paciente.value.pessoa.copy(
+                endereco = _paciente.value.pessoa.endereco.copy(complemento = complemento)
+            )
         )
     }
 
     fun onChangeUnidade(unidade: String) {
         _paciente.value = _paciente.value.copy(
-            endereco = _paciente.value.endereco.copy(unidade = unidade)
+            pessoa = _paciente.value.pessoa.copy(
+                endereco = _paciente.value.pessoa.endereco.copy(unidade = unidade)
+            )
         )
     }
 
     fun onChangeBairro(bairro: String) {
         _paciente.value = _paciente.value.copy(
-            endereco = _paciente.value.endereco.copy(bairro = bairro)
+            pessoa = _paciente.value.pessoa.copy(
+                endereco = _paciente.value.pessoa.endereco.copy(bairro = bairro)
+            )
         )
     }
 
     fun onChangeLocalidade(localidade: String) {
         _paciente.value = _paciente.value.copy(
-            endereco = _paciente.value.endereco.copy(localidade = localidade)
+            pessoa = _paciente.value.pessoa.copy(
+                endereco = _paciente.value.pessoa.endereco.copy(localidade = localidade)
+            )
         )
     }
 
     fun onChangeUf(uf: String) {
         _paciente.value = _paciente.value.copy(
-            endereco = _paciente.value.endereco.copy(uf = uf)
+            pessoa = _paciente.value.pessoa.copy(
+                endereco = _paciente.value.pessoa.endereco.copy(uf = uf)
+            )
         )
     }
 
     fun onChangeNumero(numero: String) {
         _paciente.value = _paciente.value.copy(
-            endereco = _paciente.value.endereco.copy(numero = numero)
+            pessoa = _paciente.value.pessoa.copy(
+                endereco = _paciente.value.pessoa.endereco.copy(numero = numero)
+            )
         )
     }
 
     fun onChangeReferencia(referencia: String) {
         _paciente.value = _paciente.value.copy(
-            endereco = _paciente.value.endereco.copy(referencia = referencia)
+            pessoa = _paciente.value.pessoa.copy(
+                endereco = _paciente.value.pessoa.endereco.copy(referencia = referencia)
+            )
         )
     }
 
     fun onChangeEstado(estado: String) {
         _paciente.value = _paciente.value.copy(
-            endereco = _paciente.value.endereco.copy(estado = estado)
+            pessoa = _paciente.value.pessoa.copy(
+                endereco = _paciente.value.pessoa.endereco.copy(estado = estado)
+            )
         )
     }
 
     fun onChangeEscolaAno(valor: String) {
         _paciente.value = _paciente.value.copy(
-            socioEconomico = _paciente.value.socioEconomico.copy(escolaAno = valor)
+            escolaAno = valor
         )
     }
 
     fun onChangeNomeEscola(valor: String) {
         _paciente.value = _paciente.value.copy(
-            socioEconomico = _paciente.value.socioEconomico.copy(escolaNome = valor)
+            escolaNome = valor
         )
     }
 
     fun onChangeRemuneracao(valor: String) {
         _paciente.value = _paciente.value.copy(
-            socioEconomico = _paciente.value.socioEconomico.copy(remuneracao = valor)
+            remuneracao = valor
         )
     }
 
-    fun onChangeRemuneracaoOpt(valor: String) {
+    fun onChangeBpcOpt(valor: String) {
         _paciente.value = _paciente.value.copy(
-            socioEconomico = _paciente.value.socioEconomico.copy(bpc = valor.toInt())
+            bpc = valor.toInt()
         )
     }
 
     fun onChangeValorBPC(valor: String) {
         _paciente.value = _paciente.value.copy(
-            socioEconomico = _paciente.value.socioEconomico.copy(valorBpc = valor)
+            valorBpc = valor
         )
     }
 
     fun onChangeTamanhoRoupa(valor: String) {
         _paciente.value = _paciente.value.copy(
-            socioEconomico = _paciente.value.socioEconomico.copy(tamRoupa = valor.toInt())
+            tamRoupa = valor
         )
     }
 
     fun onChangeTamanhoCalcado(valor: String) {
         _paciente.value = _paciente.value.copy(
-            socioEconomico = _paciente.value.socioEconomico.copy(tamCalcado = valor.toInt())
+            tamCalcado = valor.toInt()
         )
     }
 

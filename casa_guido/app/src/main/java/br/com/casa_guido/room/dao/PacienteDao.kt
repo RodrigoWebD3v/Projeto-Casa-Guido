@@ -19,5 +19,5 @@ interface PacienteDao {
     fun getAll(): Flow<List<Paciente>>
 
     @Query("SELECT * FROM paciente WHERE id = :id")
-    suspend fun getById(id: Long): Paciente?
+    suspend fun getById(id: String): Paciente?
 }

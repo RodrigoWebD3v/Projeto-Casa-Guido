@@ -36,7 +36,7 @@ class PacientesViewModel() : ViewModel() {
                 state.copy(
                     nome = nome,
                     listaPacientesFiltrada = state.pacientes.filter { paciente ->
-                        paciente.nome.contains(nome, ignoreCase = true)
+                        paciente.pessoa.nome.contains(nome, ignoreCase = true)
                     }
                 )
             }

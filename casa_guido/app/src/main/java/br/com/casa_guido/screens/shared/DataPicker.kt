@@ -109,7 +109,7 @@ fun DataPicker(
                 .clickable {
                     onClick()
                 },
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -120,18 +120,16 @@ fun DataPicker(
                     fontWeight = FontWeight.SemiBold,
                     textAlign = TextAlign.Start
                 ),
-                modifier = Modifier
-                    .padding(start = 10.dp)
             )
 
-            Icon(
-                imageVector = Icons.Default.CalendarToday,
-                contentDescription = "Ícone de calendário",
-                tint = BackgroundColor,
-                modifier = Modifier
-                    .padding(end = 10.dp)
-                    .size(20.dp)
-            )
+//            Icon(
+//                imageVector = Icons.Default.CalendarToday,
+//                contentDescription = "Ícone de calendário",
+//                tint = BackgroundColor,
+//                modifier = Modifier
+//                    .padding(end = 10.dp)
+//                    .size(20.dp)
+//            )
         }
     }
 

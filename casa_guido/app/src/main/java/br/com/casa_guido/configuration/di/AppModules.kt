@@ -14,7 +14,9 @@ import br.com.casa_guido.screens.cadastro.formularios.cirurgia.CirurgiaViewModel
 import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.ComposicaoFamiliarViewModel
 import br.com.casa_guido.screens.cadastro.formularios.endereco.EnderecoViewModel
 import br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente.IdentificacaoViewModel
-import br.com.casa_guido.screens.cadastro.formularios.responsavel.ResponsavelViewModel
+import br.com.casa_guido.screens.cadastro.formularios.radio.QuimioViewModel
+import br.com.casa_guido.screens.cadastro.formularios.radio.RadioViewModel
+import br.com.casa_guido.screens.cadastro.formularios.responsavel.ConjugeViewModel
 import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.SocioEconomicoViewModel
 
 import br.com.casa_guido.screens.home.HomeViewModel
@@ -38,7 +40,11 @@ val appModule = module {
     viewModelOf(::SocioEconomicoViewModel)
     viewModelOf(::EnderecoViewModel)
     viewModelOf(::IdentificacaoViewModel)
-    viewModelOf(::ResponsavelViewModel)
+    viewModelOf(::ConjugeViewModel)
+    viewModelOf(::RadioViewModel)
+    viewModelOf(::QuimioViewModel)
+
+
 
     singleOf(::ClienteApi)
     singleOf(::ApiViaCepConfig)
@@ -57,13 +63,15 @@ val appModule = module {
     single { get<AppDatabase>().pessoaDao() }
     single { get<AppDatabase>().enderecoDao() }
     single { get<AppDatabase>().pacienteDao() }
-    single { get<AppDatabase>().responsavelDao() }
-    single { get<AppDatabase>().conjugeDao() }
-    single { get<AppDatabase>().outroResponsavelDao() }
+    single { get<AppDatabase>().quimioterapiaDao() }
+    single { get<AppDatabase>().radioterapiaDao() }
+    single { get<AppDatabase>().telefoneDao() }
     single { get<AppDatabase>().cirurgiaDao() }
     single { get<AppDatabase>().tratamentoDao() }
     single { get<AppDatabase>().historicoSaudeDao() }
     single { get<AppDatabase>().situacaoHabitacionalDao() }
     single { get<AppDatabase>().composicaoFamiliarDao() }
+    single { get<AppDatabase>().profissionalResponsavelDao() }
+    single { get<AppDatabase>().doencasDao() }
 
 }

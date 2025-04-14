@@ -24,5 +24,5 @@ interface SituacaoHabitacionalDao {
     fun getAll(): Flow<List<SituacaoHabitacional>>
 
     @Query("SELECT * FROM situacao_habitacional WHERE id = :id")
-    suspend fun getById(id: Long): SituacaoHabitacional?
+    suspend fun getById(id: String): SituacaoHabitacional?
 }

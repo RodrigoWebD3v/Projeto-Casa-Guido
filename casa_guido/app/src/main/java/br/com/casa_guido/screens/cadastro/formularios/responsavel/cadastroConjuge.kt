@@ -80,7 +80,7 @@ fun CadastroResponsavel(
         ) {
             Column {
                 Text(
-                    "6. Responsavel",
+                    "7. Responsavel",
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,

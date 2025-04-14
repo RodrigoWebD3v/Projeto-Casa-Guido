@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.screens.Paciente
+import br.com.casa_guido.screens.Pessoa
 import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Highlight
@@ -78,7 +79,7 @@ fun PacienteItem(paciente: Paciente, onUpId: (String) -> Unit) {
                         ), contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        Utils.getInitials(paciente.nome),
+                        Utils.getInitials(paciente.pessoa.nome),
                         style = TextStyle(),
                         fontSize = 16.sp,
                         color = BackgroundColor,
@@ -91,7 +92,7 @@ fun PacienteItem(paciente: Paciente, onUpId: (String) -> Unit) {
                     verticalArrangement = Arrangement.Center,
                 ) {
                     Text(
-                        paciente.nome,
+                        paciente.pessoa.nome,
                         style = TextStyle(),
                         fontSize = 16.sp,
                         color = BackgroundColor,
@@ -99,7 +100,7 @@ fun PacienteItem(paciente: Paciente, onUpId: (String) -> Unit) {
                     )
 
                     Text(
-                        paciente.telefone,
+                        paciente.pessoa.telefone,
                         style = TextStyle(),
                         fontSize = 12.sp,
                         color = BackgroundColor,
@@ -135,8 +136,6 @@ fun PacienteItem(paciente: Paciente, onUpId: (String) -> Unit) {
 private fun PacienteItemPrev() {
     PacienteItem(
         Paciente(
-            nome = "João da Silva",
-            telefone = "(48) 99999-9999",
             status = true
         ),
         onUpId = TODO()
@@ -148,10 +147,8 @@ private fun PacienteItemPrev() {
 private fun PacienteItemPrev2() {
     PacienteItem(
         Paciente(
-            nome = "João da Silva",
-            telefone = "(48) 99999-9999",
             status = false
         ),
-        onUpId = TODO()
+        onUpId = TODO(),
     )
 }

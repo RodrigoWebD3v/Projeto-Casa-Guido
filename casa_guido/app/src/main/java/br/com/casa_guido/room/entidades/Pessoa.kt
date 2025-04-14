@@ -2,17 +2,20 @@ package br.com.casa_guido.room.entidades
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.UUID
 
 @Entity(tableName = "pessoa")
 data class Pessoa(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val nome: String,
-    val data_nascimento: String, // ou Date com TypeConverter
+    val data_nascimento: String,
     val cpf: String?,
     val identidade: String?,
     val naturalidade: String?,
     val genero: String?,
     val escolaridade: String?,
     val contato: String?,
-    val enderecoId: Long? // FK para EnderecoEntity
+    val estado_civil: String?,
+    val situacao_profissional: Int?,
+    val enderecoId: String? // UUID compatível com o backend
 )

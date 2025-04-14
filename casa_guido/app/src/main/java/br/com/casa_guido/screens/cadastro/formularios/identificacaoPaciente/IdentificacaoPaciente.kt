@@ -91,7 +91,7 @@ fun IdentificacaoPaciente(
     ) {
         TextFieldSimples(
             nomeCampo = "Nome Completo",
-            valorPreenchido = paciente.nome,
+            valorPreenchido = paciente.pessoa.nome,
             onChange = {
                 onChangeCampo(
                     CamposIdentificacao.NOME,
@@ -107,7 +107,7 @@ fun IdentificacaoPaciente(
 
         DataPicker(
             showDataPicker = dataPickerNascimentoShow,
-            valorPreenchido = paciente.dataNascimento,
+            valorPreenchido = paciente.pessoa.dataNascimento,
             titulo = "Data de Nascimento",
             onCancelar = {
                 dataPickerNascimentoShow = false
@@ -164,7 +164,7 @@ fun IdentificacaoPaciente(
         Row {
             TextFieldSimples(
                 nomeCampo = "Cpf",
-                valorPreenchido = paciente.cpf,
+                valorPreenchido = paciente.pessoa.cpf,
                 visualTransformation = VisualTransformationCustom.CpfVisualTransformation(),
                 placeholder = "111.111.111.99",
                 onChange = {
@@ -178,7 +178,7 @@ fun IdentificacaoPaciente(
 
             TextFieldSimples(
                 nomeCampo = "Rg",
-                valorPreenchido = paciente.rg,
+                valorPreenchido = paciente.pessoa.rg,
                 visualTransformation = VisualTransformationCustom.RgVisualTransformation(),
                 placeholder = "11.111.111-9",
                 onChange = {
@@ -204,14 +204,13 @@ fun IdentificacaoPaciente(
                         it
                     )
                 },
-                modifier = Modifier.fillMaxWidth(.5f),
+                modifier = Modifier.fillMaxWidth(.55f),
                 paddingValues = PaddingValues(start = 20.dp, end = 0.dp),
             )
 
             TextFieldSimples(
                 nomeCampo = "Celular",
-                valorPreenchido = paciente.telefone,
-
+                valorPreenchido = paciente.pessoa.telefone,
                 visualTransformation = VisualTransformationCustom.PhoneVisualTransformation(),
                 placeholder = "(48) 99963-9821",
                 onChange = {

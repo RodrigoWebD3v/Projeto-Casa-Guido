@@ -83,7 +83,7 @@ fun TextFieldSimples(
                 decorationBox = { innerTextField ->
                     if (valorPreenchido.isEmpty()) {
                         Text(
-                            text = placeholder,
+                            text = "",
                             color = BackgroundColor,
                             fontSize = 16.sp
                         )

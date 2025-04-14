@@ -10,14 +10,19 @@ import br.com.casa_guido.room.entidades.*
         Pessoa::class,
         Endereco::class,
         Paciente::class,
-        Responsavel::class,
-        Conjuge::class,
-        OutroResponsavel::class,
         Cirurgia::class,
         Tratamento::class,
         HistoricoSaude::class,
         SituacaoHabitacional::class,
-        ComposicaoFamiliar::class
+        ComposicaoFamiliar::class,
+        Quimioterapia::class,
+        RadioTerapia::class,
+        Telefone::class,
+        Doencas::class,
+        ProfissionalResponsavel::class,
+        Entrevista::class,
+
+
     ],
     version = 1,
     exportSchema = false
@@ -26,14 +31,16 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun pessoaDao(): PessoaDao
     abstract fun enderecoDao(): EnderecoDao
     abstract fun pacienteDao(): PacienteDao
-    abstract fun responsavelDao(): ResponsavelDao
-    abstract fun conjugeDao(): ConjugeDao
-    abstract fun outroResponsavelDao(): OutroResponsavelDao
+    abstract fun quimioterapiaDao(): QuimioterapiaDao
+    abstract fun radioterapiaDao(): RadioTerapiaDao
+    abstract fun telefoneDao(): TelefoneDao
     abstract fun cirurgiaDao(): CirurgiaDao
     abstract fun tratamentoDao(): TratamentoDao
     abstract fun historicoSaudeDao(): HistoricoSaudeDao
     abstract fun situacaoHabitacionalDao(): SituacaoHabitacionalDao
     abstract fun composicaoFamiliarDao(): ComposicaoFamiliarDao
+    abstract fun doencasDao(): DoencasDao
+    abstract fun profissionalResponsavelDao(): ProfissionalResponsavelDao
 
     companion object {
         @Volatile private var INSTANCE: AppDatabase? = null

@@ -25,5 +25,5 @@ interface EnderecoDao {
     fun getAll(): Flow<List<Endereco>>
 
     @Query("SELECT * FROM endereco WHERE id = :id")
-    suspend fun getById(id: Long): Endereco?
+    suspend fun getById(id: String): Endereco?
 }

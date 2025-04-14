@@ -24,5 +24,5 @@ interface PessoaDao {
     fun getAll(): Flow<List<Pessoa>>
 
     @Query("SELECT * FROM pessoa WHERE id = :id")
-    suspend fun getById(id: Long): Pessoa?
+    suspend fun getById(id: String): Pessoa?
 }

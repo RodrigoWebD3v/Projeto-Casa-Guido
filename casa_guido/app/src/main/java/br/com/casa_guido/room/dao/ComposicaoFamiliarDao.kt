@@ -24,5 +24,5 @@ interface ComposicaoFamiliarDao {
     fun getAll(): Flow<List<ComposicaoFamiliar>>
 
     @Query("SELECT * FROM composicao_familiar WHERE id = :id")
-    suspend fun getById(id: Long): ComposicaoFamiliar?
+    suspend fun getById(id: String): ComposicaoFamiliar?
 }

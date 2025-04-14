@@ -3,12 +3,13 @@ package br.com.casa_guido.room.entidades
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.math.BigDecimal
+import java.util.UUID
 
 @Entity(tableName = "situacao_habitacional")
 
 data class SituacaoHabitacional(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val responsavelId: Long,
+    @PrimaryKey val id: String = UUID.randomUUID().toString(),
+    val responsavelId: String?,
     val tipo_moradia: String?,
     val propriedade: Boolean?,
     val area: String?,
