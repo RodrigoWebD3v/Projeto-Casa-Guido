@@ -24,7 +24,7 @@ import br.com.casa_guido.room.entidades.*
 
 
     ],
-    version = 1,
+    version = 8,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

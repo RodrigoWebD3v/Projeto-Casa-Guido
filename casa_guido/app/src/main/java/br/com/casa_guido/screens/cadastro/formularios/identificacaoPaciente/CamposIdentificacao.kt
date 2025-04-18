@@ -10,4 +10,5 @@ enum class CamposIdentificacao {
     DATA_NASCIMENTO,
     TELEFONE,
     NOME_RESPONSAVEL,
+    NOME_OUTRO_RESPONSAVEL,
 }

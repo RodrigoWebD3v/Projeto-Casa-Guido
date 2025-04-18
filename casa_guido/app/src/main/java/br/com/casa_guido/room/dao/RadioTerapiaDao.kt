@@ -6,8 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import br.com.casa_guido.room.entidades.Cirurgia
-import br.com.casa_guido.room.entidades.Quimioterapia
 import br.com.casa_guido.room.entidades.RadioTerapia
 import kotlinx.coroutines.flow.Flow
 
@@ -27,4 +25,11 @@ interface RadioTerapiaDao {
 
     @Query("SELECT * FROM radioterapia WHERE id = :id")
     suspend fun getById(id: String): RadioTerapia?
+
+    @Query("DELETE FROM radioterapia WHERE pacienteId = :pacienteId")
+    suspend fun deleteRadioTerapiaPorPaciente(pacienteId: String)
+
+    @Query("SELECT * FROM radioterapia WHERE pacienteId = :pacienteId")
+    fun getRadioTerapiaPorPaciente(pacienteId: String): Flow<List<RadioTerapia>>
+
 }

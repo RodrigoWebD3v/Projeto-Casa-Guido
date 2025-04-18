@@ -5,18 +5,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-class ViewModelSincronizacao : ViewModel() {
+class MainViewModel : ViewModel() {
 
     private val _status = MutableStateFlow<SincronizandoDados>(SincronizandoDados.Sincronizando)
     val status = _status.asStateFlow()
 
-    fun setStatusSincronizacao(estado: SincronizandoDados) {
-        _status.update {
-            estado
+    private val _primeiroAcesso = MutableStateFlow<Boolean>(false)
+    val primeiroAcesso = _primeiroAcesso.asStateFlow()
+
+
+    fun togglePrimeiroAcesso(){
+        _primeiroAcesso.update {
+            true
         }
     }
-
-
-
-
 }

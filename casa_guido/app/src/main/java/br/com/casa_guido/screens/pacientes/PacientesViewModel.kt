@@ -1,15 +1,23 @@
 package br.com.casa_guido.screens.pacientes
 
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.casa_guido.screens.pacientes.uistate.PacientesUiState
-import br.com.casa_guido.util.ListaMemoria
+import br.com.casa_guido.service.CompartilharArquivoService
+import br.com.casa_guido.service.CriarPdfService
+import br.com.casa_guido.service.PacienteService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class PacientesViewModel() : ViewModel() {
+class PacientesViewModel(
+    private val pacienteService: PacienteService,
+    private val gerarPDFService: CriarPdfService,
+    private val compartilharArquivoService: CompartilharArquivoService
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow<PacientesUiState>(PacientesUiState())
     val uiState = _uiState.asStateFlow()
@@ -17,25 +25,28 @@ class PacientesViewModel() : ViewModel() {
     private val _loading = MutableStateFlow(true)
     val loading = _loading.asStateFlow()
 
-    private fun carregarPacientes() {
+    fun carregarPacientes() {
+        Log.i(
+            "ViewModelPacientes",
+            "Carregando pacientes"
+        )
         viewModelScope.launch {
             _uiState.update { state ->
                 state.copy(
-                    pacientes = ListaMemoria.pacientesLista,
-                    listaPacientesFiltrada = ListaMemoria.pacientesLista,
+                    pacientes = pacienteService.getPacientes(),
+                    listaPacientesFiltrada = pacienteService.getPacientes(),
                 )
             }
             _loading.value = false
         }
     }
 
-
     fun filtrarPacientes(nome: String) {
         viewModelScope.launch {
-            _uiState.update { state ->
-                state.copy(
+            _uiState.update {
+                it.copy(
                     nome = nome,
-                    listaPacientesFiltrada = state.pacientes.filter { paciente ->
+                    listaPacientesFiltrada = it.pacientes.filter { paciente ->
                         paciente.pessoa.nome.contains(nome, ignoreCase = true)
                     }
                 )
@@ -43,7 +54,12 @@ class PacientesViewModel() : ViewModel() {
         }
     }
 
-    init {
-        carregarPacientes()
+    fun gerarPdf(idEdicao: String, context: Context) {
+        val pdfArquivo = gerarPDFService.gerarFichaIdentificacaoPdf(
+            context = context,
+            paciente = _uiState.value.listaPacientesFiltrada.find { it.id == idEdicao }!!,
+        )
+        compartilharArquivoService.compartilharPdf(context, pdfArquivo)
     }
+
 }

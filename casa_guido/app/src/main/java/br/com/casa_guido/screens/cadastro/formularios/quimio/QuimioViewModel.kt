@@ -12,6 +12,14 @@ class QuimioViewModel : ViewModel() {
     private val _uiState = MutableStateFlow<QuimioStateUi>(QuimioStateUi())
     val uiState = _uiState.asStateFlow()
 
+    fun newQuimio() {
+        _uiState.update {
+            it.copy(
+                quimioEdicao = Quimio()
+            )
+        }
+    }
+
     fun toggleDataPickerQuimioInicio() {
         _uiState.value =
             _uiState.value.copy(toggleDataPickerInicioQuimio = _uiState.value.toggleDataPickerInicioQuimio.not())
@@ -23,8 +31,6 @@ class QuimioViewModel : ViewModel() {
     }
 
     fun onChangeQuimioInicio(data: String) {
-        Log.i("QuimioViewModel", "onChangeQuimioEdicao Inicio: $data")
-
         _uiState.update {
             it.copy(
                 quimioEdicao = it.quimioEdicao.copy(
@@ -45,17 +51,6 @@ class QuimioViewModel : ViewModel() {
         }
     }
 
-    fun addQuimio(quimio: Quimio) {
-        val listaCirurgias = _uiState.value.listaQuimio.toMutableList()
-        listaCirurgias.add(quimio)
-        _uiState.value = _uiState.value.copy(listaQuimio = listaCirurgias)
-    }
-
-    fun RemoveIndex(index: Int) {
-        val listaCirurgias = _uiState.value.listaQuimio.toMutableList()
-        listaCirurgias.removeAt(index)
-        _uiState.value = _uiState.value.copy(listaQuimio = listaCirurgias)
-    }
 
     fun toggleList() {
         _uiState.update {

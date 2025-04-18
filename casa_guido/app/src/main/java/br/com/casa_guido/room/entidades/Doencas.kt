@@ -23,3 +23,4 @@ data class Doencas(
     val diabetes: Boolean?,
     val cancer: Boolean?
 )
+

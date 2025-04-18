@@ -20,7 +20,7 @@ model Pessoa {
    nome             String
    data_nascimento  DateTime
    cpf              String?            @unique
-   identidade       String?
+   rg               String?            @unique
    naturalidade     String?
    genero           String?
    escolaridade     String?

@@ -45,8 +45,8 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import br.com.casa_guido.configuration.Resultado
 import br.com.casa_guido.configuration.Sessao
+import br.com.casa_guido.configuration.Status
 import br.com.casa_guido.navigation.root.ViewModelAuthMananger
 import br.com.casa_guido.screens.cadastro.ItemNavBar
 import br.com.casa_guido.screens.home.HomeScreen
@@ -63,11 +63,13 @@ fun Main(
     modifier: Modifier = Modifier,
     onNavigateToLogin: () -> Unit,
     navHostController: NavHostController,
-    mensagemSucesso: Resultado
+    mensagemSucesso: Status
 ) {
 
     val authViewModel = koinViewModel<ViewModelAuthMananger>()
     val statusUsuario by authViewModel.statusUsuario.collectAsState()
+    val viewModelMain = koinViewModel<MainViewModel>()
+    val primeiroAcesso by viewModelMain.primeiroAcesso.collectAsState()
 
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -113,28 +115,29 @@ fun Main(
     }
 
     LaunchedEffect(statusUsuario) {
-
         when (statusUsuario) {
             true -> {
 
             }
-
             false -> {
                 onNavigateToLogin()
             }
         }
-
     }
 
-    LaunchedEffect(mensagemSucesso) {
-        val mensagem = (mensagemSucesso as? Resultado.Sucesso)?.mensagem
-        mensagem?.let {
-            snackbarHostState.showSnackbar(
-                message = it,
-                actionLabel = "Fechar",
-                duration = SnackbarDuration.Short
-            )
+    LaunchedEffect(mensagemSucesso, primeiroAcesso) {
+        if (!primeiroAcesso) {
+            val mensagem = (mensagemSucesso as? Status.Sucesso)?.mensagem
+            mensagem?.let {
+                snackbarHostState.showSnackbar(
+                    message = it,
+                    actionLabel = "Fechar",
+                    duration = SnackbarDuration.Short
+                )
+            }
+            viewModelMain.togglePrimeiroAcesso()
         }
+
     }
 
     Scaffold(

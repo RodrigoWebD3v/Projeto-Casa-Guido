@@ -20,6 +20,12 @@ interface CirurgiaDao {
     @Delete
     suspend fun delete(cirurgia: Cirurgia)
 
+    @Query("DELETE FROM cirurgia WHERE pacienteId = :pacienteId")
+    suspend fun deleteCirurgiasPorPaciente(pacienteId: String)
+
+    @Query("SELECT * FROM cirurgia WHERE pacienteId = :pacienteId")
+    fun getCirursgiasPorPacienteId(pacienteId: String): Flow<List<Cirurgia>>
+
     @Query("SELECT * FROM cirurgia")
     fun getAll(): Flow<List<Cirurgia>>
 

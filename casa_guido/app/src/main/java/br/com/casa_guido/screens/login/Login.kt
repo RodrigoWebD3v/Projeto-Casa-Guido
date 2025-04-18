@@ -39,7 +39,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.casa_guido.configuration.Conexao
-import br.com.casa_guido.configuration.Resultado
+import br.com.casa_guido.configuration.Status
 import br.com.casa_guido.navigation.root.ViewModelAuthMananger
 import br.com.casa_guido.screens.shared.TextFieldSimples
 import br.com.casa_guido.ui.theme.BackgroundColor
@@ -52,7 +52,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: Resultado) {
+fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: Status) {
 
     val context = LocalContext.current
     val viewModelAuthMananger = koinViewModel<ViewModelAuthMananger>()
@@ -89,11 +89,11 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
 
     LaunchedEffect(state) {
         when (state) {
-            Resultado.Carregando -> {
+            Status.Carregando -> {
                 carregando = true
             }
 
-            is Resultado.Erro -> {
+            is Status.Erro -> {
                 corSnackbar = Button
                 carregando = false
                 snackbarHostState.showSnackbar(
@@ -101,10 +101,10 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
                     actionLabel = "Fechar",
                     duration = SnackbarDuration.Short
                 )
-                viewModelAuthMananger.setStatus(Resultado.SemInteracao)
+                viewModelAuthMananger.setStatus(Status.SemInteracao)
             }
 
-            is Resultado.Sucesso -> {
+            is Status.Sucesso -> {
                 corSnackbar = Paragraph
                 snackbarHostState.showSnackbar(
                     message = "Login realizado com sucesso",
@@ -114,11 +114,11 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
                 onLoginSuccess()
             }
 
-            Resultado.SemInteracao -> {
+            Status.SemInteracao -> {
 
             }
 
-            is Resultado.Desconectado -> TODO()
+            is Status.Desconectado -> TODO()
         }
     }
 
@@ -144,11 +144,11 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
 
     LaunchedEffect(Unit) {
         when (resultado) {
-            Resultado.Carregando -> {
+            Status.Carregando -> {
 
             }
 
-            is Resultado.Desconectado -> {
+            is Status.Desconectado -> {
                 corSnackbar = Paragraph
                 snackbarHostState.showSnackbar(
                     message = "Sessão finalizada com sucesso",
@@ -157,14 +157,14 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
                 )
             }
 
-            is Resultado.Erro -> {
+            is Status.Erro -> {
             }
 
-            Resultado.SemInteracao -> {
-                viewModelAuthMananger.setStatus(Resultado.Carregando)
+            Status.SemInteracao -> {
+                viewModelAuthMananger.setStatus(Status.Carregando)
             }
 
-            is Resultado.Sucesso -> {
+            is Status.Sucesso -> {
             }
         }
     }
@@ -266,6 +266,6 @@ private fun LoginPreview() {
     Login(
         modifier = Modifier,
         onLoginSuccess = { },
-        resultado = Resultado.SemInteracao
+        resultado = Status.SemInteracao
     )
 }

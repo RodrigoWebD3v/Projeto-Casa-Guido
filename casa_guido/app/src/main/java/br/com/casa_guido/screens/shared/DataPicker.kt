@@ -2,6 +2,7 @@ package br.com.casa_guido.screens.shared
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -10,12 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CalendarToday
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -30,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.ui.theme.BackgroundColor
@@ -41,7 +38,6 @@ import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -94,8 +90,10 @@ fun DataPicker(
                 fontSize = 14.sp,
                 color = GreenBlack,
                 fontWeight = FontWeight.Medium,
-                textAlign = TextAlign.Start
-            )
+                textAlign = TextAlign.Center,
+            ),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
         Row(
             modifier = Modifier
@@ -108,7 +106,11 @@ fun DataPicker(
                 .height(45.dp)
                 .clickable {
                     onClick()
-                },
+                }
+                .background(
+                    color = Paragraph,
+                    shape = RoundedCornerShape(5.dp)
+                ),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -121,15 +123,6 @@ fun DataPicker(
                     textAlign = TextAlign.Start
                 ),
             )
-
-//            Icon(
-//                imageVector = Icons.Default.CalendarToday,
-//                contentDescription = "Ícone de calendário",
-//                tint = BackgroundColor,
-//                modifier = Modifier
-//                    .padding(end = 10.dp)
-//                    .size(20.dp)
-//            )
         }
     }
 

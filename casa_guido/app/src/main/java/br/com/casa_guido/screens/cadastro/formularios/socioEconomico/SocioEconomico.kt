@@ -3,7 +3,6 @@ package br.com.casa_guido.screens.cadastro.formularios.socioEconomico
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -24,11 +24,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.screens.Paciente
-import br.com.casa_guido.screens.Pessoa
 import br.com.casa_guido.screens.shared.RadioButtonComLabel
 import br.com.casa_guido.screens.shared.TextFieldSimples
 import br.com.casa_guido.ui.theme.BackgroundColor
@@ -37,10 +37,12 @@ import br.com.casa_guido.ui.theme.Paragraph
 
 @Composable
 fun SocioEconomico(
-    modifier: Modifier = Modifier, paciente: Paciente,
+    modifier: Modifier = Modifier,
     onChangeCampo: (CamposSocioEconomico, String) -> Unit,
-    onCollapse: () -> Unit,
+    paciente: Paciente,
+    numeroTela: Int
 ) {
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -49,16 +51,13 @@ fun SocioEconomico(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp)
-                .clickable {
-                    onCollapse()
-                },
+                .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column {
                 Text(
-                    "3. Sócio econômico",
+                    "$numeroTela. Sócio econômico",
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,
@@ -101,10 +100,6 @@ fun SocioEconomico(
             }
         )
 
-        var selecionado by remember {
-            mutableIntStateOf(paciente.bpc)
-        }
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -131,45 +126,39 @@ fun SocioEconomico(
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().padding(start = 10.dp),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.Center,
             ) {
                 RadioButtonComLabel(
                     label = "Sim",
-                    selected = selecionado == 1,
+                    selected = paciente.bpc == 1,
                     onClickListener = {
-                        selecionado = 1
-
                         onChangeCampo(
                             CamposSocioEconomico.REMUNERACAO_OPT,
-                            selecionado.toString()
+                            1.toString()
                         )
                     }
                 )
 
                 RadioButtonComLabel(
                     label = "Não",
-                    selected = selecionado == 0,
+                    selected = paciente.bpc == 0,
                     onClickListener = {
-                        selecionado = 0
-
                         onChangeCampo(
                             CamposSocioEconomico.REMUNERACAO_OPT,
-                            selecionado.toString()
+                            0.toString()
                         )
                     }
                 )
 
                 RadioButtonComLabel(
                     label = "Apto a receber",
-                    selected = selecionado == 2,
+                    selected = paciente.bpc == 2,
                     onClickListener = {
-                        selecionado = 2
-
                         onChangeCampo(
                             CamposSocioEconomico.REMUNERACAO_OPT,
-                            selecionado.toString()
+                            2.toString()
                         )
                     }
                 )
@@ -178,7 +167,7 @@ fun SocioEconomico(
         }
 
         AnimatedVisibility(
-            visible = selecionado == 1
+            visible = paciente.bpc == 1
         ) {
             TextFieldSimples(
                 nomeCampo = "Valor",
@@ -208,7 +197,7 @@ fun SocioEconomico(
         Row {
             TextFieldSimples(
                 nomeCampo = "Ano",
-                valorPreenchido = paciente.escolaAno,
+                valorPreenchido = paciente.pessoa.escolaridade,
                 placeholder = "3",
                 onChange = {
                     onChangeCampo(
@@ -235,8 +224,11 @@ fun SocioEconomico(
             TextFieldSimples(
                 nomeCampo = "Tam. Calçado",
                 placeholder = "32",
-                valorPreenchido = paciente.tamCalcado.toString(),
+                valorPreenchido = paciente.tamCalcado,
+                keyboardType = KeyboardType.Number,
+                somenteNumero = true,
                 onChange = {
+
                     onChangeCampo(
                         CamposSocioEconomico.TAMANHO_CALCADO,
                         it
@@ -245,8 +237,6 @@ fun SocioEconomico(
                 modifier = Modifier.weight(1f)
             )
         }
-
-
     }
 }
 

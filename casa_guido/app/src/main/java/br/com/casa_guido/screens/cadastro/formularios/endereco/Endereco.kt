@@ -2,7 +2,6 @@ package br.com.casa_guido.screens.cadastro.formularios.endereco
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,10 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.casa_guido.screens.Paciente
 import br.com.casa_guido.screens.Pessoa
 import br.com.casa_guido.screens.shared.TextFieldSimples
 import br.com.casa_guido.ui.theme.Main
@@ -28,7 +27,6 @@ import br.com.casa_guido.ui.theme.Paragraph
 fun Endereco(
     modifier: Modifier = Modifier, pessoa: Pessoa,
     onChangeCampo: (CamposEndereco, String) -> Unit,
-    onCollapse: () -> Unit,
 ) {
 
     Column(
@@ -39,16 +37,13 @@ fun Endereco(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp)
-                .clickable {
-                    onCollapse()
-                },
+                .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column {
                 Text(
-                    "2. Endereço", style = TextStyle(
+                    "Endereço", style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,
                         fontWeight = FontWeight.Bold,
@@ -77,19 +72,37 @@ fun Endereco(
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.Start
     ) {
-        TextFieldSimples(
-            nomeCampo = "Cep",
-            valorPreenchido = pessoa.endereco.cep,
-            placeholder = "88815-200",
-            onChange = {
-                onChangeCampo(
-                    CamposEndereco.CEP, it
-                )
-            })
+        Row {
+            TextFieldSimples(
+                nomeCampo = "Cep",
+                valorPreenchido = pessoa.endereco.cep,
+                placeholder = "",
+                keyboardType = KeyboardType.Number,
+                onChange = {
+                    onChangeCampo(
+                        CamposEndereco.CEP, it
+                    )
+                },
+                modifier = Modifier.fillMaxWidth(.6f)
+            )
+            TextFieldSimples(
+                nomeCampo = "Número",
+                keyboardType = KeyboardType.Number,
+                valorPreenchido = pessoa.endereco.numero,
+                placeholder = "",
+                onChange = {
+                    onChangeCampo(
+                        CamposEndereco.NUMERO, it
+                    )
+                },
+                modifier = Modifier.weight(1f)
+            )
+        }
+
         TextFieldSimples(
             nomeCampo = "Logradouro",
             valorPreenchido = pessoa.endereco.logradouro,
-            placeholder = "Rua miguel patricio de souza",
+            placeholder = "",
             onChange = {
                 onChangeCampo(
                     CamposEndereco.LOGRADOURO, it
@@ -99,20 +112,20 @@ fun Endereco(
         TextFieldSimples(
             nomeCampo = "Bairro",
             valorPreenchido = pessoa.endereco.bairro,
-            placeholder = "Jardim Maristela",
+            placeholder = "",
             onChange = {
                 onChangeCampo(
-                    CamposEndereco.LOGRADOURO, it
+                    CamposEndereco.BAIRRO, it
                 )
             })
 
         TextFieldSimples(
-            nomeCampo = "Complemento",
-            valorPreenchido = pessoa.endereco.complemento,
-            placeholder = "Ao lado do supermercado",
+            nomeCampo = "Próximo",
+            valorPreenchido = pessoa.endereco.referencia,
+            placeholder = "",
             onChange = {
                 onChangeCampo(
-                    CamposEndereco.COMPLEMENTO, it
+                    CamposEndereco.REFERENCIA, it
                 )
             })
 
@@ -120,7 +133,7 @@ fun Endereco(
             TextFieldSimples(
                 nomeCampo = "Localidade",
                 valorPreenchido = pessoa.endereco.localidade,
-                placeholder = "Criciúma",
+                placeholder = "",
                 onChange = {
                     onChangeCampo(
                         CamposEndereco.LOCALIDADE, it
@@ -132,7 +145,7 @@ fun Endereco(
             TextFieldSimples(
                 nomeCampo = "UF",
                 valorPreenchido = pessoa.endereco.uf,
-                placeholder = "SC",
+                placeholder = "",
                 onChange = {
                     onChangeCampo(
                         CamposEndereco.UF, it

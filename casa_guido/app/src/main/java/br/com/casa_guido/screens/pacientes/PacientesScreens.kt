@@ -5,13 +5,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.casa_guido.screens.pacientes.componentes.ListagemPacientes
@@ -24,13 +27,16 @@ fun PacientesScreens(
     modifier: Modifier = Modifier,
     onEditePaciente: (String) -> Unit
 ) {
+    val context = LocalContext.current
     val viewModel = koinViewModel<PacientesViewModel>()
     val state by viewModel.uiState.collectAsState()
 
-    val listState = rememberLazyListState()
+    var idEdicao by remember { mutableStateOf("") }
+
+    var openBottomSheet by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        listState.animateScrollToItem(index = 0) // Exemplo
+        viewModel.carregarPacientes()
     }
 
     Column(
@@ -52,11 +58,34 @@ fun PacientesScreens(
             },
             lista = state.listaPacientesFiltrada,
         ) { id ->
-            onEditePaciente(id)
-            viewModel.filtrarPacientes("")
+            idEdicao = id
+            openBottomSheet = true
         }
+
+        ModalBottomSheetComp(
+            openBottomSheet = openBottomSheet,
+            onClick = {
+                when (it) {
+                    TipoAcao.EDITAR -> {
+                        onEditePaciente(idEdicao)
+                        viewModel.filtrarPacientes("")
+                        openBottomSheet = false
+                    }
+
+                    TipoAcao.COMPARTILHAR -> {
+                        viewModel.gerarPdf(idEdicao, context)
+                        openBottomSheet = false
+                    }
+
+                    TipoAcao.SEM_INTERACAO -> {
+                        openBottomSheet = false
+                    }
+                }
+            }
+        )
     }
 }
+
 
 @Preview
 @Composable

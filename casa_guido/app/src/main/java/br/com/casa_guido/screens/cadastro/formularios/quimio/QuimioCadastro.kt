@@ -48,7 +48,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
+import br.com.casa_guido.screens.Quimio
+import br.com.casa_guido.screens.cadastro.formularios.quimio.CamposQuimio
 import br.com.casa_guido.screens.shared.DataPicker
 import br.com.casa_guido.screens.shared.RadioButtonComLabel
 import br.com.casa_guido.ui.theme.BackgroundColor
@@ -63,12 +64,12 @@ import java.time.LocalDate
 @Composable
 fun QuimioCadastro(
     modifier: Modifier = Modifier,
-    onChangeCampo: (CamposEndereco, String) -> Unit,
-    onCollapse: () -> Unit,
+    onChangeCampo: (CamposQuimio, Quimio) -> Unit,
+    listaQuimios: List<Quimio>,
+    numeroTela: Int
 ) {
     val viewModel = koinViewModel<QuimioViewModel>()
     val state by viewModel.uiState.collectAsState()
-
 
     Column(
         modifier = modifier
@@ -78,16 +79,13 @@ fun QuimioCadastro(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp)
-                .clickable {
-                    onCollapse()
-                },
+                .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column {
                 Text(
-                    "5. Quimio",
+                    "$numeroTela. Quimio",
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,
@@ -225,10 +223,14 @@ fun QuimioCadastro(
             Button(
                 onClick = {
                     if (state.quimioEdicao.dataInicio.isNotEmpty() && state.quimioEdicao.dataUltimaSessao.isNotEmpty()) {
-                        viewModel.addQuimio(state.quimioEdicao)
+                        onChangeCampo(
+                            CamposQuimio.ADD_QUIMIO,
+                            state.quimioEdicao
+                        )
+                        viewModel.newQuimio()
                         viewModel.onChangeQuimioInicio(Utils.formatData(LocalDate.now())!!)
                         viewModel.onChangeQuimioFim(Utils.formatData(LocalDate.now())!!)
-                        Log.i("QuimioCadastro", "${state.listaQuimio.size}")
+                        Log.i("QuimioCadastro", "${listaQuimios.size}")
                     }
                 },
                 modifier = Modifier
@@ -255,14 +257,16 @@ fun QuimioCadastro(
             }
 
             Column (
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .padding(horizontal = 20.dp)
                     .padding(vertical = 20.dp)
             ){
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(Paragraph,
+                        .background(
+                            Paragraph,
                             shape = RoundedCornerShape(10.dp)
                         )
                         .padding(12.dp)
@@ -273,7 +277,7 @@ fun QuimioCadastro(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "Lista de quimios",
+                        text = "Lista de Quimios",
                         style = TextStyle(
                             fontSize = 16.sp,
                             color = BackgroundColor,
@@ -283,7 +287,7 @@ fun QuimioCadastro(
                     )
 
                     Text(
-                        text = "Quantidade: ${state.listaQuimio.size}",
+                        text = "Quantidade: ${listaQuimios.size}",
                         style = TextStyle(
                             fontSize = 16.sp,
                             color = GreenBlack,
@@ -325,12 +329,15 @@ fun QuimioCadastro(
                                 .verticalScroll(rememberScrollState())
                                 .padding(8.dp)
                         ) {
-                            state.listaQuimio.forEachIndexed { index, item ->
+                            listaQuimios.forEachIndexed { index, item ->
                                 ItemQuimio(
                                     item.dataInicio,
                                     item.dataUltimaSessao
                                 ) {
-                                    viewModel.RemoveIndex(index)
+                                    onChangeCampo(
+                                        CamposQuimio.REMOVE_QUIMIO,
+                                        item
+                                    )
                                 }
                             }
                         }

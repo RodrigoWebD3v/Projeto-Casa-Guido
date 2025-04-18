@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
-import br.com.casa_guido.configuration.Resultado
+import br.com.casa_guido.configuration.Status
 import br.com.casa_guido.navigation.navHost.AppNavHost
 import br.com.casa_guido.navigation.navHost.AuthNavHost
 import br.com.casa_guido.screens.splashScreen.SplashScreen
@@ -22,13 +22,13 @@ fun RootNavHost(
     val state by viewModelAuthMananger.status.collectAsState()
 
     when (state) {
-        Resultado.Carregando -> {
+        Status.Carregando -> {
             SplashScreen() { resultado ->
                 viewModelAuthMananger.setStatus(resultado)
             }
         }
 
-        is Resultado.Erro -> {
+        is Status.Erro -> {
             AuthNavHost(
                 navHostController = rootNavHostController,
                 sucessoAutenticacao = { resultado ->
@@ -38,7 +38,7 @@ fun RootNavHost(
             )
         }
 
-        is Resultado.Desconectado -> {
+        is Status.Desconectado -> {
             AuthNavHost(
                 navHostController = rootNavHostController,
                 sucessoAutenticacao = { resultado ->
@@ -48,18 +48,18 @@ fun RootNavHost(
             )
         }
 
-        is Resultado.Sucesso -> {
+        is Status.Sucesso -> {
             AppNavHost(
                 navHostController = rootNavHostController,
                 onLogout = {
-                    viewModelAuthMananger.setStatus(Resultado.Desconectado("Sessão finalziada com sucesso"))
+                    viewModelAuthMananger.setStatus(Status.Desconectado("Sessão finalziada com sucesso"))
                 },
                 mensagemSucesso = state
             )
         }
 
-        Resultado.SemInteracao -> {
-            viewModelAuthMananger.setStatus(Resultado.Carregando)
+        Status.SemInteracao -> {
+            viewModelAuthMananger.setStatus(Status.Carregando)
         }
 
 

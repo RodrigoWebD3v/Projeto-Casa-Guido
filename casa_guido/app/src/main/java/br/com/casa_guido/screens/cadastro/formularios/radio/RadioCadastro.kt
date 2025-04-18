@@ -48,7 +48,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
+import br.com.casa_guido.screens.Radio
 import br.com.casa_guido.screens.shared.DataPicker
 import br.com.casa_guido.screens.shared.RadioButtonComLabel
 import br.com.casa_guido.ui.theme.BackgroundColor
@@ -63,8 +63,9 @@ import java.time.LocalDate
 @Composable
 fun RadioCadastro(
     modifier: Modifier = Modifier,
-    onChangeCampo: (CamposEndereco, String) -> Unit,
-    onCollapse: () -> Unit,
+    onChangeCampo: (CamposRadio, Radio) -> Unit,
+    listaRadios: List<Radio>,
+    numeroTela:Int
 ) {
     val viewModel = koinViewModel<RadioViewModel>()
     val state by viewModel.uiState.collectAsState()
@@ -78,16 +79,13 @@ fun RadioCadastro(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp)
-                .clickable {
-                    onCollapse()
-                },
+                .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column {
                 Text(
-                    "6. Radio",
+                    "$numeroTela. Radio",
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,
@@ -96,7 +94,7 @@ fun RadioCadastro(
                     )
                 )
                 Text(
-                    "Informações de quimioterapias do paciente",
+                    "Informações de radioterapias do paciente",
                     style = TextStyle(
                         fontSize = 12.sp,
                         color = Color.Black,
@@ -124,7 +122,7 @@ fun RadioCadastro(
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            var selecionadoQuimio by remember {
+            var selecionadoRadio by remember {
                 mutableIntStateOf(0)
             }
 
@@ -143,7 +141,7 @@ fun RadioCadastro(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "Quimio",
+                        text = "Radio",
                         style = TextStyle(
                             fontSize = 16.sp,
                             color = BackgroundColor,
@@ -157,22 +155,22 @@ fun RadioCadastro(
 
                 RadioButtonComLabel(
                     label = "Sim",
-                    selected = selecionadoQuimio == 1,
+                    selected = selecionadoRadio == 1,
                     onClickListener = {
-                        selecionadoQuimio = 1
+                        selecionadoRadio = 1
                     }
                 )
                 RadioButtonComLabel(
                     label = "Não",
-                    selected = selecionadoQuimio == 2,
+                    selected = selecionadoRadio == 2,
                     onClickListener = {
-                        selecionadoQuimio = 2
+                        selecionadoRadio = 2
                     }
                 )
             }
 
             AnimatedVisibility(
-                visible = selecionadoQuimio == 1,
+                visible = selecionadoRadio == 1,
                 enter = expandVertically(
                     animationSpec = tween(
                         durationMillis = 400,
@@ -190,14 +188,14 @@ fun RadioCadastro(
                         valorPreenchido = state.radioEdicao.dataInicio,
                         titulo = "Data inicio",
                         onCancelar = {
-                            viewModel.toggleDataPickerQuimioInicio()
+                            viewModel.toggleDataPickerRadioInicio()
                         },
                         onChange = {
-                            Log.i("QuimioCadastro 0", "onChange: $it")
-                            viewModel.onChangeQuimioInicio(it)
+                            Log.i("RadioCadastro 0", "onChange: $it")
+                            viewModel.onChangeRadio(it)
                         },
                         onClick = {
-                            viewModel.toggleDataPickerQuimioInicio()
+                            viewModel.toggleDataPickerRadioInicio()
                         },
                     )
 
@@ -208,14 +206,14 @@ fun RadioCadastro(
                         valorPreenchido = state.radioEdicao.dataUltimaSessao,
                         titulo = "Data fim",
                         onCancelar = {
-                            viewModel.toggleDataPickerQuimioFim()
+                            viewModel.toggleDataPickerRadioFim()
                         },
                         onChange = {
-                            Log.i("QuimioCadastro 1", "onChange: $it")
-                            viewModel.onChangeQuimioFim(it)
+                            Log.i("RadioCadastro 1", "onChange: $it")
+                            viewModel.onChangeRadioFim(it)
                         },
                         onClick = {
-                            viewModel.toggleDataPickerQuimioFim()
+                            viewModel.toggleDataPickerRadioFim()
                         },
                     )
                 }
@@ -225,10 +223,14 @@ fun RadioCadastro(
             Button(
                 onClick = {
                     if (state.radioEdicao.dataInicio.isNotEmpty() && state.radioEdicao.dataUltimaSessao.isNotEmpty()) {
-                        viewModel.addQuimio(state.radioEdicao)
-                        viewModel.onChangeQuimioInicio(Utils.formatData(LocalDate.now())!!)
-                        viewModel.onChangeQuimioFim(Utils.formatData(LocalDate.now())!!)
-                        Log.i("QuimioCadastro", "${state.listaRadio.size}")
+                        onChangeCampo(
+                            CamposRadio.ADD_RADIO,
+                            state.radioEdicao
+                        )
+                        viewModel.newRadio()
+                        viewModel.onChangeRadio(Utils.formatData(LocalDate.now())!!)
+                        viewModel.onChangeRadioFim(Utils.formatData(LocalDate.now())!!)
+
                     }
                 },
                 modifier = Modifier
@@ -244,7 +246,7 @@ fun RadioCadastro(
                 )
             ) {
                 Text(
-                    text = "Adicionar quimio",
+                    text = "Adicionar Radio",
                     style = TextStyle(
                         fontSize = 16.sp,
                         color = br.com.casa_guido.ui.theme.Button,
@@ -255,14 +257,16 @@ fun RadioCadastro(
             }
 
             Column (
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .padding(horizontal = 20.dp)
                     .padding(vertical = 20.dp)
             ){
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(Paragraph,
+                        .background(
+                            Paragraph,
                             shape = RoundedCornerShape(10.dp)
                         )
                         .padding(12.dp)
@@ -273,7 +277,7 @@ fun RadioCadastro(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "Lista de quimios",
+                        text = "Lista de Radios",
                         style = TextStyle(
                             fontSize = 16.sp,
                             color = BackgroundColor,
@@ -283,7 +287,7 @@ fun RadioCadastro(
                     )
 
                     Text(
-                        text = "Quantidade: ${state.listaRadio.size}",
+                        text = "Quantidade: ${listaRadios.size}",
                         style = TextStyle(
                             fontSize = 16.sp,
                             color = GreenBlack,
@@ -325,12 +329,15 @@ fun RadioCadastro(
                                 .verticalScroll(rememberScrollState())
                                 .padding(8.dp)
                         ) {
-                            state.listaRadio.forEachIndexed { index, item ->
-                                ItemQuimio(
+                            listaRadios.forEachIndexed { index, item ->
+                                ItemRadio(
                                     item.dataInicio,
                                     item.dataUltimaSessao
                                 ) {
-                                    viewModel.RemoveIndex(index)
+                                    onChangeCampo(
+                                        CamposRadio.REMOVE_RADIO,
+                                        item
+                                    )
                                 }
                             }
                         }

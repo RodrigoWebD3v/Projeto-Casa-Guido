@@ -8,14 +8,35 @@ import java.util.UUID
 data class Pessoa(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val nome: String,
-    val data_nascimento: String,
-    val cpf: String?,
-    val identidade: String?,
-    val naturalidade: String?,
-    val genero: String?,
-    val escolaridade: String?,
-    val contato: String?,
-    val estado_civil: String?,
-    val situacao_profissional: Int?,
-    val enderecoId: String? // UUID compatível com o backend
+    val contato: String? = null, // Equivalente ao "telefone"
+    val dataNascimento: String, // renomeado para camelCase, mantendo legibilidade
+    val cpf: String? = null,
+    val identidade: String? = null, // equivalente ao "rg"
+    val naturalidade: String? = null,
+    val genero: String? = null,
+    val escolaridade: String? = null,
+    val estadoCivil: Int? = null, // mantido como Int para enums
+    val situacaoProfissional: Int? = null, // idem
+    val salario: String? = null, // manter como String, tratado como decimal no backend
+    val enderecoId: String? = null, // UUID compatível com relação
+    val telefone: String? = null,
+    val cartaoSus: String? = null,
 )
+
+/*
+data class Pessoa(
+    val id: String = UUID.randomUUID().toString(),
+    val nome: String = "",
+    val telefone: String = "",
+    val dataNascimento: String = "",
+    val cpf: String = "",
+    val rg: String = "",
+    val endereco: Endereco = Endereco(),
+    val situacaoProfissional : Int = 0,
+    val estadoCivil : Int = 0,
+    val naturalidade: String = "",
+    val escolaridade: String = "",
+    val salario: String = "",
+)
+
+ */

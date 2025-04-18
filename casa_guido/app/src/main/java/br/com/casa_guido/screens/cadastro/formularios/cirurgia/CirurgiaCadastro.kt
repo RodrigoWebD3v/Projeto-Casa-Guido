@@ -44,7 +44,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.screens.Cirurgia
-import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.shared.DataPicker
 import br.com.casa_guido.screens.shared.TextFieldSimples
 import br.com.casa_guido.ui.theme.BackgroundColor
@@ -59,12 +58,14 @@ import java.time.LocalDate
 @Composable
 fun CirurgiaCadastro(
     modifier: Modifier = Modifier,
-    onChangeCampo: (CamposEndereco, String) -> Unit,
-    onCollapse: () -> Unit,
+    onChangeCampo: (CamposCirurgia, Cirurgia) -> Unit,
+    listaCirurgias: List<Cirurgia>,
+    numeroTela: Int
 ) {
 
     val viewModel = koinViewModel<CirurgiaViewModel>()
     val state by viewModel.uiState.collectAsState()
+
 
     Column(
         modifier = modifier
@@ -74,16 +75,13 @@ fun CirurgiaCadastro(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp)
-                .clickable {
-                    onCollapse()
-                },
+                .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column {
                 Text(
-                    "4. Cirurgias",
+                    "$numeroTela. Cirurgias",
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,
@@ -171,12 +169,11 @@ fun CirurgiaCadastro(
             Button(
                 onClick = {
                     if (state.cirurgiaEdicao.nome.isNotEmpty()) {
-                        viewModel.addCirurgia(state.cirurgiaEdicao)
-                        viewModel.onChangeCirurgiaEdicao(
-                            Cirurgia(
-                                data = Utils.formatData(LocalDate.now())!!
-                            )
+                        onChangeCampo(
+                            CamposCirurgia.ADD_CIRURGIA,
+                            state.cirurgiaEdicao
                         )
+                        viewModel.onChangeCirurgiaEdicao( Cirurgia(data = Utils.formatData(LocalDate.now())!!))
                     }
                 },
                 modifier = Modifier
@@ -233,7 +230,7 @@ fun CirurgiaCadastro(
                     )
 
                     Text(
-                        text = "Quantidade: ${state.listaCirurgias.size}",
+                        text = "Quantidade: ${listaCirurgias.size}",
                         style = TextStyle(
                             fontSize = 16.sp,
                             color = GreenBlack,
@@ -275,12 +272,15 @@ fun CirurgiaCadastro(
                                 .verticalScroll(rememberScrollState())
                                 .padding(8.dp)
                         ) {
-                            state.listaCirurgias.forEachIndexed { index, item ->
+                            listaCirurgias.forEachIndexed { index, item ->
                                 ItemCirurgia(
                                     nomeCirurgia = item.nome,
                                     data = item.data
                                 ) {
-                                    viewModel.RemoveIndex(index)
+                                    onChangeCampo(
+                                        CamposCirurgia.REMOVE_CIRURGIA,
+                                        item
+                                    )
                                 }
                             }
                         }
@@ -290,9 +290,6 @@ fun CirurgiaCadastro(
 
         }
     }
-
 }
-
-
 
 

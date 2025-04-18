@@ -26,7 +26,7 @@ import br.com.casa_guido.ui.theme.Paragraph
 fun ComposicaoFamiliar(
     modifier: Modifier = Modifier,
     onChangeCampo: (CamposIdentificacao, String) -> Unit,
-    onCollapse: () -> Unit,
+    numeroTela: Int
 ) {
     Column(
         modifier = modifier
@@ -37,16 +37,13 @@ fun ComposicaoFamiliar(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp)
-                .clickable {
-                    onCollapse()
-                },
+                .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column {
                 Text(
-                    "9. Composicão Familiar",
+                    "$numeroTela. Composicão Familiar",
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,

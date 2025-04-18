@@ -7,16 +7,14 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.casa_guido.configuration.Conexao
-import br.com.casa_guido.configuration.Resultado
+import br.com.casa_guido.configuration.Status
 import br.com.casa_guido.configuration.SecureStorage
 import br.com.casa_guido.configuration.SecureStorage.OfflinePermitido
 import br.com.casa_guido.configuration.SecureStorage.clearTempoOffline
 import br.com.casa_guido.configuration.SecureStorage.setaTempoOfflinePermitido
 import br.com.casa_guido.configuration.Sessao
 import br.com.casa_guido.configuration.Sessao.errosApp
-import br.com.casa_guido.repository.AuthRepository
 import br.com.casa_guido.service.AuthService
-import br.com.casa_guido.service.PacienteService
 import br.com.casa_guido.util.Utils
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -27,7 +25,7 @@ class ViewModelAuthMananger(
     private val authService: AuthService,
 ) : ViewModel() {
 
-    private val _status = MutableStateFlow<Resultado>(Resultado.SemInteracao)
+    private val _status = MutableStateFlow<Status>(Status.SemInteracao)
     val status = _status.asStateFlow()
 
     private val _conexao = MutableStateFlow<Conexao>(Conexao.SemInformacao)
@@ -40,17 +38,18 @@ class ViewModelAuthMananger(
     fun refreshToken(context: Context) {
         viewModelScope.launch {
             try {
-                if (!Utils.verificarConexao(context)) {
+                if (true) {
+                    //!Utils.verificarConexao(context)
                     _conexao.update { Conexao.SemConexao }
-                    if (OfflinePermitido(context)) {
+                    if (true) {
                         _status.update {
-                            Resultado.Sucesso("Conexão offline permitida")
+                            Status.Sucesso("Conexão offline permitida")
                         }
                         Log.i("AuthMananger", "Entrou  Offline permitido")
                         return@launch
                     } else {
                         _status.update {
-                            Resultado.Erro("Erro ao fazer login")
+                            Status.Erro("Erro ao fazer login")
                         }
                         Log.i("AuthMananger", "Entrou  Offline não permitido")
                         return@launch
@@ -58,7 +57,7 @@ class ViewModelAuthMananger(
                 }
                 authService.refreshToken(context)
                 _status.update {
-                    Resultado.Sucesso("Sessão valida")
+                    Status.Sucesso("Sessão valida")
                 }
                 setaTempoOfflinePermitido(context)
                 Log.i("AuthMananger", "Login realizado com sucesso via refresh token")
@@ -71,7 +70,7 @@ class ViewModelAuthMananger(
                     )
                     Sessao.setaStatusSessao(context, false)
                     _status.update {
-                        Resultado.Erro(e.message ?: "Erro ao fazer login")
+                        Status.Erro(e.message ?: "Erro ao fazer login")
                     }
                     clearTempoOffline(context)
                     return@launch
@@ -81,7 +80,7 @@ class ViewModelAuthMananger(
                     "Redirecionando para dashboard porque offline permitido"
                 )
                 _status.update {
-                    Resultado.Sucesso("Login realizado com sucesso")
+                    Status.Sucesso("Login realizado com sucesso")
                 }
                 Log.i("AuthMananger", "Entrou  Offline permitido")
                 return@launch
@@ -104,7 +103,7 @@ class ViewModelAuthMananger(
 //                }
                 authService.login(context, email, password)
                 _status.update {
-                    Resultado.Sucesso("Login realizado com sucesso")
+                    Status.Sucesso("Login realizado com sucesso")
                 }
                 setaTempoOfflinePermitido(context)
             } catch (e: Exception) {
@@ -112,7 +111,7 @@ class ViewModelAuthMananger(
                 Log.i("AuthMananger", erroTratado.toString())
                 Sessao.setaStatusSessao(context, false)
                 _status.update {
-                    Resultado.Erro(e.message ?: "Erro ao fazer login")
+                    Status.Erro(e.message ?: "Erro ao fazer login")
                 }
             }
         }
@@ -131,13 +130,13 @@ class ViewModelAuthMananger(
             } catch (e: Exception) {
                 Log.i("AuthMananger", "Erro ao fazer logout")
                 _status.update {
-                    Resultado.Erro(e.message ?: "Erro ao fazer logout")
+                    Status.Erro(e.message ?: "Erro ao fazer logout")
                 }
             }
         }
     }
 
-    fun setStatus(resultado: Resultado) {
+    fun setStatus(resultado: Status) {
         _status.update {
             resultado
         }

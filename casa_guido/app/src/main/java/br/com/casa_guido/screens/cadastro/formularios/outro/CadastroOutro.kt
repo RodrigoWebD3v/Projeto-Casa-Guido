@@ -1,15 +1,13 @@
-package br.com.casa_guido.screens.cadastro.formularios.responsavel
+package br.com.casa_guido.screens.cadastro.formularios.outro
 
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -17,12 +15,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -32,36 +35,70 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.customizacao.VisualTransformationCustom
+import br.com.casa_guido.screens.Pessoa
+import br.com.casa_guido.screens.cadastro.formularios.conjuge.CamposOutro
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
+import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
+import br.com.casa_guido.screens.shared.BotaoPersonalizadoComIcones
 import br.com.casa_guido.screens.shared.DataPicker
 import br.com.casa_guido.screens.shared.RadioButtonComLabelWidthIn
 import br.com.casa_guido.screens.shared.TextFieldSimples
+import br.com.casa_guido.ui.theme.Alert
 import br.com.casa_guido.ui.theme.BackgroundColor
+import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun CadastroResponsavel(
+fun CadastroOutro(
     modifier: Modifier = Modifier,
-    onChangeCampo: (CamposEndereco, String) -> Unit,
-    onCollapse: () -> Unit,
+    onChangeCampo: (CamposOutro, String) -> Unit,
+    outro: Pessoa,
+    onChangeEnderecoOutro: (CamposEndereco, String) -> Unit,
+    numeroTela: Int,
 ) {
-    var selectionadoEstadoCivil by remember {
-        mutableIntStateOf(0)
+
+    var openBottomSheet by remember {
+        mutableStateOf(
+            false
+        )
     }
 
-    var selecionadoSitProfissional by remember {
-        mutableIntStateOf(0)
+    var color by remember {
+        mutableStateOf(GreenBlack)
     }
 
-    var toggleDataPickerCirurgia by remember {
-        mutableStateOf(false)
+    var iconeBotao by remember {
+        mutableStateOf(Icons.Default.Check)
     }
+
+    LaunchedEffect(outro) {
+        color = if (!(outro.endereco.cep.isEmpty()
+                    || outro.endereco.numero.isEmpty()
+                    || outro.endereco.logradouro.isEmpty()
+                    || outro.endereco.bairro.isEmpty()
+                    || outro.endereco.referencia.isEmpty()
+                    || outro.endereco.localidade.isEmpty()
+                    || outro.endereco.uf.isEmpty())
+        ) GreenBlack else Alert
+
+        iconeBotao = if (!(outro.endereco.cep.isEmpty()
+                    || outro.endereco.numero.isEmpty()
+                    || outro.endereco.logradouro.isEmpty()
+                    || outro.endereco.bairro.isEmpty()
+                    || outro.endereco.referencia.isEmpty()
+                    || outro.endereco.localidade.isEmpty()
+                    || outro.endereco.uf.isEmpty())
+        ) Icons.Default.Check else Icons.Default.Close
+    }
+
 
     Column(
         modifier = modifier
@@ -71,16 +108,13 @@ fun CadastroResponsavel(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp)
-                .clickable {
-                    onCollapse()
-                },
+                .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column {
                 Text(
-                    "7. Responsavel",
+                    "$numeroTela. Outro Responsavel",
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,
@@ -89,7 +123,7 @@ fun CadastroResponsavel(
                     )
                 )
                 Text(
-                    "Informações do responsavel",
+                    "Informações de outro responsavel",
                     style = TextStyle(
                         fontSize = 12.sp,
                         color = Color.Black,
@@ -101,15 +135,14 @@ fun CadastroResponsavel(
         }
     }
 
-
-
     Column(
         modifier = modifier
             .fillMaxWidth()
             .background(Main)
             .animateContentSize()
             .padding(vertical = 10.dp)
-            .padding(bottom = 10.dp),
+            .padding(bottom = 10.dp)
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.Start
     ) {
@@ -129,48 +162,30 @@ fun CadastroResponsavel(
 
                 TextFieldSimples(
                     nomeCampo = "Nome Completo",
-                    valorPreenchido = "",
+                    valorPreenchido = outro.nome,
                     onChange = {
                         onChangeCampo(
-                            CamposEndereco.CEP,
+                            CamposOutro.NOME_OUTRO,
                             it
                         )
                     },
-                    placeholder = "Rodrigo Cardoso"
+                    placeholder = ""
                 )
 
                 var dataPickerNascimentoShow by remember {
                     mutableStateOf(false)
                 }
 
-                DataPicker(
-                    showDataPicker = dataPickerNascimentoShow,
-                    valorPreenchido = "",
-                    titulo = "Data de Nascimento",
-                    onCancelar = {
-                        dataPickerNascimentoShow = false
-                    },
-                    onChange = {
-                        onChangeCampo(
-                            CamposEndereco.CEP,
-                            it
-                        )
-                    },
-                    onClick = {
-                        dataPickerNascimentoShow = true
-                    },
-                )
-
 
                 Row {
                     TextFieldSimples(
                         nomeCampo = "Cpf",
-                        valorPreenchido = "",
+                        valorPreenchido = outro.cpf,
                         visualTransformation = VisualTransformationCustom.CpfVisualTransformation(),
-                        placeholder = "111.111.111.99",
+                        placeholder = "",
                         onChange = {
                             onChangeCampo(
-                                CamposEndereco.CEP,
+                                CamposOutro.CPF_OUTRO,
                                 it
                             )
                         },
@@ -179,12 +194,12 @@ fun CadastroResponsavel(
 
                     TextFieldSimples(
                         nomeCampo = "Rg",
-                        valorPreenchido = "",
-                        visualTransformation = VisualTransformationCustom.RgVisualTransformation(),
-                        placeholder = "11.111.111-9",
+                        valorPreenchido = outro.rg,
+                        visualTransformation = VisualTransformation.None,
+                        placeholder = "",
                         onChange = {
                             onChangeCampo(
-                                CamposEndereco.CEP,
+                                CamposOutro.RG_OUTRO,
                                 it
                             )
                         },
@@ -195,12 +210,12 @@ fun CadastroResponsavel(
                 Row {
                     TextFieldSimples(
                         nomeCampo = "Naturalidade",
-                        valorPreenchido = "",
-                        visualTransformation = VisualTransformationCustom.CpfVisualTransformation(),
-                        placeholder = "Brasileiro",
+                        valorPreenchido = outro.naturalidade,
+                        visualTransformation = VisualTransformation.None,
+                        placeholder = "",
                         onChange = {
                             onChangeCampo(
-                                CamposEndereco.CEP,
+                                CamposOutro.NATURALIDADE_OUTRO,
                                 it
                             )
                         },
@@ -209,12 +224,12 @@ fun CadastroResponsavel(
 
                     TextFieldSimples(
                         nomeCampo = "Escolaridade",
-                        valorPreenchido = "",
-                        visualTransformation = VisualTransformationCustom.RgVisualTransformation(),
-                        placeholder = "8 série",
+                        valorPreenchido = outro.escolaridade,
+                        visualTransformation = VisualTransformation.None,
+                        placeholder = "",
                         onChange = {
                             onChangeCampo(
-                                CamposEndereco.CEP,
+                                CamposOutro.ESCOLARIDADE_OUTRO,
                                 it
                             )
                         },
@@ -225,50 +240,85 @@ fun CadastroResponsavel(
                 Row {
 
                     DataPicker(
-                        showDataPicker = toggleDataPickerCirurgia,
-                        valorPreenchido = "",
-                        titulo = "Data da cirurgia",
+                        showDataPicker = dataPickerNascimentoShow,
+                        valorPreenchido = outro.dataNascimento,
+                        titulo = "Data de Nascimento",
                         onCancelar = {
-                            toggleDataPickerCirurgia = false
+                            dataPickerNascimentoShow = false
                         },
                         onChange = {
-
+                            onChangeCampo(
+                                CamposOutro.DATA_NASCIMENTO_OUTRO,
+                                it
+                            )
                         },
                         onClick = {
-                            toggleDataPickerCirurgia = true
+                            dataPickerNascimentoShow = true
                         },
                         modifier = Modifier.fillMaxWidth(.5f)
                     )
 
 
+
                     TextFieldSimples(
                         nomeCampo = "Celular",
-                        valorPreenchido = "",
+                        valorPreenchido = outro.telefone,
                         visualTransformation = VisualTransformationCustom.PhoneVisualTransformation(),
                         placeholder = "(48) 99963-9821",
                         onChange = {
                             onChangeCampo(
-                                CamposEndereco.CEP,
+                                CamposOutro.TELEFONE_OUTRO,
                                 it
                             )
                         },
                         modifier = Modifier.weight(1f)
                     )
                 }
-
                 TextFieldSimples(
                     nomeCampo = "Cartão do sus",
-                    valorPreenchido = "",
+                    valorPreenchido = outro.cartaoSus,
                     visualTransformation = VisualTransformationCustom.CartSusVisualTransformation(),
                     placeholder = "567 8901 2345 6789",
                     onChange = {
                         onChangeCampo(
-                            CamposEndereco.CEP,
+                            CamposOutro.CARTAO_SUS,
                             it
                         )
                     },
-                    paddingValues = PaddingValues(start = 20.dp, end = 10.dp),
+                    modifier = Modifier.fillMaxWidth(),
                 )
+
+                Row {
+                    Row(
+                        modifier = Modifier.padding(start = 20.dp),
+                        verticalAlignment = Alignment.Bottom
+                    ) {
+                        BotaoPersonalizadoComIcones(
+                            iconeBotao = iconeBotao,
+                            color = color,
+                            onClick = {
+                                openBottomSheet = true
+                            },
+                            titulo = "Endereço",
+                            modifier = Modifier.fillMaxWidth(.6f)
+                        )
+
+                        TextFieldSimples(
+                            nomeCampo = "Salário",
+                            valorPreenchido = outro.salario,
+                            visualTransformation = VisualTransformation.None,
+                            keyboardType = KeyboardType.Number,
+                            placeholder = "1.230",
+                            onChange = {
+                                onChangeCampo(
+                                    CamposOutro.SALARIO_OUTRO,
+                                    it
+                                )
+                            },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
 
                 Column(
                     Modifier
@@ -304,25 +354,34 @@ fun CadastroResponsavel(
                         Column {
                             RadioButtonComLabelWidthIn(
                                 label = "Solteiro",
-                                selected = selectionadoEstadoCivil == 1,
+                                selected = outro.estadoCivil == 1,
                                 onClickListener = {
-                                    selectionadoEstadoCivil = 1
+                                    onChangeCampo(
+                                        CamposOutro.ESTADO_CIVIL_OUTRO,
+                                        1.toString()
+                                    )
                                 }
                             )
 
                             RadioButtonComLabelWidthIn(
                                 label = "Casado",
-                                selected = selectionadoEstadoCivil == 2,
+                                selected = outro.estadoCivil == 2,
                                 onClickListener = {
-                                    selectionadoEstadoCivil = 2
+                                    onChangeCampo(
+                                        CamposOutro.ESTADO_CIVIL_OUTRO,
+                                        2.toString()
+                                    )
                                 }
                             )
 
                             RadioButtonComLabelWidthIn(
                                 label = "União Estavel",
-                                selected = selectionadoEstadoCivil == 3,
+                                selected = outro.estadoCivil == 3,
                                 onClickListener = {
-                                    selectionadoEstadoCivil = 3
+                                    onChangeCampo(
+                                        CamposOutro.ESTADO_CIVIL_OUTRO,
+                                        3.toString()
+                                    )
                                 }
                             )
                         }
@@ -338,25 +397,34 @@ fun CadastroResponsavel(
                         ) {
                             RadioButtonComLabelWidthIn(
                                 label = "Viúvo",
-                                selected = selectionadoEstadoCivil == 4,
+                                selected = outro.estadoCivil == 4,
                                 onClickListener = {
-                                    selectionadoEstadoCivil = 4
+                                    onChangeCampo(
+                                        CamposOutro.ESTADO_CIVIL_OUTRO,
+                                        4.toString()
+                                    )
                                 }
                             )
 
                             RadioButtonComLabelWidthIn(
                                 label = "Separado",
-                                selected = selectionadoEstadoCivil == 5,
+                                selected = outro.estadoCivil == 5,
                                 onClickListener = {
-                                    selectionadoEstadoCivil = 5
+                                    onChangeCampo(
+                                        CamposOutro.ESTADO_CIVIL_OUTRO,
+                                        5.toString()
+                                    )
                                 }
                             )
 
                             RadioButtonComLabelWidthIn(
                                 label = "Outro",
-                                selected = selectionadoEstadoCivil == 6,
+                                selected = outro.estadoCivil == 6,
                                 onClickListener = {
-                                    selectionadoEstadoCivil = 6
+                                    onChangeCampo(
+                                        CamposOutro.ESTADO_CIVIL_OUTRO,
+                                        6.toString()
+                                    )
                                 }
                             )
                         }
@@ -398,32 +466,44 @@ fun CadastroResponsavel(
                         Column {
                             RadioButtonComLabelWidthIn(
                                 label = "Empregado",
-                                selected = selecionadoSitProfissional == 1,
+                                selected = outro.situacaoProfissional == 1,
                                 onClickListener = {
-                                    selecionadoSitProfissional = 1
+                                    onChangeCampo(
+                                        CamposOutro.SITUACAO_PROFISSIONAL_OUTRO,
+                                        1.toString()
+                                    )
                                 }
                             )
 
                             RadioButtonComLabelWidthIn(
                                 label = "Desempregado",
-                                selected = selecionadoSitProfissional == 2,
+                                selected = outro.situacaoProfissional == 2,
                                 onClickListener = {
-                                    selecionadoSitProfissional = 2
+                                    onChangeCampo(
+                                        CamposOutro.SITUACAO_PROFISSIONAL_OUTRO,
+                                        2.toString()
+                                    )
                                 }
                             )
 
                             RadioButtonComLabelWidthIn(
                                 label = "Autonomo",
-                                selected = selecionadoSitProfissional == 3,
+                                selected = outro.situacaoProfissional == 3,
                                 onClickListener = {
-                                    selecionadoSitProfissional = 3
+                                    onChangeCampo(
+                                        CamposOutro.SITUACAO_PROFISSIONAL_OUTRO,
+                                        3.toString()
+                                    )
                                 }
                             )
                             RadioButtonComLabelWidthIn(
                                 label = "Pensionista",
-                                selected = selecionadoSitProfissional == 4,
+                                selected = outro.situacaoProfissional == 4,
                                 onClickListener = {
-                                    selecionadoSitProfissional = 4
+                                    onChangeCampo(
+                                        CamposOutro.SITUACAO_PROFISSIONAL_OUTRO,
+                                        4.toString()
+                                    )
                                 }
                             )
                         }
@@ -440,47 +520,65 @@ fun CadastroResponsavel(
                         ) {
                             RadioButtonComLabelWidthIn(
                                 label = "Aposentado",
-                                selected = selecionadoSitProfissional == 5,
+                                selected = outro.situacaoProfissional == 5,
                                 onClickListener = {
-                                    selecionadoSitProfissional = 5
+                                    onChangeCampo(
+                                        CamposOutro.SITUACAO_PROFISSIONAL_OUTRO,
+                                        5.toString()
+                                    )
                                 }
                             )
 
                             RadioButtonComLabelWidthIn(
                                 label = "Diarista",
-                                selected = selecionadoSitProfissional == 6,
+                                selected = outro.situacaoProfissional == 6,
                                 onClickListener = {
-                                    selecionadoSitProfissional = 6
+                                    onChangeCampo(
+                                        CamposOutro.SITUACAO_PROFISSIONAL_OUTRO,
+                                        6.toString()
+                                    )
                                 }
                             )
 
                             RadioButtonComLabelWidthIn(
                                 label = "Pensionista",
-                                selected = selecionadoSitProfissional == 7,
+                                selected = outro.situacaoProfissional == 7,
                                 onClickListener = {
-                                    selecionadoSitProfissional = 7
+                                    onChangeCampo(
+                                        CamposOutro.SITUACAO_PROFISSIONAL_OUTRO,
+                                        7.toString()
+                                    )
                                 }
                             )
 
-                            TextFieldSimples(
-                                nomeCampo = "Salário",
-                                valorPreenchido = "",
-                                visualTransformation = VisualTransformationCustom.PhoneVisualTransformation(),
-                                placeholder = "1.230",
-                                onChange = {
+                            RadioButtonComLabelWidthIn(
+                                label = "Outro",
+                                selected = outro.situacaoProfissional == 8,
+                                onClickListener = {
                                     onChangeCampo(
-                                        CamposEndereco.CEP,
-                                        it
+                                        CamposOutro.SITUACAO_PROFISSIONAL_OUTRO,
+                                        8.toString()
                                     )
-                                },
-                                paddingValues = PaddingValues(0.dp, 0.dp),
-                                modifier = Modifier.fillMaxWidth(.7f)
+                                }
                             )
+
                         }
+
+                        ModalEndereco(
+                            openBottomSheet = openBottomSheet,
+                            pessoa = outro,
+                            onChange = { campo, valor ->
+                                onChangeEnderecoOutro(
+                                    campo, valor
+                                )
+                            },
+                            onDismiss = {
+                                openBottomSheet = false
+                            },
+                        )
 
                     }
                 }
-
             }
         }
     }

@@ -12,19 +12,25 @@ class RadioViewModel : ViewModel() {
     private val _uiState = MutableStateFlow<RadioStateUi>(RadioStateUi())
     val uiState = _uiState.asStateFlow()
 
-    fun toggleDataPickerQuimioInicio() {
+    fun toggleDataPickerRadioInicio() {
         _uiState.value =
             _uiState.value.copy(toggleDataPickerInicioRadio = _uiState.value.toggleDataPickerInicioRadio.not())
     }
 
-    fun toggleDataPickerQuimioFim() {
+    fun toggleDataPickerRadioFim() {
         _uiState.value =
             _uiState.value.copy(toggleDataPickerFimRadio = _uiState.value.toggleDataPickerFimRadio.not())
     }
 
-    fun onChangeQuimioInicio(data: String) {
-        Log.i("QuimioViewModel", "onChangeQuimioEdicao Inicio: $data")
+    fun newRadio() {
+        _uiState.update {
+            it.copy(
+                radioEdicao = Radio()
+            )
+        }
+    }
 
+    fun onChangeRadio(data: String) {
         _uiState.update {
             it.copy(
                 radioEdicao = it.radioEdicao.copy(
@@ -34,7 +40,7 @@ class RadioViewModel : ViewModel() {
         }
     }
 
-    fun onChangeQuimioFim(data: String) {
+    fun onChangeRadioFim(data: String) {
         Log.i("QuimioViewModel", "onChangeQuimioEdicao Fim: $data")
         _uiState.update {
             it.copy(
@@ -45,17 +51,6 @@ class RadioViewModel : ViewModel() {
         }
     }
 
-    fun addQuimio(radio: Radio) {
-        val listaCirurgias = _uiState.value.listaRadio.toMutableList()
-        listaCirurgias.add(radio)
-        _uiState.value = _uiState.value.copy(listaRadio = listaCirurgias)
-    }
-
-    fun RemoveIndex(index: Int) {
-        val listaCirurgias = _uiState.value.listaRadio.toMutableList()
-        listaCirurgias.removeAt(index)
-        _uiState.value = _uiState.value.copy(listaRadio = listaCirurgias)
-    }
 
     fun toggleList() {
         _uiState.update {

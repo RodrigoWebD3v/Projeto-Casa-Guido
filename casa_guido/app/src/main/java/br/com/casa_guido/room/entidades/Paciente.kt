@@ -9,17 +9,31 @@ import java.util.UUID
 data class Paciente(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val pessoaId: String,
-    val cartao_sus: String?,
-    val remuneracao: String?, // manter string, mas tratar como decimal no backend
-    val recebe_bpc: Boolean?,
-    val bpc_valor: String?,   // idem
-    val diagnostico: String?,
-    val medico_responsavel: String?,
-    val escola: String?,
-    val tamanho_roupa: String?,
-    val tamanho_calcado: String?,
-    val ano_escolar: String?,
-    val responsavelId: String?,
-    val conjugeResponsavelId: String?,
-    val outroResponsavelId: String?,
+
+    val status: Boolean? = null,
+
+    val nomeMae: String? = null,
+    val nomePai: String? = null,
+    val nomeOutro: String? = null,
+
+    val recebeRemuneracao: Int? = null,
+    val remuneracao: String? = null, // tratar como decimal no backend
+
+    val recebeBpc: Int? = null,
+    val valorBpc: String? = null, // tratar como decimal no backend
+
+    val diagnostico: String? = null,
+    val profissionalResponsavel: String? = null,
+
+    val escolaNome: String? = null,
+    val anoEscolar: String? = null,
+    val tamRoupa: String? = null,
+    val tamCalcado: String? = null,
+
+    val origenInfoOng: String? = null,
+    val observacoes: String? = null,
+
+    val responsavelId: String? = null,
+    val conjugeResponsavelId: String? = null,
+    val outroResponsavelId: String? = null
 )

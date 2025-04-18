@@ -14,9 +14,6 @@ interface PessoaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(pessoa: Pessoa)
 
-    @Update
-    suspend fun update(pessoa: Pessoa)
-
     @Delete
     suspend fun delete(pessoa: Pessoa)
 

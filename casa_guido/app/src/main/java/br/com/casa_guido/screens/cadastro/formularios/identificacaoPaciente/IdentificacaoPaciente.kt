@@ -2,18 +2,19 @@ package br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,8 +29,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.customizacao.VisualTransformationCustom
 import br.com.casa_guido.screens.Paciente
+import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
+import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
+import br.com.casa_guido.screens.shared.BotaoPersonalizadoComIcones
 import br.com.casa_guido.screens.shared.DataPicker
 import br.com.casa_guido.screens.shared.TextFieldSimples
+import br.com.casa_guido.ui.theme.Alert
+import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
 
@@ -39,27 +45,48 @@ fun IdentificacaoPaciente(
     modifier: Modifier = Modifier,
     paciente: Paciente,
     onChangeCampo: (CamposIdentificacao, String) -> Unit,
-    onCollapse: () -> Unit,
+    onChangeCampoEndereco: (CamposEndereco, String) -> Unit,
+    numeroTela: Int,
 ) {
+
+    var openBottomSheet by remember {
+        mutableStateOf(false)
+    }
+
+    var color by remember {
+        mutableStateOf(GreenBlack)
+    }
+
+    var iconeBotao by remember {
+        mutableStateOf(Icons.Default.Check)
+    }
+
+    LaunchedEffect(paciente) {
+
+        color =
+            if (!(paciente.pessoa.endereco.cep.isEmpty() || paciente.pessoa.endereco.numero.isEmpty() || paciente.pessoa.endereco.logradouro.isEmpty() || paciente.pessoa.endereco.bairro.isEmpty() || paciente.pessoa.endereco.referencia.isEmpty() || paciente.pessoa.endereco.localidade.isEmpty() || paciente.pessoa.endereco.uf.isEmpty())) GreenBlack else Alert
+
+        iconeBotao =
+            if (!(paciente.pessoa.endereco.cep.isEmpty() || paciente.pessoa.endereco.numero.isEmpty() || paciente.pessoa.endereco.logradouro.isEmpty() || paciente.pessoa.endereco.bairro.isEmpty() || paciente.pessoa.endereco.referencia.isEmpty() || paciente.pessoa.endereco.localidade.isEmpty() || paciente.pessoa.endereco.uf.isEmpty())) Icons.Default.Check else Icons.Default.Close
+    }
+
+
+
     Column(
         modifier = modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .background(Paragraph)
-            .animateContentSize()
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp)
-                .clickable {
-                    onCollapse()
-                },
+                .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column {
                 Text(
-                    "1. Identificação do Paciente",
+                    "$numeroTela. Identificação do Paciente",
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,
@@ -105,23 +132,37 @@ fun IdentificacaoPaciente(
             mutableStateOf(false)
         }
 
-        DataPicker(
-            showDataPicker = dataPickerNascimentoShow,
-            valorPreenchido = paciente.pessoa.dataNascimento,
-            titulo = "Data de Nascimento",
-            onCancelar = {
-                dataPickerNascimentoShow = false
-            },
-            onChange = {
-                onChangeCampo(
-                    CamposIdentificacao.DATA_NASCIMENTO,
-                    it
-                )
-            },
-            onClick = {
-                dataPickerNascimentoShow = true
-            },
-        )
+        Row(
+            modifier = Modifier.padding(horizontal = 20.dp), verticalAlignment = Alignment.Bottom
+        ) {
+            BotaoPersonalizadoComIcones(
+                iconeBotao = iconeBotao,
+                color = color,
+                onClick = {
+                    openBottomSheet = true
+                },
+                titulo = "Endereço",
+                modifier = Modifier.fillMaxWidth(.5f)
+            )
+
+            DataPicker(
+                showDataPicker = dataPickerNascimentoShow,
+                valorPreenchido = paciente.pessoa.dataNascimento,
+                titulo = "Data de Nascimento",
+                onCancelar = {
+                    dataPickerNascimentoShow = false
+                },
+                onChange = {
+                    onChangeCampo(
+                        CamposIdentificacao.DATA_NASCIMENTO, it
+                    )
+                },
+                onClick = {
+                    dataPickerNascimentoShow = true
+                },
+                modifier = Modifier.weight(1f)
+            )
+        }
 
         TextFieldSimples(
             nomeCampo = "Mãe",
@@ -153,7 +194,7 @@ fun IdentificacaoPaciente(
             placeholder = "Maria Aparecida",
             onChange = {
                 onChangeCampo(
-                    CamposIdentificacao.NOME_RESPONSAVEL,
+                    CamposIdentificacao.NOME_OUTRO_RESPONSAVEL,
                     it
                 )
             }
@@ -195,16 +236,16 @@ fun IdentificacaoPaciente(
         Row {
             TextFieldSimples(
                 nomeCampo = "Cartão do sus",
-                valorPreenchido = paciente.cartaoSus,
+                valorPreenchido = paciente.pessoa.cartaoSus,
                 visualTransformation = VisualTransformationCustom.CartSusVisualTransformation(),
-                placeholder = "567 8901 2345 6789",
+                placeholder = "",
                 onChange = {
                     onChangeCampo(
                         CamposIdentificacao.CARTAO_SUS,
                         it
                     )
                 },
-                modifier = Modifier.fillMaxWidth(.55f),
+                modifier = Modifier.fillMaxWidth(.50f),
                 paddingValues = PaddingValues(start = 20.dp, end = 0.dp),
             )
 
@@ -222,6 +263,20 @@ fun IdentificacaoPaciente(
                 modifier = Modifier.weight(1f)
             )
         }
+
+
+        ModalEndereco(
+            openBottomSheet = openBottomSheet,
+            pessoa = paciente.pessoa,
+            onChange = { campo, valor ->
+                onChangeCampoEndereco(
+                    campo, valor
+                )
+            },
+            onDismiss = {
+                openBottomSheet = false
+            },
+        )
 
     }
 }

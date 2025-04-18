@@ -27,7 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.casa_guido.configuration.Conexao
-import br.com.casa_guido.configuration.Resultado
+import br.com.casa_guido.configuration.Status
 import br.com.casa_guido.navigation.root.ViewModelAuthMananger
 import br.com.casa_guido.ui.theme.Button
 import br.com.casa_guido.ui.theme.GreenBlack
@@ -42,7 +42,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun SplashScreen(modifier: Modifier = Modifier, setResultado: (Resultado) -> Unit) {
+fun SplashScreen(modifier: Modifier = Modifier, setResultado: (Status) -> Unit) {
     val viewModelAuthMananger = koinViewModel<ViewModelAuthMananger>()
     val state by viewModelAuthMananger.status.collectAsState()
     val conexao by viewModelAuthMananger.conexao.collectAsState()
@@ -74,23 +74,23 @@ fun SplashScreen(modifier: Modifier = Modifier, setResultado: (Resultado) -> Uni
 
     LaunchedEffect(state) {
         when(state){
-            Resultado.Carregando -> {
+            Status.Carregando -> {
 
             }
 
-            is Resultado.Erro -> {
-                setResultado(Resultado.Erro(""))
+            is Status.Erro -> {
+                setResultado(Status.Erro(""))
             }
 
-            is Resultado.Sucesso -> {
-                setResultado(Resultado.Sucesso(""))
+            is Status.Sucesso -> {
+                setResultado(Status.Sucesso(""))
             }
 
-            Resultado.SemInteracao -> {
+            Status.SemInteracao -> {
 
             }
 
-            is Resultado.Desconectado -> {
+            is Status.Desconectado -> {
 
             }
         }
@@ -141,7 +141,7 @@ fun SplashScreen(modifier: Modifier = Modifier, setResultado: (Resultado) -> Uni
                 .padding(paddingValues)
                 .clickable {
                     setResultado(
-                        Resultado.Sucesso("")
+                        Status.Sucesso("")
                     )
                 },
             contentAlignment = Alignment.Center

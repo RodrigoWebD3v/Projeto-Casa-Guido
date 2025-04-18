@@ -7,5 +7,6 @@ enum class CamposEndereco {
     BAIRRO,
     LOCALIDADE,
     UF,
-    CEP
+    CEP,
+    REFERENCIA,
 }

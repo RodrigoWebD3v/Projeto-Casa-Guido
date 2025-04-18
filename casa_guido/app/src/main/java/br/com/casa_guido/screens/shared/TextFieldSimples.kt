@@ -1,6 +1,5 @@
 package br.com.casa_guido.screens.shared
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,18 +10,19 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.ui.theme.BackgroundColor
@@ -36,6 +36,8 @@ fun TextFieldSimples(
     valorPreenchido: String,
     paddingValues: PaddingValues = PaddingValues(20.dp,0.dp),
     placeholder: String,
+    keyboardType: KeyboardType = KeyboardType.Text,
+    somenteNumero: Boolean = false,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     onChange: (String) -> Unit
 ) {
@@ -53,7 +55,7 @@ fun TextFieldSimples(
                 color = GreenBlack,
                 fontWeight = FontWeight.Medium,
                 textAlign = TextAlign.Start
-            )
+            ), maxLines = 1, overflow = TextOverflow.Ellipsis
         )
 
         Box(
@@ -61,15 +63,19 @@ fun TextFieldSimples(
                 .fillMaxWidth()
                 .height(45.dp)
                 .border(
-                    width = 1.5.dp,
-                    color = Paragraph,
-                    shape = RoundedCornerShape(8.dp)
+                    width = 1.5.dp, color = Paragraph, shape = RoundedCornerShape(8.dp)
                 )
                 .padding(horizontal = 12.dp, vertical = 4.dp)
         ) {
             BasicTextField(
-                value = valorPreenchido,
-                onValueChange = { onChange(it) },
+                value = valorPreenchido, onValueChange = {
+                    if (somenteNumero) {
+                        val apenasNumeros = it.filter { char -> char.isDigit() }
+                        onChange(apenasNumeros)
+                    } else {
+                        onChange(it)
+                    }
+                },
                 textStyle = LocalTextStyle.current.copy(
                     color = GreenBlack,
                     fontSize = 16.sp
@@ -89,7 +95,9 @@ fun TextFieldSimples(
                         )
                     }
                     innerTextField()
-                }
+                }, keyboardOptions = KeyboardOptions(
+                    autoCorrectEnabled = false, keyboardType = keyboardType
+                )
             )
         }
     }
