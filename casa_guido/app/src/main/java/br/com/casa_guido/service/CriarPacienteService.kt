@@ -8,7 +8,9 @@ class CriarPacienteService(
     private val enderecoService: EnderecoService,
     private val quimioService: QuimioService,
     private val cirurgiaService: CirurgiaService,
-    private val radioService: RadioService
+    private val radioService: RadioService,
+    private val composicaoFamiliarService: ComposicaoFamiliarService,
+    private val historicoSaudeService: HistoricoSaudeService
 ) {
 
     suspend fun criarPaciente(paciente: Paciente) {
@@ -76,5 +78,18 @@ class CriarPacienteService(
                 pacienteId = paciente.id
             )
         }
+
+        composicaoFamiliarService.deleteComposicaoFamiliar(pacienteId = paciente.id)
+        paciente.composicaoFamiliar.forEach {
+            composicaoFamiliarService.createComposicaoFamiliar(
+                componenteFamiliar = it,
+                pacienteId = paciente.id
+            )
+        }
+
+        historicoSaudeService.createHistoricoSaude(
+            historicoSaude = paciente.historicoSaude,
+            pacienteId = paciente.id
+        )
     }
 }

@@ -1,7 +1,6 @@
-package br.com.casa_guido.screens.cadastro.formularios.radio
+package br.com.casa_guido.screens.cadastro.formularios.cirurgia
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
@@ -15,14 +14,13 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -36,9 +34,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -48,10 +43,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.casa_guido.screens.Quimio
-import br.com.casa_guido.screens.cadastro.formularios.quimio.CamposQuimio
+import br.com.casa_guido.screens.Cirurgia
 import br.com.casa_guido.screens.shared.DataPicker
-import br.com.casa_guido.screens.shared.RadioButtonComLabel
+import br.com.casa_guido.screens.shared.TextFieldSimples
 import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
@@ -62,14 +56,16 @@ import java.time.LocalDate
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun QuimioCadastro(
+fun CadastroCirurgia(
     modifier: Modifier = Modifier,
-    onChangeCampo: (CamposQuimio, Quimio) -> Unit,
-    listaQuimios: List<Quimio>,
+    onChangeCampo: (CamposCirurgia, Cirurgia) -> Unit,
+    listaCirurgias: List<Cirurgia>,
     numeroTela: Int
 ) {
-    val viewModel = koinViewModel<QuimioViewModel>()
+
+    val viewModel = koinViewModel<CirurgiaViewModel>()
     val state by viewModel.uiState.collectAsState()
+
 
     Column(
         modifier = modifier
@@ -85,7 +81,7 @@ fun QuimioCadastro(
         ) {
             Column {
                 Text(
-                    "$numeroTela. Quimio",
+                    "$numeroTela. Cirurgias",
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,
@@ -94,7 +90,7 @@ fun QuimioCadastro(
                     )
                 )
                 Text(
-                    "Informações de quimioterapias do paciente",
+                    "Informações de cirurgias do paciente",
                     style = TextStyle(
                         fontSize = 12.sp,
                         color = Color.Black,
@@ -122,98 +118,48 @@ fun QuimioCadastro(
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            var selecionadoQuimio by remember {
-                mutableIntStateOf(0)
-            }
-
-            Row(
-                Modifier
+            Column(
+                modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 20.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Start
-            ) {
-                Box(
-                    Modifier
-                        .size(60.dp, 35.dp)
-                        .clip(RoundedCornerShape(10.dp))
-                        .background(Paragraph),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "Quimio",
-                        style = TextStyle(
-                            fontSize = 16.sp,
-                            color = BackgroundColor,
-                            fontWeight = FontWeight.SemiBold,
-                            textAlign = TextAlign.Center
-                        )
-                    )
-                }
-
-                Spacer(Modifier.width(10.dp))
-
-                RadioButtonComLabel(
-                    label = "Sim",
-                    selected = selecionadoQuimio == 1,
-                    onClickListener = {
-                        selecionadoQuimio = 1
-                    }
-                )
-                RadioButtonComLabel(
-                    label = "Não",
-                    selected = selecionadoQuimio == 2,
-                    onClickListener = {
-                        selecionadoQuimio = 2
-                    }
-                )
-            }
-
-            AnimatedVisibility(
-                visible = selecionadoQuimio == 1,
-                enter = expandVertically(
-                    animationSpec = tween(
-                        durationMillis = 400,
-                        easing = FastOutSlowInEasing
-                    )
-                ),
-                exit = shrinkVertically() + fadeOut(),
+                    .padding(vertical = 10.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                horizontalAlignment = Alignment.Start
             ) {
                 Row(
-                    Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    DataPicker(
-                        modifier = Modifier.fillMaxWidth(.5f),
-                        showDataPicker = state.toggleDataPickerInicioQuimio,
-                        valorPreenchido = state.quimioEdicao.dataInicio,
-                        titulo = "Data inicio",
-                        onCancelar = {
-                            viewModel.toggleDataPickerQuimioInicio()
-                        },
+                    TextFieldSimples(
+                        nomeCampo = "Nome da cirurgia",
+                        valorPreenchido = state.cirurgiaEdicao.nome,
+                        placeholder = "Nefrectomia",
                         onChange = {
-                            Log.i("QuimioCadastro 0", "onChange: $it")
-                            viewModel.onChangeQuimioInicio(it)
+                            viewModel.onChangeCirurgiaEdicao(
+                                state.cirurgiaEdicao.copy(
+                                nome = it
+                                )
+                            )
                         },
-                        onClick = {
-                            viewModel.toggleDataPickerQuimioInicio()
-                        },
+                        modifier = Modifier.fillMaxWidth(.6f),
+                        paddingValues = PaddingValues(start = 20.dp, end = 0.dp)
                     )
 
 
                     DataPicker(
-                        modifier = Modifier.weight(1f),
-                        showDataPicker = state.toggleDataPickerFimQuimio,
-                        valorPreenchido = state.quimioEdicao.dataUltimaSessao,
-                        titulo = "Data fim",
+                        showDataPicker = state.toggleDataPickerCirurgia,
+                        valorPreenchido = state.cirurgiaEdicao.data,
+                        titulo = "Data da cirurgia",
                         onCancelar = {
-                            viewModel.toggleDataPickerQuimioFim()
+                            viewModel.toggleDatePickerCirurgia()
                         },
                         onChange = {
-                            Log.i("QuimioCadastro 1", "onChange: $it")
-                            viewModel.onChangeQuimioFim(it)
+                            viewModel.onChangeCirurgiaEdicao(
+                                state.cirurgiaEdicao.copy(
+                                    data = it
+                                )
+                            )
                         },
                         onClick = {
-                            viewModel.toggleDataPickerQuimioFim()
+                            viewModel.toggleDatePickerCirurgia()
                         },
                     )
                 }
@@ -222,15 +168,12 @@ fun QuimioCadastro(
 
             Button(
                 onClick = {
-                    if (state.quimioEdicao.dataInicio.isNotEmpty() && state.quimioEdicao.dataUltimaSessao.isNotEmpty()) {
+                    if (state.cirurgiaEdicao.nome.isNotEmpty()) {
                         onChangeCampo(
-                            CamposQuimio.ADD_QUIMIO,
-                            state.quimioEdicao
+                            CamposCirurgia.ADD_CIRURGIA,
+                            state.cirurgiaEdicao
                         )
-                        viewModel.newQuimio()
-                        viewModel.onChangeQuimioInicio(Utils.formatData(LocalDate.now())!!)
-                        viewModel.onChangeQuimioFim(Utils.formatData(LocalDate.now())!!)
-                        Log.i("QuimioCadastro", "${listaQuimios.size}")
+                        viewModel.onChangeCirurgiaEdicao( Cirurgia(data = Utils.formatData(LocalDate.now())!!))
                     }
                 },
                 modifier = Modifier
@@ -246,7 +189,7 @@ fun QuimioCadastro(
                 )
             ) {
                 Text(
-                    text = "Adicionar quimio",
+                    text = "Adicionar cirurgia",
                     style = TextStyle(
                         fontSize = 16.sp,
                         color = br.com.casa_guido.ui.theme.Button,
@@ -256,12 +199,12 @@ fun QuimioCadastro(
                 )
             }
 
-            Column (
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp)
                     .padding(vertical = 20.dp)
-            ){
+            ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -277,7 +220,7 @@ fun QuimioCadastro(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "Lista de Quimios",
+                        text = "Lista de quimios",
                         style = TextStyle(
                             fontSize = 16.sp,
                             color = BackgroundColor,
@@ -287,7 +230,7 @@ fun QuimioCadastro(
                     )
 
                     Text(
-                        text = "Quantidade: ${listaQuimios.size}",
+                        text = "Quantidade: ${listaCirurgias.size}",
                         style = TextStyle(
                             fontSize = 16.sp,
                             color = GreenBlack,
@@ -321,7 +264,7 @@ fun QuimioCadastro(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .heightIn(min = 0.dp, max = 400.dp)
+                            .heightIn(min = 0.dp, max = 450.dp)
                     ) {
                         Column(
                             modifier = Modifier
@@ -329,13 +272,13 @@ fun QuimioCadastro(
                                 .verticalScroll(rememberScrollState())
                                 .padding(8.dp)
                         ) {
-                            listaQuimios.forEachIndexed { index, item ->
-                                ItemQuimio(
-                                    item.dataInicio,
-                                    item.dataUltimaSessao
+                            listaCirurgias.forEachIndexed { index, item ->
+                                ItemCirurgia(
+                                    nomeCirurgia = item.nome,
+                                    data = item.data
                                 ) {
                                     onChangeCampo(
-                                        CamposQuimio.REMOVE_QUIMIO,
+                                        CamposCirurgia.REMOVE_CIRURGIA,
                                         item
                                     )
                                 }
@@ -347,6 +290,6 @@ fun QuimioCadastro(
 
         }
     }
-
 }
+
 

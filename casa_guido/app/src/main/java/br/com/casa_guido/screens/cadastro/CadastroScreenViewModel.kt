@@ -5,17 +5,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.casa_guido.configuration.Status
 import br.com.casa_guido.screens.Cirurgia
+import br.com.casa_guido.screens.ComposicaoFamiliar
 import br.com.casa_guido.screens.Paciente
 import br.com.casa_guido.screens.Quimio
 import br.com.casa_guido.screens.Radio
 import br.com.casa_guido.screens.cadastro.formularios.cirurgia.CamposCirurgia
+import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.CamposCompFamiliar
 import br.com.casa_guido.screens.cadastro.formularios.conjuge.CamposConjuge
 import br.com.casa_guido.screens.cadastro.formularios.conjuge.CamposOutro
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
+import br.com.casa_guido.screens.cadastro.formularios.historicoSaude.CamposHistoricoSaude
 import br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente.CamposIdentificacao
 import br.com.casa_guido.screens.cadastro.formularios.quimio.CamposQuimio
 import br.com.casa_guido.screens.cadastro.formularios.radio.CamposRadio
 import br.com.casa_guido.screens.cadastro.formularios.responsavel.CamposResponsavel
+import br.com.casa_guido.screens.cadastro.formularios.situacaoHabitacional.CamposSituacaoHabitacional
 import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.CamposSocioEconomico
 import br.com.casa_guido.service.CriarPacienteService
 import br.com.casa_guido.service.PacienteService
@@ -40,18 +44,13 @@ class CadastroScreenViewModel(
     val paciente = _paciente.asStateFlow()
 
 
-    suspend fun getPaciente(id: String) {
+    fun getPaciente(id: String) {
         viewModelScope.launch {
             var paciente = pacienteService.getById(id)
             _paciente.value = paciente!!
             _uiState.value = _uiState.value.copy(
                 edicao = true
             )
-
-            val dado = _paciente.value.responsavel.estadoCivil
-            val dado2 = _paciente.value.responsavel.situacaoProfissional
-
-            Log.i("CadastroScreenViewModel", "getPaciente: $dado - $dado2")
         }
     }
 
@@ -75,18 +74,6 @@ class CadastroScreenViewModel(
                 )
             }
         }
-    }
-
-    fun onChangeAddQuimio(valor: List<Quimio>) {
-        _paciente.value = _paciente.value.copy(
-            quimios = valor
-        )
-    }
-
-    fun onChangeAddRadio(valor: List<Radio>) {
-        _paciente.value = _paciente.value.copy(
-            radios = valor
-        )
     }
 
     fun onChangeSocioEconomico(camposSocioEconomico: CamposSocioEconomico, valor: String) {
@@ -459,7 +446,6 @@ class CadastroScreenViewModel(
         }
 
     }
-
 
     fun onChangeEnderecoOutro(camposEndereco: CamposEndereco, valor: String) {
         when (camposEndereco) {
@@ -953,6 +939,128 @@ class CadastroScreenViewModel(
         }
     }
 
+    fun onChangeComposicaoFamiliar(campo: CamposCompFamiliar, valor: ComposicaoFamiliar) {
+        when (campo) {
+            CamposCompFamiliar.ADD_COM_FAMILIA -> {
+                _paciente.value = _paciente.value.copy(
+                    composicaoFamiliar = _paciente.value.composicaoFamiliar + valor
+                )
+            }
 
+            CamposCompFamiliar.DELETE_COM_FAMILIA -> {
+                _paciente.value = _paciente.value.copy(
+                    composicaoFamiliar = _paciente.value.composicaoFamiliar.filterNot {
+                        it == valor
+                    }
+                )
+            }
 
+            CamposCompFamiliar.EDIT_COM_FAMILIA -> {
+                _paciente.value = _paciente.value.copy(
+                    composicaoFamiliar = _paciente.value.composicaoFamiliar.filterNot {
+                        it == valor
+                    }
+                )
+
+                _paciente.value = _paciente.value.copy(
+                    composicaoFamiliar = _paciente.value.composicaoFamiliar + valor
+                )
+            }
+
+        }
+    }
+
+    fun onChangeHistoricoSaude(campo: CamposHistoricoSaude, valor: String) {
+        when (campo) {
+            CamposHistoricoSaude.DOENCA_FAMILIA -> {
+                if (valor.toInt() !in _paciente.value.historicoSaude.doencasFamilia) {
+                    _paciente.value = _paciente.value.copy(
+                        historicoSaude = _paciente.value.historicoSaude.copy(
+                            doencasFamilia = _paciente.value.historicoSaude.doencasFamilia + valor.toInt()
+                        )
+                    )
+                } else {
+                    _paciente.value = _paciente.value.copy(
+                        historicoSaude = _paciente.value.historicoSaude.copy(
+                            doencasFamilia = _paciente.value.historicoSaude.doencasFamilia.filterNot {
+                                it == valor.toInt()
+                            }.toTypedArray()
+                        )
+                    )
+                }
+            }
+
+            CamposHistoricoSaude.MEDICAMENTOS_USO_CONTINUO -> {
+                _paciente.value = _paciente.value.copy(
+                    historicoSaude = _paciente.value.historicoSaude.copy(
+                        medicamentosUsoContinuo = valor
+                    )
+                )
+            }
+
+            CamposHistoricoSaude.LOCAL_PROCURA_ATENDIMENTO -> {
+                if (valor.toInt() !in _paciente.value.historicoSaude.localProcuraAtendimento) {
+                    _paciente.value = _paciente.value.copy(
+                        historicoSaude = _paciente.value.historicoSaude.copy(
+                            localProcuraAtendimento = _paciente.value.historicoSaude.localProcuraAtendimento + valor.toInt()
+                        )
+                    )
+                } else {
+                    _paciente.value = _paciente.value.copy(
+                        historicoSaude = _paciente.value.historicoSaude.copy(
+                            localProcuraAtendimento = _paciente.value.historicoSaude.localProcuraAtendimento.filterNot {
+                                it == valor.toInt()
+                            }.toTypedArray()
+                        )
+                    )
+                }
+            }
+
+            CamposHistoricoSaude.RECEBE_BENEFICIO -> {
+                _paciente.value = _paciente.value.copy(
+                    historicoSaude = _paciente.value.historicoSaude.copy(
+                        recebeBeneficio = valor.toInt()
+                    )
+                )
+            }
+
+            CamposHistoricoSaude.BENEFICIO_DESCRICAO -> {
+                _paciente.value = _paciente.value.copy(
+                    historicoSaude = _paciente.value.historicoSaude.copy(
+                        beneficioDescricao = valor
+                    )
+                )
+            }
+        }
+    }
+
+    fun onChangeSituacaoHabitacional(campo: CamposSituacaoHabitacional, valor: String) {
+        when (campo) {
+            CamposSituacaoHabitacional.COMO_ADQUIRIU_CASA -> {
+                _paciente.value = _paciente.value.copy(
+                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                        comoAdquiriuCasa = valor.toInt()
+                    )
+                )
+            }
+
+            CamposSituacaoHabitacional.COMP_PROPRIEDADE -> {
+
+            }
+
+            CamposSituacaoHabitacional.AREA -> {
+
+            }
+
+            CamposSituacaoHabitacional.NUMERO_COMODOS -> {}
+
+            CamposSituacaoHabitacional.MATERIAL -> {
+
+            }
+
+            CamposSituacaoHabitacional.ELETRODOMESTICOS -> {
+
+            }
+        }
+    }
 }

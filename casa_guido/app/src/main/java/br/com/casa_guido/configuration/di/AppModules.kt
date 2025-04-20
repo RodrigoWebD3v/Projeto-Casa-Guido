@@ -9,7 +9,9 @@ import br.com.casa_guido.configuration.ClienteApi
 import br.com.casa_guido.navigation.root.ViewModelAuthMananger
 import br.com.casa_guido.repository.AuthRepository
 import br.com.casa_guido.repository.CirurgiaRepository
+import br.com.casa_guido.repository.ComposicaoFamiliarRepository
 import br.com.casa_guido.repository.EnderecoRepository
+import br.com.casa_guido.repository.HistoricoSaudeRepository
 import br.com.casa_guido.repository.PacienteRepository
 import br.com.casa_guido.repository.PessoaRepository
 import br.com.casa_guido.repository.QuimioRepository
@@ -32,9 +34,11 @@ import br.com.casa_guido.screens.pacientes.PacientesViewModel
 import br.com.casa_guido.service.AuthService
 import br.com.casa_guido.service.CirurgiaService
 import br.com.casa_guido.service.CompartilharArquivoService
+import br.com.casa_guido.service.ComposicaoFamiliarService
 import br.com.casa_guido.service.CriarPacienteService
 import br.com.casa_guido.service.CriarPdfService
 import br.com.casa_guido.service.EnderecoService
+import br.com.casa_guido.service.HistoricoSaudeService
 import br.com.casa_guido.service.PacienteService
 import br.com.casa_guido.service.PessoaService
 import br.com.casa_guido.service.QuimioService
@@ -59,6 +63,7 @@ val appModule = module {
     viewModelOf(::RadioViewModel)
     viewModelOf(::QuimioViewModel)
     viewModelOf(::OutroViewModel)
+    viewModelOf(::ComposicaoFamiliarViewModel)
 
 
 
@@ -75,9 +80,8 @@ val appModule = module {
     singleOf(::CirurgiaRepository)
     singleOf(::RadioRepository)
     singleOf(::MainViewModel)
-
-
-
+    singleOf(::ComposicaoFamiliarService)
+    singleOf(::ComposicaoFamiliarRepository)
     singleOf(::ViaCepService)
     singleOf(::AuthService)
     singleOf(::PacienteService)
@@ -90,6 +94,8 @@ val appModule = module {
     singleOf(::RadioService)
     singleOf(::CriarPdfService)
     singleOf(::CompartilharArquivoService)
+    singleOf(::HistoricoSaudeService)
+    singleOf(::HistoricoSaudeRepository)
 
 
     single {

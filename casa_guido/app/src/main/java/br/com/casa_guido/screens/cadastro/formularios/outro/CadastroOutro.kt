@@ -99,7 +99,6 @@ fun CadastroOutro(
         ) Icons.Default.Check else Icons.Default.Close
     }
 
-
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -158,8 +157,6 @@ fun CadastroOutro(
                 verticalArrangement = Arrangement.spacedBy(10.dp),
                 horizontalAlignment = Alignment.Start
             ) {
-
-
                 TextFieldSimples(
                     nomeCampo = "Nome Completo",
                     valorPreenchido = outro.nome,
@@ -169,20 +166,19 @@ fun CadastroOutro(
                             it
                         )
                     },
-                    placeholder = ""
+                    placeholder = "Rodrigo Cardoso"
                 )
 
                 var dataPickerNascimentoShow by remember {
                     mutableStateOf(false)
                 }
 
-
                 Row {
                     TextFieldSimples(
                         nomeCampo = "Cpf",
                         valorPreenchido = outro.cpf,
                         visualTransformation = VisualTransformationCustom.CpfVisualTransformation(),
-                        placeholder = "",
+                        placeholder = "111.111.111.99",
                         onChange = {
                             onChangeCampo(
                                 CamposOutro.CPF_OUTRO,
@@ -195,8 +191,8 @@ fun CadastroOutro(
                     TextFieldSimples(
                         nomeCampo = "Rg",
                         valorPreenchido = outro.rg,
-                        visualTransformation = VisualTransformation.None,
-                        placeholder = "",
+                        visualTransformation = VisualTransformationCustom.RgVisualTransformation(),
+                        placeholder = "11.111.111-9",
                         onChange = {
                             onChangeCampo(
                                 CamposOutro.RG_OUTRO,
@@ -212,7 +208,7 @@ fun CadastroOutro(
                         nomeCampo = "Naturalidade",
                         valorPreenchido = outro.naturalidade,
                         visualTransformation = VisualTransformation.None,
-                        placeholder = "",
+                        placeholder = "Brasileiro",
                         onChange = {
                             onChangeCampo(
                                 CamposOutro.NATURALIDADE_OUTRO,
@@ -226,7 +222,7 @@ fun CadastroOutro(
                         nomeCampo = "Escolaridade",
                         valorPreenchido = outro.escolaridade,
                         visualTransformation = VisualTransformation.None,
-                        placeholder = "",
+                        placeholder = "8 série",
                         onChange = {
                             onChangeCampo(
                                 CamposOutro.ESCOLARIDADE_OUTRO,
@@ -237,8 +233,9 @@ fun CadastroOutro(
                     )
                 }
 
-                Row {
 
+
+                Row {
                     DataPicker(
                         showDataPicker = dataPickerNascimentoShow,
                         valorPreenchido = outro.dataNascimento,
@@ -258,8 +255,6 @@ fun CadastroOutro(
                         modifier = Modifier.fillMaxWidth(.5f)
                     )
 
-
-
                     TextFieldSimples(
                         nomeCampo = "Celular",
                         valorPreenchido = outro.telefone,
@@ -274,6 +269,7 @@ fun CadastroOutro(
                         modifier = Modifier.weight(1f)
                     )
                 }
+
                 TextFieldSimples(
                     nomeCampo = "Cartão do sus",
                     valorPreenchido = outro.cartaoSus,
@@ -288,36 +284,36 @@ fun CadastroOutro(
                     modifier = Modifier.fillMaxWidth(),
                 )
 
-                Row {
-                    Row(
-                        modifier = Modifier.padding(start = 20.dp),
-                        verticalAlignment = Alignment.Bottom
-                    ) {
-                        BotaoPersonalizadoComIcones(
-                            iconeBotao = iconeBotao,
-                            color = color,
-                            onClick = {
-                                openBottomSheet = true
-                            },
-                            titulo = "Endereço",
-                            modifier = Modifier.fillMaxWidth(.6f)
-                        )
 
-                        TextFieldSimples(
-                            nomeCampo = "Salário",
-                            valorPreenchido = outro.salario,
-                            visualTransformation = VisualTransformation.None,
-                            keyboardType = KeyboardType.Number,
-                            placeholder = "1.230",
-                            onChange = {
-                                onChangeCampo(
-                                    CamposOutro.SALARIO_OUTRO,
-                                    it
-                                )
-                            },
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
+                Row(
+                    modifier = Modifier.padding(start = 20.dp),
+                    verticalAlignment = Alignment.Bottom
+                ) {
+
+                    BotaoPersonalizadoComIcones(
+                        iconeBotao = iconeBotao,
+                        color = color,
+                        onClick = {
+                            openBottomSheet = true
+                        },
+                        titulo = "Endereço",
+                        modifier = Modifier.fillMaxWidth(.6f)
+                    )
+
+                    TextFieldSimples(
+                        nomeCampo = "Salário",
+                        valorPreenchido = outro.salario,
+                        visualTransformation = VisualTransformation.None,
+                        keyboardType = KeyboardType.Number,
+                        placeholder = "1.230",
+                        onChange = {
+                            onChangeCampo(
+                                CamposOutro.SALARIO_OUTRO,
+                                it
+                            )
+                        },
+                        modifier = Modifier.weight(1f)
+                    )
                 }
 
                 Column(
@@ -561,23 +557,21 @@ fun CadastroOutro(
                                     )
                                 }
                             )
-
                         }
-
-                        ModalEndereco(
-                            openBottomSheet = openBottomSheet,
-                            pessoa = outro,
-                            onChange = { campo, valor ->
-                                onChangeEnderecoOutro(
-                                    campo, valor
-                                )
-                            },
-                            onDismiss = {
-                                openBottomSheet = false
-                            },
-                        )
-
                     }
+
+                    ModalEndereco(
+                        openBottomSheet = openBottomSheet,
+                        pessoa = outro,
+                        onChange = { campo, valor ->
+                            onChangeEnderecoOutro(
+                                campo, valor
+                            )
+                        },
+                        onDismiss = {
+                            openBottomSheet = false
+                        },
+                    )
                 }
             }
         }

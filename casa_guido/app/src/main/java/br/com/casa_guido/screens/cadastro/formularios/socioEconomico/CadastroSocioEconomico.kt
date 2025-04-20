@@ -13,11 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,13 +31,12 @@ import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
 
 @Composable
-fun SocioEconomico(
+fun CadastroSocioEconomico(
     modifier: Modifier = Modifier,
     onChangeCampo: (CamposSocioEconomico, String) -> Unit,
     paciente: Paciente,
     numeroTela: Int
 ) {
-
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -126,7 +120,9 @@ fun SocioEconomico(
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth().padding(start = 10.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 10.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center,
             ) {

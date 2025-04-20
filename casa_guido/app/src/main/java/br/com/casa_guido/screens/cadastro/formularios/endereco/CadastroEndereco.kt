@@ -24,7 +24,7 @@ import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
 
 @Composable
-fun Endereco(
+fun CadastroEndereco(
     modifier: Modifier = Modifier, pessoa: Pessoa,
     onChangeCampo: (CamposEndereco, String) -> Unit,
 ) {

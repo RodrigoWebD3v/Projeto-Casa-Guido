@@ -25,4 +25,11 @@ interface ComposicaoFamiliarDao {
 
     @Query("SELECT * FROM composicao_familiar WHERE id = :id")
     suspend fun getById(id: String): ComposicaoFamiliar?
+
+    @Query("SELECT * FROM composicao_familiar WHERE pacienteId = :pacienteId")
+    fun getByPacienteId(pacienteId: String): Flow<List<ComposicaoFamiliar>>
+
+    @Query("DELETE FROM composicao_familiar WHERE pacienteId = :pacienteId")
+    suspend fun deleteByPacienteId(pacienteId: String)
+
 }

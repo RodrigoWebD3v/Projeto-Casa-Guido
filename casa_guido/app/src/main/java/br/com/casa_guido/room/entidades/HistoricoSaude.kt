@@ -8,8 +8,9 @@ import java.util.UUID
 data class HistoricoSaude(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val pacienteId: String,
-    val recebe_beneficio: Boolean?,
+    val recebe_beneficio: Int?,
     val beneficio_descricao: String?,
     val medicamentos_uso_continuo: String?,
-    val local_procura_atendimento: String?,
+    val local_procura_atendimento: Array<Int>?,
+    val doencasFamilia: Array<Int>?,
 )

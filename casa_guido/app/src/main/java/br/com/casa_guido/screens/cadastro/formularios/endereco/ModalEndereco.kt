@@ -50,7 +50,7 @@ fun ModalEndereco(
                 ) {
                 Column(
                 ) {
-                    Endereco(
+                    CadastroEndereco(
                         pessoa = pessoa,
                         onChangeCampo = { campo, valor ->
                             onChange(campo, valor)

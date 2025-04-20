@@ -41,7 +41,7 @@ import br.com.casa_guido.ui.theme.Paragraph
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun IdentificacaoPaciente(
+fun CadastroIdentificacaoPaciente(
     modifier: Modifier = Modifier,
     paciente: Paciente,
     onChangeCampo: (CamposIdentificacao, String) -> Unit,

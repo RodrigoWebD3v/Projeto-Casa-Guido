@@ -1,7 +1,10 @@
 package br.com.casa_guido.screens.shared
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
@@ -29,7 +32,7 @@ fun RadioButtonComLabelWidthIn(
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(label, style = TextStyle(
             color = GreenBlack,
@@ -37,7 +40,8 @@ fun RadioButtonComLabelWidthIn(
             fontWeight = FontWeight.SemiBold,
             textAlign = TextAlign.Start
         ),
-            modifier = Modifier.widthIn(110.dp, 120.dp))
+            modifier = Modifier.width(120.dp)
+        )
         
         RadioButton(
             modifier = modifier,

@@ -2,7 +2,6 @@ package br.com.casa_guido.room.entidades
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.math.BigDecimal
 import java.util.UUID
 
 @Entity(tableName = "composicao_familiar")
@@ -12,7 +11,9 @@ data class ComposicaoFamiliar(
     val nome: String?,
     val parentesco: String?,
     val data_nascimento: String?,
+    val estudaOpc: Int?,
     val escolaridade: String?,
-    val trabalha: Boolean?,
-    val renda: String?
+    val trabalhaOpc: Int?,
+    val renda: String?,
+    val idade: Int?,
 )

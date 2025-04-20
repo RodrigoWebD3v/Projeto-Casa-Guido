@@ -55,6 +55,9 @@ data class Paciente(
     val doenca: List<Doenca> = emptyList(),
     val tratamento: List<Tratamento> = emptyList(),
     val profissionalResponsavel: ProfissionalResponsavel = ProfissionalResponsavel(),
+    val composicaoFamiliar: List<ComposicaoFamiliar> = emptyList(),
+    val historicoSaude: HistoricoSaude = HistoricoSaude(),
+    val situacaoHabitacional: SituacaoHabitacional = SituacaoHabitacional(),
 )
 
 @Serializable
@@ -101,7 +104,6 @@ data class Doenca(
     val id : String = UUID.randomUUID().toString()
 )
 
-
 data class Tratamento(
     val tipo: String = "",
     val data_inicio: String = "",
@@ -124,7 +126,44 @@ data class Telefone(
     val id: String = UUID.randomUUID().toString()
 )
 
+data class ComposicaoFamiliar(
+    val nome: String = "",
+    val parentesco: String = "",
+    val dataNascimento: String = "",
+    val idade: Int = 0,
+    val estudaOpcional: Int = 0,
+    val serie: String = "",
+    val trabalhaOpcional: Int = 0,
+    val renda: String = "",
+    val id: String = UUID.randomUUID().toString()
+)
 
+data class HistoricoSaude(
+    val id: String = UUID.randomUUID().toString(),
+    val doencasFamilia: Array<Int> = emptyArray(),
+    val medicamentosUsoContinuo: String = "",
+    val localProcuraAtendimento: Array<Int> = emptyArray(),
+    val recebeBeneficio: Int? = null,
+    val beneficioDescricao: String = "",
+)
+
+data class SituacaoHabitacional(
+    val id: String = UUID.randomUUID().toString(),
+    val comoAdquiriuCasa: Int? = null,
+    val compPropriedade: Int? = null,
+    val area: Int? = null,
+    val numeroComodos: Int? = null,
+    val material: Int? = null,
+    val eletrodomesticos: Array<Int> = emptyArray(),
+    val bens: Array<Int> = emptyArray(),
+    val meioDeTransporte: Int? = null,
+    val meioDeComunicao: Int? = null,
+    val possuiBanheiros: Int? = null,
+    val dentroDeCasa: Int? = null,
+    val destinoDoLixo: Int? = null,
+    val agua: Int? = null,
+    val valorTotal: String? = null,
+)
 
 
 val listaAgendamentos = listOf(

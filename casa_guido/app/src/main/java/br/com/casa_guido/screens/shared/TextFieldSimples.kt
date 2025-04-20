@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -39,6 +39,7 @@ fun TextFieldSimples(
     keyboardType: KeyboardType = KeyboardType.Text,
     somenteNumero: Boolean = false,
     visualTransformation: VisualTransformation = VisualTransformation.None,
+    singleLine: Boolean = true,
     onChange: (String) -> Unit
 ) {
     Column(
@@ -61,7 +62,7 @@ fun TextFieldSimples(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(45.dp)
+                .heightIn(min = 45.dp, max = 300.dp)
                 .border(
                     width = 1.5.dp, color = Paragraph, shape = RoundedCornerShape(8.dp)
                 )
@@ -85,7 +86,7 @@ fun TextFieldSimples(
                     .align(Alignment.CenterStart),
                 cursorBrush = SolidColor(BackgroundColor),
                 visualTransformation = visualTransformation,
-                singleLine = true,
+                singleLine = singleLine,
                 decorationBox = { innerTextField ->
                     if (valorPreenchido.isEmpty()) {
                         Text(

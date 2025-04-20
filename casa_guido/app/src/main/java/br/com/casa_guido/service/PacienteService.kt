@@ -1,6 +1,7 @@
 package br.com.casa_guido.service
 
 import br.com.casa_guido.repository.PacienteRepository
+import br.com.casa_guido.screens.HistoricoSaude
 import br.com.casa_guido.screens.Paciente
 import br.com.casa_guido.screens.ProfissionalResponsavel
 import kotlinx.coroutines.flow.first
@@ -13,7 +14,9 @@ class PacienteService(
     private val pessoaService: PessoaService,
     private val quimioService: QuimioService,
     private val cirurgiaService: CirurgiaService,
-    private val radioService: RadioService
+    private val radioService: RadioService,
+    private val composicaoFamiliarService: ComposicaoFamiliarService,
+    private val historicoSaudeService: HistoricoSaudeService
 ) {
 
     suspend fun getPacientes(): List<Paciente> {
@@ -63,6 +66,7 @@ class PacienteService(
             responsavelId = this.responsavel.id,
             conjugeResponsavelId = this.conjugeResponsavel.id,
             outroResponsavelId = this.outroResponsavel.id,
+
         )
     }
 
@@ -95,7 +99,10 @@ class PacienteService(
             ),
             quimios = quimioService.getQuimiosPorPaciente(this.id),
             cirurgias = cirurgiaService.getCirurgiasPorPaciente(this.id),
-            radios = radioService.getRadiosByPaciente(this.id)
+            radios = radioService.getRadiosByPaciente(this.id),
+            composicaoFamiliar = composicaoFamiliarService.getComposicaoFamiliarPorPaciente(this.id),
+            historicoSaude = historicoSaudeService.getHistoricoSaudeByPaciente(this.id)
+                ?: HistoricoSaude()
         )
     }
 }
