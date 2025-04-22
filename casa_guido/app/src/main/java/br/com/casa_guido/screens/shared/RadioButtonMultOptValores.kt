@@ -32,7 +32,7 @@ import br.com.casa_guido.ui.theme.Paragraph
 @Composable
 fun RadioButtonMultOptValores(
     modifier: Modifier = Modifier,
-    selected: Int,
+    selected: Int?,
     labelTitulo: String,
     opcoesLista: List<Pair<String, Int>> = listOf("Sim" to 0, "Não" to 1),
     onClickListener: (Int) -> Unit

@@ -6,7 +6,6 @@ import androidx.room.TypeConverters
 import br.com.casa_guido.room.Converters
 import br.com.casa_guido.room.dao.CirurgiaDao
 import br.com.casa_guido.room.dao.ComposicaoFamiliarDao
-import br.com.casa_guido.room.dao.DoencasDao
 import br.com.casa_guido.room.dao.EnderecoDao
 import br.com.casa_guido.room.dao.HistoricoSaudeDao
 import br.com.casa_guido.room.dao.PacienteDao
@@ -15,11 +14,9 @@ import br.com.casa_guido.room.dao.ProfissionalResponsavelDao
 import br.com.casa_guido.room.dao.QuimioterapiaDao
 import br.com.casa_guido.room.dao.RadioTerapiaDao
 import br.com.casa_guido.room.dao.SituacaoHabitacionalDao
-import br.com.casa_guido.room.dao.TelefoneDao
 import br.com.casa_guido.room.dao.TratamentoDao
 import br.com.casa_guido.room.entidades.Cirurgia
 import br.com.casa_guido.room.entidades.ComposicaoFamiliar
-import br.com.casa_guido.room.entidades.Doencas
 import br.com.casa_guido.room.entidades.Endereco
 import br.com.casa_guido.room.entidades.Entrevista
 import br.com.casa_guido.room.entidades.HistoricoSaude
@@ -29,7 +26,6 @@ import br.com.casa_guido.room.entidades.ProfissionalResponsavel
 import br.com.casa_guido.room.entidades.Quimioterapia
 import br.com.casa_guido.room.entidades.RadioTerapia
 import br.com.casa_guido.room.entidades.SituacaoHabitacional
-import br.com.casa_guido.room.entidades.Telefone
 import br.com.casa_guido.room.entidades.Tratamento
 
 @Database(
@@ -51,7 +47,7 @@ import br.com.casa_guido.room.entidades.Tratamento
 
 
     ],
-    version = 10,
+    version = 11,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

@@ -6,5 +6,13 @@ enum class CamposSituacaoHabitacional {
     AREA,
     NUMERO_COMODOS,
     MATERIAL,
-    ELETRODOMESTICOS
+    ELETRODOMESTICOS,
+    BENS,
+    VALOR_TOTAL,
+    MEIO_TRANSPORTE,
+    MEIO_COMUNICACAO,
+    POSSUI_BANHEIRO,
+    DENTRO_DE_CASA,
+    DESCARTE_LIXO,
+    AGUA,
 }

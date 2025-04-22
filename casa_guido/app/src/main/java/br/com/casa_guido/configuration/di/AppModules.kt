@@ -22,6 +22,7 @@ import br.com.casa_guido.screens.cadastro.formularios.cirurgia.CirurgiaViewModel
 import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.ComposicaoFamiliarViewModel
 import br.com.casa_guido.screens.cadastro.formularios.endereco.EnderecoViewModel
 import br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente.IdentificacaoViewModel
+import br.com.casa_guido.screens.cadastro.formularios.observacao.CadastroObservacaoViewModel
 import br.com.casa_guido.screens.cadastro.formularios.radio.QuimioViewModel
 import br.com.casa_guido.screens.cadastro.formularios.radio.RadioViewModel
 import br.com.casa_guido.screens.cadastro.formularios.responsavel.OutroViewModel
@@ -96,6 +97,8 @@ val appModule = module {
     singleOf(::CompartilharArquivoService)
     singleOf(::HistoricoSaudeService)
     singleOf(::HistoricoSaudeRepository)
+    singleOf(::CadastroObservacaoViewModel)
+
 
 
     single {

@@ -6,7 +6,6 @@ import java.math.BigDecimal
 import java.util.UUID
 
 @Entity(tableName = "situacao_habitacional")
-
 data class SituacaoHabitacional(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val responsavelId: String?,

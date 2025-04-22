@@ -31,7 +31,7 @@ data class Paciente(
     val tamCalcado: String? = null,
 
     val origenInfoOng: String? = null,
-    val observacoes: String? = null,
+    val observacoes: Array<String>?,
 
     val responsavelId: String? = null,
     val conjugeResponsavelId: String? = null,

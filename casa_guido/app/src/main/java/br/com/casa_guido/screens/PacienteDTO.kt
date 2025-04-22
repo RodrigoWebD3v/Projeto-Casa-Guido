@@ -48,7 +48,7 @@ data class Paciente(
     val tamCalcado: String = "",
     val diagnostico: String = "",
     val origen_info_ong: String = "",
-    val observacoes: String = "",
+    val observacoes: Array<String> = emptyArray(),
     val responsavel: Pessoa = Pessoa(),
     val conjugeResponsavel: Pessoa = Pessoa(),
     val outroResponsavel: Pessoa = Pessoa(),

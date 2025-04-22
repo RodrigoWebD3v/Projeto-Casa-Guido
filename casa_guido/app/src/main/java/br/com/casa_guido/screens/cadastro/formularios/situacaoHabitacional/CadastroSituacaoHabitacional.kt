@@ -1,5 +1,6 @@
 package br.com.casa_guido.screens.cadastro.formularios.situacaoHabitacional
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,7 +12,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -68,11 +68,14 @@ fun CadastroSituacaoHabitacional(
     }
 
     Column(
-        Modifier.padding(horizontal = 20.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(20.dp)
+        Modifier
+            .padding(horizontal = 20.dp)
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
 
         RadioButtonMultOptValores(
-            selected = situacaoHabitacional.comoAdquiriuCasa ?: 0,
+            selected = situacaoHabitacional.comoAdquiriuCasa,
             labelTitulo = "Como adquiriu a casa",
             opcoesLista = listOf(
                 "Doacao" to 0,
@@ -88,7 +91,7 @@ fun CadastroSituacaoHabitacional(
         }
 
         RadioButtonMultOptValores(
-            selected = situacaoHabitacional.compPropriedade ?: 0,
+            selected = situacaoHabitacional.compPropriedade,
             labelTitulo = "Comp. Propriedade",
         ) {
             onChangeCampo(
@@ -97,19 +100,19 @@ fun CadastroSituacaoHabitacional(
         }
 
         RadioButtonMultOptValores(
-            selected = situacaoHabitacional.area ?: 0, labelTitulo = "Área", opcoesLista = listOf(
+            selected = situacaoHabitacional.area, labelTitulo = "Área", opcoesLista = listOf(
                 "Pública" to 0,
                 "Particular" to 1,
             )
         ) {
             onChangeCampo(
-                CamposSituacaoHabitacional.COMP_PROPRIEDADE, it.toString()
+                CamposSituacaoHabitacional.AREA, it.toString()
             )
         }
 
         TextFieldSimples(
             nomeCampo = "Numero de Comodos",
-            valorPreenchido = (situacaoHabitacional.numeroComodos ?: "0").toString(),
+            valorPreenchido = (situacaoHabitacional.numeroComodos ?: 0).toString(),
             placeholder = "",
             paddingValues = PaddingValues(0.dp)
         ) {
@@ -119,7 +122,7 @@ fun CadastroSituacaoHabitacional(
         }
 
         RadioButtonMultOptValores(
-            selected = situacaoHabitacional.material ?: 0,
+            selected = situacaoHabitacional.material,
             labelTitulo = "Caracteristicas",
             opcoesLista = listOf(
                 "Alvenaria" to 0,
@@ -128,7 +131,7 @@ fun CadastroSituacaoHabitacional(
             )
         ) {
             onChangeCampo(
-                CamposSituacaoHabitacional.COMP_PROPRIEDADE, it.toString()
+                CamposSituacaoHabitacional.MATERIAL, it.toString()
             )
         }
 
@@ -142,7 +145,103 @@ fun CadastroSituacaoHabitacional(
                 it.toString()
             )
         }
+
+        RadioButtonMultValores(
+            opcoesLista = listOf("Terreno", "Carro", "Outro"),
+            labelTitulo = "Bens/Imovel",
+            opcoesSelecionadas = situacaoHabitacional.bens,
+        ) {
+            onChangeCampo(
+                CamposSituacaoHabitacional.BENS,
+                it.toString()
+            )
+        }
+
+        RadioButtonMultOptValores(
+            opcoesLista = listOf("Carro" to 0, "Moto" to 1, "Outro" to 2),
+            labelTitulo = "Meio de transporte + usado",
+            selected = situacaoHabitacional.meioDeTransporte,
+        ) {
+            onChangeCampo(
+                CamposSituacaoHabitacional.MEIO_TRANSPORTE,
+                it.toString()
+            )
+        }
+
+        RadioButtonMultOptValores(
+            opcoesLista = listOf("TV" to 0, "Radio" to 1, "Internet" to 2, "Outro" to 3),
+            labelTitulo = "Meio de comunicacao + usado",
+            selected = situacaoHabitacional.meioDeComunicao,
+        ) {
+            onChangeCampo(
+                CamposSituacaoHabitacional.MEIO_COMUNICACAO,
+                it.toString()
+            )
+        }
+
+        RadioButtonMultOptValores(
+            labelTitulo = "Possui banheiro",
+            selected = situacaoHabitacional.possuiBanheiros,
+        ) {
+            onChangeCampo(
+                CamposSituacaoHabitacional.POSSUI_BANHEIRO,
+                it.toString()
+            )
+        }
+
+        AnimatedVisibility(
+            situacaoHabitacional.possuiBanheiros == 0
+        ) {
+            RadioButtonMultOptValores(
+                labelTitulo = "Dentro de casa",
+                selected = situacaoHabitacional.dentroDeCasa,
+            ) {
+                onChangeCampo(
+                    CamposSituacaoHabitacional.DENTRO_DE_CASA,
+                    it.toString()
+                )
+            }
+        }
+
+
+        RadioButtonMultOptValores(
+            opcoesLista = listOf("Coleta Publica" to 0, "Queimado" to 1, "Enterrado" to 2),
+            labelTitulo = "Destino do lixo",
+            selected = situacaoHabitacional.destinoDoLixo,
+        ) {
+            onChangeCampo(
+                CamposSituacaoHabitacional.DESCARTE_LIXO,
+                it.toString()
+            )
+        }
+
+        RadioButtonMultOptValores(
+            opcoesLista = listOf(
+                "Encanada" to 0,
+                "Fervida" to 1,
+                "Filtrada" to 2,
+                "Clorada" to 3,
+                "Fora de Casa" to 4
+            ),
+            labelTitulo = "Agua",
+            selected = situacaoHabitacional.agua,
+        ) {
+            onChangeCampo(
+                CamposSituacaoHabitacional.AGUA,
+                it.toString()
+            )
+        }
+
+        TextFieldSimples(
+            nomeCampo = "Valor",
+            placeholder = "",
+            valorPreenchido = (situacaoHabitacional.valorTotal ?: 0).toString(),
+            paddingValues = PaddingValues(0.dp)
+        ) {
+            onChangeCampo(
+                CamposSituacaoHabitacional.VALOR_TOTAL,
+                it
+            )
+        }
     }
-
-
 }

@@ -15,4 +15,15 @@ class Converters {
             .toTypedArray()
     }
 
+    @TypeConverter
+    fun fromArrayString(value: Array<String>): String {
+        return value.joinToString(";")
+    }
+
+    @TypeConverter
+    fun toArrayString(value: String): Array<String> {
+        return if (value.isEmpty()) emptyArray() else value.split(";").map { it }
+            .toTypedArray()
+    }
+
 }

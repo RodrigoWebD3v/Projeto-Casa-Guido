@@ -8,7 +8,6 @@ import androidx.room.Query
 import androidx.room.Update
 import br.com.casa_guido.room.entidades.Cirurgia
 import br.com.casa_guido.room.entidades.Entrevista
-import br.com.casa_guido.room.entidades.Telefone
 import kotlinx.coroutines.flow.Flow
 
 @Dao

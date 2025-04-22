@@ -16,6 +16,7 @@ import br.com.casa_guido.screens.cadastro.formularios.conjuge.CamposOutro
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.historicoSaude.CamposHistoricoSaude
 import br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente.CamposIdentificacao
+import br.com.casa_guido.screens.cadastro.formularios.observacao.CamposObservacao
 import br.com.casa_guido.screens.cadastro.formularios.quimio.CamposQuimio
 import br.com.casa_guido.screens.cadastro.formularios.radio.CamposRadio
 import br.com.casa_guido.screens.cadastro.formularios.responsavel.CamposResponsavel
@@ -1045,21 +1046,153 @@ class CadastroScreenViewModel(
             }
 
             CamposSituacaoHabitacional.COMP_PROPRIEDADE -> {
-
+                _paciente.value = _paciente.value.copy(
+                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                        compPropriedade = valor.toInt()
+                    )
+                )
             }
 
             CamposSituacaoHabitacional.AREA -> {
-
+                _paciente.value = _paciente.value.copy(
+                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                        area = valor.toInt()
+                    )
+                )
             }
 
-            CamposSituacaoHabitacional.NUMERO_COMODOS -> {}
+            CamposSituacaoHabitacional.NUMERO_COMODOS -> {
+                _paciente.value = _paciente.value.copy(
+                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                        numeroComodos = valor.toInt()
+                    )
+                )
+            }
 
             CamposSituacaoHabitacional.MATERIAL -> {
-
+                _paciente.value = _paciente.value.copy(
+                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                        material = valor.toInt()
+                    )
+                )
             }
 
             CamposSituacaoHabitacional.ELETRODOMESTICOS -> {
+                if (valor.toInt() !in _paciente.value.situacaoHabitacional.eletrodomesticos) {
+                    _paciente.value = _paciente.value.copy(
+                        situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                            eletrodomesticos = _paciente.value.situacaoHabitacional.eletrodomesticos + valor.toInt()
+                        )
+                    )
+                } else {
+                    _paciente.value = _paciente.value.copy(
+                        situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                            eletrodomesticos = _paciente.value.situacaoHabitacional.eletrodomesticos.filterNot {
+                                it == valor.toInt()
+                            }.toTypedArray()
+                        )
+                    )
+                }
 
+            }
+
+            CamposSituacaoHabitacional.BENS -> {
+                if (valor.toInt() !in _paciente.value.situacaoHabitacional.bens) {
+                    _paciente.value = _paciente.value.copy(
+                        situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                            bens = _paciente.value.situacaoHabitacional.bens + valor.toInt()
+                        )
+                    )
+                } else {
+                    _paciente.value = _paciente.value.copy(
+                        situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                            bens = _paciente.value.situacaoHabitacional.bens.filterNot {
+                                it == valor.toInt()
+                            }.toTypedArray()
+                        )
+                    )
+                }
+            }
+
+            CamposSituacaoHabitacional.VALOR_TOTAL -> {
+                _paciente.value = _paciente.value.copy(
+                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                        valorTotal = valor
+                    )
+                )
+            }
+
+            CamposSituacaoHabitacional.MEIO_TRANSPORTE -> {
+                _paciente.value = _paciente.value.copy(
+                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                        meioDeTransporte = valor.toInt()
+                    )
+                )
+            }
+
+            CamposSituacaoHabitacional.MEIO_COMUNICACAO -> {
+                _paciente.value = _paciente.value.copy(
+                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                        meioDeComunicao = valor.toInt()
+                    )
+                )
+            }
+
+            CamposSituacaoHabitacional.POSSUI_BANHEIRO -> {
+                _paciente.value = _paciente.value.copy(
+                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                        possuiBanheiros = valor.toInt()
+                    )
+                )
+            }
+
+            CamposSituacaoHabitacional.DENTRO_DE_CASA -> {
+                _paciente.value = _paciente.value.copy(
+                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                        dentroDeCasa = valor.toInt()
+                    )
+                )
+            }
+
+            CamposSituacaoHabitacional.DESCARTE_LIXO -> {
+                _paciente.value = _paciente.value.copy(
+                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                        destinoDoLixo = valor.toInt()
+                    )
+                )
+            }
+
+            CamposSituacaoHabitacional.AGUA -> {
+                _paciente.value = _paciente.value.copy(
+                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
+                        agua = valor.toInt()
+                    )
+                )
+            }
+        }
+    }
+
+    fun onChangeObservacao(campo: CamposObservacao, valor: String) {
+        when(campo)
+        {
+            CamposObservacao.COMO_CONHECEU -> {
+                _paciente.value = _paciente.value.copy(
+                    origen_info_ong = valor
+                )
+            }
+
+            CamposObservacao.ADD_OBSERVACAO -> {
+                _paciente.value = _paciente.value.copy(
+                    observacoes = _paciente.value.observacoes + valor
+                )
+            }
+
+            CamposObservacao.DELETE_OBSERVACAO -> {
+                _paciente.value = _paciente.value.copy(
+                    observacoes = _paciente.value.observacoes
+                        .filterIndexed { index, _ -> index != valor.toInt() }
+                        .toTypedArray()
+                )
             }
         }
     }

@@ -59,6 +59,7 @@ import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.CadastroCompo
 import br.com.casa_guido.screens.cadastro.formularios.conjuge.CadastroConjuge
 import br.com.casa_guido.screens.cadastro.formularios.historicoSaude.CadastroHistoricoSaude
 import br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente.CadastroIdentificacaoPaciente
+import br.com.casa_guido.screens.cadastro.formularios.observacao.Observacao
 import br.com.casa_guido.screens.cadastro.formularios.outro.CadastroOutro
 import br.com.casa_guido.screens.cadastro.formularios.radio.CadastroQuimio
 import br.com.casa_guido.screens.cadastro.formularios.radio.RadioCadastro
@@ -166,8 +167,8 @@ fun CadastroScreen(
             )
         },
 
-    ) { innerPadding ->
-        val pagerState = rememberPagerState(pageCount = { 11 })
+        ) { innerPadding ->
+        val pagerState = rememberPagerState(pageCount = { 12 })
         var percentual by remember { mutableFloatStateOf(.0f) }
         val animatedPercentual by animateFloatAsState(targetValue = percentual, label = "")
 
@@ -195,7 +196,7 @@ fun CadastroScreen(
 
             LaunchedEffect(pagerState.currentPage) {
                 //remover scrolltopage apos finalizar criacao de todo o cadastro
-                pagerState.scrollToPage(11)
+                //pagerState.scrollToPage(12)
 
 
                 percentual = pagerState.currentPage / (pagerState.pageCount - 1).toFloat()
@@ -203,7 +204,7 @@ fun CadastroScreen(
 
 
 
-            HorizontalPager(state = pagerState, beyondViewportPageCount = 11) { page ->
+            HorizontalPager(state = pagerState, beyondViewportPageCount = 12) { page ->
                 Box(Modifier.fillMaxSize()) {
                     Column(
                         modifier = Modifier
@@ -353,6 +354,18 @@ fun CadastroScreen(
                                         numeroTela = page + 1,
                                         onChangeCampo = { campo, valor ->
                                             viewModel.onChangeSituacaoHabitacional(campo, valor)
+                                        }
+                                    )
+                                }
+
+                                11 -> {
+                                    Observacao(
+                                        numeroTela = page + 1,
+                                        paciente = paciente,
+                                        onChangeCampo = { campo, valor ->
+                                            viewModel.onChangeObservacao(
+                                                campo, valor
+                                            )
                                         }
                                     )
                                 }

@@ -9,18 +9,9 @@ import java.util.UUID
 data class Cirurgia(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
 
-    val pacienteId: String, // relação com Paciente
+    val pacienteId: String,
 
-    val nome: String? = null,      // adicionado da versão anterior
-    val data: String? = null,      // manter como String, mas considere parsear para Date no backend
-    val descricao: String? = null  // manter para observações extras
+    val nome: String? = null,
+    val data: String? = null,     
+    val descricao: String? = null
 )
-
-/*
-data class Cirurgia(
-    val nome: String = "",
-    val data: String = "",
-    val id : String = UUID.randomUUID().toString()
-)
-
- */
