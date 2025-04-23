@@ -111,13 +111,11 @@ val appModule = module {
     single { get<AppDatabase>().pacienteDao() }
     single { get<AppDatabase>().quimioterapiaDao() }
     single { get<AppDatabase>().radioterapiaDao() }
-    single { get<AppDatabase>().telefoneDao() }
     single { get<AppDatabase>().cirurgiaDao() }
     single { get<AppDatabase>().tratamentoDao() }
     single { get<AppDatabase>().historicoSaudeDao() }
     single { get<AppDatabase>().situacaoHabitacionalDao() }
     single { get<AppDatabase>().composicaoFamiliarDao() }
     single { get<AppDatabase>().profissionalResponsavelDao() }
-    single { get<AppDatabase>().doencasDao() }
 
 }

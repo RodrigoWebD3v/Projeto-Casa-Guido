@@ -40,14 +40,12 @@ import br.com.casa_guido.room.entidades.Tratamento
         ComposicaoFamiliar::class,
         Quimioterapia::class,
         RadioTerapia::class,
-        Telefone::class,
-        Doencas::class,
         ProfissionalResponsavel::class,
         Entrevista::class,
 
 
     ],
-    version = 11,
+    version = 12,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -57,13 +55,11 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun pacienteDao(): PacienteDao
     abstract fun quimioterapiaDao(): QuimioterapiaDao
     abstract fun radioterapiaDao(): RadioTerapiaDao
-    abstract fun telefoneDao(): TelefoneDao
     abstract fun cirurgiaDao(): CirurgiaDao
     abstract fun tratamentoDao(): TratamentoDao
     abstract fun historicoSaudeDao(): HistoricoSaudeDao
     abstract fun situacaoHabitacionalDao(): SituacaoHabitacionalDao
     abstract fun composicaoFamiliarDao(): ComposicaoFamiliarDao
-    abstract fun doencasDao(): DoencasDao
     abstract fun profissionalResponsavelDao(): ProfissionalResponsavelDao
 
     companion object {

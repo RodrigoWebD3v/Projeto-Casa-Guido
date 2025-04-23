@@ -1,5 +1,6 @@
 package br.com.casa_guido.screens.cadastro
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -25,8 +26,10 @@ import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.CamposSocio
 import br.com.casa_guido.service.CriarPacienteService
 import br.com.casa_guido.service.PacienteService
 import br.com.casa_guido.service.ViaCepService
+import br.com.casa_guido.util.Utils
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class CadastroScreenViewModel(
@@ -43,6 +46,8 @@ class CadastroScreenViewModel(
 
     private val _paciente = MutableStateFlow<Paciente>(Paciente())
     val paciente = _paciente.asStateFlow()
+
+    var _context: Context? = null
 
 
     fun getPaciente(id: String) {
@@ -211,7 +216,9 @@ class CadastroScreenViewModel(
                     )
                 )
 
-                if (valor.length == 8 && valor.all { it.isDigit() }) {
+                if (valor.length == 8 && valor.all { it.isDigit() } && Utils.verificarConexao(
+                        context = _context!!
+                    )) {
                     try {
                         viewModelScope.launch {
                             val endereco = viaCepService.buscaCep(valor)
@@ -224,6 +231,12 @@ class CadastroScreenViewModel(
                         }
                     } catch (e: Exception) {
                         _status.value = Status.Erro("Erro ao buscar endereço")
+                    }
+                } else {
+                    if (Utils.verificarConexao(context = _context!!)) {
+                        _status.update {
+                            Status.Erro("Sem conexão para buscar CEP")
+                        }
                     }
                 }
             }
@@ -1173,8 +1186,7 @@ class CadastroScreenViewModel(
     }
 
     fun onChangeObservacao(campo: CamposObservacao, valor: String) {
-        when(campo)
-        {
+        when (campo) {
             CamposObservacao.COMO_CONHECEU -> {
                 _paciente.value = _paciente.value.copy(
                     origen_info_ong = valor

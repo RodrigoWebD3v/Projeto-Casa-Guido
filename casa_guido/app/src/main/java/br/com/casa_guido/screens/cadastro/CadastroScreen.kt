@@ -47,6 +47,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -92,6 +93,8 @@ fun CadastroScreen(
     val viewModel = koinViewModel<CadastroScreenViewModel>()
     val paciente by viewModel.paciente.collectAsState()
     val status by viewModel.status.collectAsState()
+
+    viewModel._context = LocalContext.current
 
 
     LaunchedEffect(pacienteId) {
