@@ -19,7 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.screens.Pessoa
-import br.com.casa_guido.screens.shared.TextFieldSimples
+import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
 

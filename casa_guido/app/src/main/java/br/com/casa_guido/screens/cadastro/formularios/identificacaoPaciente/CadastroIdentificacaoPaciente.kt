@@ -31,9 +31,9 @@ import br.com.casa_guido.customizacao.VisualTransformationCustom
 import br.com.casa_guido.screens.Paciente
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
-import br.com.casa_guido.screens.shared.BotaoPersonalizadoComIcones
-import br.com.casa_guido.screens.shared.DataPicker
-import br.com.casa_guido.screens.shared.TextFieldSimples
+import br.com.casa_guido.screens.components.BotaoPersonalizadoComIcones
+import br.com.casa_guido.screens.components.DataPicker
+import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.Alert
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main

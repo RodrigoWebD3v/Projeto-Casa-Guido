@@ -1,4 +1,4 @@
-package br.com.casa_guido.screens.shared
+package br.com.casa_guido.screens.components
 
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background

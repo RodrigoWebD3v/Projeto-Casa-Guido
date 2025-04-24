@@ -30,9 +30,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.screens.HistoricoSaude
-import br.com.casa_guido.screens.shared.RadioButtonComLabelWidthIn
-import br.com.casa_guido.screens.shared.RadioButtonMultOptValores
-import br.com.casa_guido.screens.shared.TextFieldSimples
+import br.com.casa_guido.screens.components.RadioButtonComLabelWidthIn
+import br.com.casa_guido.screens.components.RadioButtonMultOptValores
+import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Paragraph

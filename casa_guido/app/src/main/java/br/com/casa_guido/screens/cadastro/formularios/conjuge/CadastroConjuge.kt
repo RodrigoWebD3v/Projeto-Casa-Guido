@@ -5,24 +5,16 @@ import androidx.annotation.RequiresApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Text
-import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -31,7 +23,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -44,12 +35,11 @@ import br.com.casa_guido.customizacao.VisualTransformationCustom
 import br.com.casa_guido.screens.Pessoa
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
-import br.com.casa_guido.screens.shared.BotaoPersonalizadoComIcones
-import br.com.casa_guido.screens.shared.DataPicker
-import br.com.casa_guido.screens.shared.RadioButtonComLabelWidthIn
-import br.com.casa_guido.screens.shared.TextFieldSimples
+import br.com.casa_guido.screens.components.BotaoPersonalizadoComIcones
+import br.com.casa_guido.screens.components.DataPicker
+import br.com.casa_guido.screens.components.RadioButtonMultOptValores
+import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.Alert
-import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
@@ -320,252 +310,52 @@ fun CadastroConjuge(
                         modifier = Modifier.weight(1f)
                     )
                 }
-
                 Column(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp, vertical = 10.dp),
+                    modifier = Modifier.padding(horizontal = 20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Box(
-                        Modifier
-                            .fillMaxWidth()
-                            .height(60.dp)
-                            .padding(bottom = 10.dp)
-                            .clip(RoundedCornerShape(10.dp))
-                            .background(Paragraph),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "Estado Civil",
-                            style = TextStyle(
-                                fontSize = 16.sp,
-                                color = BackgroundColor,
-                                fontWeight = FontWeight.SemiBold,
-                                textAlign = TextAlign.Center
+                    RadioButtonMultOptValores(
+                        labelTitulo = "Estado Civil",
+                        opcoesLista = listOf(
+                            "Solteiro" to 0,
+                            "Casado" to 1,
+                            "União Estavel" to 2,
+                            "Viúvo" to 3,
+                            "Separado" to 4,
+                            "Outro" to 5
+                        ),
+                        selected = conjuge.estadoCivil,
+                        onClickListener = {
+                            onChangeCampo(
+                                CamposConjuge.ESTADO_CIVIL_CONJUGE,
+                                it.toString()
                             )
-                        )
-                    }
+                        },
+                    )
 
-                    Spacer(Modifier.width(10.dp))
-
-                    Row(
-                        Modifier.height(IntrinsicSize.Min)
-                    ) {
-                        Column {
-                            RadioButtonComLabelWidthIn(
-                                label = "Solteiro",
-                                selected = conjuge.estadoCivil == 1,
-                                onClickListener = {
-                                    onChangeCampo(
-                                        CamposConjuge.ESTADO_CIVIL_CONJUGE,
-                                        1.toString()
-                                    )
-                                }
+                    RadioButtonMultOptValores(
+                        labelTitulo = "Situacao Profissional",
+                        opcoesLista = listOf(
+                            "Empregado" to 0,
+                            "Desempregado" to 1,
+                            "Autonomo" to 2,
+                            "Pensionista" to 3,
+                            "Aposentado" to 4,
+                            "Diarista" to 5,
+                            "Pensionista" to 6,
+                            "Outro" to 7
+                        ),
+                        selected = conjuge.situacaoProfissional,
+                        onClickListener = {
+                            onChangeCampo(
+                                CamposConjuge.SITUACAO_PROFISSIONAL_CONJUGE,
+                                it.toString()
                             )
-
-                            RadioButtonComLabelWidthIn(
-                                label = "Casado",
-                                selected = conjuge.estadoCivil == 2,
-                                onClickListener = {
-                                    onChangeCampo(
-                                        CamposConjuge.ESTADO_CIVIL_CONJUGE,
-                                        2.toString()
-                                    )
-                                }
-                            )
-
-                            RadioButtonComLabelWidthIn(
-                                label = "União Estavel",
-                                selected = conjuge.estadoCivil == 3,
-                                onClickListener = {
-                                    onChangeCampo(
-                                        CamposConjuge.ESTADO_CIVIL_CONJUGE,
-                                        3.toString()
-                                    )
-                                }
-                            )
-                        }
-
-                        VerticalDivider(
-                            modifier = Modifier
-                                .fillMaxHeight()
-                                .width(1.dp)
-                                .background(BackgroundColor)
-                        )
-                        Column(
-                            Modifier.padding(start = 10.dp)
-                        ) {
-                            RadioButtonComLabelWidthIn(
-                                label = "Viúvo",
-                                selected = conjuge.estadoCivil == 4,
-                                onClickListener = {
-                                    onChangeCampo(
-                                        CamposConjuge.ESTADO_CIVIL_CONJUGE,
-                                        4.toString()
-                                    )
-                                }
-                            )
-
-                            RadioButtonComLabelWidthIn(
-                                label = "Separado",
-                                selected = conjuge.estadoCivil == 5,
-                                onClickListener = {
-                                    onChangeCampo(
-                                        CamposConjuge.ESTADO_CIVIL_CONJUGE,
-                                        5.toString()
-                                    )
-                                }
-                            )
-
-                            RadioButtonComLabelWidthIn(
-                                label = "Outro",
-                                selected = conjuge.estadoCivil == 6,
-                                onClickListener = {
-                                    onChangeCampo(
-                                        CamposConjuge.ESTADO_CIVIL_CONJUGE,
-                                        6.toString()
-                                    )
-                                }
-                            )
-                        }
-                    }
-
+                        },
+                    )
                 }
 
-                Column(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Box(
-                        Modifier
-                            .fillMaxWidth()
-                            .height(60.dp)
-                            .padding(bottom = 10.dp)
-                            .clip(RoundedCornerShape(10.dp))
-                            .background(Paragraph),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "Situacao Profissional",
-                            style = TextStyle(
-                                fontSize = 16.sp,
-                                color = BackgroundColor,
-                                fontWeight = FontWeight.SemiBold,
-                                textAlign = TextAlign.Center
-                            )
-                        )
-                    }
-
-                    Spacer(Modifier.width(10.dp))
-
-                    Row(
-                        Modifier.height(IntrinsicSize.Min)
-                    ) {
-                        Column {
-                            RadioButtonComLabelWidthIn(
-                                label = "Empregado",
-                                selected = conjuge.situacaoProfissional == 1,
-                                onClickListener = {
-                                    onChangeCampo(
-                                        CamposConjuge.SITUACAO_PROFISSIONAL_CONJUGE,
-                                        1.toString()
-                                    )
-                                }
-                            )
-
-                            RadioButtonComLabelWidthIn(
-                                label = "Desempregado",
-                                selected = conjuge.situacaoProfissional == 2,
-                                onClickListener = {
-                                    onChangeCampo(
-                                        CamposConjuge.SITUACAO_PROFISSIONAL_CONJUGE,
-                                        2.toString()
-                                    )
-                                }
-                            )
-
-                            RadioButtonComLabelWidthIn(
-                                label = "Autonomo",
-                                selected = conjuge.situacaoProfissional == 3,
-                                onClickListener = {
-                                    onChangeCampo(
-                                        CamposConjuge.SITUACAO_PROFISSIONAL_CONJUGE,
-                                        3.toString()
-                                    )
-                                }
-                            )
-                            RadioButtonComLabelWidthIn(
-                                label = "Pensionista",
-                                selected = conjuge.situacaoProfissional == 4,
-                                onClickListener = {
-                                    onChangeCampo(
-                                        CamposConjuge.SITUACAO_PROFISSIONAL_CONJUGE,
-                                        4.toString()
-                                    )
-                                }
-                            )
-                        }
-
-                        VerticalDivider(
-                            modifier = Modifier
-                                .fillMaxHeight()
-                                .width(1.dp)
-                                .background(BackgroundColor)
-                        )
-
-                        Column(
-                            Modifier.padding(start = 10.dp)
-                        ) {
-                            RadioButtonComLabelWidthIn(
-                                label = "Aposentado",
-                                selected = conjuge.situacaoProfissional == 5,
-                                onClickListener = {
-                                    onChangeCampo(
-                                        CamposConjuge.SITUACAO_PROFISSIONAL_CONJUGE,
-                                        5.toString()
-                                    )
-                                }
-                            )
-
-                            RadioButtonComLabelWidthIn(
-                                label = "Diarista",
-                                selected = conjuge.situacaoProfissional == 6,
-                                onClickListener = {
-                                    onChangeCampo(
-                                        CamposConjuge.SITUACAO_PROFISSIONAL_CONJUGE,
-                                        6.toString()
-                                    )
-                                }
-                            )
-
-                            RadioButtonComLabelWidthIn(
-                                label = "Pensionista",
-                                selected = conjuge.situacaoProfissional == 7,
-                                onClickListener = {
-                                    onChangeCampo(
-                                        CamposConjuge.SITUACAO_PROFISSIONAL_CONJUGE,
-                                        7.toString()
-                                    )
-                                }
-                            )
-
-                            RadioButtonComLabelWidthIn(
-                                label = "Outro",
-                                selected = conjuge.situacaoProfissional == 8,
-                                onClickListener = {
-                                    onChangeCampo(
-                                        CamposConjuge.SITUACAO_PROFISSIONAL_CONJUGE,
-                                        8.toString()
-                                    )
-                                }
-                            )
-                        }
-                    }
-
-                    ModalEndereco(
+                ModalEndereco(
                         openBottomSheet = openBottomSheet,
                         pessoa = conjuge,
                         onChange = { campo, valor ->
@@ -577,8 +367,6 @@ fun CadastroConjuge(
                             openBottomSheet = false
                         },
                     )
-
-                }
 
             }
         }

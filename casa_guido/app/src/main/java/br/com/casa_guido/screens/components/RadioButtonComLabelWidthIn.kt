@@ -1,8 +1,8 @@
-package br.com.casa_guido.screens.shared
+package br.com.casa_guido.screens.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Text
@@ -19,7 +19,7 @@ import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Paragraph
 
 @Composable
-fun RadioButtonComLabel(
+fun RadioButtonComLabelWidthIn(
     modifier: Modifier = Modifier,
     label: String,
     selected: Boolean,
@@ -29,15 +29,17 @@ fun RadioButtonComLabel(
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(label, style = TextStyle(
             color = GreenBlack,
             fontSize = 14.sp,
             fontWeight = FontWeight.SemiBold,
             textAlign = TextAlign.Start
-        ))
-
+        ),
+            modifier = Modifier.width(120.dp)
+        )
+        
         RadioButton(
             modifier = modifier,
             selected = selected,

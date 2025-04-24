@@ -1,4 +1,4 @@
-package br.com.casa_guido.screens.shared
+package br.com.casa_guido.screens.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement

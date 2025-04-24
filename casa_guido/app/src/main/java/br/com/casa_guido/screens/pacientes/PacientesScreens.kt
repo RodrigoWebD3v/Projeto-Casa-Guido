@@ -18,7 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.casa_guido.screens.pacientes.componentes.ListagemPacientes
-import br.com.casa_guido.screens.shared.CaixaPesquisa
+import br.com.casa_guido.screens.components.CaixaPesquisa
 import br.com.casa_guido.ui.theme.Main
 import org.koin.androidx.compose.koinViewModel
 

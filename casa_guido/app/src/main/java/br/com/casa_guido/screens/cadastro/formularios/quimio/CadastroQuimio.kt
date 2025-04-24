@@ -50,8 +50,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.screens.Quimio
 import br.com.casa_guido.screens.cadastro.formularios.quimio.CamposQuimio
-import br.com.casa_guido.screens.shared.DataPicker
-import br.com.casa_guido.screens.shared.RadioButtonComLabel
+import br.com.casa_guido.screens.components.DataPicker
+import br.com.casa_guido.screens.components.RadioButtonComLabel
 import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main

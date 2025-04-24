@@ -495,6 +495,7 @@ fun CadastroScreen(
                                                         actionLabel = "Fechar"
                                                     )
                                                 }
+                                                navHostController.popBackStack()
                                             },
                                             interactionSource = remember { MutableInteractionSource() },
                                             indication = LocalIndication.current

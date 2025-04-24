@@ -41,7 +41,7 @@ import androidx.compose.ui.unit.dp
 import br.com.casa_guido.configuration.Conexao
 import br.com.casa_guido.configuration.Status
 import br.com.casa_guido.navigation.root.ViewModelAuthMananger
-import br.com.casa_guido.screens.shared.TextFieldSimples
+import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.Button
 import br.com.casa_guido.ui.theme.GreenBlack

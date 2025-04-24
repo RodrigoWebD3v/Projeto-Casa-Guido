@@ -45,7 +45,7 @@ import br.com.casa_guido.room.entidades.Tratamento
 
 
     ],
-    version = 12,
+    version = 13,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

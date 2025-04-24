@@ -1,12 +1,10 @@
 package br.com.casa_guido.screens.cadastro
 
-import android.content.Context
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MedicalInformation
 import androidx.compose.material.icons.filled.PersonAddAlt
-import androidx.compose.ui.platform.LocalContext
 import br.com.casa_guido.screens.Cirurgia
-import br.com.casa_guido.screens.shared.DropDownMenuItem
+import br.com.casa_guido.screens.components.DropDownMenuItem
 
 data class CadastroScreenUiState(
     val opcoes: List<DropDownMenuItem> = listOf(
