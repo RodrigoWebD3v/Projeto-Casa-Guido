@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("com.google.devtools.ksp")
     kotlin("plugin.serialization") version "2.1.10"
+    id("com.google.gms.google-services")
 
 }
 
@@ -75,6 +76,12 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.koin.androidx.compose.navigation)
 
+    //firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-auth")
+
+
     val ktorVersion = "2.3.6"
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-android:$ktorVersion")
@@ -101,6 +108,9 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+
+    implementation("com.facebook.stetho:stetho:1.6.0")
+    implementation("com.facebook.stetho:stetho-okhttp3:1.6.0")
 
 
     implementation(libs.androidx.core.ktx)

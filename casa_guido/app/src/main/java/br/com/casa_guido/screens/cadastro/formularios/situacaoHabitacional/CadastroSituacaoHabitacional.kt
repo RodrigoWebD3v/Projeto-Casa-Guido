@@ -112,7 +112,7 @@ fun CadastroSituacaoHabitacional(
 
         TextFieldSimples(
             nomeCampo = "Numero de Comodos",
-            valorPreenchido = (situacaoHabitacional.numeroComodos ?: 0).toString(),
+            valorPreenchido = (situacaoHabitacional.numeroComodos ?: 1).toString(),
             placeholder = "",
             paddingValues = PaddingValues(0.dp)
         ) {

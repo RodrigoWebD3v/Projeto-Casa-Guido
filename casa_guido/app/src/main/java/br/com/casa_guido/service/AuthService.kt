@@ -14,9 +14,8 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class AuthService(
-    private val authRepository: AuthRepository,
-) {
+class AuthService(private val authRepository: AuthRepository )
+{
 
     suspend fun login(context: Context, email: String, password: String): LoginResponse {
         try {

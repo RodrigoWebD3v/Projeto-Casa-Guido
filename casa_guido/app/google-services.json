@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "335953114050",
+    "project_id": "casaguido-6d90b",
+    "storage_bucket": "casaguido-6d90b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:335953114050:android:c7cc67ee0214e8a080dc5b",
+        "android_client_info": {
+          "package_name": "br.com.casa_guido"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABLPaU2q1B1OsTeXkXlVWFtF6uX5FoB8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

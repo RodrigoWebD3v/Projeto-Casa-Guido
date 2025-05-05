@@ -13,6 +13,7 @@ data class Agendamento(
     val id : String = UUID.randomUUID().toString()
 )
 
+@Serializable
 data class Pessoa(
     val id: String = UUID.randomUUID().toString(),
     val nome: String = "",
@@ -21,14 +22,15 @@ data class Pessoa(
     val cpf: String = "",
     val rg: String = "",
     val endereco: Endereco = Endereco(),
-    val situacaoProfissional: Int? = 0,
-    val estadoCivil: Int? = 0,
+    val situacaoProfissional: Int? = null,
+    val estadoCivil: Int? = null,
     val naturalidade: String = "",
     val escolaridade: String = "",
     val salario: String = "",
     val cartaoSus: String = "",
 )
 
+@Serializable
 @Immutable
 data class Paciente(
     val id: String = UUID.randomUUID().toString(),
@@ -41,7 +43,7 @@ data class Paciente(
     val quimios: List<Quimio> = emptyList(),
     val radios: List<Radio> = emptyList(),
     val remuneracao: String = "",
-    val bpc: Int? = 0,
+    val bpc: Int? = null,
     val valorBpc: String = "",
     val escolaNome: String = "",
     val tamRoupa: String = "",
@@ -81,29 +83,34 @@ data class Endereco(
     val pais: String = "Brasil",
 )
 
+@Serializable
 data class Cirurgia(
     val nome: String = "",
     val data: String = "",
     val id : String = UUID.randomUUID().toString()
 )
 
+@Serializable
 data class Quimio(
     val id: String = UUID.randomUUID().toString(),
     val dataInicio: String = "",
     val dataUltimaSessao: String = "",
 )
 
+@Serializable
 data class Radio(
     val dataInicio: String = "",
     val dataUltimaSessao: String = "",
     val id : String = UUID.randomUUID().toString()
 )
 
+@Serializable
 data class Doenca(
     val nome: String = "",
     val id : String = UUID.randomUUID().toString()
 )
 
+@Serializable
 data class Tratamento(
     val tipo: String = "",
     val data_inicio: String = "",
@@ -113,6 +120,7 @@ data class Tratamento(
     val id : String = UUID.randomUUID().toString()
 )
 
+@Serializable
 data class ProfissionalResponsavel(
     val tipo: String = "",
     val nome: String = "",
@@ -120,12 +128,8 @@ data class ProfissionalResponsavel(
     val id : String = UUID.randomUUID().toString()
 )
 
-data class Telefone(
-    val numero: String = "",
-    val tipo: String = "",
-    val id: String = UUID.randomUUID().toString()
-)
 
+@Serializable
 data class ComposicaoFamiliar(
     val nome: String = "",
     val parentesco: String = "",
@@ -138,6 +142,7 @@ data class ComposicaoFamiliar(
     val id: String = UUID.randomUUID().toString()
 )
 
+@Serializable
 data class HistoricoSaude(
     val id: String = UUID.randomUUID().toString(),
     val doencasFamilia: Array<Int> = emptyArray(),
@@ -147,12 +152,13 @@ data class HistoricoSaude(
     val beneficioDescricao: String = "",
 )
 
+@Serializable
 data class SituacaoHabitacional(
     val id: String = UUID.randomUUID().toString(),
     val comoAdquiriuCasa: Int? = null,
     val compPropriedade: Int? = null,
     val area: Int? = null,
-    val numeroComodos: Int? = null,
+    val numeroComodos: String? = null,
     val material: Int? = null,
     val eletrodomesticos: Array<Int> = emptyArray(),
     val bens: Array<Int> = emptyArray(),

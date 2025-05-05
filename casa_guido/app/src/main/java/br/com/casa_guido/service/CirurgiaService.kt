@@ -22,7 +22,6 @@ class CirurgiaService(
         cirurgiaRepository.deleteCirurgiasPorPaciente(pacienteId)
     }
 
-
     private fun CirurgiaUI.toEntidade(
         pacienteId: String
     ): Cirurgia {

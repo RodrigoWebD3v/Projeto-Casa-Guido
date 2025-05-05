@@ -16,6 +16,7 @@ import br.com.casa_guido.repository.PacienteRepository
 import br.com.casa_guido.repository.PessoaRepository
 import br.com.casa_guido.repository.QuimioRepository
 import br.com.casa_guido.repository.RadioRepository
+import br.com.casa_guido.repository.SincronizarPacientesRepository
 import br.com.casa_guido.repository.ViaCepRepository
 import br.com.casa_guido.screens.cadastro.CadastroScreenViewModel
 import br.com.casa_guido.screens.cadastro.formularios.cirurgia.CirurgiaViewModel
@@ -44,6 +45,7 @@ import br.com.casa_guido.service.PacienteService
 import br.com.casa_guido.service.PessoaService
 import br.com.casa_guido.service.QuimioService
 import br.com.casa_guido.service.RadioService
+import br.com.casa_guido.service.SincronizarPacientesService
 import br.com.casa_guido.service.ViaCepService
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
@@ -65,7 +67,7 @@ val appModule = module {
     viewModelOf(::QuimioViewModel)
     viewModelOf(::OutroViewModel)
     viewModelOf(::ComposicaoFamiliarViewModel)
-
+    viewModelOf(::CadastroObservacaoViewModel)
 
 
 
@@ -97,7 +99,11 @@ val appModule = module {
     singleOf(::CompartilharArquivoService)
     singleOf(::HistoricoSaudeService)
     singleOf(::HistoricoSaudeRepository)
-    singleOf(::CadastroObservacaoViewModel)
+    singleOf(::SincronizarPacientesService)
+    singleOf(::SincronizarPacientesRepository)
+
+
+
 
 
 

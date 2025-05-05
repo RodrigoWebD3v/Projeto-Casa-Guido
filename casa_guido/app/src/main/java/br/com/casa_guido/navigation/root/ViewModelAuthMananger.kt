@@ -38,10 +38,9 @@ class ViewModelAuthMananger(
     fun refreshToken(context: Context) {
         viewModelScope.launch {
             try {
-                if (true) {
-                    //!Utils.verificarConexao(context)
+                if (!Utils.verificarConexao(context)) {
                     _conexao.update { Conexao.SemConexao }
-                    if (true) {
+                    if (OfflinePermitido(context)) {
                         _status.update {
                             Status.Sucesso("Conexão offline permitida")
                         }
@@ -93,14 +92,14 @@ class ViewModelAuthMananger(
     fun login(context: Context, email: String, password: String) {
         viewModelScope.launch {
             try {
-//                if (!Utils.verificarConexao(context)) {
-//                    Log.i("AuthMananger", "Login Sem conexão")
-//                    _conexao.update { Conexao.SemConexao }
-//                    setStatus(Resultado.Erro("Sem conexão com a internet"))
-//                    return@launch
-//                } else {
-//                    _conexao.update { Conexao.Conectado }
-//                }
+                if (!Utils.verificarConexao(context)) {
+                    Log.i("AuthMananger", "Login Sem conexão")
+                    _conexao.update { Conexao.SemConexao }
+                    setStatus(Status.Erro("Sem conexão com a internet"))
+                    return@launch
+                } else {
+                    _conexao.update { Conexao.Conectado }
+                }
                 authService.login(context, email, password)
                 _status.update {
                     Status.Sucesso("Login realizado com sucesso")

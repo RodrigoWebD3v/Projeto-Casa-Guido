@@ -4,18 +4,14 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -24,9 +20,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.screens.Paciente
-import br.com.casa_guido.screens.components.RadioButtonComLabel
+import br.com.casa_guido.screens.components.RadioButtonMultOptValores
 import br.com.casa_guido.screens.components.TextFieldSimples
-import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
 
@@ -101,64 +96,16 @@ fun CadastroSocioEconomico(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            Box(
-                Modifier
-                    .size(50.dp, 35.dp)
-                    .clip(RoundedCornerShape(10.dp))
-                    .background(Paragraph),
-                contentAlignment = Alignment.Center
+
+            RadioButtonMultOptValores(
+                opcoesLista = listOf("Sim" to 0, "Não" to 1, "Apto a receber" to 2),
+                labelTitulo = "BPC",
+                selected = paciente.bpc
             ) {
-                Text(
-                    text = "BPC",
-                    style = TextStyle(
-                        fontSize = 16.sp,
-                        color = BackgroundColor,
-                        fontWeight = FontWeight.SemiBold,
-                        textAlign = TextAlign.Center
-                    )
+                onChangeCampo(
+                    CamposSocioEconomico.REMUNERACAO_OPT,
+                    it.toString()
                 )
-            }
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 10.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-            ) {
-                RadioButtonComLabel(
-                    label = "Sim",
-                    selected = paciente.bpc == 1,
-                    onClickListener = {
-                        onChangeCampo(
-                            CamposSocioEconomico.REMUNERACAO_OPT,
-                            1.toString()
-                        )
-                    }
-                )
-
-                RadioButtonComLabel(
-                    label = "Não",
-                    selected = paciente.bpc == 0,
-                    onClickListener = {
-                        onChangeCampo(
-                            CamposSocioEconomico.REMUNERACAO_OPT,
-                            0.toString()
-                        )
-                    }
-                )
-
-                RadioButtonComLabel(
-                    label = "Apto a receber",
-                    selected = paciente.bpc == 2,
-                    onClickListener = {
-                        onChangeCampo(
-                            CamposSocioEconomico.REMUNERACAO_OPT,
-                            2.toString()
-                        )
-                    }
-                )
-
             }
         }
 

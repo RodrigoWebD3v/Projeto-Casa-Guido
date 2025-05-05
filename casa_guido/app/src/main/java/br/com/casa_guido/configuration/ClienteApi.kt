@@ -20,6 +20,8 @@ class ClienteApi {
 
     val authEndpoint = "${endpointPrincipal}/api/v1/auth"
 
+    val pacienteEndpoint = "https://webhook.site/198ad44b-1f0f-4d46-8c04-cf2cb8b46626"
+
     val client = HttpClient(Android) {
         install(ContentNegotiation) {
             json(
