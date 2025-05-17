@@ -44,8 +44,7 @@ fun DropDownMenu(
     var isExpanded by remember { mutableStateOf(false) }
 
     Box(
-        modifier = modifier
-            .fillMaxWidth(.8f),
+        modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         ExposedDropdownMenuBox(

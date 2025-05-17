@@ -7,7 +7,9 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.time.temporal.TemporalAccessor
 
 object Utils {
@@ -21,7 +23,7 @@ object Utils {
     fun formatData(
         data: TemporalAccessor
     ): String? {
-      return  DateTimeFormatter
+        return DateTimeFormatter
             .ofPattern("dd/MM/yyyy")
             .format(data)
     }
@@ -36,6 +38,17 @@ object Utils {
 
         return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
                 capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun converteEmAnos(ano: String): String {
+        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        val data = LocalDate.parse(ano, formatter)
+        val hoje = LocalDate.now()
+        val diferencaAnos = ChronoUnit.YEARS.between(data, hoje)
+
+        return diferencaAnos.toString()
     }
 
 }

@@ -102,7 +102,7 @@ fun CadastroResponsavel(
         ) {
             Column {
                 Text(
-                    "$numeroTela. Responsavel",
+                    "$numeroTela. Pai",
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,
@@ -111,7 +111,7 @@ fun CadastroResponsavel(
                     )
                 )
                 Text(
-                    "Informações do responsavel",
+                    "Informações do pai",
                     style = TextStyle(
                         fontSize = 12.sp,
                         color = Color.Black,
@@ -148,6 +148,15 @@ fun CadastroResponsavel(
                 verticalArrangement = Arrangement.spacedBy(10.dp),
                 horizontalAlignment = Alignment.Start
             ) {
+
+                RadioButtonMultOptValores(
+                    opcoesLista = listOf("Sim" to 0),
+                    modifier = Modifier.fillMaxWidth(.9f),
+                    selected = 0,
+                    labelTitulo = "Resp Principal",
+                ) {
+                }
+
                 TextFieldSimples(
                     nomeCampo = "Nome Completo",
                     valorPreenchido = responsavel.nome,

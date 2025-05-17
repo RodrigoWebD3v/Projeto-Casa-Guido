@@ -166,38 +166,58 @@ fun CadastroCirurgia(
 
             }
 
-            Button(
-                onClick = {
-                    if (state.cirurgiaEdicao.nome.isNotEmpty()) {
-                        onChangeCampo(
-                            CamposCirurgia.ADD_CIRURGIA,
-                            state.cirurgiaEdicao
+            Row {
+
+                TextFieldSimples(
+                    nomeCampo = "CID",
+                    valorPreenchido = state.cirurgiaEdicao.nome,
+                    placeholder = "Nefrectomia",
+                    onChange = {
+                        viewModel.onChangeCirurgiaEdicao(
+                            state.cirurgiaEdicao.copy(
+                                nome = it
+                            )
                         )
-                        viewModel.onChangeCirurgiaEdicao( Cirurgia(data = Utils.formatData(LocalDate.now())!!))
-                    }
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp)
-                    .padding(top = 10.dp)
-                    .clip(RoundedCornerShape(10.dp))
-                    .background(BackgroundColor),
-                shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = BackgroundColor,
-                    contentColor = Color.White
+                    },
+                    modifier = Modifier.fillMaxWidth(.6f),
+                    paddingValues = PaddingValues(start = 20.dp, end = 0.dp)
                 )
-            ) {
-                Text(
-                    text = "Adicionar cirurgia",
-                    style = TextStyle(
-                        fontSize = 16.sp,
-                        color = br.com.casa_guido.ui.theme.Button,
-                        fontWeight = FontWeight.SemiBold,
-                        textAlign = TextAlign.Center
+
+                Button(
+                    onClick = {
+                        if (state.cirurgiaEdicao.nome.isNotEmpty()) {
+                            onChangeCampo(
+                                CamposCirurgia.ADD_CIRURGIA,
+                                state.cirurgiaEdicao
+                            )
+                            viewModel.onChangeCirurgiaEdicao( Cirurgia(data = Utils.formatData(LocalDate.now())!!))
+                        }
+                    },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(horizontal = 20.dp)
+                        .padding(top = 10.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .background(BackgroundColor),
+                    shape = RoundedCornerShape(10.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = BackgroundColor,
+                        contentColor = Color.White
                     )
-                )
+                ) {
+                    Text(
+                        text = "Adicionar cirurgia",
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            color = br.com.casa_guido.ui.theme.Button,
+                            fontWeight = FontWeight.SemiBold,
+                            textAlign = TextAlign.Center
+                        )
+                    )
+                }
             }
+
+
 
             Column(
                 modifier = Modifier

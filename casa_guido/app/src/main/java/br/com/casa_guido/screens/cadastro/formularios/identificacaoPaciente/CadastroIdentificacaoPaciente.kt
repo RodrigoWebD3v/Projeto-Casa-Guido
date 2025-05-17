@@ -4,11 +4,14 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
@@ -35,9 +38,11 @@ import br.com.casa_guido.screens.components.BotaoPersonalizadoComIcones
 import br.com.casa_guido.screens.components.DataPicker
 import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.Alert
+import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
+import br.com.casa_guido.util.Utils
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -142,8 +147,9 @@ fun CadastroIdentificacaoPaciente(
                     openBottomSheet = true
                 },
                 titulo = "Endereço",
-                modifier = Modifier.fillMaxWidth(.5f)
+                modifier = Modifier.fillMaxWidth(.45f)
             )
+
 
             DataPicker(
                 showDataPicker = dataPickerNascimentoShow,
@@ -162,6 +168,25 @@ fun CadastroIdentificacaoPaciente(
                 },
                 modifier = Modifier.weight(1f)
             )
+
+            Box(
+                Modifier
+                    .size(45.dp)
+                    .background(Paragraph, shape = RoundedCornerShape(10.dp)),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = if (paciente.pessoa.dataNascimento == "") "0" else Utils.converteEmAnos(
+                        paciente.pessoa.dataNascimento
+                    ),
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        color = BackgroundColor,
+                        fontWeight = FontWeight.SemiBold,
+                        textAlign = TextAlign.Start
+                    ),
+                )
+            }
         }
 
         TextFieldSimples(

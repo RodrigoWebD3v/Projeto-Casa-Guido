@@ -51,7 +51,7 @@ import androidx.compose.ui.unit.sp
 import br.com.casa_guido.screens.Quimio
 import br.com.casa_guido.screens.cadastro.formularios.quimio.CamposQuimio
 import br.com.casa_guido.screens.components.DataPicker
-import br.com.casa_guido.screens.components.RadioButtonComLabel
+import br.com.casa_guido.screens.components.RadioButtonMultOptValores
 import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
@@ -126,47 +126,13 @@ fun CadastroQuimio(
                 mutableIntStateOf(0)
             }
 
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Start
+            RadioButtonMultOptValores(
+                opcoesLista = listOf("Sim" to 1, "Não" to 0),
+                modifier = Modifier.fillMaxWidth(.9f),
+                selected = selecionadoQuimio,
+                labelTitulo = "Quimio",
             ) {
-                Box(
-                    Modifier
-                        .size(60.dp, 35.dp)
-                        .clip(RoundedCornerShape(10.dp))
-                        .background(Paragraph),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "Quimio",
-                        style = TextStyle(
-                            fontSize = 16.sp,
-                            color = BackgroundColor,
-                            fontWeight = FontWeight.SemiBold,
-                            textAlign = TextAlign.Center
-                        )
-                    )
-                }
-
-                Spacer(Modifier.width(10.dp))
-
-                RadioButtonComLabel(
-                    label = "Sim",
-                    selected = selecionadoQuimio == 1,
-                    onClickListener = {
-                        selecionadoQuimio = 1
-                    }
-                )
-                RadioButtonComLabel(
-                    label = "Não",
-                    selected = selecionadoQuimio == 2,
-                    onClickListener = {
-                        selecionadoQuimio = 2
-                    }
-                )
+                selecionadoQuimio = it
             }
 
             AnimatedVisibility(
@@ -256,12 +222,12 @@ fun CadastroQuimio(
                 )
             }
 
-            Column (
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp)
                     .padding(vertical = 20.dp)
-            ){
+            ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
