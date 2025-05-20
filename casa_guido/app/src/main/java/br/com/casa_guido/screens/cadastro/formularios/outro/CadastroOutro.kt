@@ -147,6 +147,15 @@ fun CadastroOutro(
                 verticalArrangement = Arrangement.spacedBy(10.dp),
                 horizontalAlignment = Alignment.Start
             ) {
+                RadioButtonMultOptValores(
+                    opcoesLista = listOf("Sim" to 0),
+                    modifier = Modifier.fillMaxWidth(.9f).padding(start = 20.dp),
+                    selected = 0,
+                    labelTitulo = "Resp Principal",
+                ) {
+
+                }
+
                 TextFieldSimples(
                     nomeCampo = "Nome Completo",
                     valorPreenchido = outro.nome,

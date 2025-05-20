@@ -150,6 +150,15 @@ fun CadastroConjuge(
                 horizontalAlignment = Alignment.Start
             ) {
 
+                RadioButtonMultOptValores(
+                    opcoesLista = listOf("Sim" to 0),
+                    modifier = Modifier.fillMaxWidth(.9f).padding(start = 20.dp),
+                    selected = 0,
+                    labelTitulo = "Resp Principal",
+                ) {
+
+                }
+
 
                 TextFieldSimples(
                     nomeCampo = "Nome Completo",

@@ -9,7 +9,16 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9bc01d2-2390-4e59-bcae-4ed6d67e6a6d" name="Changes" comment="" />
+    <list default="true" id="d9bc01d2-2390-4e59-bcae-4ed6d67e6a6d" name="Changes" comment="alteracoes nas telas">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoDeSaudeFamiliar/CamposHistoricoDeSaudeFamiliar.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoDeSaudeFamiliar/HistoricoDeSaudeFamiliar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/conjuge/CadastroConjuge.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/conjuge/CadastroConjuge.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoSaude/CadastroHistoricoSaude.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoSaude/CadastroHistoricoSaude.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/outro/CadastroOutro.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/outro/CadastroOutro.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/responsavel/CadastroResponsavel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/responsavel/CadastroResponsavel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/situacaoHabitacional/CadastroSituacaoHabitacional.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/situacaoHabitacional/CadastroSituacaoHabitacional.kt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,10 +68,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Interface" />
-        <option value="Kotlin Enum" />
+        <option value="Kotlin Data Class" />
         <option value="Kotlin File" />
         <option value="Kotlin Class" />
-        <option value="Kotlin Data Class" />
+        <option value="Kotlin Enum" />
       </list>
     </option>
   </component>

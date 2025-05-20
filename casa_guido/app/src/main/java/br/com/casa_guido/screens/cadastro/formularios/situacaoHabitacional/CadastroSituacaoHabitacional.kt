@@ -91,18 +91,9 @@ fun CadastroSituacaoHabitacional(
         }
 
         RadioButtonMultOptValores(
-            selected = situacaoHabitacional.compPropriedade,
-            labelTitulo = "Comp. Propriedade",
-        ) {
-            onChangeCampo(
-                CamposSituacaoHabitacional.COMP_PROPRIEDADE, it.toString()
-            )
-        }
-
-        RadioButtonMultOptValores(
             selected = situacaoHabitacional.area, labelTitulo = "Área", opcoesLista = listOf(
                 "Pública" to 0,
-                "Particular" to 1,
+                "Privada" to 1,
             )
         ) {
             onChangeCampo(
@@ -132,17 +123,6 @@ fun CadastroSituacaoHabitacional(
         ) {
             onChangeCampo(
                 CamposSituacaoHabitacional.MATERIAL, it.toString()
-            )
-        }
-
-        RadioButtonMultValores(
-            opcoesLista = listOf("Tv/Dvd", "Microondas", "Geladeira", "Fogao", "Forno Eletrico"),
-            labelTitulo = "Eletrodomestico",
-            opcoesSelecionadas = situacaoHabitacional.eletrodomesticos,
-        ) {
-            onChangeCampo(
-                CamposSituacaoHabitacional.ELETRODOMESTICOS,
-                it.toString()
             )
         }
 
