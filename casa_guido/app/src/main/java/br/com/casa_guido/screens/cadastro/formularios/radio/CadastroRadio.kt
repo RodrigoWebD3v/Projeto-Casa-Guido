@@ -86,7 +86,7 @@ fun RadioCadastro(
         ) {
             Column {
                 Text(
-                    "$numeroTela. Radio",
+                    "$numeroTela. Radioterapia",
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,
@@ -113,7 +113,6 @@ fun RadioCadastro(
             .fillMaxWidth()
             .background(Main)
             .animateContentSize()
-            .padding(vertical = 10.dp)
             .padding(bottom = 10.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.Start
@@ -123,78 +122,72 @@ fun RadioCadastro(
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            var selecionadoRadio by remember {
-                mutableIntStateOf(0)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp)
+                    .background(
+                        Paragraph,
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                    .clickable {
+                        viewModel.toggleList()
+                    },
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "Radioterapia",
+                    modifier = Modifier.padding(12.dp),
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        color = BackgroundColor,
+                        fontWeight = FontWeight.SemiBold,
+                        textAlign = TextAlign.Center
+                    )
+                )
             }
+
 
             Row(
-                Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Start
+                Modifier.fillMaxWidth(),
             ) {
+                DataPicker(
+                    modifier = Modifier.fillMaxWidth(.5f),
+                    showDataPicker = state.toggleDataPickerInicioRadio,
+                    valorPreenchido = state.radioEdicao.dataInicio,
+                    titulo = "Data inicio",
+                    onCancelar = {
+                        viewModel.toggleDataPickerRadioInicio()
+                    },
+                    onChange = {
+                        Log.i("RadioCadastro 0", "onChange: $it")
+                        viewModel.onChangeRadio(it)
+                    },
+                    onClick = {
+                        viewModel.toggleDataPickerRadioInicio()
+                    },
+                )
 
-                RadioButtonMultOptValores(
-                    opcoesLista = listOf("Sim" to 1, "Não" to 0),
-                    modifier = Modifier.fillMaxWidth(.9f),
-                    selected = selecionadoRadio,
-                    labelTitulo = "Quimio",
-                ) {
-                    selecionadoRadio = it
-                }
+
+                DataPicker(
+                    modifier = Modifier.weight(1f),
+                    showDataPicker = state.toggleDataPickerFimRadio,
+                    valorPreenchido = state.radioEdicao.dataUltimaSessao,
+                    titulo = "Data fim",
+                    onCancelar = {
+                        viewModel.toggleDataPickerRadioFim()
+                    },
+                    onChange = {
+                        Log.i("RadioCadastro 1", "onChange: $it")
+                        viewModel.onChangeRadioFim(it)
+                    },
+                    onClick = {
+                        viewModel.toggleDataPickerRadioFim()
+                    },
+                )
             }
 
-            AnimatedVisibility(
-                visible = selecionadoRadio == 1,
-                enter = expandVertically(
-                    animationSpec = tween(
-                        durationMillis = 400,
-                        easing = FastOutSlowInEasing
-                    )
-                ),
-                exit = shrinkVertically() + fadeOut(),
-            ) {
-                Row(
-                    Modifier.fillMaxWidth(),
-                ) {
-                    DataPicker(
-                        modifier = Modifier.fillMaxWidth(.5f),
-                        showDataPicker = state.toggleDataPickerInicioRadio,
-                        valorPreenchido = state.radioEdicao.dataInicio,
-                        titulo = "Data inicio",
-                        onCancelar = {
-                            viewModel.toggleDataPickerRadioInicio()
-                        },
-                        onChange = {
-                            Log.i("RadioCadastro 0", "onChange: $it")
-                            viewModel.onChangeRadio(it)
-                        },
-                        onClick = {
-                            viewModel.toggleDataPickerRadioInicio()
-                        },
-                    )
-
-
-                    DataPicker(
-                        modifier = Modifier.weight(1f),
-                        showDataPicker = state.toggleDataPickerFimRadio,
-                        valorPreenchido = state.radioEdicao.dataUltimaSessao,
-                        titulo = "Data fim",
-                        onCancelar = {
-                            viewModel.toggleDataPickerRadioFim()
-                        },
-                        onChange = {
-                            Log.i("RadioCadastro 1", "onChange: $it")
-                            viewModel.onChangeRadioFim(it)
-                        },
-                        onClick = {
-                            viewModel.toggleDataPickerRadioFim()
-                        },
-                    )
-                }
-
-            }
 
             Button(
                 onClick = {
@@ -222,7 +215,7 @@ fun RadioCadastro(
                 )
             ) {
                 Text(
-                    text = "Adicionar Radio",
+                    text = "Adicionar Radioterapia",
                     style = TextStyle(
                         fontSize = 16.sp,
                         color = br.com.casa_guido.ui.theme.Button,
@@ -253,7 +246,7 @@ fun RadioCadastro(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "Lista de Radios",
+                        text = "Lista de Radioterapias",
                         style = TextStyle(
                             fontSize = 16.sp,
                             color = BackgroundColor,

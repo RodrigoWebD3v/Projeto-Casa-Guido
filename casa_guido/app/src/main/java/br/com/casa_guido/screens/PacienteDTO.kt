@@ -26,6 +26,7 @@ data class Pessoa(
     val estadoCivil: Int? = null,
     val naturalidade: String = "",
     val escolaridade: String = "",
+    val serie: String = "",
     val salario: String = "",
     val cartaoSus: String = "",
 )
@@ -87,7 +88,8 @@ data class Endereco(
 data class Cirurgia(
     val nome: String = "",
     val data: String = "",
-    val id : String = UUID.randomUUID().toString()
+    val id : String = UUID.randomUUID().toString(),
+    val cid: String = "",
 )
 
 @Serializable

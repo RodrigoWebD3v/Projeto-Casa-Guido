@@ -13,5 +13,6 @@ data class Cirurgia(
 
     val nome: String? = null,
     val data: String? = null,     
-    val descricao: String? = null
+    val descricao: String? = null,
+    val cid: String? = null,
 )

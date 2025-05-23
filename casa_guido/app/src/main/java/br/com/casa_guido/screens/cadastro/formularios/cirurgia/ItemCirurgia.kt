@@ -27,6 +27,7 @@ import br.com.casa_guido.ui.theme.Paragraph
 fun ItemCirurgia(
     nomeCirurgia: String,
     data: String,
+    cid: String,
     onExcluir: () -> Unit
 ) {
     Row(
@@ -50,7 +51,7 @@ fun ItemCirurgia(
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "Data: $data",
+                text = "Data: $data \nCid: $cid",
                 fontSize = 14.sp,
                 color = Color.DarkGray
             )

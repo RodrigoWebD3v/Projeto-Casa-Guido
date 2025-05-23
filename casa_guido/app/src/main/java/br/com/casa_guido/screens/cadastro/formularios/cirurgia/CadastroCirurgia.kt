@@ -66,7 +66,6 @@ fun CadastroCirurgia(
     val viewModel = koinViewModel<CirurgiaViewModel>()
     val state by viewModel.uiState.collectAsState()
 
-
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -81,7 +80,7 @@ fun CadastroCirurgia(
         ) {
             Column {
                 Text(
-                    "$numeroTela. Cirurgias",
+                    "$numeroTela. Cirurgia",
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,
@@ -108,7 +107,6 @@ fun CadastroCirurgia(
             .fillMaxWidth()
             .background(Main)
             .animateContentSize()
-            .padding(vertical = 10.dp)
             .padding(bottom = 10.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.Start
@@ -120,8 +118,7 @@ fun CadastroCirurgia(
         ) {
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 10.dp),
+                    .fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(10.dp),
                 horizontalAlignment = Alignment.Start
             ) {
@@ -167,15 +164,14 @@ fun CadastroCirurgia(
             }
 
             Row {
-
                 TextFieldSimples(
                     nomeCampo = "CID",
-                    valorPreenchido = state.cirurgiaEdicao.nome,
-                    placeholder = "Nefrectomia",
+                    valorPreenchido = state.cirurgiaEdicao.cid,
+                    placeholder = "",
                     onChange = {
                         viewModel.onChangeCirurgiaEdicao(
                             state.cirurgiaEdicao.copy(
-                                nome = it
+                                cid = it
                             )
                         )
                     },
@@ -206,9 +202,9 @@ fun CadastroCirurgia(
                     )
                 ) {
                     Text(
-                        text = "Adicionar cirurgia",
+                        text = "Adicionar Cirurgia",
                         style = TextStyle(
-                            fontSize = 16.sp,
+                            fontSize = 14.sp,
                             color = br.com.casa_guido.ui.theme.Button,
                             fontWeight = FontWeight.SemiBold,
                             textAlign = TextAlign.Center
@@ -240,7 +236,7 @@ fun CadastroCirurgia(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "Lista de quimios",
+                        text = "Lista de Cirurgias",
                         style = TextStyle(
                             fontSize = 16.sp,
                             color = BackgroundColor,
@@ -295,7 +291,8 @@ fun CadastroCirurgia(
                             listaCirurgias.forEachIndexed { index, item ->
                                 ItemCirurgia(
                                     nomeCirurgia = item.nome,
-                                    data = item.data
+                                    data = item.data,
+                                    cid = item.cid
                                 ) {
                                     onChangeCampo(
                                         CamposCirurgia.REMOVE_CIRURGIA,

@@ -85,7 +85,7 @@ fun CadastroQuimio(
         ) {
             Column {
                 Text(
-                    "$numeroTela. Quimio",
+                    "$numeroTela. Quimioterapia",
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,
@@ -106,13 +106,11 @@ fun CadastroQuimio(
         }
     }
 
-
     Column(
         modifier = modifier
             .fillMaxWidth()
             .background(Main)
             .animateContentSize()
-            .padding(vertical = 10.dp)
             .padding(bottom = 10.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.Start
@@ -122,69 +120,71 @@ fun CadastroQuimio(
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            var selecionadoQuimio by remember {
-                mutableIntStateOf(0)
-            }
-
-            RadioButtonMultOptValores(
-                opcoesLista = listOf("Sim" to 1, "Não" to 0),
-                modifier = Modifier.fillMaxWidth(.9f),
-                selected = selecionadoQuimio,
-                labelTitulo = "Quimio",
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp)
+                    .background(
+                        Paragraph,
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                    .clickable {
+                        viewModel.toggleList()
+                    },
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
             ) {
-                selecionadoQuimio = it
+                Text(
+                    text = "Quimioterapia",
+                    modifier = Modifier.padding(12.dp),
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        color = BackgroundColor,
+                        fontWeight = FontWeight.SemiBold,
+                        textAlign = TextAlign.Center
+                    )
+                )
             }
 
-            AnimatedVisibility(
-                visible = selecionadoQuimio == 1,
-                enter = expandVertically(
-                    animationSpec = tween(
-                        durationMillis = 400,
-                        easing = FastOutSlowInEasing
-                    )
-                ),
-                exit = shrinkVertically() + fadeOut(),
+            Row(
+                Modifier.fillMaxWidth(),
             ) {
-                Row(
-                    Modifier.fillMaxWidth(),
-                ) {
-                    DataPicker(
-                        modifier = Modifier.fillMaxWidth(.5f),
-                        showDataPicker = state.toggleDataPickerInicioQuimio,
-                        valorPreenchido = state.quimioEdicao.dataInicio,
-                        titulo = "Data inicio",
-                        onCancelar = {
-                            viewModel.toggleDataPickerQuimioInicio()
-                        },
-                        onChange = {
-                            Log.i("QuimioCadastro 0", "onChange: $it")
-                            viewModel.onChangeQuimioInicio(it)
-                        },
-                        onClick = {
-                            viewModel.toggleDataPickerQuimioInicio()
-                        },
-                    )
+                DataPicker(
+                    modifier = Modifier.fillMaxWidth(.5f),
+                    showDataPicker = state.toggleDataPickerInicioQuimio,
+                    valorPreenchido = state.quimioEdicao.dataInicio,
+                    titulo = "Data inicio",
+                    onCancelar = {
+                        viewModel.toggleDataPickerQuimioInicio()
+                    },
+                    onChange = {
+                        Log.i("QuimioCadastro 0", "onChange: $it")
+                        viewModel.onChangeQuimioInicio(it)
+                    },
+                    onClick = {
+                        viewModel.toggleDataPickerQuimioInicio()
+                    },
+                )
 
 
-                    DataPicker(
-                        modifier = Modifier.weight(1f),
-                        showDataPicker = state.toggleDataPickerFimQuimio,
-                        valorPreenchido = state.quimioEdicao.dataUltimaSessao,
-                        titulo = "Data fim",
-                        onCancelar = {
-                            viewModel.toggleDataPickerQuimioFim()
-                        },
-                        onChange = {
-                            Log.i("QuimioCadastro 1", "onChange: $it")
-                            viewModel.onChangeQuimioFim(it)
-                        },
-                        onClick = {
-                            viewModel.toggleDataPickerQuimioFim()
-                        },
-                    )
-                }
-
+                DataPicker(
+                    modifier = Modifier.weight(1f),
+                    showDataPicker = state.toggleDataPickerFimQuimio,
+                    valorPreenchido = state.quimioEdicao.dataUltimaSessao,
+                    titulo = "Data fim",
+                    onCancelar = {
+                        viewModel.toggleDataPickerQuimioFim()
+                    },
+                    onChange = {
+                        Log.i("QuimioCadastro 1", "onChange: $it")
+                        viewModel.onChangeQuimioFim(it)
+                    },
+                    onClick = {
+                        viewModel.toggleDataPickerQuimioFim()
+                    },
+                )
             }
+
 
             Button(
                 onClick = {
@@ -212,7 +212,7 @@ fun CadastroQuimio(
                 )
             ) {
                 Text(
-                    text = "Adicionar quimio",
+                    text = "Adicionar Quimioterapia",
                     style = TextStyle(
                         fontSize = 16.sp,
                         color = br.com.casa_guido.ui.theme.Button,

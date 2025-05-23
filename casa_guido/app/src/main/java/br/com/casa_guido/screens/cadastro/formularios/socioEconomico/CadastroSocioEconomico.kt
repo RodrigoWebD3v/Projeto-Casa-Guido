@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import br.com.casa_guido.screens.Paciente
 import br.com.casa_guido.screens.components.DropDownMenu
 import br.com.casa_guido.screens.components.DropDownMenuItem
+import br.com.casa_guido.screens.components.Escolaridade
 import br.com.casa_guido.screens.components.RadioButtonMultOptValores
 import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.GreenBlack
@@ -148,95 +149,20 @@ fun CadastroSocioEconomico(
             }
         )
 
+        Escolaridade(
+            onChangeEscolaridade = {valor1, valor2 ->
 
-        var escolaridadeState by remember {
-            mutableStateOf(
-                DropDownMenuItem(nome = "Selecione", icone = Icons.Filled.Settings, id = "0")
+                onChangeCampo(
+                    CamposSocioEconomico.ESCOLARIDADE,
+                    valor1
+                )
 
-            )
-        }
-
-        var seriestate by remember {
-            mutableStateOf(
-                "0"
-            )
-        }
-
-        val escolaridade = listOf(
-            DropDownMenuItem(nome = "Fundamental", icone = Icons.Filled.Home, id = "1"),
-            DropDownMenuItem(nome = "Médio", icone = Icons.Filled.Settings, id = "2"),
-            DropDownMenuItem(nome = "Selecione", icone = Icons.Filled.Settings, id = "0")
-        )
-
-        val serieFundamental = listOf(
-            DropDownMenuItem(nome = "1", icone = Icons.Filled.Check),
-            DropDownMenuItem(nome = "2", icone = Icons.Filled.Check),
-            DropDownMenuItem(nome = "3", icone = Icons.Filled.Check),
-            DropDownMenuItem(nome = "4", icone = Icons.Filled.Check),
-            DropDownMenuItem(nome = "5", icone = Icons.Filled.Check),
-            DropDownMenuItem(nome = "6", icone = Icons.Filled.Check),
-            DropDownMenuItem(nome = "7", icone = Icons.Filled.Check),
-            DropDownMenuItem(nome = "8", icone = Icons.Filled.Check),
-            DropDownMenuItem(nome = "9", icone = Icons.Filled.Check),
-        )
-
-        val serieMedio = listOf(
-            DropDownMenuItem(nome = "1", icone = Icons.Filled.Home),
-            DropDownMenuItem(nome = "2", icone = Icons.Filled.Settings),
-            DropDownMenuItem(nome = "3", icone = Icons.Filled.Settings),
-        )
-
-        val opcoesDefault = listOf(
-            DropDownMenuItem(nome = "Selecione", icone = Icons.Filled.Settings, id = "0")
-        )
-
-        Row (
-            Modifier.fillMaxWidth(.9f)
-        ){
-            Text(
-                "Escolaridade",
-                style = TextStyle(
-                    fontSize = 14.sp,
-                    color = GreenBlack,
-                    fontWeight = FontWeight.Medium,
-                    textAlign = TextAlign.Start
-                ), maxLines = 1, overflow = TextOverflow.Ellipsis
-            )
-        }
-
-
-        DropDownMenu(
-            opcoes = escolaridade,
-            modifier = Modifier.fillMaxWidth(.9f)
-        ) {
-            escolaridadeState = it
-        }
-
-
-        Row (
-            Modifier.fillMaxWidth(.9f)
-        ){
-            Text(
-                "Série",
-                style = TextStyle(
-                    fontSize = 14.sp,
-                    color = GreenBlack,
-                    fontWeight = FontWeight.Medium,
-                    textAlign = TextAlign.Start
-                ), maxLines = 1, overflow = TextOverflow.Ellipsis
-            )
-        }
-
-        DropDownMenu(
-            modifier = Modifier.fillMaxWidth(.9f),
-            opcoes = when (escolaridadeState.id) {
-                "1" -> serieFundamental
-                "2" -> serieMedio
-                else -> opcoesDefault
+                onChangeCampo(
+                    CamposSocioEconomico.SERIE,
+                    valor2
+                )
             }
-        ) {
-            seriestate = it.id
-        }
+        )
 
 
         RadioButtonMultOptValores(
@@ -244,7 +170,9 @@ fun CadastroSocioEconomico(
             modifier = Modifier.fillMaxWidth(.9f),
             selected = 0,
             labelTitulo = "Escola"
-        ) { }
+        ) {
+
+        }
 
     }
 }

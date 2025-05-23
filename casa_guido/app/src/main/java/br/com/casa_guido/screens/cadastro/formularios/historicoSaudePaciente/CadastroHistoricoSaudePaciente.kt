@@ -1,28 +1,20 @@
-package br.com.casa_guido.screens.cadastro.formularios.historicoSaude
+package br.com.casa_guido.screens.cadastro.formularios.historicoSaudePaciente
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
-import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -30,11 +22,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.screens.HistoricoSaude
-import br.com.casa_guido.screens.components.RadioButtonComLabelWidthIn
 import br.com.casa_guido.screens.components.RadioButtonMultOptValores
 import br.com.casa_guido.screens.components.TextFieldSimples
-import br.com.casa_guido.ui.theme.BackgroundColor
-import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Paragraph
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -94,7 +83,7 @@ fun CadastroHistoricoSaudePaciente(
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         RadioButtonMultOptValores(
-            selected = historicoDoencas.recebeBeneficio ?: 0,
+            selected = historicoDoencas.recebeBeneficio,
             labelTitulo = "Recebe beneficio",
         ) {
             onChangeCampo(
@@ -114,6 +103,7 @@ fun CadastroHistoricoSaudePaciente(
                 nomeCampo = "Quais beneficios",
                 valorPreenchido = historicoDoencas.beneficioDescricao,
                 placeholder = "",
+                singleLine = false,
                 paddingValues = PaddingValues(0.dp, 0.dp)
             ) {
                 onChangeCampo(

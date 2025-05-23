@@ -1,7 +1,8 @@
 package br.com.casa_guido.screens.cadastro.formularios.socioEconomico
 
 enum class CamposSocioEconomico {
-    ESCOLA_ANO,
+    ESCOLARIDADE,
+    SERIE,
     NOME_ESCOLA,
     REMUNERACAO,
     REMUNERACAO_OPT,

@@ -15,7 +15,7 @@ import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.CamposCompFam
 import br.com.casa_guido.screens.cadastro.formularios.conjuge.CamposConjuge
 import br.com.casa_guido.screens.cadastro.formularios.conjuge.CamposOutro
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
-import br.com.casa_guido.screens.cadastro.formularios.historicoSaude.CamposHistoricoSaude
+import br.com.casa_guido.screens.cadastro.formularios.historicoSaudePaciente.CamposHistoricoSaude
 import br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente.CamposIdentificacao
 import br.com.casa_guido.screens.cadastro.formularios.observacao.CamposObservacao
 import br.com.casa_guido.screens.cadastro.formularios.quimio.CamposQuimio
@@ -84,10 +84,18 @@ class CadastroScreenViewModel(
 
     fun onChangeSocioEconomico(camposSocioEconomico: CamposSocioEconomico, valor: String) {
         when (camposSocioEconomico) {
-            CamposSocioEconomico.ESCOLA_ANO -> {
+            CamposSocioEconomico.ESCOLARIDADE -> {
                 _paciente.value = _paciente.value.copy(
                     pessoa = _paciente.value.pessoa.copy(
                         escolaridade = valor
+                    )
+                )
+            }
+
+            CamposSocioEconomico.SERIE -> {
+                _paciente.value = _paciente.value.copy(
+                    pessoa = _paciente.value.pessoa.copy(
+                        serie = valor
                     )
                 )
             }
@@ -140,6 +148,8 @@ class CadastroScreenViewModel(
                     bpc = valor.toInt()
                 )
             }
+
+
         }
     }
 

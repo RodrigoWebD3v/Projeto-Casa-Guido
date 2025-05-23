@@ -10,16 +10,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9bc01d2-2390-4e59-bcae-4ed6d67e6a6d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../algoritimo.kt.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/ubs/UbsScreen.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/ubs/componentes/ListagemUbs.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/ubs/componentes/UbsItem.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/components/CheckBoxComp.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/components/Escolaridade.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/AndroidProjectSystem.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/appInsightsSettings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/betterCommentsSettings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/migrations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/configuration/di/AppModules.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/configuration/di/AppModules.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/config/AppDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/config/AppDatabase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Cirurgia.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Cirurgia.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Pessoa.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Pessoa.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/PacienteDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/PacienteDTO.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/CadastroScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/CadastroScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoDeSaudeFamiliar/HistoricoDeSaudeFamiliar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoDeSaudeFamiliar/CadastroHistoricoDeSaudeFamiliar.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoSaude/CadastroHistoricoSaude.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoSaude/CadastroHistoricoSaude.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/CadastroScreenViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/CadastroScreenViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/cirurgia/CadastroCirurgia.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/cirurgia/CadastroCirurgia.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/cirurgia/ItemCirurgia.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/cirurgia/ItemCirurgia.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoDeSaudeFamiliar/CadastroHistoricoDeSaudeFamiliar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoDeSaudeFamiliar/CadastroHistoricoDeSaudeFamiliar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoSaude/CadastroHistoricoSaude.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoSaudePaciente/CadastroHistoricoSaudePaciente.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoSaude/CamposHistoricoSaude.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoSaudePaciente/CamposHistoricoSaude.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/quimio/CadastroQuimio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/quimio/CadastroQuimio.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/radio/CadastroRadio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/radio/CadastroRadio.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/responsavel/CadastroResponsavel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/responsavel/CamposResponsavel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/responsavel/ResponsavelViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/socioEconomico/CadastroSocioEconomico.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/socioEconomico/CadastroSocioEconomico.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/socioEconomico/CamposSocioEconomico.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/socioEconomico/CamposSocioEconomico.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/socioEconomico/SocioEconomicoViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/home/HomeScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/home/HomeScreen.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/main/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/main/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/CirurgiaService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/CirurgiaService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/PessoaService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/PessoaService.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +59,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=/Users/macbookairm1/.android/avd/Medium_Phone.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\Digo\.android\avd\Medium_Phone_API_35.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -80,6 +110,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;RodrigoWebD3v&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:RodrigoWebD3v/Projeto-Casa-Guido.git&quot;,
+    &quot;accountId&quot;: &quot;5a0e2752-5c6f-4eec-8843-ffa790d7ac85&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -91,30 +133,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Android App.app.executor": "Run",
-    "Gradle.casa_guido [signingReport].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/macbookairm1/Documents/GitHub/Projeto-Casa-Guido/casa_guido/app",
-    "memory.settings.postsync.last.time.stamp": "1747952377899"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.casa_guido [signingReport].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ee095405&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Digo/Desktop/Projeto-Casa-Guido/casa_guido/app/src/main/java/br/com/casa_guido/screens/components&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Digo\Desktop\Projeto-Casa-Guido\casa_guido\app\src\main\java\br\com\casa_guido\screens\components" />
       <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/app/src/main/assets" />
       <recent name="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/shared" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/ubs" />
       <recent name="$PROJECT_DIR$/app" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
@@ -222,6 +263,10 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Android App.app" />
+      <item itemvalue="Gradle.casa_guido [signingReport]" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.casa_guido [signingReport]" />

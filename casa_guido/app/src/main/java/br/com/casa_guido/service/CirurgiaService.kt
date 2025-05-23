@@ -30,6 +30,7 @@ class CirurgiaService(
             pacienteId = pacienteId,
             nome = this.nome,
             data = this.data,
+            cid = this.cid,
         )
     }
 
@@ -38,6 +39,7 @@ class CirurgiaService(
             id = this.id,
             nome = this.nome ?: "",
             data = this.data ?: "",
+            cid = this.cid  ?: "",
         )
     }
 }

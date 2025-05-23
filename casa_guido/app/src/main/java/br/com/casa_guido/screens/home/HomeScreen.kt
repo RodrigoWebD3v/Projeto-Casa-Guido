@@ -2,6 +2,7 @@ package br.com.casa_guido.screens.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,7 +13,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -21,6 +25,11 @@ import br.com.casa_guido.screens.home.componentes.grid_home.GridItemData
 import br.com.casa_guido.screens.home.componentes.grid_home.GridScreen
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -33,71 +42,44 @@ fun HomeScreen(
 
     val state by viewModel.uiState.collectAsState()
 
-    Column(
-            modifier = modifier
-                .fillMaxSize()
-                .background(
-                    color = Main
-                ),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
+    val composition by rememberLottieComposition(LottieCompositionSpec.Asset("buildScreen.json"))
 
-            GridScreen(
-                gridItemsList = listOf(
-                    GridItemData(
-                        state.totalPacientes.title,
-                        state.totalPacientes.valorPrincipal,
-                        state.totalPacientes.subtitulo
-                    ),
-                    GridItemData(
-                        state.pacientesHoje.title,
-                        state.pacientesHoje.valorPrincipal,
-                        state.pacientesHoje.subtitulo
-                    ),
-                    GridItemData(
-                        state.pacientesSemana.title,
-                        state.pacientesSemana.valorPrincipal,
-                        state.pacientesSemana.subtitulo
-                    ),
-                    GridItemData(
-                        state.comparecimento.title,
-                        state.comparecimento.valorPrincipal,
-                        state.comparecimento.subtitulo
-                    ),
-                )
-            )
 
-            Column(
+    val progress by animateLottieCompositionAsState(
+        composition,
+        iterations = LottieConstants.IterateForever,
+        isPlaying = true
+    )
 
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 10.dp, start = 10.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.Start
-            ) {
-                Text(
-                    "Proximos Agendamentos",
-                    style = TextStyle(
-                        fontSize = 20.sp,
-                        color = GreenBlack,
-                        fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-                    ),
-                )
-                Text(
-                    "Agendamentos para hoje",
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        color = GreenBlack,
-                        fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-                    ),
-                )
-            }
-
-        ListagemAgendamentos(
-            lista = state.agendamentos
+    Column (
+        modifier = modifier
+            .fillMaxSize()
+            .background(
+                color = Main
+            ),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceAround
+    ){
+        LottieAnimation(
+            modifier = Modifier
+                .fillMaxSize(.9f)
+                .background(Color.Transparent),
+            composition = composition,
+            progress = { progress },
         )
 
+        Text(
+            text = "Esta tela está em desenvolvimento",
+            color = Color.Gray,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(24.dp)
+        )
     }
+
 
 
 }

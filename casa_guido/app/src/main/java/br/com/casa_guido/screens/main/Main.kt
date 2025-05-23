@@ -79,7 +79,7 @@ fun Main(
     val items = listOf(
         ItemNavBar("Dashboard", Icons.Default.Dashboard, 0),
         ItemNavBar("Pacientes", Icons.Default.Groups, 1),
-        ItemNavBar("Ubs", Icons.Default.LocalHospital, 2)
+        //ItemNavBar("Ubs", Icons.Default.LocalHospital, 2)
     )
 
     var selectedItem by remember {
@@ -263,13 +263,13 @@ fun Main(
                     }
                 }
 
-                2 -> {
-                    Box(Modifier.clickable {
-                        Sessao.clearSession(contexto)
-                    }) {
-                        Text("Agenda")
-                    }
-                }
+//                2 -> {
+//                    Box(Modifier.clickable {
+//                        Sessao.clearSession(contexto)
+//                    }) {
+//                        Text("Agenda")
+//                    }
+//                }
             }
         }
     }

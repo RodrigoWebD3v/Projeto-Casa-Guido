@@ -42,10 +42,8 @@ import br.com.casa_guido.room.entidades.Tratamento
         RadioTerapia::class,
         ProfissionalResponsavel::class,
         Entrevista::class,
-
-
     ],
-    version = 13,
+    version = 15,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

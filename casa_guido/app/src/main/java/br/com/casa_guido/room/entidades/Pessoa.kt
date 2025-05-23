@@ -15,6 +15,7 @@ data class Pessoa(
     val naturalidade: String? = null,
     val genero: String? = null,
     val escolaridade: String? = null,
+    val serie: String? = null,
     val estadoCivil: Int? = null, // mantido como Int para enums
     val situacaoProfissional: Int? = null, // idem
     val salario: String? = null, // manter como String, tratado como decimal no backend

@@ -58,7 +58,8 @@ import br.com.casa_guido.configuration.Status
 import br.com.casa_guido.screens.cadastro.formularios.cirurgia.CadastroCirurgia
 import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.CadastroComposicaoFamiliar
 import br.com.casa_guido.screens.cadastro.formularios.conjuge.CadastroConjuge
-import br.com.casa_guido.screens.cadastro.formularios.historicoSaude.CadastroHistoricoSaudePaciente
+import br.com.casa_guido.screens.cadastro.formularios.historicoDeSaudeFamiliar.CadastroHistoricoDeSaudeFamiliar
+import br.com.casa_guido.screens.cadastro.formularios.historicoSaudePaciente.CadastroHistoricoSaudePaciente
 import br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente.CadastroIdentificacaoPaciente
 import br.com.casa_guido.screens.cadastro.formularios.observacao.Observacao
 import br.com.casa_guido.screens.cadastro.formularios.outro.CadastroOutro
@@ -251,6 +252,16 @@ fun CadastroScreen(
                                 }
 
                                 2 -> {
+                                    CadastroHistoricoSaudePaciente(
+                                        historicoDoencas = paciente.historicoSaude,
+                                        numeroTela = page + 1,
+                                        onChangeCampo = { campo, valor ->
+                                            viewModel.onChangeHistoricoSaude(campo, valor)
+                                        }
+                                    )
+                                }
+
+                                3 -> {
                                     CadastroCirurgia(
                                         onChangeCampo = { campo, valor ->
                                             viewModel.onChangeCirurgia(
@@ -263,7 +274,7 @@ fun CadastroScreen(
                                     )
                                 }
 
-                                3 -> {
+                                4 -> {
                                     CadastroQuimio(
                                         onChangeCampo = { campo, valor ->
                                             viewModel.onChangeQuimio(
@@ -276,7 +287,7 @@ fun CadastroScreen(
                                     )
                                 }
 
-                                4 -> {
+                                5 -> {
                                     RadioCadastro(
                                         onChangeCampo = { campo, valor ->
                                             viewModel.onChangeRadio(
@@ -289,7 +300,7 @@ fun CadastroScreen(
                                     )
                                 }
 
-                                5 -> {
+                                6 -> {
                                     CadastroResponsavel(
                                         onChangeCampo = { campo, valor ->
                                             viewModel.onChangeResponsavel(campo, valor)
@@ -302,7 +313,7 @@ fun CadastroScreen(
                                     )
                                 }
 
-                                6 -> {
+                                7 -> {
                                     CadastroConjuge(
                                         onChangeCampo = { campo, valor ->
                                             viewModel.onChangeConjuge(campo, valor)
@@ -315,7 +326,7 @@ fun CadastroScreen(
                                     )
                                 }
 
-                                7 -> {
+                                8 -> {
                                     CadastroOutro(
                                         onChangeCampo = { campo, valor ->
                                             viewModel.onChangeOutro(campo, valor)
@@ -328,7 +339,7 @@ fun CadastroScreen(
                                     )
                                 }
 
-                                8 -> {
+                                9 -> {
                                     CadastroComposicaoFamiliar(
                                         onChangeCampo = { campo, valor ->
                                             viewModel.onChangeComposicaoFamiliar(
@@ -341,8 +352,8 @@ fun CadastroScreen(
                                     )
                                 }
 
-                                9 -> {
-                                    CadastroHistoricoSaudePaciente(
+                                10 -> {
+                                    CadastroHistoricoDeSaudeFamiliar(
                                         historicoDoencas = paciente.historicoSaude,
                                         numeroTela = page + 1,
                                         onChangeCampo = { campo, valor ->
@@ -351,7 +362,7 @@ fun CadastroScreen(
                                     )
                                 }
 
-                                10 -> {
+                                11 -> {
                                     CadastroSituacaoHabitacional(
                                         situacaoHabitacional = paciente.situacaoHabitacional,
                                         numeroTela = page + 1,
@@ -361,7 +372,7 @@ fun CadastroScreen(
                                     )
                                 }
 
-                                11 -> {
+                                12 -> {
                                     Observacao(
                                         numeroTela = page + 1,
                                         paciente = paciente,

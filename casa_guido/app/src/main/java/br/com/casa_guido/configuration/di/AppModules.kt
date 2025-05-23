@@ -27,7 +27,6 @@ import br.com.casa_guido.screens.cadastro.formularios.observacao.CadastroObserva
 import br.com.casa_guido.screens.cadastro.formularios.radio.QuimioViewModel
 import br.com.casa_guido.screens.cadastro.formularios.radio.RadioViewModel
 import br.com.casa_guido.screens.cadastro.formularios.responsavel.OutroViewModel
-import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.SocioEconomicoViewModel
 
 import br.com.casa_guido.screens.home.HomeViewModel
 import br.com.casa_guido.screens.login.LoginViewModel
@@ -59,7 +58,6 @@ val appModule = module {
     viewModelOf(::CadastroScreenViewModel)
     viewModelOf(::CirurgiaViewModel)
     viewModelOf(::ComposicaoFamiliarViewModel)
-    viewModelOf(::SocioEconomicoViewModel)
     viewModelOf(::EnderecoViewModel)
     viewModelOf(::IdentificacaoViewModel)
     viewModelOf(::OutroViewModel)
