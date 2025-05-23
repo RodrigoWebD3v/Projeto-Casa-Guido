@@ -58,7 +58,7 @@ import br.com.casa_guido.configuration.Status
 import br.com.casa_guido.screens.cadastro.formularios.cirurgia.CadastroCirurgia
 import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.CadastroComposicaoFamiliar
 import br.com.casa_guido.screens.cadastro.formularios.conjuge.CadastroConjuge
-import br.com.casa_guido.screens.cadastro.formularios.historicoSaude.CadastroHistoricoSaude
+import br.com.casa_guido.screens.cadastro.formularios.historicoSaude.CadastroHistoricoSaudePaciente
 import br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente.CadastroIdentificacaoPaciente
 import br.com.casa_guido.screens.cadastro.formularios.observacao.Observacao
 import br.com.casa_guido.screens.cadastro.formularios.outro.CadastroOutro
@@ -342,7 +342,7 @@ fun CadastroScreen(
                                 }
 
                                 9 -> {
-                                    CadastroHistoricoSaude(
+                                    CadastroHistoricoSaudePaciente(
                                         historicoDoencas = paciente.historicoSaude,
                                         numeroTela = page + 1,
                                         onChangeCampo = { campo, valor ->

@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Dashboard
 import androidx.compose.material.icons.filled.EditCalendar
 import androidx.compose.material.icons.filled.Groups
+import androidx.compose.material.icons.filled.LocalHospital
 import androidx.compose.material.icons.filled.PersonAddAlt
 import androidx.compose.material.icons.filled.Sync
 import androidx.compose.material3.BottomAppBar
@@ -78,7 +79,7 @@ fun Main(
     val items = listOf(
         ItemNavBar("Dashboard", Icons.Default.Dashboard, 0),
         ItemNavBar("Pacientes", Icons.Default.Groups, 1),
-        ItemNavBar("Agenda", Icons.Default.CalendarMonth, 2)
+        ItemNavBar("Ubs", Icons.Default.LocalHospital, 2)
     )
 
     var selectedItem by remember {
@@ -209,7 +210,7 @@ fun Main(
                         containerColor = Button
                     ) {
                         Icon(
-                            imageVector = Icons.Default.EditCalendar,
+                            imageVector = Icons.Default.LocalHospital,
                             contentDescription = "Adicionar",
                             tint = GreenBlack
                         )

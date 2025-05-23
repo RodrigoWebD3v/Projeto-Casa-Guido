@@ -171,6 +171,15 @@ data class SituacaoHabitacional(
     val valorTotal: String? = null,
 )
 
+@Serializable
+data class UbsDto(
+    val id: String = UUID.randomUUID().toString(),
+    val nome: String= "",
+    val cep: String = "",
+    val rua: String = "",
+    val numero: String = ""
+)
+
 
 val listaAgendamentos = listOf(
     Agendamento(

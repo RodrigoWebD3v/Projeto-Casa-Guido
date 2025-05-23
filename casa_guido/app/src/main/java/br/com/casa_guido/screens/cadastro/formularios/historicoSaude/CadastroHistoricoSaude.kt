@@ -40,7 +40,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun CadastroHistoricoSaude(
+fun CadastroHistoricoSaudePaciente(
     modifier: Modifier = Modifier,
     historicoDoencas: HistoricoSaude,
     numeroTela: Int,
