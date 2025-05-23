@@ -1,4 +1,4 @@
-package br.com.casa_guido.screens.cadastro.formularios.responsavel
+package br.com.casa_guido.screens.cadastro.formularios.mae
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -35,6 +35,7 @@ import br.com.casa_guido.customizacao.VisualTransformationCustom
 import br.com.casa_guido.screens.Pessoa
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
+import br.com.casa_guido.screens.cadastro.formularios.pai.CamposResponsavel
 import br.com.casa_guido.screens.components.BotaoPersonalizadoComIcones
 import br.com.casa_guido.screens.components.CheckBoxComp
 import br.com.casa_guido.screens.components.DataPicker
@@ -47,10 +48,10 @@ import br.com.casa_guido.ui.theme.Paragraph
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun CadastroResponsavel(
+fun CadastroConjuge(
     modifier: Modifier = Modifier,
-    onChangeCampo: (CamposResponsavel, String) -> Unit,
-    responsavel: Pessoa,
+    onChangeCampo: (CamposConjuge, String) -> Unit,
+    conjuge: Pessoa,
     onChangeEndereco: (CamposEndereco, String) -> Unit,
     numeroTela: Int
 ) {
@@ -69,25 +70,26 @@ fun CadastroResponsavel(
         mutableStateOf(Icons.Default.Check)
     }
 
-    LaunchedEffect(responsavel) {
-        color = if (!(responsavel.endereco.cep.isEmpty()
-                    || responsavel.endereco.numero.isEmpty()
-                    || responsavel.endereco.logradouro.isEmpty()
-                    || responsavel.endereco.bairro.isEmpty()
-                    || responsavel.endereco.referencia.isEmpty()
-                    || responsavel.endereco.localidade.isEmpty()
-                    || responsavel.endereco.uf.isEmpty())
+    LaunchedEffect(conjuge) {
+        color = if (!(conjuge.endereco.cep.isEmpty()
+                    || conjuge.endereco.numero.isEmpty()
+                    || conjuge.endereco.logradouro.isEmpty()
+                    || conjuge.endereco.bairro.isEmpty()
+                    || conjuge.endereco.referencia.isEmpty()
+                    || conjuge.endereco.localidade.isEmpty()
+                    || conjuge.endereco.uf.isEmpty())
         ) GreenBlack else Alert
 
-        iconeBotao = if (!(responsavel.endereco.cep.isEmpty()
-                    || responsavel.endereco.numero.isEmpty()
-                    || responsavel.endereco.logradouro.isEmpty()
-                    || responsavel.endereco.bairro.isEmpty()
-                    || responsavel.endereco.referencia.isEmpty()
-                    || responsavel.endereco.localidade.isEmpty()
-                    || responsavel.endereco.uf.isEmpty())
+        iconeBotao = if (!(conjuge.endereco.cep.isEmpty()
+                    || conjuge.endereco.numero.isEmpty()
+                    || conjuge.endereco.logradouro.isEmpty()
+                    || conjuge.endereco.bairro.isEmpty()
+                    || conjuge.endereco.referencia.isEmpty()
+                    || conjuge.endereco.localidade.isEmpty()
+                    || conjuge.endereco.uf.isEmpty())
         ) Icons.Default.Check else Icons.Default.Close
     }
+
 
     Column(
         modifier = modifier
@@ -103,7 +105,7 @@ fun CadastroResponsavel(
         ) {
             Column {
                 Text(
-                    "$numeroTela. Pai",
+                    "$numeroTela. Mãe",
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,
@@ -112,7 +114,7 @@ fun CadastroResponsavel(
                     )
                 )
                 Text(
-                    "Informações do pai",
+                    "Informações da mãe",
                     style = TextStyle(
                         fontSize = 12.sp,
                         color = Color.Black,
@@ -123,6 +125,8 @@ fun CadastroResponsavel(
             }
         }
     }
+
+
 
     Column(
         modifier = modifier
@@ -149,36 +153,38 @@ fun CadastroResponsavel(
                 CheckBoxComp(
                     modifier = Modifier.padding(20.dp),
                     labelTitulo = "Resp Principal?",
-                    selected = 1,
+                    selected = conjuge.respPrincipal,
                 ) {
-
+                    onChangeCampo(CamposConjuge.RESP_PRINCIPAL, if(it) "1" else "0")
                 }
+
 
                 TextFieldSimples(
                     nomeCampo = "Nome Completo",
-                    valorPreenchido = responsavel.nome,
+                    valorPreenchido = conjuge.nome,
                     onChange = {
                         onChangeCampo(
-                            CamposResponsavel.NOME_RESPONSAVEL,
+                            CamposConjuge.NOME_CONJUGE,
                             it
                         )
                     },
-                    placeholder = "Rodrigo Cardoso"
+                    placeholder = ""
                 )
 
                 var dataPickerNascimentoShow by remember {
                     mutableStateOf(false)
                 }
 
+
                 Row {
                     TextFieldSimples(
                         nomeCampo = "Cpf",
-                        valorPreenchido = responsavel.cpf,
+                        valorPreenchido = conjuge.cpf,
                         visualTransformation = VisualTransformationCustom.CpfVisualTransformation(),
-                        placeholder = "111.111.111.99",
+                        placeholder = "",
                         onChange = {
                             onChangeCampo(
-                                CamposResponsavel.CPF_RESPONSAVEL,
+                                CamposConjuge.CPF_CONJUGE,
                                 it
                             )
                         },
@@ -187,12 +193,12 @@ fun CadastroResponsavel(
 
                     TextFieldSimples(
                         nomeCampo = "Rg",
-                        valorPreenchido = responsavel.rg,
+                        valorPreenchido = conjuge.rg,
                         visualTransformation = VisualTransformationCustom.RgVisualTransformation(),
-                        placeholder = "11.111.111-9",
+                        placeholder = "",
                         onChange = {
                             onChangeCampo(
-                                CamposResponsavel.RG_RESPONSAVEL,
+                                CamposConjuge.RG_CONJUGE,
                                 it
                             )
                         },
@@ -203,12 +209,12 @@ fun CadastroResponsavel(
                 Row {
                     TextFieldSimples(
                         nomeCampo = "Naturalidade",
-                        valorPreenchido = responsavel.naturalidade,
+                        valorPreenchido = conjuge.naturalidade,
                         visualTransformation = VisualTransformation.None,
-                        placeholder = "Brasileiro",
+                        placeholder = "",
                         onChange = {
                             onChangeCampo(
-                                CamposResponsavel.NATURALIDADE_RESPONSAVEL,
+                                CamposConjuge.NATURALIDADE_CONJUGE,
                                 it
                             )
                         },
@@ -217,12 +223,12 @@ fun CadastroResponsavel(
 
                     TextFieldSimples(
                         nomeCampo = "Escolaridade",
-                        valorPreenchido = responsavel.escolaridade,
+                        valorPreenchido = conjuge.escolaridade,
                         visualTransformation = VisualTransformation.None,
-                        placeholder = "8 série",
+                        placeholder = "",
                         onChange = {
                             onChangeCampo(
-                                CamposResponsavel.ESCOLARIDADE_RESPONSAVEL,
+                                CamposConjuge.ESCOLARIDADE_CONJUGE,
                                 it
                             )
                         },
@@ -230,19 +236,18 @@ fun CadastroResponsavel(
                     )
                 }
 
-
-
                 Row {
+
                     DataPicker(
                         showDataPicker = dataPickerNascimentoShow,
-                        valorPreenchido = responsavel.dataNascimento,
+                        valorPreenchido = conjuge.dataNascimento,
                         titulo = "Data de Nascimento",
                         onCancelar = {
                             dataPickerNascimentoShow = false
                         },
                         onChange = {
                             onChangeCampo(
-                                CamposResponsavel.DATA_NASCIMENTO_RESPONSAVEL,
+                                CamposConjuge.DATA_NASCIMENTO_CONJUGE,
                                 it
                             )
                         },
@@ -252,14 +257,16 @@ fun CadastroResponsavel(
                         modifier = Modifier.fillMaxWidth(.5f)
                     )
 
+
+
                     TextFieldSimples(
                         nomeCampo = "Celular",
-                        valorPreenchido = responsavel.telefone,
+                        valorPreenchido = conjuge.telefone,
                         visualTransformation = VisualTransformationCustom.PhoneVisualTransformation(),
                         placeholder = "(48) 99963-9821",
                         onChange = {
                             onChangeCampo(
-                                CamposResponsavel.TELEFONE_RESPONSAVEL,
+                                CamposConjuge.TELEFONE_CONJUGE,
                                 it
                             )
                         },
@@ -269,18 +276,17 @@ fun CadastroResponsavel(
 
                 TextFieldSimples(
                     nomeCampo = "Cartão do sus",
-                    valorPreenchido = responsavel.cartaoSus,
+                    valorPreenchido = conjuge.cartaoSus,
                     visualTransformation = VisualTransformationCustom.CartSusVisualTransformation(),
                     placeholder = "567 8901 2345 6789",
                     onChange = {
                         onChangeCampo(
-                            CamposResponsavel.CARTAO_SUS,
+                            CamposConjuge.CARTAO_SUS,
                             it
                         )
                     },
                     modifier = Modifier.fillMaxWidth(),
                 )
-
 
                 Row(
                     modifier = Modifier.padding(start = 20.dp),
@@ -299,24 +305,23 @@ fun CadastroResponsavel(
 
                     TextFieldSimples(
                         nomeCampo = "Salário",
-                        valorPreenchido = responsavel.salario,
+                        valorPreenchido = conjuge.salario,
                         visualTransformation = VisualTransformation.None,
                         keyboardType = KeyboardType.Number,
-                        placeholder = "1.230",
+                        placeholder = "",
                         onChange = {
                             onChangeCampo(
-                                CamposResponsavel.SALARIO_RESPONSAVEL,
+                                CamposConjuge.SALARIO_CONJUGE,
                                 it
                             )
                         },
                         modifier = Modifier.weight(1f)
                     )
                 }
-
-                Column (
+                Column(
                     modifier = Modifier.padding(horizontal = 20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
-                ){
+                ) {
                     RadioButtonMultOptValores(
                         labelTitulo = "Estado Civil",
                         opcoesLista = listOf(
@@ -327,10 +332,10 @@ fun CadastroResponsavel(
                             "Separado" to 4,
                             "Outro" to 5
                         ),
-                        selected = responsavel.estadoCivil,
+                        selected = conjuge.estadoCivil,
                         onClickListener = {
                             onChangeCampo(
-                                CamposResponsavel.ESTADO_CIVIL_RESPONSAVEL,
+                                CamposConjuge.ESTADO_CIVIL_CONJUGE,
                                 it.toString()
                             )
                         },
@@ -348,29 +353,46 @@ fun CadastroResponsavel(
                             "Pensionista" to 6,
                             "Outro" to 7
                         ),
-                        selected = responsavel.situacaoProfissional,
+                        selected = conjuge.situacaoProfissional,
                         onClickListener = {
                             onChangeCampo(
-                                CamposResponsavel.SITUACAO_PROFISSIONAL_RESPONSAVEL,
+                                CamposConjuge.SITUACAO_PROFISSIONAL_CONJUGE,
                                 it.toString()
                             )
                         },
                     )
-                }
 
-                ModalEndereco(
-                    openBottomSheet = openBottomSheet,
-                    pessoa = responsavel,
-                    onChange = { campo, valor ->
-                        onChangeEndereco(
-                            campo, valor
+
+
+                }
+                TextFieldSimples(
+                    nomeCampo = "Profissão",
+                    valorPreenchido = conjuge.profissao,
+                    placeholder = "",
+                    onChange = {
+                        onChangeCampo(
+                            CamposConjuge.PROFISSAO,
+                            it
                         )
                     },
-                    onDismiss = {
-                        openBottomSheet = false
-                    },
+                    modifier = Modifier.fillMaxWidth()
                 )
+
+                ModalEndereco(
+                        openBottomSheet = openBottomSheet,
+                        pessoa = conjuge,
+                        onChange = { campo, valor ->
+                            onChangeEndereco(
+                                campo, valor
+                            )
+                        },
+                        onDismiss = {
+                            openBottomSheet = false
+                        },
+                    )
+
             }
         }
     }
 }
+

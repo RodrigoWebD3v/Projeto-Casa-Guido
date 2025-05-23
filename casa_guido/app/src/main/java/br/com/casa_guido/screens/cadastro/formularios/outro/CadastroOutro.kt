@@ -33,10 +33,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.customizacao.VisualTransformationCustom
 import br.com.casa_guido.screens.Pessoa
-import br.com.casa_guido.screens.cadastro.formularios.conjuge.CamposOutro
+import br.com.casa_guido.screens.cadastro.formularios.mae.CamposOutro
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
+import br.com.casa_guido.screens.cadastro.formularios.mae.CamposConjuge
+import br.com.casa_guido.screens.cadastro.formularios.pai.CamposResponsavel
 import br.com.casa_guido.screens.components.BotaoPersonalizadoComIcones
+import br.com.casa_guido.screens.components.CheckBoxComp
 import br.com.casa_guido.screens.components.DataPicker
 import br.com.casa_guido.screens.components.RadioButtonMultOptValores
 import br.com.casa_guido.screens.components.TextFieldSimples
@@ -129,7 +132,6 @@ fun CadastroOutro(
             .fillMaxWidth()
             .background(Main)
             .animateContentSize()
-            .padding(vertical = 10.dp)
             .padding(bottom = 10.dp)
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(10.dp),
@@ -142,20 +144,17 @@ fun CadastroOutro(
         ) {
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 10.dp),
+                    .fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(10.dp),
                 horizontalAlignment = Alignment.Start
             ) {
-                RadioButtonMultOptValores(
-                    opcoesLista = listOf("Sim" to 0),
-                    modifier = Modifier.fillMaxWidth(.9f).padding(start = 20.dp),
-                    selected = 0,
-                    labelTitulo = "Resp Principal",
+                CheckBoxComp(
+                    modifier = Modifier.padding(20.dp),
+                    labelTitulo = "Resp Principal?",
+                    selected = outro.respPrincipal,
                 ) {
-
+                    onChangeCampo(CamposOutro.RESP_PRINCIPAL, if(it) "1" else "0")
                 }
-
                 TextFieldSimples(
                     nomeCampo = "Nome Completo",
                     valorPreenchido = outro.nome,
@@ -357,7 +356,21 @@ fun CadastroOutro(
                             )
                         },
                     )
+
                 }
+
+                TextFieldSimples(
+                    nomeCampo = "Profissão",
+                    valorPreenchido = outro.profissao,
+                    placeholder = "",
+                    onChange = {
+                        onChangeCampo(
+                            CamposOutro.PROFISSAO,
+                            it
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                )
 
                 ModalEndereco(
                         openBottomSheet = openBottomSheet,

@@ -183,45 +183,16 @@ fun CadastroSituacaoHabitacional(
             }
         }
 
-
-        RadioButtonMultOptValores(
-            opcoesLista = listOf("Coleta Publica" to 0, "Queimado" to 1, "Enterrado" to 2),
-            labelTitulo = "Destino do lixo",
-            selected = situacaoHabitacional.destinoDoLixo,
-        ) {
-            onChangeCampo(
-                CamposSituacaoHabitacional.DESCARTE_LIXO,
-                it.toString()
-            )
-        }
-
-        RadioButtonMultOptValores(
-            opcoesLista = listOf(
-                "Encanada" to 0,
-                "Fervida" to 1,
-                "Filtrada" to 2,
-                "Clorada" to 3,
-                "Fora de Casa" to 4
-            ),
-            labelTitulo = "Agua",
-            selected = situacaoHabitacional.agua,
-        ) {
-            onChangeCampo(
-                CamposSituacaoHabitacional.AGUA,
-                it.toString()
-            )
-        }
-
-        TextFieldSimples(
-            nomeCampo = "Valor",
-            placeholder = "",
-            valorPreenchido = (situacaoHabitacional.valorTotal ?: 0).toString(),
-            paddingValues = PaddingValues(0.dp)
-        ) {
-            onChangeCampo(
-                CamposSituacaoHabitacional.VALOR_TOTAL,
-                it
-            )
-        }
+//        TextFieldSimples(
+//            nomeCampo = "Valor",
+//            placeholder = "",
+//            valorPreenchido = (situacaoHabitacional.valorTotal ?: 0).toString(),
+//            paddingValues = PaddingValues(0.dp)
+//        ) {
+//            onChangeCampo(
+//                CamposSituacaoHabitacional.VALOR_TOTAL,
+//                it
+//            )
+//        }
     }
 }

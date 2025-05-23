@@ -26,7 +26,7 @@ import br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente.Iden
 import br.com.casa_guido.screens.cadastro.formularios.observacao.CadastroObservacaoViewModel
 import br.com.casa_guido.screens.cadastro.formularios.radio.QuimioViewModel
 import br.com.casa_guido.screens.cadastro.formularios.radio.RadioViewModel
-import br.com.casa_guido.screens.cadastro.formularios.responsavel.OutroViewModel
+import br.com.casa_guido.screens.cadastro.formularios.pai.OutroViewModel
 
 import br.com.casa_guido.screens.home.HomeViewModel
 import br.com.casa_guido.screens.login.LoginViewModel

@@ -12,15 +12,15 @@ import br.com.casa_guido.screens.Quimio
 import br.com.casa_guido.screens.Radio
 import br.com.casa_guido.screens.cadastro.formularios.cirurgia.CamposCirurgia
 import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.CamposCompFamiliar
-import br.com.casa_guido.screens.cadastro.formularios.conjuge.CamposConjuge
-import br.com.casa_guido.screens.cadastro.formularios.conjuge.CamposOutro
+import br.com.casa_guido.screens.cadastro.formularios.mae.CamposConjuge
+import br.com.casa_guido.screens.cadastro.formularios.mae.CamposOutro
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.historicoSaudePaciente.CamposHistoricoSaude
 import br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente.CamposIdentificacao
 import br.com.casa_guido.screens.cadastro.formularios.observacao.CamposObservacao
 import br.com.casa_guido.screens.cadastro.formularios.quimio.CamposQuimio
 import br.com.casa_guido.screens.cadastro.formularios.radio.CamposRadio
-import br.com.casa_guido.screens.cadastro.formularios.responsavel.CamposResponsavel
+import br.com.casa_guido.screens.cadastro.formularios.pai.CamposResponsavel
 import br.com.casa_guido.screens.cadastro.formularios.situacaoHabitacional.CamposSituacaoHabitacional
 import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.CamposSocioEconomico
 import br.com.casa_guido.service.CriarPacienteService
@@ -744,6 +744,22 @@ class CadastroScreenViewModel(
                     )
                 )
             }
+
+            CamposResponsavel.RESP_PRINCIPAL -> {
+                _paciente.value = _paciente.value.copy(
+                    responsavel = _paciente.value.responsavel.copy(
+                        respPrincipal = valor.toInt()
+                    )
+                )
+            }
+
+            CamposResponsavel.PROFISSAO -> {
+                _paciente.value = _paciente.value.copy(
+                    responsavel = _paciente.value.responsavel.copy(
+                        profissao = valor
+                    )
+                )
+            }
         }
     }
 
@@ -836,6 +852,22 @@ class CadastroScreenViewModel(
                     )
                 )
             }
+
+            CamposConjuge.RESP_PRINCIPAL -> {
+                _paciente.value = _paciente.value.copy(
+                    conjugeResponsavel = _paciente.value.conjugeResponsavel.copy(
+                        respPrincipal = valor.toInt()
+                    )
+                )
+            }
+
+            CamposConjuge.PROFISSAO -> {
+                _paciente.value = _paciente.value.copy(
+                    conjugeResponsavel = _paciente.value.conjugeResponsavel.copy(
+                        profissao = valor
+                    )
+                )
+            }
         }
     }
 
@@ -925,6 +957,22 @@ class CadastroScreenViewModel(
                 _paciente.value = _paciente.value.copy(
                     outroResponsavel = _paciente.value.outroResponsavel.copy(
                         cartaoSus = valor
+                    )
+                )
+            }
+
+            CamposOutro.RESP_PRINCIPAL -> {
+                _paciente.value = _paciente.value.copy(
+                    outroResponsavel = _paciente.value.outroResponsavel.copy(
+                        respPrincipal = valor.toInt()
+                    )
+                )
+            }
+
+            CamposOutro.PROFISSAO -> {
+                _paciente.value = _paciente.value.copy(
+                    outroResponsavel = _paciente.value.outroResponsavel.copy(
+                        profissao = valor
                     )
                 )
             }
@@ -1052,6 +1100,35 @@ class CadastroScreenViewModel(
                 _paciente.value = _paciente.value.copy(
                     historicoSaude = _paciente.value.historicoSaude.copy(
                         beneficioDescricao = valor
+                    )
+                )
+            }
+
+            CamposHistoricoSaude.MUNICIPIO_CRAS -> {
+                _paciente.value = _paciente.value.copy(
+                    cras = _paciente.value.cras.copy(
+                        municipio = valor
+                    )
+                )
+            }
+            CamposHistoricoSaude.BAIRRO_CRAS -> {
+                _paciente.value = _paciente.value.copy(
+                    cras = _paciente.value.cras.copy(
+                        bairro = valor
+                    )
+                )
+            }
+            CamposHistoricoSaude.MUNICIPIO_UBS -> {
+                _paciente.value = _paciente.value.copy(
+                    ubs = _paciente.value.ubs.copy(
+                        municipio = valor
+                    )
+                )
+            }
+            CamposHistoricoSaude.BAIRRO_UBS -> {
+                _paciente.value = _paciente.value.copy(
+                    ubs = _paciente.value.ubs.copy(
+                        bairro = valor
                     )
                 )
             }

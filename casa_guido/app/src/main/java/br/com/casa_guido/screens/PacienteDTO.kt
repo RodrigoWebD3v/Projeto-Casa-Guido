@@ -29,6 +29,8 @@ data class Pessoa(
     val serie: String = "",
     val salario: String = "",
     val cartaoSus: String = "",
+    val respPrincipal: Int = 0,
+    val profissao: String = ""
 )
 
 @Serializable
@@ -51,6 +53,8 @@ data class Paciente(
     val tamCalcado: String = "",
     val diagnostico: String = "",
     val origen_info_ong: String = "",
+    val ubs: Ubs = Ubs(),
+    val cras: Cras = Cras(),
     val observacoes: Array<String> = emptyArray(),
     val responsavel: Pessoa = Pessoa(),
     val conjugeResponsavel: Pessoa = Pessoa(),
@@ -174,12 +178,17 @@ data class SituacaoHabitacional(
 )
 
 @Serializable
-data class UbsDto(
+data class Ubs(
     val id: String = UUID.randomUUID().toString(),
-    val nome: String= "",
-    val cep: String = "",
-    val rua: String = "",
-    val numero: String = ""
+    val municipio: String = "",
+    val bairro: String = ""
+)
+
+@Serializable
+data class Cras(
+    val id: String = UUID.randomUUID().toString(),
+    val municipio: String = "",
+    val bairro: String = ""
 )
 
 

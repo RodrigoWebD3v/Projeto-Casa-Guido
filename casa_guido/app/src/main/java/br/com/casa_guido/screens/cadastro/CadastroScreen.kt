@@ -57,7 +57,7 @@ import androidx.navigation.NavHostController
 import br.com.casa_guido.configuration.Status
 import br.com.casa_guido.screens.cadastro.formularios.cirurgia.CadastroCirurgia
 import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.CadastroComposicaoFamiliar
-import br.com.casa_guido.screens.cadastro.formularios.conjuge.CadastroConjuge
+import br.com.casa_guido.screens.cadastro.formularios.mae.CadastroConjuge
 import br.com.casa_guido.screens.cadastro.formularios.historicoDeSaudeFamiliar.CadastroHistoricoDeSaudeFamiliar
 import br.com.casa_guido.screens.cadastro.formularios.historicoSaudePaciente.CadastroHistoricoSaudePaciente
 import br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente.CadastroIdentificacaoPaciente
@@ -65,7 +65,7 @@ import br.com.casa_guido.screens.cadastro.formularios.observacao.Observacao
 import br.com.casa_guido.screens.cadastro.formularios.outro.CadastroOutro
 import br.com.casa_guido.screens.cadastro.formularios.radio.CadastroQuimio
 import br.com.casa_guido.screens.cadastro.formularios.radio.RadioCadastro
-import br.com.casa_guido.screens.cadastro.formularios.responsavel.CadastroResponsavel
+import br.com.casa_guido.screens.cadastro.formularios.pai.CadastroResponsavel
 import br.com.casa_guido.screens.cadastro.formularios.situacaoHabitacional.CadastroSituacaoHabitacional
 import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.CadastroSocioEconomico
 import br.com.casa_guido.screens.scaffold_components.TopAppBarComp
@@ -253,8 +253,8 @@ fun CadastroScreen(
 
                                 2 -> {
                                     CadastroHistoricoSaudePaciente(
-                                        historicoDoencas = paciente.historicoSaude,
                                         numeroTela = page + 1,
+                                        paciente = paciente,
                                         onChangeCampo = { campo, valor ->
                                             viewModel.onChangeHistoricoSaude(campo, valor)
                                         }

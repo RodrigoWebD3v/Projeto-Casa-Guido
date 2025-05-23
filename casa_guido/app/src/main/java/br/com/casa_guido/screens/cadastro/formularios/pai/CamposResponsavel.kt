@@ -1,7 +1,8 @@
-package br.com.casa_guido.screens.cadastro.formularios.responsavel
+package br.com.casa_guido.screens.cadastro.formularios.pai
 
 enum class CamposResponsavel {
     NOME_RESPONSAVEL,
+    RESP_PRINCIPAL,
     CPF_RESPONSAVEL,
     TELEFONE_RESPONSAVEL,
     RG_RESPONSAVEL,
@@ -11,5 +12,6 @@ enum class CamposResponsavel {
     ESTADO_CIVIL_RESPONSAVEL,
     SITUACAO_PROFISSIONAL_RESPONSAVEL,
     SALARIO_RESPONSAVEL,
-    CARTAO_SUS
+    CARTAO_SUS,
+    PROFISSAO
 }

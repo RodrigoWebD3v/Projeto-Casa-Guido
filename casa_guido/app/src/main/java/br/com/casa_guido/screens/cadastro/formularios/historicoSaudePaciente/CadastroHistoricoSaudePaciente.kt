@@ -2,6 +2,7 @@ package br.com.casa_guido.screens.cadastro.formularios.historicoSaudePaciente
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,8 +24,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.screens.HistoricoSaude
+import br.com.casa_guido.screens.Paciente
+import br.com.casa_guido.screens.Pessoa
 import br.com.casa_guido.screens.components.RadioButtonMultOptValores
 import br.com.casa_guido.screens.components.TextFieldSimples
+import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.Paragraph
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -31,7 +36,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun CadastroHistoricoSaudePaciente(
     modifier: Modifier = Modifier,
-    historicoDoencas: HistoricoSaude,
+    paciente: Paciente,
     numeroTela: Int,
     onChangeCampo: (CamposHistoricoSaude, String) -> Unit
 ) {
@@ -83,7 +88,7 @@ fun CadastroHistoricoSaudePaciente(
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         RadioButtonMultOptValores(
-            selected = historicoDoencas.recebeBeneficio,
+            selected = paciente.historicoSaude.recebeBeneficio,
             labelTitulo = "Recebe beneficio",
         ) {
             onChangeCampo(
@@ -97,11 +102,11 @@ fun CadastroHistoricoSaudePaciente(
         }
 
         AnimatedVisibility(
-            visible = historicoDoencas.recebeBeneficio == 0
+            visible = paciente.historicoSaude.recebeBeneficio == 0
         ) {
             TextFieldSimples(
                 nomeCampo = "Quais beneficios",
-                valorPreenchido = historicoDoencas.beneficioDescricao,
+                valorPreenchido = paciente.historicoSaude.beneficioDescricao,
                 placeholder = "",
                 singleLine = false,
                 paddingValues = PaddingValues(0.dp, 0.dp)
@@ -116,13 +121,113 @@ fun CadastroHistoricoSaudePaciente(
         Column {
             TextFieldSimples(
                 nomeCampo = "Medicamentos de uso continuo",
-                valorPreenchido = historicoDoencas.medicamentosUsoContinuo,
+                valorPreenchido = paciente.historicoSaude.medicamentosUsoContinuo,
                 placeholder = "",
                 singleLine = false,
                 paddingValues = PaddingValues(0.dp, 0.dp)
             ) {
                 onChangeCampo(
                     CamposHistoricoSaude.MEDICAMENTOS_USO_CONTINUO,
+                    it
+                )
+            }
+        }
+
+        Column {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 10.dp)
+                    .padding(top = 15.dp)
+                    .background(
+                        Paragraph,
+                        shape = RoundedCornerShape(10.dp)
+                    ),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "Ubs para referencia",
+                    modifier = Modifier.padding(12.dp),
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        color = BackgroundColor,
+                        fontWeight = FontWeight.SemiBold,
+                        textAlign = TextAlign.Center
+                    )
+                )
+            }
+
+            TextFieldSimples(
+                nomeCampo = "Municipio",
+                valorPreenchido = paciente.ubs.municipio,
+                placeholder = "",
+                paddingValues = PaddingValues(0.dp, 0.dp)
+            ) {
+                onChangeCampo(
+                    CamposHistoricoSaude.MUNICIPIO_UBS,
+                    it
+                )
+            }
+
+            TextFieldSimples(
+                nomeCampo = "Bairro",
+                valorPreenchido = paciente.ubs.bairro,
+                placeholder = "",
+                paddingValues = PaddingValues(0.dp, 0.dp)
+            ) {
+                onChangeCampo(
+                    CamposHistoricoSaude.BAIRRO_UBS,
+                    it
+                )
+            }
+        }
+
+        Column {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 10.dp)
+                    .padding(top = 15.dp)
+                    .background(
+                        Paragraph,
+                        shape = RoundedCornerShape(10.dp)
+                    ),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "Crás para referencia",
+                    modifier = Modifier.padding(12.dp),
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        color = BackgroundColor,
+                        fontWeight = FontWeight.SemiBold,
+                        textAlign = TextAlign.Center
+                    )
+                )
+            }
+
+            TextFieldSimples(
+                nomeCampo = "Municipio",
+                valorPreenchido = paciente.cras.municipio,
+                placeholder = "",
+                paddingValues = PaddingValues(0.dp, 0.dp)
+            ) {
+                onChangeCampo(
+                    CamposHistoricoSaude.MUNICIPIO_CRAS,
+                    it
+                )
+            }
+
+            TextFieldSimples(
+                nomeCampo = "Bairro",
+                valorPreenchido = paciente.cras.bairro,
+                placeholder = "",
+                paddingValues = PaddingValues(0.dp, 0.dp)
+            ) {
+                onChangeCampo(
+                    CamposHistoricoSaude.BAIRRO_CRAS,
                     it
                 )
             }

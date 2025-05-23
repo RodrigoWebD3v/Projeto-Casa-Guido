@@ -1,4 +1,4 @@
-package br.com.casa_guido.screens.cadastro.formularios.conjuge
+package br.com.casa_guido.screens.cadastro.formularios.mae
 
 enum class CamposConjuge {
     NOME_CONJUGE,
@@ -11,5 +11,7 @@ enum class CamposConjuge {
     ESTADO_CIVIL_CONJUGE,
     SITUACAO_PROFISSIONAL_CONJUGE,
     SALARIO_CONJUGE,
-    CARTAO_SUS
+    CARTAO_SUS,
+    RESP_PRINCIPAL,
+    PROFISSAO
 }
