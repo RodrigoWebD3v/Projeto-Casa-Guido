@@ -66,7 +66,6 @@ class PacienteService(
             responsavelId = this.responsavel.id,
             conjugeResponsavelId = this.conjugeResponsavel.id,
             outroResponsavelId = this.outroResponsavel.id,
-
         )
     }
 

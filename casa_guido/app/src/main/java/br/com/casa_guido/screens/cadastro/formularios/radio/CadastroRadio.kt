@@ -122,32 +122,6 @@ fun RadioCadastro(
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(20.dp)
-                    .background(
-                        Paragraph,
-                        shape = RoundedCornerShape(10.dp)
-                    )
-                    .clickable {
-                        viewModel.toggleList()
-                    },
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = "Radioterapia",
-                    modifier = Modifier.padding(12.dp),
-                    style = TextStyle(
-                        fontSize = 16.sp,
-                        color = BackgroundColor,
-                        fontWeight = FontWeight.SemiBold,
-                        textAlign = TextAlign.Center
-                    )
-                )
-            }
-
 
             Row(
                 Modifier.fillMaxWidth(),

@@ -38,9 +38,11 @@ import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
 import br.com.casa_guido.screens.cadastro.formularios.mae.CamposConjuge
 import br.com.casa_guido.screens.cadastro.formularios.pai.CamposResponsavel
+import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.CamposSocioEconomico
 import br.com.casa_guido.screens.components.BotaoPersonalizadoComIcones
 import br.com.casa_guido.screens.components.CheckBoxComp
 import br.com.casa_guido.screens.components.DataPicker
+import br.com.casa_guido.screens.components.Escolaridade
 import br.com.casa_guido.screens.components.RadioButtonMultOptValores
 import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.Alert
@@ -215,23 +217,26 @@ fun CadastroOutro(
                         },
                         modifier = Modifier.fillMaxWidth(.5f)
                     )
+                }
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(20.dp),
+                    horizontalArrangement = Arrangement.Center
 
-                    TextFieldSimples(
-                        nomeCampo = "Escolaridade",
-                        valorPreenchido = outro.escolaridade,
-                        visualTransformation = VisualTransformation.None,
-                        placeholder = "8 série",
-                        onChange = {
+                ) {
+                    Escolaridade(
+                        pessoa = outro,
+                        onChangeEscolaridade = {valor1, valor2 ->
                             onChangeCampo(
-                                CamposOutro.ESCOLARIDADE_OUTRO,
-                                it
+                                CamposOutro.ESCOLARIDADE,
+                                valor1
                             )
-                        },
-                        modifier = Modifier.weight(1f)
+                            onChangeCampo(
+                                CamposOutro.SERIE,
+                                valor2
+                            )
+                        }
                     )
                 }
-
-
 
                 Row {
                     DataPicker(

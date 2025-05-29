@@ -36,9 +36,11 @@ import br.com.casa_guido.screens.Pessoa
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
 import br.com.casa_guido.screens.cadastro.formularios.pai.CamposResponsavel
+import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.CamposSocioEconomico
 import br.com.casa_guido.screens.components.BotaoPersonalizadoComIcones
 import br.com.casa_guido.screens.components.CheckBoxComp
 import br.com.casa_guido.screens.components.DataPicker
+import br.com.casa_guido.screens.components.Escolaridade
 import br.com.casa_guido.screens.components.RadioButtonMultOptValores
 import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.Alert
@@ -220,19 +222,23 @@ fun CadastroConjuge(
                         },
                         modifier = Modifier.fillMaxWidth(.5f)
                     )
-
-                    TextFieldSimples(
-                        nomeCampo = "Escolaridade",
-                        valorPreenchido = conjuge.escolaridade,
-                        visualTransformation = VisualTransformation.None,
-                        placeholder = "",
-                        onChange = {
+                }
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(20.dp),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Escolaridade(
+                        pessoa = conjuge,
+                        onChangeEscolaridade = { valor1, valor2 ->
                             onChangeCampo(
-                                CamposConjuge.ESCOLARIDADE_CONJUGE,
-                                it
+                                CamposConjuge.ESCOLARIDADE,
+                                valor1
                             )
-                        },
-                        modifier = Modifier.weight(1f)
+                            onChangeCampo(
+                                CamposConjuge.SERIE,
+                                valor2
+                            )
+                        }
                     )
                 }
 

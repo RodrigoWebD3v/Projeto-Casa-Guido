@@ -87,7 +87,7 @@ class CadastroScreenViewModel(
             CamposSocioEconomico.ESCOLARIDADE -> {
                 _paciente.value = _paciente.value.copy(
                     pessoa = _paciente.value.pessoa.copy(
-                        escolaridade = valor
+                        escolaridade = valor.toInt()
                     )
                 )
             }
@@ -95,7 +95,7 @@ class CadastroScreenViewModel(
             CamposSocioEconomico.SERIE -> {
                 _paciente.value = _paciente.value.copy(
                     pessoa = _paciente.value.pessoa.copy(
-                        serie = valor
+                        serie = valor.toInt()
                     )
                 )
             }
@@ -149,7 +149,11 @@ class CadastroScreenViewModel(
                 )
             }
 
-
+            CamposSocioEconomico.PUBLICA_PRIVADA -> {
+                _paciente.value = _paciente.value.copy(
+                    tipoEscola = valor.toInt()
+                )
+            }
         }
     }
 
@@ -707,7 +711,7 @@ class CadastroScreenViewModel(
             CamposResponsavel.ESCOLARIDADE_RESPONSAVEL -> {
                 _paciente.value = _paciente.value.copy(
                     responsavel = _paciente.value.responsavel.copy(
-                        escolaridade = valor
+                        escolaridade = valor.toInt()
                     )
                 )
             }
@@ -757,6 +761,22 @@ class CadastroScreenViewModel(
                 _paciente.value = _paciente.value.copy(
                     responsavel = _paciente.value.responsavel.copy(
                         profissao = valor
+                    )
+                )
+            }
+
+            CamposResponsavel.ESCOLARIDADE -> {
+                _paciente.value = _paciente.value.copy(
+                    responsavel = _paciente.value.responsavel.copy(
+                        escolaridade = valor.toInt()
+                    )
+                )
+            }
+
+            CamposResponsavel.SERIE -> {
+                _paciente.value = _paciente.value.copy(
+                    responsavel = _paciente.value.responsavel.copy(
+                        serie = valor.toInt()
                     )
                 )
             }
@@ -816,7 +836,7 @@ class CadastroScreenViewModel(
             CamposConjuge.ESCOLARIDADE_CONJUGE -> {
                 _paciente.value = _paciente.value.copy(
                     conjugeResponsavel = _paciente.value.conjugeResponsavel.copy(
-                        escolaridade = valor
+                        escolaridade = valor.toInt()
                     )
                 )
             }
@@ -865,6 +885,22 @@ class CadastroScreenViewModel(
                 _paciente.value = _paciente.value.copy(
                     conjugeResponsavel = _paciente.value.conjugeResponsavel.copy(
                         profissao = valor
+                    )
+                )
+            }
+
+            CamposConjuge.ESCOLARIDADE -> {
+                _paciente.value = _paciente.value.copy(
+                    conjugeResponsavel = _paciente.value.conjugeResponsavel.copy(
+                        escolaridade = valor.toInt()
+                    )
+                )
+            }
+
+            CamposConjuge.SERIE -> {
+                _paciente.value = _paciente.value.copy(
+                    conjugeResponsavel = _paciente.value.conjugeResponsavel.copy(
+                        escolaridade = valor.toInt()
                     )
                 )
             }
@@ -924,7 +960,7 @@ class CadastroScreenViewModel(
             CamposOutro.ESCOLARIDADE_OUTRO -> {
                 _paciente.value = _paciente.value.copy(
                     outroResponsavel = _paciente.value.outroResponsavel.copy(
-                        escolaridade = valor
+                        escolaridade = valor.toInt()
                     )
                 )
             }
@@ -973,6 +1009,22 @@ class CadastroScreenViewModel(
                 _paciente.value = _paciente.value.copy(
                     outroResponsavel = _paciente.value.outroResponsavel.copy(
                         profissao = valor
+                    )
+                )
+            }
+
+            CamposOutro.ESCOLARIDADE -> {
+                _paciente.value = _paciente.value.copy(
+                    outroResponsavel = _paciente.value.outroResponsavel.copy(
+                        escolaridade = valor.toInt()
+                    )
+                )
+            }
+
+            CamposOutro.SERIE -> {
+                _paciente.value = _paciente.value.copy(
+                    outroResponsavel = _paciente.value.outroResponsavel.copy(
+                        serie = valor.toInt()
                     )
                 )
             }

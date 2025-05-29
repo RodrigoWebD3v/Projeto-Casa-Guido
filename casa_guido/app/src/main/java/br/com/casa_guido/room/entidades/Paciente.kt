@@ -35,5 +35,5 @@ data class Paciente(
 
     val responsavelId: String? = null,
     val conjugeResponsavelId: String? = null,
-    val outroResponsavelId: String? = null
+    val outroResponsavelId: String? = null,
 )

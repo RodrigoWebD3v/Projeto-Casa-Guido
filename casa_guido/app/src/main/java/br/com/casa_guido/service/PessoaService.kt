@@ -50,6 +50,8 @@ class PessoaService(
             salario = this.salario,
             enderecoId = enderecoId,
             cartaoSus = this.cartaoSus,
+            profissao = this.profissao,
+            respPrincipal = this.respPrincipal
         )
     }
 
@@ -62,13 +64,15 @@ class PessoaService(
             rg = this.identidade?.let { this.identidade } ?: "",
             telefone = this.telefone?.let { this.telefone } ?: "",
             naturalidade = this.naturalidade?.let { this.naturalidade } ?: "",
-            escolaridade = this.escolaridade?.let { this.escolaridade } ?: "",
+            escolaridade = this.escolaridade?.let { this.escolaridade } ?: 0,
             estadoCivil = this.estadoCivil?.let { this.estadoCivil ?: 0 },
             situacaoProfissional = this.situacaoProfissional.let { this.situacaoProfissional ?: 0 },
             salario = this.salario?.let { this.salario } ?: "",
             endereco = this.enderecoId?.let { enderecoService.getById(it) } ?: Endereco(),
             cartaoSus = this.cartaoSus?.let { this.cartaoSus } ?: "",
-            serie = this.serie?.let { this.serie } ?: "",
+            serie = this.serie?.let { this.serie } ?: 0,
+            profissao = this.profissao?.let { this.profissao } ?: "",
+            respPrincipal = this.respPrincipal?.let { this.respPrincipal } ?: 0,
         )
     }
 

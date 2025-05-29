@@ -14,14 +14,16 @@ data class Pessoa(
     val identidade: String? = null, // equivalente ao "rg"
     val naturalidade: String? = null,
     val genero: String? = null,
-    val escolaridade: String? = null,
-    val serie: String? = null,
+    val escolaridade: Int? = 0,
+    val serie: Int? = 0,
     val estadoCivil: Int? = null, // mantido como Int para enums
     val situacaoProfissional: Int? = null, // idem
     val salario: String? = null, // manter como String, tratado como decimal no backend
     val enderecoId: String? = null, // UUID compatível com relação
     val telefone: String? = null,
     val cartaoSus: String? = null,
+    val profissao: String? = null,
+    val respPrincipal: Int?,
 )
 
 /*

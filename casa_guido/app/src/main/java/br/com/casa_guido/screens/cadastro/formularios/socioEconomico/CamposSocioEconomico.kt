@@ -11,5 +11,6 @@ enum class CamposSocioEconomico {
     TAMANHO_CALCADO,
     DIAGNOSTICO,
     RECEBE_BPC,
+    PUBLICA_PRIVADA,
 }
 

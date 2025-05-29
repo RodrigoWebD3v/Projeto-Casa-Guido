@@ -13,5 +13,7 @@ enum class CamposConjuge {
     SALARIO_CONJUGE,
     CARTAO_SUS,
     RESP_PRINCIPAL,
-    PROFISSAO
+    PROFISSAO,
+    ESCOLARIDADE,
+    SERIE
 }

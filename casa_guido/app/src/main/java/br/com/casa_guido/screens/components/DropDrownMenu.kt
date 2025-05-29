@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,11 +38,18 @@ data class DropDownMenuItem(
 fun DropDownMenu(
     modifier: Modifier = Modifier,
     opcoes: List<DropDownMenuItem> = emptyList(),
+    valorPreenchido: DropDownMenuItem? = null,
     onSelected: (DropDownMenuItem) -> Unit
 ) {
 
     var selectedItem by remember { mutableStateOf(opcoes.first()) }
     var isExpanded by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        valorPreenchido?.let {
+            valorPreenchido
+        } ?: opcoes.first()
+    }
 
     Box(
         modifier = modifier,
@@ -69,7 +77,7 @@ fun DropDownMenu(
                     focusedContainerColor = BackgroundColor,
                     unfocusedContainerColor = BackgroundColor
                 ),
-               // shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
+                // shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
             )
             ExposedDropdownMenu(
                 expanded = isExpanded,

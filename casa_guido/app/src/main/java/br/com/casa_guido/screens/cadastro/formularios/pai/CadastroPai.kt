@@ -35,9 +35,11 @@ import br.com.casa_guido.customizacao.VisualTransformationCustom
 import br.com.casa_guido.screens.Pessoa
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
+import br.com.casa_guido.screens.cadastro.formularios.mae.CamposOutro
 import br.com.casa_guido.screens.components.BotaoPersonalizadoComIcones
 import br.com.casa_guido.screens.components.CheckBoxComp
 import br.com.casa_guido.screens.components.DataPicker
+import br.com.casa_guido.screens.components.Escolaridade
 import br.com.casa_guido.screens.components.RadioButtonMultOptValores
 import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.Alert
@@ -151,7 +153,7 @@ fun CadastroResponsavel(
                     labelTitulo = "Resp Principal?",
                     selected = responsavel.respPrincipal,
                 ) {
-                    onChangeCampo(CamposResponsavel.RESP_PRINCIPAL, if(it) "1" else "0")
+                    onChangeCampo(CamposResponsavel.RESP_PRINCIPAL, if (it) "1" else "0")
                 }
 
                 TextFieldSimples(
@@ -215,22 +217,30 @@ fun CadastroResponsavel(
                         modifier = Modifier.fillMaxWidth(.5f)
                     )
 
-                    TextFieldSimples(
-                        nomeCampo = "Escolaridade",
-                        valorPreenchido = responsavel.escolaridade,
-                        visualTransformation = VisualTransformation.None,
-                        placeholder = "8 série",
-                        onChange = {
-                            onChangeCampo(
-                                CamposResponsavel.ESCOLARIDADE_RESPONSAVEL,
-                                it
-                            )
-                        },
-                        modifier = Modifier.weight(1f)
-                    )
+
                 }
 
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp),
+                    horizontalArrangement = Arrangement.Center
+                ) {
 
+                    Escolaridade(
+                        pessoa = responsavel,
+                        onChangeEscolaridade = { valor1, valor2 ->
+                            onChangeCampo(
+                                CamposResponsavel.ESCOLARIDADE,
+                                valor1
+                            )
+                            onChangeCampo(
+                                CamposResponsavel.SERIE,
+                                valor2
+                            )
+                        }
+                    )
+                }
 
                 Row {
                     DataPicker(
@@ -313,10 +323,10 @@ fun CadastroResponsavel(
                     )
                 }
 
-                Column (
+                Column(
                     modifier = Modifier.padding(horizontal = 20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
-                ){
+                ) {
                     RadioButtonMultOptValores(
                         labelTitulo = "Estado Civil",
                         opcoesLista = listOf(

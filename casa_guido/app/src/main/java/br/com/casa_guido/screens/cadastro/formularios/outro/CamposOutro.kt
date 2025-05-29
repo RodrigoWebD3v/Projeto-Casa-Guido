@@ -13,5 +13,7 @@ enum class CamposOutro {
     SALARIO_OUTRO,
     CARTAO_SUS,
     RESP_PRINCIPAL,
-    PROFISSAO
+    PROFISSAO,
+    ESCOLARIDADE,
+    SERIE
 }

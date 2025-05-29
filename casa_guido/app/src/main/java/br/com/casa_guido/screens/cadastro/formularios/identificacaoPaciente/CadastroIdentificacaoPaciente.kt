@@ -67,15 +67,12 @@ fun CadastroIdentificacaoPaciente(
     }
 
     LaunchedEffect(paciente) {
-
         color =
             if (!(paciente.pessoa.endereco.cep.isEmpty() || paciente.pessoa.endereco.numero.isEmpty() || paciente.pessoa.endereco.logradouro.isEmpty() || paciente.pessoa.endereco.bairro.isEmpty() || paciente.pessoa.endereco.referencia.isEmpty() || paciente.pessoa.endereco.localidade.isEmpty() || paciente.pessoa.endereco.uf.isEmpty())) GreenBlack else Alert
 
         iconeBotao =
             if (!(paciente.pessoa.endereco.cep.isEmpty() || paciente.pessoa.endereco.numero.isEmpty() || paciente.pessoa.endereco.logradouro.isEmpty() || paciente.pessoa.endereco.bairro.isEmpty() || paciente.pessoa.endereco.referencia.isEmpty() || paciente.pessoa.endereco.localidade.isEmpty() || paciente.pessoa.endereco.uf.isEmpty())) Icons.Default.Check else Icons.Default.Close
     }
-
-
 
     Column(
         modifier = modifier

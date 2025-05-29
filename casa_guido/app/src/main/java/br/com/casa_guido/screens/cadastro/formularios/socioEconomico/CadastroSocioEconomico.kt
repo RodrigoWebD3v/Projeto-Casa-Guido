@@ -122,7 +122,7 @@ fun CadastroSocioEconomico(
         }
 
         AnimatedVisibility(
-            visible = paciente.bpc == 1
+            visible = paciente.bpc == 0
         ) {
             TextFieldSimples(
                 nomeCampo = "Valor",
@@ -150,13 +150,12 @@ fun CadastroSocioEconomico(
         )
 
         Escolaridade(
-            onChangeEscolaridade = {valor1, valor2 ->
-
+            pessoa = paciente.pessoa,
+            onChangeEscolaridade = { valor1, valor2 ->
                 onChangeCampo(
                     CamposSocioEconomico.ESCOLARIDADE,
                     valor1
                 )
-
                 onChangeCampo(
                     CamposSocioEconomico.SERIE,
                     valor2
@@ -168,10 +167,13 @@ fun CadastroSocioEconomico(
         RadioButtonMultOptValores(
             opcoesLista = listOf("Publica" to 0, "Privada" to 1),
             modifier = Modifier.fillMaxWidth(.9f),
-            selected = 0,
+            selected = paciente.tipoEscola,
             labelTitulo = "Escola"
         ) {
-
+            onChangeCampo(
+                CamposSocioEconomico.PUBLICA_PRIVADA,
+                it.toString()
+            )
         }
 
     }
