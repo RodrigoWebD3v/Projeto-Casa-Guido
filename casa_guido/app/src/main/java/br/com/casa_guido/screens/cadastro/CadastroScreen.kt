@@ -6,10 +6,8 @@ package br.com.casa_guido.screens.cadastro
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -48,9 +47,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -59,12 +56,12 @@ import br.com.casa_guido.screens.cadastro.formularios.cirurgia.CadastroCirurgia
 import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.CadastroComposicaoFamiliar
 import br.com.casa_guido.screens.cadastro.formularios.mae.CadastroConjuge
 import br.com.casa_guido.screens.cadastro.formularios.historicoDeSaudeFamiliar.CadastroHistoricoDeSaudeFamiliar
-import br.com.casa_guido.screens.cadastro.formularios.historicoSaudePaciente.CadastroHistoricoSaudePaciente
+import br.com.casa_guido.screens.cadastro.formularios.historicoDeSaudePaciente.CadastroHistoricoSaudePaciente
 import br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente.CadastroIdentificacaoPaciente
 import br.com.casa_guido.screens.cadastro.formularios.observacao.Observacao
 import br.com.casa_guido.screens.cadastro.formularios.outro.CadastroOutro
-import br.com.casa_guido.screens.cadastro.formularios.radio.CadastroQuimio
-import br.com.casa_guido.screens.cadastro.formularios.radio.RadioCadastro
+import br.com.casa_guido.screens.cadastro.formularios.radioterapia.CadastroQuimio
+import br.com.casa_guido.screens.cadastro.formularios.radioterapia.RadioCadastro
 import br.com.casa_guido.screens.cadastro.formularios.pai.CadastroResponsavel
 import br.com.casa_guido.screens.cadastro.formularios.situacaoHabitacional.CadastroSituacaoHabitacional
 import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.CadastroSocioEconomico
@@ -387,167 +384,123 @@ fun CadastroScreen(
                         }
 
                         Row(
-                            Modifier
+                            modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(vertical = 12.dp)
-                                .padding(horizontal = 20.dp),
+                                .padding(horizontal = 16.dp, vertical = 8.dp),
                             horizontalArrangement = if (pagerState.currentPage == 0) Arrangement.End else Arrangement.SpaceBetween
                         ) {
-                            if (pagerState.currentPage > 0) {
-                                Row(
-                                    modifier = Modifier
-                                        .clip(RoundedCornerShape(10.dp))
-                                        .clickable(
-                                            onClick = {
-                                                coroutineScope.launch {
-                                                    pagerState.animateScrollToPage(
-                                                        pagerState.currentPage.dec()
-                                                    )
-                                                }
-                                            },
-                                            interactionSource = remember { MutableInteractionSource() },
-                                            indication = LocalIndication.current
-                                        )
-                                ) {
-                                    Box(
-                                        Modifier
-                                            .background(GreenBlack)
-                                            .padding(5.dp)
-                                            .height(40.dp),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Default.DoubleArrow,
-                                            contentDescription = "Proxima tela",
-                                            tint = Main,
-                                            modifier = Modifier.graphicsLayer {
-                                                scaleX = -1f
-                                            }
-                                        )
+                            if (pagerState.currentPage != 0) {
+                                NavigationButton(
+                                    label = "Anterior",
+                                    icon = Icons.Default.DoubleArrow,
+                                    onClick = {
+                                        coroutineScope.launch {
+                                            pagerState.animateScrollToPage(pagerState.currentPage - 1)
+                                        }
+                                    },
+                                    reverseIcon = true
+                                )
+                                NavigationButton(
+                                    label = "Salvar",
+                                    icon = Icons.Default.Save,
+                                    onClick = {
+                                        coroutineScope.launch {
+                                            viewModel.save()
+                                            snackbarHostState.showSnackbar(
+                                                message = "Paciente salvo com sucesso",
+                                                duration = SnackbarDuration.Short,
+                                                actionLabel = "Fechar"
+                                            )
+                                            navHostController.popBackStack()
+                                        }
                                     }
+                                )
 
-                                    Box(
-                                        Modifier
-                                            .background(Paragraph)
-                                            .padding(5.dp)
-                                            .height(40.dp),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Text(
-                                            "Anterior",
-                                            style = TextStyle(
-                                                fontSize = 18.sp,
-                                                color = GreenBlack,
-                                                fontWeight = FontWeight.Bold,
-                                                textAlign = TextAlign.Start
-                                            )
-                                        )
+                                NavigationButton(
+                                    label = "Próximo",
+                                    icon = Icons.Default.DoubleArrow,
+                                    onClick = {
+                                        coroutineScope.launch {
+                                            pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                                        }
                                     }
-                                }
-                            }
-                            if (pagerState.currentPage < pagerState.pageCount - 1) {
-                                Row(
-                                    modifier = Modifier
-                                        .clip(RoundedCornerShape(10.dp))
-                                        .clickable(
-                                            onClick = {
-                                                coroutineScope.launch {
-                                                    pagerState.animateScrollToPage(
-                                                        pagerState.currentPage.inc()
-                                                    )
-                                                }
-                                            },
-                                            interactionSource = remember { MutableInteractionSource() },
-                                            indication = LocalIndication.current
-                                        )
-                                ) {
-                                    Box(
-                                        Modifier
-                                            .background(Paragraph)
-                                            .padding(5.dp)
-                                            .height(40.dp),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Text(
-                                            "Proximo",
-                                            style = TextStyle(
-                                                fontSize = 18.sp,
-                                                color = GreenBlack,
-                                                fontWeight = FontWeight.Bold,
-                                                textAlign = TextAlign.Start
-                                            )
-                                        )
-                                    }
-                                    Box(
-                                        Modifier
-                                            .background(GreenBlack)
-                                            .padding(5.dp)
-                                            .height(40.dp),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Default.DoubleArrow,
-                                            contentDescription = "Proxima tela",
-                                            tint = Main,
-                                        )
-                                    }
-                                }
+                                )
                             } else {
-                                Row(
-                                    modifier = Modifier
-                                        .clip(RoundedCornerShape(10.dp))
-                                        .clickable(
-                                            onClick = {
-                                                coroutineScope.launch {
-                                                    viewModel.save()
-                                                    snackbarHostState.showSnackbar(
-                                                        message = "Paciente salvo com sucesso",
-                                                        duration = SnackbarDuration.Short,
-                                                        actionLabel = "Fechar"
-                                                    )
-                                                }
-                                                navHostController.popBackStack()
-                                            },
-                                            interactionSource = remember { MutableInteractionSource() },
-                                            indication = LocalIndication.current
-                                        )
-                                ) {
-                                    Box(
-                                        Modifier
-                                            .background(Paragraph)
-                                            .padding(5.dp)
-                                            .height(40.dp),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Text(
-                                            "Salvar Paciente",
-                                            style = TextStyle(
-                                                fontSize = 18.sp,
-                                                color = GreenBlack,
-                                                fontWeight = FontWeight.Bold,
-                                                textAlign = TextAlign.Start
+                                NavigationButton(
+                                    label = "Salvar",
+                                    icon = Icons.Default.Save,
+                                    modifier = Modifier.padding(end = 20.dp),
+                                    onClick = {
+                                        coroutineScope.launch {
+                                            viewModel.save()
+                                            snackbarHostState.showSnackbar(
+                                                message = "Paciente salvo com sucesso",
+                                                duration = SnackbarDuration.Short,
+                                                actionLabel = "Fechar"
                                             )
-                                        )
+                                            navHostController.popBackStack()
+                                        }
                                     }
-                                    Box(
-                                        Modifier
-                                            .background(GreenBlack)
-                                            .padding(5.dp)
-                                            .height(40.dp),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Default.Save,
-                                            contentDescription = "Salvar",
-                                            tint = Main,
-                                        )
+                                )
+
+                                NavigationButton(
+                                    label = "Próximo",
+                                    icon = Icons.Default.DoubleArrow,
+                                    onClick = {
+                                        coroutineScope.launch {
+                                            pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                                        }
                                     }
-                                }
+                                )
                             }
                         }
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun NavigationButton(
+    label: String,
+    icon: ImageVector,
+    onClick: () -> Unit,
+    reverseIcon: Boolean = false,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .clip(RoundedCornerShape(8.dp))
+            .clickable(onClick = onClick)
+            .background(Paragraph)
+            .padding(horizontal = 8.dp, vertical = 6.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        if (reverseIcon) {
+            Icon(
+                imageVector = icon,
+                contentDescription = label,
+                tint = GreenBlack,
+                modifier = Modifier
+                    .size(20.dp)
+                    .graphicsLayer { scaleX = -1f }
+            )
+        }
+        Text(
+            text = label,
+            color = GreenBlack,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 14.sp,
+            modifier = Modifier.padding(horizontal = 6.dp)
+        )
+        if (!reverseIcon) {
+            Icon(
+                imageVector = icon,
+                contentDescription = label,
+                tint = GreenBlack,
+                modifier = Modifier.size(20.dp)
+            )
         }
     }
 }

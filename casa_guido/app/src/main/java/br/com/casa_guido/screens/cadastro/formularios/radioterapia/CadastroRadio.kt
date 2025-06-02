@@ -1,4 +1,4 @@
-package br.com.casa_guido.screens.cadastro.formularios.radio
+package br.com.casa_guido.screens.cadastro.formularios.radioterapia
 
 import android.os.Build
 import android.util.Log
@@ -16,13 +16,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -36,9 +34,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -48,10 +43,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.casa_guido.screens.Quimio
-import br.com.casa_guido.screens.cadastro.formularios.quimio.CamposQuimio
+import br.com.casa_guido.models.Radio
 import br.com.casa_guido.screens.components.DataPicker
-import br.com.casa_guido.screens.components.RadioButtonMultOptValores
 import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
@@ -62,14 +55,15 @@ import java.time.LocalDate
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun CadastroQuimio(
+fun RadioCadastro(
     modifier: Modifier = Modifier,
-    onChangeCampo: (CamposQuimio, Quimio) -> Unit,
-    listaQuimios: List<Quimio>,
+    onChangeCampo: (CamposRadio, Radio) -> Unit,
+    listaRadios: List<Radio>,
     numeroTela: Int
 ) {
-    val viewModel = koinViewModel<QuimioViewModel>()
+    val viewModel = koinViewModel<RadioViewModel>()
     val state by viewModel.uiState.collectAsState()
+
 
     Column(
         modifier = modifier
@@ -85,7 +79,7 @@ fun CadastroQuimio(
         ) {
             Column {
                 Text(
-                    "$numeroTela. Quimioterapia",
+                    "$numeroTela. Radioterapia",
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.Black,
@@ -94,7 +88,7 @@ fun CadastroQuimio(
                     )
                 )
                 Text(
-                    "Informações de quimioterapias do paciente",
+                    "Informações de radioterapias do paciente",
                     style = TextStyle(
                         fontSize = 12.sp,
                         color = Color.Black,
@@ -105,6 +99,7 @@ fun CadastroQuimio(
             }
         }
     }
+
 
     Column(
         modifier = modifier
@@ -120,57 +115,64 @@ fun CadastroQuimio(
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
             Row(
                 Modifier.fillMaxWidth(),
             ) {
                 DataPicker(
-                    modifier = Modifier.fillMaxWidth(.5f),
-                    showDataPicker = state.toggleDataPickerInicioQuimio,
-                    valorPreenchido = state.quimioEdicao.dataInicio,
-                    titulo = "Data inicio",
+                    showDataPicker = state.toggleDataPickerInicioRadio,
+                    valorPreenchido = state.radioEdicao.dataInicio,
+                    titulo = "Data início",
                     onCancelar = {
-                        viewModel.toggleDataPickerQuimioInicio()
+                        viewModel.toggleDataPickerRadioInicio()
                     },
                     onChange = {
-                        Log.i("QuimioCadastro 0", "onChange: $it")
-                        viewModel.onChangeQuimioInicio(it)
+                        Log.i("RadioCadastro 0", "onChange: $it")
+                        viewModel.onChangeRadio(it)
                     },
                     onClick = {
-                        viewModel.toggleDataPickerQuimioInicio()
+                        viewModel.toggleDataPickerRadioInicio()
                     },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 20.dp)
+                        .padding(end = 10.dp),
                 )
 
 
                 DataPicker(
-                    modifier = Modifier.weight(1f),
-                    showDataPicker = state.toggleDataPickerFimQuimio,
-                    valorPreenchido = state.quimioEdicao.dataUltimaSessao,
+                    showDataPicker = state.toggleDataPickerFimRadio,
+                    valorPreenchido = state.radioEdicao.dataUltimaSessao,
                     titulo = "Data fim",
                     onCancelar = {
-                        viewModel.toggleDataPickerQuimioFim()
+                        viewModel.toggleDataPickerRadioFim()
                     },
                     onChange = {
-                        Log.i("QuimioCadastro 1", "onChange: $it")
-                        viewModel.onChangeQuimioFim(it)
+                        Log.i("RadioCadastro 1", "onChange: $it")
+                        viewModel.onChangeRadioFim(it)
                     },
                     onClick = {
-                        viewModel.toggleDataPickerQuimioFim()
+                        viewModel.toggleDataPickerRadioFim()
                     },
-                )
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 10.dp)
+                        .padding(end = 20.dp),
+                    )
             }
 
 
             Button(
                 onClick = {
-                    if (state.quimioEdicao.dataInicio.isNotEmpty() && state.quimioEdicao.dataUltimaSessao.isNotEmpty()) {
+                    if (state.radioEdicao.dataInicio.isNotEmpty() && state.radioEdicao.dataUltimaSessao.isNotEmpty()) {
                         onChangeCampo(
-                            CamposQuimio.ADD_QUIMIO,
-                            state.quimioEdicao
+                            CamposRadio.ADD_RADIO,
+                            state.radioEdicao
                         )
-                        viewModel.newQuimio()
-                        viewModel.onChangeQuimioInicio(Utils.formatData(LocalDate.now())!!)
-                        viewModel.onChangeQuimioFim(Utils.formatData(LocalDate.now())!!)
-                        Log.i("QuimioCadastro", "${listaQuimios.size}")
+                        viewModel.newRadio()
+                        viewModel.onChangeRadio(Utils.formataDataPadraoBr(LocalDate.now())!!)
+                        viewModel.onChangeRadioFim(Utils.formataDataPadraoBr(LocalDate.now())!!)
+
                     }
                 },
                 modifier = Modifier
@@ -186,7 +188,7 @@ fun CadastroQuimio(
                 )
             ) {
                 Text(
-                    text = "Adicionar Quimioterapia",
+                    text = "Adicionar Radioterapia",
                     style = TextStyle(
                         fontSize = 16.sp,
                         color = br.com.casa_guido.ui.theme.Button,
@@ -217,7 +219,7 @@ fun CadastroQuimio(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "Lista de Quimios",
+                        text = "Lista de Radioterapias",
                         style = TextStyle(
                             fontSize = 16.sp,
                             color = BackgroundColor,
@@ -227,7 +229,7 @@ fun CadastroQuimio(
                     )
 
                     Text(
-                        text = "Quantidade: ${listaQuimios.size}",
+                        text = "Quantidade: ${listaRadios.size}",
                         style = TextStyle(
                             fontSize = 16.sp,
                             color = GreenBlack,
@@ -269,13 +271,13 @@ fun CadastroQuimio(
                                 .verticalScroll(rememberScrollState())
                                 .padding(8.dp)
                         ) {
-                            listaQuimios.forEachIndexed { index, item ->
-                                ItemQuimio(
+                            listaRadios.forEachIndexed { index, item ->
+                                ItemRadio(
                                     item.dataInicio,
                                     item.dataUltimaSessao
                                 ) {
                                     onChangeCampo(
-                                        CamposQuimio.REMOVE_QUIMIO,
+                                        CamposRadio.REMOVE_RADIO,
                                         item
                                     )
                                 }

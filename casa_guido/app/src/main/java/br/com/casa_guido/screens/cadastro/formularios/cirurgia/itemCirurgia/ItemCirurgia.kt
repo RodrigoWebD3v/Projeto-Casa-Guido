@@ -1,4 +1,4 @@
-package br.com.casa_guido.screens.cadastro.formularios.cirurgia
+package br.com.casa_guido.screens.cadastro.formularios.cirurgia.itemCirurgia
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

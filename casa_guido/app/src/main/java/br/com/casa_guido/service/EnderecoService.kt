@@ -5,7 +5,7 @@ import br.com.casa_guido.repository.EnderecoRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import br.com.casa_guido.room.entidades.Endereco as EnderecoEntidade
-import br.com.casa_guido.screens.Endereco as EnderecoUI
+import br.com.casa_guido.models.Endereco as EnderecoUI
 
 class EnderecoService(
     private val enderecoRepository: EnderecoRepository

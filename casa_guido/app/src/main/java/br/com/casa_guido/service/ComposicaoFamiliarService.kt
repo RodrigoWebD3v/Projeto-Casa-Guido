@@ -3,7 +3,7 @@ package br.com.casa_guido.service
 import br.com.casa_guido.repository.ComposicaoFamiliarRepository
 import br.com.casa_guido.room.entidades.ComposicaoFamiliar
 import kotlinx.coroutines.flow.first
-import br.com.casa_guido.screens.ComposicaoFamiliar as ComposicaoFamiliarUI
+import br.com.casa_guido.models.ComposicaoFamiliar as ComposicaoFamiliarUI
 
 class ComposicaoFamiliarService(
     private val composicaoFamiliarRepository: ComposicaoFamiliarRepository

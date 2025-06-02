@@ -1,8 +1,7 @@
 package br.com.casa_guido.screens.cadastro.formularios.cirurgia
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import br.com.casa_guido.screens.Cirurgia
+import br.com.casa_guido.models.Cirurgia
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

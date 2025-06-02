@@ -8,32 +8,20 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.casa_guido.screens.Paciente
-import br.com.casa_guido.screens.components.DropDownMenu
-import br.com.casa_guido.screens.components.DropDownMenuItem
+import br.com.casa_guido.models.Paciente
 import br.com.casa_guido.screens.components.Escolaridade
 import br.com.casa_guido.screens.components.RadioButtonMultOptValores
 import br.com.casa_guido.screens.components.TextFieldSimples
-import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
 
@@ -151,6 +139,7 @@ fun CadastroSocioEconomico(
 
         Escolaridade(
             pessoa = paciente.pessoa,
+            modifier = Modifier.fillMaxWidth(.9f),
             onChangeEscolaridade = { valor1, valor2 ->
                 onChangeCampo(
                     CamposSocioEconomico.ESCOLARIDADE,

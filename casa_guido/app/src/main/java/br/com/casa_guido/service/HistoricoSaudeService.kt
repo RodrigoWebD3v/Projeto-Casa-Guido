@@ -2,7 +2,7 @@ package br.com.casa_guido.service
 
 import br.com.casa_guido.repository.HistoricoSaudeRepository
 import br.com.casa_guido.room.entidades.HistoricoSaude
-import br.com.casa_guido.screens.HistoricoSaude as HistoricoSaudeUI
+import br.com.casa_guido.models.HistoricoSaude as HistoricoSaudeUI
 
 class HistoricoSaudeService(
     private val historicoSaudeRepository: HistoricoSaudeRepository

@@ -2,10 +2,10 @@ package br.com.casa_guido.service
 
 import android.util.Log
 import br.com.casa_guido.repository.PessoaRepository
-import br.com.casa_guido.screens.Endereco
-import br.com.casa_guido.screens.Pessoa
+import br.com.casa_guido.models.Endereco
+import br.com.casa_guido.models.Pessoa
 import br.com.casa_guido.room.entidades.Pessoa as PessoaEntidade
-import br.com.casa_guido.screens.Pessoa as PessoaUI
+import br.com.casa_guido.models.Pessoa as PessoaUI
 
 
 class PessoaService(

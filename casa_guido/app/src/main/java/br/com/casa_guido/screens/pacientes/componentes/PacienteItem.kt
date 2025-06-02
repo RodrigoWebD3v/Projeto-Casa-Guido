@@ -27,7 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.casa_guido.screens.Paciente
+import br.com.casa_guido.models.Paciente
 import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Highlight
@@ -78,7 +78,7 @@ fun PacienteItem(paciente: Paciente, onUpId: (String) -> Unit) {
                         ), contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        Utils.getInitials(paciente.pessoa.nome),
+                        Utils.pegaIniciais(paciente.pessoa.nome),
                         style = TextStyle(),
                         fontSize = 16.sp,
                         color = BackgroundColor,

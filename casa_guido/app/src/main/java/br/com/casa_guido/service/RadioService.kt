@@ -2,7 +2,7 @@ package br.com.casa_guido.service
 
 import br.com.casa_guido.repository.RadioRepository
 import br.com.casa_guido.room.entidades.RadioTerapia
-import br.com.casa_guido.screens.Radio
+import br.com.casa_guido.models.Radio
 import kotlinx.coroutines.flow.first
 
 class RadioService(

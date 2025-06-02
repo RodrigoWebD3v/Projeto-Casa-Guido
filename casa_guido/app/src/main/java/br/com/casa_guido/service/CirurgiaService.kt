@@ -3,7 +3,7 @@ package br.com.casa_guido.service
 import br.com.casa_guido.repository.CirurgiaRepository
 import br.com.casa_guido.room.entidades.Cirurgia
 import kotlinx.coroutines.flow.first
-import br.com.casa_guido.screens.Cirurgia as CirurgiaUI
+import br.com.casa_guido.models.Cirurgia as CirurgiaUI
 
 class CirurgiaService(
     private val cirurgiaRepository: CirurgiaRepository

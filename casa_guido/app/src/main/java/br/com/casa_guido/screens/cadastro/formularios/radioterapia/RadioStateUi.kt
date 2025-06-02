@@ -1,6 +1,6 @@
-package br.com.casa_guido.screens.cadastro.formularios.radio
+package br.com.casa_guido.screens.cadastro.formularios.radioterapia
 
-import br.com.casa_guido.screens.Radio
+import br.com.casa_guido.models.Radio
 
 data class RadioStateUi(
     val toggleDataPickerInicioRadio: Boolean = false,

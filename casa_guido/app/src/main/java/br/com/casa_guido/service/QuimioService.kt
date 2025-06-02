@@ -2,7 +2,7 @@ package br.com.casa_guido.service
 
 import br.com.casa_guido.repository.QuimioRepository
 import br.com.casa_guido.room.entidades.Quimioterapia
-import br.com.casa_guido.screens.Quimio
+import br.com.casa_guido.models.Quimio
 import kotlinx.coroutines.flow.first
 
 class QuimioService(

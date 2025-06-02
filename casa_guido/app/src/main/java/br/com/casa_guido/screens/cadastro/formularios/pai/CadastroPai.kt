@@ -32,7 +32,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.customizacao.VisualTransformationCustom
-import br.com.casa_guido.screens.Pessoa
+import br.com.casa_guido.models.Pessoa
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
 import br.com.casa_guido.screens.cadastro.formularios.mae.CamposOutro
@@ -157,7 +157,7 @@ fun CadastroResponsavel(
                 }
 
                 TextFieldSimples(
-                    nomeCampo = "Nome Completo",
+                    nomeCampo = "Nome completo",
                     valorPreenchido = responsavel.nome,
                     onChange = {
                         onChangeCampo(
@@ -174,7 +174,7 @@ fun CadastroResponsavel(
 
                 Row {
                     TextFieldSimples(
-                        nomeCampo = "Cpf",
+                        nomeCampo = "CPF",
                         valorPreenchido = responsavel.cpf,
                         visualTransformation = VisualTransformationCustom.CpfVisualTransformation(),
                         placeholder = "111.111.111.99",
@@ -188,9 +188,9 @@ fun CadastroResponsavel(
                     )
 
                     TextFieldSimples(
-                        nomeCampo = "Rg",
+                        nomeCampo = "RG",
                         valorPreenchido = responsavel.rg,
-                        visualTransformation = VisualTransformationCustom.RgVisualTransformation(),
+                        visualTransformation = VisualTransformation.None ,//VisualTransformationCustom.RgVisualTransformation(),
                         placeholder = "11.111.111-9",
                         onChange = {
                             onChangeCampo(
@@ -214,7 +214,7 @@ fun CadastroResponsavel(
                                 it
                             )
                         },
-                        modifier = Modifier.fillMaxWidth(.5f)
+                        modifier = Modifier.fillMaxWidth(1f)
                     )
 
 
@@ -259,7 +259,10 @@ fun CadastroResponsavel(
                         onClick = {
                             dataPickerNascimentoShow = true
                         },
-                        modifier = Modifier.fillMaxWidth(.5f)
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(start = 20.dp)
+                            .padding(end = 10.dp),
                     )
 
                     TextFieldSimples(
@@ -347,11 +350,11 @@ fun CadastroResponsavel(
                     )
 
                     RadioButtonMultOptValores(
-                        labelTitulo = "Situacao Profissional",
+                        labelTitulo = "Situação Profissional",
                         opcoesLista = listOf(
                             "Empregado" to 0,
                             "Desempregado" to 1,
-                            "Autonomo" to 2,
+                            "Autônomo" to 2,
                             "Pensionista" to 3,
                             "Aposentado" to 4,
                             "Diarista" to 5,

@@ -1,6 +1,6 @@
-package br.com.casa_guido.screens.cadastro.formularios.radio
+package br.com.casa_guido.screens.cadastro.formularios.radioterapia
 
-import br.com.casa_guido.screens.Quimio
+import br.com.casa_guido.models.Quimio
 
 data class QuimioStateUi(
     val toggleDataPickerInicioQuimio: Boolean = false,

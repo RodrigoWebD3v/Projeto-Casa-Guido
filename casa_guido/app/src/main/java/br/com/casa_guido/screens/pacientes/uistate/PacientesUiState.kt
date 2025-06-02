@@ -1,6 +1,6 @@
 package br.com.casa_guido.screens.pacientes.uistate
 
-import br.com.casa_guido.screens.Paciente
+import br.com.casa_guido.models.Paciente
 
 data class PacientesUiState(
     val nome: String = "",

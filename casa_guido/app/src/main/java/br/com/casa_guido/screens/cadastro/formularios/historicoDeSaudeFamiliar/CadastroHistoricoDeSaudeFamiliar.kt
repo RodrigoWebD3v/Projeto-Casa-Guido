@@ -24,8 +24,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.casa_guido.screens.HistoricoSaude
-import br.com.casa_guido.screens.cadastro.formularios.historicoSaudePaciente.CamposHistoricoSaude
+import br.com.casa_guido.models.HistoricoSaude
+import br.com.casa_guido.screens.cadastro.formularios.historicoDeSaudePaciente.CamposHistoricoSaude
 import br.com.casa_guido.screens.components.RadioButtonComLabelWidthIn
 import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
@@ -61,7 +61,7 @@ fun CadastroHistoricoDeSaudeFamiliar(
                     )
                 )
                 Text(
-                    "Informações do historico de saude",
+                    "Informações do histórico de saúde",
                     style = TextStyle(
                         fontSize = 12.sp,
                         color = Color.Black,
@@ -89,7 +89,7 @@ fun CadastroHistoricoDeSaudeFamiliar(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "Doencas existentes na familia",
+                text = "Doenças existentes na família",
                 style = TextStyle(
                     fontSize = 16.sp,
                     color = BackgroundColor,
@@ -117,7 +117,7 @@ fun CadastroHistoricoDeSaudeFamiliar(
                 )
 
                 RadioButtonComLabelWidthIn(
-                    label = "Deficiencia Intelectual",
+                    label = "Deficiência Intelectual",
                     selected = 2 in historicoDoencas.doencasFamilia,
                     onClickListener = {
                         onChangeCampo(
@@ -128,7 +128,7 @@ fun CadastroHistoricoDeSaudeFamiliar(
                 )
 
                 RadioButtonComLabelWidthIn(
-                    label = "Deficiencia Fisica",
+                    label = "Deficiência Física",
                     selected = 3 in historicoDoencas.doencasFamilia,
                     onClickListener = {
                         onChangeCampo(
@@ -139,7 +139,7 @@ fun CadastroHistoricoDeSaudeFamiliar(
                 )
 
                 RadioButtonComLabelWidthIn(
-                    label = "Deficiencia Auditiva",
+                    label = "Deficiência Auditiva",
                     selected = 4 in historicoDoencas.doencasFamilia,
                     onClickListener = {
                         onChangeCampo(
@@ -150,7 +150,7 @@ fun CadastroHistoricoDeSaudeFamiliar(
                 )
 
                 RadioButtonComLabelWidthIn(
-                    label = "Deficiencia Visual",
+                    label = "Deficiência Visual",
                     selected = 5 in historicoDoencas.doencasFamilia,
                     onClickListener = {
                         onChangeCampo(
@@ -248,7 +248,7 @@ fun CadastroHistoricoDeSaudeFamiliar(
                 )
 
                 RadioButtonComLabelWidthIn(
-                    label = "Desnutricao",
+                    label = "Desnutrição",
                     selected = 13 in historicoDoencas.doencasFamilia,
                     onClickListener = {
                         onChangeCampo(
@@ -270,7 +270,7 @@ fun CadastroHistoricoDeSaudeFamiliar(
                 )
 
                 RadioButtonComLabelWidthIn(
-                    label = "Cancer",
+                    label = "Câncer",
                     selected = 15 in historicoDoencas.doencasFamilia,
                     onClickListener = {
                         onChangeCampo(

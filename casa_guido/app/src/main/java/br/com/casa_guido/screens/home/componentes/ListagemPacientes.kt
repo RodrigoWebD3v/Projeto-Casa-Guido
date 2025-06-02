@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import br.com.casa_guido.screens.Agendamento
+import br.com.casa_guido.models.Agendamento
 import br.com.casa_guido.ui.theme.Main
 
 @Composable

@@ -1,6 +1,6 @@
 package br.com.casa_guido.dto
 
-import br.com.casa_guido.screens.Paciente
+import br.com.casa_guido.models.Paciente
 import kotlinx.serialization.Serializable
 
 

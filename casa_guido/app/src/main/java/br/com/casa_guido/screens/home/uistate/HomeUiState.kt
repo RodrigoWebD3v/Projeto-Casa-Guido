@@ -1,6 +1,6 @@
 package br.com.casa_guido.screens.home.uistate
 
-import br.com.casa_guido.screens.Agendamento
+import br.com.casa_guido.models.Agendamento
 import br.com.casa_guido.screens.home.componentes.cads_state.CardsUiState
 
 

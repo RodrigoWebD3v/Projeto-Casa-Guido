@@ -1,6 +1,6 @@
 package br.com.casa_guido.service
 
-import br.com.casa_guido.screens.Paciente
+import br.com.casa_guido.models.Paciente
 
 class CriarPacienteService(
     private val pacienteService: PacienteService,

@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -43,7 +44,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.casa_guido.screens.Cirurgia
+import br.com.casa_guido.models.Cirurgia
+import br.com.casa_guido.screens.cadastro.formularios.cirurgia.itemCirurgia.ItemCirurgia
 import br.com.casa_guido.screens.components.DataPicker
 import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.BackgroundColor
@@ -128,7 +130,7 @@ fun CadastroCirurgia(
                     TextFieldSimples(
                         nomeCampo = "Nome da cirurgia",
                         valorPreenchido = state.cirurgiaEdicao.nome,
-                        placeholder = "Nefrectomia",
+                        placeholder = "",
                         onChange = {
                             viewModel.onChangeCirurgiaEdicao(
                                 state.cirurgiaEdicao.copy(
@@ -158,12 +160,17 @@ fun CadastroCirurgia(
                         onClick = {
                             viewModel.toggleDatePickerCirurgia()
                         },
+                        modifier = Modifier.padding(start = 10.dp).padding(end = 20.dp)
                     )
                 }
 
             }
 
-            Row {
+            Spacer(Modifier.size(10.dp))
+
+            Row (
+                verticalAlignment = Alignment.Bottom
+            ){
                 TextFieldSimples(
                     nomeCampo = "CID",
                     valorPreenchido = state.cirurgiaEdicao.cid,
@@ -186,7 +193,7 @@ fun CadastroCirurgia(
                                 CamposCirurgia.ADD_CIRURGIA,
                                 state.cirurgiaEdicao
                             )
-                            viewModel.onChangeCirurgiaEdicao( Cirurgia(data = Utils.formatData(LocalDate.now())!!))
+                            viewModel.onChangeCirurgiaEdicao( Cirurgia(data = Utils.formataDataPadraoBr(LocalDate.now())!!))
                         }
                     },
                     modifier = Modifier

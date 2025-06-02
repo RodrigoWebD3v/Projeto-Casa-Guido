@@ -1,4 +1,4 @@
-package br.com.casa_guido.screens.cadastro.formularios.historicoSaudePaciente
+package br.com.casa_guido.screens.cadastro.formularios.historicoDeSaudePaciente
 
 enum class CamposHistoricoSaude {
     DOENCA_FAMILIA,

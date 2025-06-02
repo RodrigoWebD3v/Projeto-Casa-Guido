@@ -1,7 +1,7 @@
 package br.com.casa_guido.repository
 
 import br.com.casa_guido.configuration.ApiViaCepConfig
-import br.com.casa_guido.screens.Endereco
+import br.com.casa_guido.models.Endereco
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import kotlinx.coroutines.Dispatchers

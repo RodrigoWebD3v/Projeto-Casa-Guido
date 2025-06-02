@@ -1,13 +1,13 @@
 package br.com.casa_guido.service
 
 import br.com.casa_guido.repository.PacienteRepository
-import br.com.casa_guido.screens.HistoricoSaude
-import br.com.casa_guido.screens.Paciente
-import br.com.casa_guido.screens.ProfissionalResponsavel
+import br.com.casa_guido.models.HistoricoSaude
+import br.com.casa_guido.models.Paciente
+import br.com.casa_guido.models.ProfissionalResponsavel
 import kotlinx.coroutines.flow.first
 import br.com.casa_guido.room.entidades.Paciente as PacienteEntidade
-import br.com.casa_guido.screens.Paciente as PacienteUI
-import br.com.casa_guido.screens.Pessoa as PessoaUI
+import br.com.casa_guido.models.Paciente as PacienteUI
+import br.com.casa_guido.models.Pessoa as PessoaUI
 
 class PacienteService(
     private val pacienteRepository: PacienteRepository,
@@ -75,24 +75,24 @@ class PacienteService(
         return PacienteUI(
             id = this.id,
             pessoa = getPessoaById(this.pessoaId),
-            status = this.status!!,
-            nomeMae = this.nomeMae!!,
-            nomePai = this.nomePai!!,
-            nomeOutro = this.nomeOutro!!,
-            remuneracao = this.remuneracao!!,
-            bpc = this.recebeBpc!!,
-            valorBpc = this.valorBpc!!,
-            diagnostico = this.diagnostico!!,
-            escolaNome = this.escolaNome!!,
-            tamRoupa = this.tamRoupa!!,
-            tamCalcado = this.tamCalcado!!,
-            origen_info_ong = this.origenInfoOng!!,
-            observacoes = this.observacoes!!,
-            responsavel = getPessoaById(this.responsavelId!!),
-            conjugeResponsavel = getPessoaById(this.conjugeResponsavelId!!),
-            outroResponsavel = getPessoaById(this.outroResponsavelId!!),
+            status = this.status?: false,
+            nomeMae = this.nomeMae?:"",
+            nomePai = this.nomePai?:"",
+            nomeOutro = this.nomeOutro?:"",
+            remuneracao = this.remuneracao?:"",
+            bpc = this.recebeBpc?:0,
+            valorBpc = this.valorBpc?:"",
+            diagnostico = this.diagnostico?:"",
+            escolaNome = this.escolaNome?:"",
+            tamRoupa = this.tamRoupa?:"",
+            tamCalcado = this.tamCalcado?:"",
+            origen_info_ong = this.origenInfoOng?:"",
+            observacoes = this.observacoes?: arrayOf(""),
+            responsavel = getPessoaById(this.responsavelId?:""),
+            conjugeResponsavel = getPessoaById(this.conjugeResponsavelId?:""),
+            outroResponsavel = getPessoaById(this.outroResponsavelId?:""),
             profissionalResponsavel = ProfissionalResponsavel(
-                id = this.profissionalResponsavel!!,
+                id = this.profissionalResponsavel?:"",
                 nome = "Profissional Responsável",
                 crm = "",
             ),

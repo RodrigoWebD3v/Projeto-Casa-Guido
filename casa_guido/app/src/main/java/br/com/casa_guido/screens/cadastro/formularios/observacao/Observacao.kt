@@ -40,7 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.casa_guido.screens.Paciente
+import br.com.casa_guido.models.Paciente
 import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
@@ -108,7 +108,7 @@ fun Observacao(
         }
 
         TextFieldSimples(
-            nomeCampo = "Descricão da observação",
+            nomeCampo = "Descrição da observação",
             placeholder = "",
             valorPreenchido = state.observacaoEdicao,
             paddingValues = PaddingValues(0.dp)

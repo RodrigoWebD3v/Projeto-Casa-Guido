@@ -10,27 +10,87 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9bc01d2-2390-4e59-bcae-4ed6d67e6a6d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Agendamento.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Cirurgia.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/ComposicaoFamiliar.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Cras.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Doenca.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Endereco.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/HistoricoSaude.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Paciente.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Pessoa.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/ProfissionalResponsavel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Quimio.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Radio.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/SituacaoHabitacional.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Tratamento.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Ubs.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/config/AppDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/config/AppDatabase.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Paciente.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Paciente.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Pessoa.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Pessoa.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/PacienteDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/PacienteDTO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/MainApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/MainApplication.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/configuration/di/AppModules.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/configuration/di/AppModules.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/dto/PacientesDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/dto/PacientesDTO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/repository/ViaCepRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/repository/ViaCepRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/PacienteDTO.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/CadastroScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/CadastroScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/CadastroScreenUiState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/CadastroScreenUiState.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/CadastroScreenViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/CadastroScreenViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/cirurgia/CadastroCirurgia.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/cirurgia/CadastroCirurgia.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/cirurgia/CirurgiaStateUi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/cirurgia/CirurgiaStateUi.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/cirurgia/CirurgiaViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/cirurgia/CirurgiaViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/cirurgia/ItemCirurgia.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/cirurgia/itemCirurgia/ItemCirurgia.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/compFamiliar/CadastroComposicaoFamiliar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/compFamiliar/CadastroComposicaoFamiliar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/compFamiliar/CompFamiliarStateUi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/compFamiliar/CompFamiliarStateUi.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/compFamiliar/ComposicaoFamiliarViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/compFamiliar/ComposicaoFamiliarViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/compFamiliar/ItemComponenteFamiliar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/compFamiliar/ItemComponenteFamiliar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/endereco/CadastroEndereco.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/endereco/CadastroEndereco.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/endereco/ModalEndereco.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/endereco/ModalEndereco.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoDeSaudeFamiliar/CadastroHistoricoDeSaudeFamiliar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoDeSaudeFamiliar/CadastroHistoricoDeSaudeFamiliar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoSaudePaciente/CadastroHistoricoSaudePaciente.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoDeSaudePaciente/CadastroHistoricoSaudePaciente.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoSaudePaciente/CamposHistoricoSaude.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoDeSaudePaciente/CamposHistoricoSaude.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/identificacaoPaciente/CadastroIdentificacaoPaciente.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/identificacaoPaciente/CadastroIdentificacaoPaciente.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/mae/CadastroMae.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/mae/CadastroMae.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/mae/CamposConjuge.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/mae/CamposConjuge.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/observacao/Observacao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/observacao/Observacao.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/outro/CadastroOutro.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/outro/CadastroOutro.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/outro/CamposOutro.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/outro/CamposOutro.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/pai/CadastroPai.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/pai/CadastroPai.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/pai/CamposResponsavel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/pai/CamposResponsavel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/quimio/CadastroQuimio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/quimio/CadastroQuimio.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/radio/CadastroRadio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/radio/CadastroRadio.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/quimio/CadastroQuimio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/quimioterapia/CadastroQuimio.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/quimio/CamposQuimio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/quimioterapia/CamposQuimio.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/quimio/ItemQuimio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/quimioterapia/ItemQuimio.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/quimio/QuimioStateUi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/quimioterapia/QuimioStateUi.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/quimio/QuimioViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/quimioterapia/QuimioViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/radio/CadastroRadio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/radioterapia/CadastroRadio.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/radio/CamposRadio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/radioterapia/CamposRadio.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/radio/ItemRadio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/radioterapia/ItemRadio.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/radio/RadioStateUi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/radioterapia/RadioStateUi.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/radio/RadioViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/radioterapia/RadioViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/situacaoHabitacional/CadastroSituacaoHabitacional.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/situacaoHabitacional/CadastroSituacaoHabitacional.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/socioEconomico/CadastroSocioEconomico.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/socioEconomico/CadastroSocioEconomico.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/socioEconomico/CamposSocioEconomico.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/socioEconomico/CamposSocioEconomico.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/components/DataPicker.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/components/DataPicker.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/components/DropDrownMenu.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/components/DropDrownMenu.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/components/Escolaridade.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/components/Escolaridade.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/home/HomeViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/home/HomeViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/home/componentes/ItemAgendamento.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/home/componentes/ItemAgendamento.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/home/componentes/ListagemPacientes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/home/componentes/ListagemPacientes.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/home/uistate/HomeUiState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/home/uistate/HomeUiState.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/main/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/main/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/pacientes/componentes/ListagemPacientes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/pacientes/componentes/ListagemPacientes.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/pacientes/componentes/PacienteItem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/pacientes/componentes/PacienteItem.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/pacientes/uistate/PacientesUiState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/pacientes/uistate/PacientesUiState.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/ubs/UbsScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/ubs/componentes/ListagemUbs.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/ubs/componentes/UbsItem.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/CirurgiaService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/CirurgiaService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/ComposicaoFamiliarService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/ComposicaoFamiliarService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/CriarPacienteService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/CriarPacienteService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/CriarPdfService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/CriarPdfService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/EnderecoService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/EnderecoService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/HistoricoSaudeService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/HistoricoSaudeService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/PacienteService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/PacienteService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/PessoaService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/PessoaService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/QuimioService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/QuimioService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/RadioService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/RadioService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/ViaCepService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/ViaCepService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/ui/theme/Color.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/ui/theme/Color.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/util/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/util/Utils.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +100,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\Digo\.android\avd\Medium_Phone_API_35.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -82,9 +142,9 @@
       <list>
         <option value="Kotlin Interface" />
         <option value="Kotlin Data Class" />
-        <option value="Kotlin Class" />
         <option value="Kotlin Enum" />
         <option value="Kotlin File" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -114,22 +174,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.casa_guido [signingReport].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;4df7d894&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Digo/Desktop/Projeto-Casa-Guido/casa_guido/app/src/main/java/br/com/casa_guido/screens/components&quot;,
-    &quot;memory.settings.postsync.last.time.stamp&quot;: &quot;1748033249392&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.app.executor": "Run",
+    "Gradle.casa_guido [signingReport].executor": "Run",
+    "RunOnceActivity.ChatTagsLlmMigration": "true",
+    "RunOnceActivity.ClientConfigCleanupMigration": "true",
+    "RunOnceActivity.CodyAccountHistoryMigration": "true",
+    "RunOnceActivity.CodyAccountsIdsRefresh": "true",
+    "RunOnceActivity.CodyAssignOrphanedChatsToActiveAccount": "true",
+    "RunOnceActivity.CodyConvertUrlToCodebaseName": "true",
+    "RunOnceActivity.CodyHistoryLlmMigration": "true",
+    "RunOnceActivity.CodyMigrateChatHistory-v2": "true",
+    "RunOnceActivity.CodyProjectSettingsMigration": "true",
+    "RunOnceActivity.DeprecatedChatLlmMigration": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.ToggleCodyToolWindowAfterMigration": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "0e16661a",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Digo/Desktop/Projeto-Casa-Guido/casa_guido/app/src/main/java/br/com/casa_guido/screens/components",
+    "memory.settings.postsync.last.time.stamp": "1748033249392",
+    "settings.editor.selected.configurable": "com.sourcegraph.cody.config.ui.CodyConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Digo\Desktop\Projeto-Casa-Guido\casa_guido\app\src\main\java\br\com\casa_guido\screens\components" />
@@ -138,7 +211,11 @@
       <recent name="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/shared" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Digo\Desktop\Projeto-Casa-Guido\casa_guido\app\src\main\java\br\com\casa_guido\screens\cadastro\formularios\cirurgia\itemCirurgia" />
       <recent name="$PROJECT_DIR$/app" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="br.com.casa_guido.models" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="br.com.casa_guido.room.dao" />

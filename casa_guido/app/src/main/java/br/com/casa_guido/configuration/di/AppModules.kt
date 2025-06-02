@@ -24,8 +24,8 @@ import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.ComposicaoFam
 import br.com.casa_guido.screens.cadastro.formularios.endereco.EnderecoViewModel
 import br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente.IdentificacaoViewModel
 import br.com.casa_guido.screens.cadastro.formularios.observacao.CadastroObservacaoViewModel
-import br.com.casa_guido.screens.cadastro.formularios.radio.QuimioViewModel
-import br.com.casa_guido.screens.cadastro.formularios.radio.RadioViewModel
+import br.com.casa_guido.screens.cadastro.formularios.radioterapia.QuimioViewModel
+import br.com.casa_guido.screens.cadastro.formularios.radioterapia.RadioViewModel
 import br.com.casa_guido.screens.cadastro.formularios.pai.OutroViewModel
 
 import br.com.casa_guido.screens.home.HomeViewModel
@@ -50,66 +50,25 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
-val appModule = module {
+
+
+val authModule = module {
     viewModelOf(::LoginViewModel)
     viewModelOf(::ViewModelAuthMananger)
-    viewModelOf(::PacientesViewModel)
-    viewModelOf(::HomeViewModel)
-    viewModelOf(::CadastroScreenViewModel)
-    viewModelOf(::CirurgiaViewModel)
-    viewModelOf(::ComposicaoFamiliarViewModel)
-    viewModelOf(::EnderecoViewModel)
-    viewModelOf(::IdentificacaoViewModel)
-    viewModelOf(::OutroViewModel)
-    viewModelOf(::RadioViewModel)
-    viewModelOf(::QuimioViewModel)
-    viewModelOf(::OutroViewModel)
-    viewModelOf(::ComposicaoFamiliarViewModel)
-    viewModelOf(::CadastroObservacaoViewModel)
 
-
-
-    singleOf(::ClienteApi)
-    singleOf(::ApiViaCepConfig)
-    singleOf(::ViaCepRepository)
-    singleOf(::AuthRepository)
-    singleOf(::PessoaRepository)
-    singleOf(::PacienteRepository)
-    singleOf(::EnderecoRepository)
-    singleOf(::QuimioRepository)
-    singleOf(::QuimioRepository)
-    singleOf(::CirurgiaRepository)
-    singleOf(::RadioRepository)
-    singleOf(::MainViewModel)
-    singleOf(::ComposicaoFamiliarService)
-    singleOf(::ComposicaoFamiliarRepository)
-    singleOf(::ViaCepService)
     singleOf(::AuthService)
-    singleOf(::PacienteService)
-    singleOf(::PessoaService)
-    singleOf(::EnderecoService)
-    singleOf(::CriarPacienteService)
-    singleOf(::QuimioService)
-    singleOf(::QuimioService)
-    singleOf(::CirurgiaService)
-    singleOf(::RadioService)
-    singleOf(::CriarPdfService)
-    singleOf(::CompartilharArquivoService)
-    singleOf(::HistoricoSaudeService)
-    singleOf(::HistoricoSaudeRepository)
-    singleOf(::SincronizarPacientesService)
-    singleOf(::SincronizarPacientesRepository)
+    singleOf(::AuthRepository)
+}
 
 
-
-
-
-
+val coreModule = module {
     single {
         Room.databaseBuilder(get<Application>(), AppDatabase::class.java, "casa_guido_local.db")
             .fallbackToDestructiveMigration(true)
             .build()
     }
+
+    // DAOs
     single { get<AppDatabase>().pessoaDao() }
     single { get<AppDatabase>().enderecoDao() }
     single { get<AppDatabase>().pacienteDao() }
@@ -121,5 +80,68 @@ val appModule = module {
     single { get<AppDatabase>().situacaoHabitacionalDao() }
     single { get<AppDatabase>().composicaoFamiliarDao() }
     single { get<AppDatabase>().profissionalResponsavelDao() }
-
 }
+
+val pessoaModule = module {
+    viewModelOf(::IdentificacaoViewModel)
+    viewModelOf(::EnderecoViewModel)
+
+    singleOf(::PessoaService)
+    singleOf(::PessoaRepository)
+    singleOf(::EnderecoService)
+    singleOf(::EnderecoRepository)
+}
+
+val pacienteModule = module {
+    viewModelOf(::CadastroScreenViewModel)
+    viewModelOf(::PacientesViewModel)
+    viewModelOf(::CadastroObservacaoViewModel)
+    viewModelOf(::HomeViewModel)
+
+    singleOf(::PacienteService)
+    singleOf(::CriarPacienteService)
+    singleOf(::PacienteRepository)
+}
+
+val tratamentosModule = module {
+    viewModelOf(::QuimioViewModel)
+    viewModelOf(::CirurgiaViewModel)
+    viewModelOf(::RadioViewModel)
+    viewModelOf(::OutroViewModel) // Remover duplicação se for o mesmo caso
+
+    singleOf(::QuimioService)
+    singleOf(::QuimioRepository)
+    singleOf(::CirurgiaService)
+    singleOf(::CirurgiaRepository)
+    singleOf(::RadioService)
+    singleOf(::RadioRepository)
+}
+
+val composicaoFamiliarModule = module {
+    viewModelOf(::ComposicaoFamiliarViewModel)
+
+    singleOf(::ComposicaoFamiliarService)
+    singleOf(::ComposicaoFamiliarRepository)
+}
+
+val historicoSaudeModule = module {
+    singleOf(::HistoricoSaudeService)
+    singleOf(::HistoricoSaudeRepository)
+}
+
+val viaCepModule = module {
+    singleOf(::ApiViaCepConfig)
+    singleOf(::ViaCepRepository)
+    singleOf(::ViaCepService)
+}
+
+val infraModule = module {
+    viewModelOf(::MainViewModel)
+
+    singleOf(::ClienteApi)
+    singleOf(::CriarPdfService)
+    singleOf(::CompartilharArquivoService)
+    singleOf(::SincronizarPacientesService)
+    singleOf(::SincronizarPacientesRepository)
+}
+

@@ -2,7 +2,7 @@ package br.com.casa_guido.screens.cadastro.formularios.compFamiliar
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import br.com.casa_guido.screens.ComposicaoFamiliar
+import br.com.casa_guido.models.ComposicaoFamiliar
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

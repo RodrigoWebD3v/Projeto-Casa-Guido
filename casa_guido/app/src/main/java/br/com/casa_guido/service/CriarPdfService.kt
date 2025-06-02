@@ -1,7 +1,6 @@
 package br.com.casa_guido.service
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Paint
@@ -9,7 +8,7 @@ import android.graphics.Typeface
 import android.print.PrintAttributes
 import android.print.pdf.PrintedPdfDocument
 import br.com.casa_guido.R
-import br.com.casa_guido.screens.Paciente
+import br.com.casa_guido.models.Paciente
 import java.io.File
 import java.io.FileOutputStream
 import androidx.core.graphics.scale

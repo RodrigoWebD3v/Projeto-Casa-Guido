@@ -1,8 +1,8 @@
-package br.com.casa_guido.screens.cadastro.formularios.radio
+package br.com.casa_guido.screens.cadastro.formularios.radioterapia
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import br.com.casa_guido.screens.Radio
+import br.com.casa_guido.models.Radio
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

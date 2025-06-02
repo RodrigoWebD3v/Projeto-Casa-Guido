@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -27,11 +28,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.customizacao.VisualTransformationCustom
-import br.com.casa_guido.screens.Paciente
+import br.com.casa_guido.models.Paciente
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
 import br.com.casa_guido.screens.components.BotaoPersonalizadoComIcones
@@ -119,7 +122,7 @@ fun CadastroIdentificacaoPaciente(
         horizontalAlignment = Alignment.Start
     ) {
         TextFieldSimples(
-            nomeCampo = "Nome Completo",
+            nomeCampo = "Nome completo",
             valorPreenchido = paciente.pessoa.nome,
             onChange = {
                 onChangeCampo(
@@ -137,6 +140,7 @@ fun CadastroIdentificacaoPaciente(
         Row(
             modifier = Modifier.padding(horizontal = 20.dp), verticalAlignment = Alignment.Bottom
         ) {
+
             BotaoPersonalizadoComIcones(
                 iconeBotao = iconeBotao,
                 color = color,
@@ -146,7 +150,11 @@ fun CadastroIdentificacaoPaciente(
                 titulo = "Endereço",
                 modifier = Modifier.fillMaxWidth(.45f)
             )
+        }
 
+        Row(
+            modifier = Modifier.padding(horizontal = 20.dp), verticalAlignment = Alignment.Bottom
+        ) {
 
             DataPicker(
                 showDataPicker = dataPickerNascimentoShow,
@@ -163,27 +171,44 @@ fun CadastroIdentificacaoPaciente(
                 onClick = {
                     dataPickerNascimentoShow = true
                 },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.padding(end = 20.dp).weight(1f)
             )
 
-            Box(
-                Modifier
-                    .size(45.dp)
-                    .background(Paragraph, shape = RoundedCornerShape(10.dp)),
-                contentAlignment = Alignment.Center
-            ) {
+            Column {
+
                 Text(
-                    text = if (paciente.pessoa.dataNascimento == "") "0" else Utils.converteEmAnos(
-                        paciente.pessoa.dataNascimento
-                    ),
+                    "Idade",
                     style = TextStyle(
-                        fontSize = 16.sp,
-                        color = BackgroundColor,
-                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 14.sp,
+                        color = GreenBlack,
+                        fontWeight = FontWeight.Medium,
                         textAlign = TextAlign.Start
-                    ),
+                    ), maxLines = 1, overflow = TextOverflow.Ellipsis
                 )
+
+                Spacer(Modifier.size(5.dp))
+
+                Box(
+                    Modifier
+                        .size(45.dp)
+                        .background(Paragraph, shape = RoundedCornerShape(10.dp)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = if (paciente.pessoa.dataNascimento == "") "0" else Utils.buscaDiferencaEmAnos(
+                            paciente.pessoa.dataNascimento
+                        ),
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            color = BackgroundColor,
+                            fontWeight = FontWeight.SemiBold,
+                            textAlign = TextAlign.Start
+                        ),
+                    )
+                }
             }
+
+
         }
 
         TextFieldSimples(
@@ -226,7 +251,7 @@ fun CadastroIdentificacaoPaciente(
 
         Row {
             TextFieldSimples(
-                nomeCampo = "Cpf",
+                nomeCampo = "CPF",
                 valorPreenchido = paciente.pessoa.cpf,
                 visualTransformation = VisualTransformationCustom.CpfVisualTransformation(),
                 placeholder = "111.111.111.99",
@@ -240,9 +265,9 @@ fun CadastroIdentificacaoPaciente(
             )
 
             TextFieldSimples(
-                nomeCampo = "Rg",
+                nomeCampo = "RG",
                 valorPreenchido = paciente.pessoa.rg,
-                visualTransformation = VisualTransformationCustom.RgVisualTransformation(),
+                visualTransformation = VisualTransformation.None, //VisualTransformationCustom.RgVisualTransformation(),
                 placeholder = "11.111.111-9",
                 onChange = {
                     onChangeCampo(
@@ -257,7 +282,7 @@ fun CadastroIdentificacaoPaciente(
 
         Row {
             TextFieldSimples(
-                nomeCampo = "Cartão do sus",
+                nomeCampo = "Cartão do SUS",
                 valorPreenchido = paciente.pessoa.cartaoSus,
                 visualTransformation = VisualTransformationCustom.CartSusVisualTransformation(),
                 placeholder = "",

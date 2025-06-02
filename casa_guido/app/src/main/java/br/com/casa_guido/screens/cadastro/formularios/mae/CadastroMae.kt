@@ -32,7 +32,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.customizacao.VisualTransformationCustom
-import br.com.casa_guido.screens.Pessoa
+import br.com.casa_guido.models.Pessoa
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
 import br.com.casa_guido.screens.cadastro.formularios.pai.CamposResponsavel
@@ -154,7 +154,7 @@ fun CadastroConjuge(
 
                 CheckBoxComp(
                     modifier = Modifier.padding(20.dp),
-                    labelTitulo = "Resp Principal?",
+                    labelTitulo = "Resp Principal",
                     selected = conjuge.respPrincipal,
                 ) {
                     onChangeCampo(CamposConjuge.RESP_PRINCIPAL, if(it) "1" else "0")
@@ -162,7 +162,7 @@ fun CadastroConjuge(
 
 
                 TextFieldSimples(
-                    nomeCampo = "Nome Completo",
+                    nomeCampo = "Nome completo",
                     valorPreenchido = conjuge.nome,
                     onChange = {
                         onChangeCampo(
@@ -180,7 +180,7 @@ fun CadastroConjuge(
 
                 Row {
                     TextFieldSimples(
-                        nomeCampo = "Cpf",
+                        nomeCampo = "CPF",
                         valorPreenchido = conjuge.cpf,
                         visualTransformation = VisualTransformationCustom.CpfVisualTransformation(),
                         placeholder = "",
@@ -194,9 +194,9 @@ fun CadastroConjuge(
                     )
 
                     TextFieldSimples(
-                        nomeCampo = "Rg",
+                        nomeCampo = "RG",
                         valorPreenchido = conjuge.rg,
-                        visualTransformation = VisualTransformationCustom.RgVisualTransformation(),
+                        visualTransformation = VisualTransformation.None ,//VisualTransformationCustom.RgVisualTransformation(),
                         placeholder = "",
                         onChange = {
                             onChangeCampo(
@@ -220,7 +220,7 @@ fun CadastroConjuge(
                                 it
                             )
                         },
-                        modifier = Modifier.fillMaxWidth(.5f)
+                        modifier = Modifier.fillMaxWidth(1f)
                     )
                 }
                 Row(
@@ -260,7 +260,10 @@ fun CadastroConjuge(
                         onClick = {
                             dataPickerNascimentoShow = true
                         },
-                        modifier = Modifier.fillMaxWidth(.5f)
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(start = 20.dp)
+                            .padding(end = 10.dp),
                     )
 
 
@@ -281,7 +284,7 @@ fun CadastroConjuge(
                 }
 
                 TextFieldSimples(
-                    nomeCampo = "Cartão do sus",
+                    nomeCampo = "Cartão do SUS",
                     valorPreenchido = conjuge.cartaoSus,
                     visualTransformation = VisualTransformationCustom.CartSusVisualTransformation(),
                     placeholder = "567 8901 2345 6789",
@@ -348,11 +351,11 @@ fun CadastroConjuge(
                     )
 
                     RadioButtonMultOptValores(
-                        labelTitulo = "Situacao Profissional",
+                        labelTitulo = "Situação Profissional",
                         opcoesLista = listOf(
                             "Empregado" to 0,
                             "Desempregado" to 1,
-                            "Autonomo" to 2,
+                            "Autônomo" to 2,
                             "Pensionista" to 3,
                             "Aposentado" to 4,
                             "Diarista" to 5,

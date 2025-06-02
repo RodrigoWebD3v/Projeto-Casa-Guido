@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.casa_guido.screens.SituacaoHabitacional
+import br.com.casa_guido.models.SituacaoHabitacional
 import br.com.casa_guido.screens.components.RadioButtonMultOptValores
 import br.com.casa_guido.screens.components.RadioButtonMultValores
 import br.com.casa_guido.screens.components.TextFieldSimples
@@ -102,7 +102,7 @@ fun CadastroSituacaoHabitacional(
         }
 
         TextFieldSimples(
-            nomeCampo = "Numero de Comodos",
+            nomeCampo = "Número de Cômodos",
             valorPreenchido = (situacaoHabitacional.numeroComodos ?: 1).toString(),
             placeholder = "",
             paddingValues = PaddingValues(0.dp)
@@ -114,7 +114,7 @@ fun CadastroSituacaoHabitacional(
 
         RadioButtonMultOptValores(
             selected = situacaoHabitacional.material,
-            labelTitulo = "Caracteristicas",
+            labelTitulo = "Características",
             opcoesLista = listOf(
                 "Alvenaria" to 0,
                 "Madeira" to 1,
@@ -128,7 +128,7 @@ fun CadastroSituacaoHabitacional(
 
         RadioButtonMultValores(
             opcoesLista = listOf("Terreno", "Carro", "Outro"),
-            labelTitulo = "Bens/Imovel",
+            labelTitulo = "Bens/Imóvel",
             opcoesSelecionadas = situacaoHabitacional.bens,
         ) {
             onChangeCampo(
@@ -139,7 +139,7 @@ fun CadastroSituacaoHabitacional(
 
         RadioButtonMultOptValores(
             opcoesLista = listOf("Carro" to 0, "Moto" to 1, "Outro" to 2),
-            labelTitulo = "Meio de transporte + usado",
+            labelTitulo = "Meio de transporte mais usado",
             selected = situacaoHabitacional.meioDeTransporte,
         ) {
             onChangeCampo(
@@ -150,7 +150,7 @@ fun CadastroSituacaoHabitacional(
 
         RadioButtonMultOptValores(
             opcoesLista = listOf("TV" to 0, "Radio" to 1, "Internet" to 2, "Outro" to 3),
-            labelTitulo = "Meio de comunicacao + usado",
+            labelTitulo = "Meio de comunicação mais usado",
             selected = situacaoHabitacional.meioDeComunicao,
         ) {
             onChangeCampo(

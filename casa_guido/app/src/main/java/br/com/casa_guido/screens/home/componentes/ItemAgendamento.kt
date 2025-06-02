@@ -22,7 +22,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.casa_guido.screens.Agendamento
+import br.com.casa_guido.models.Agendamento
 import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Highlight
@@ -59,7 +59,7 @@ fun ItemAgendamento(agendamento: Agendamento) {
                     ), contentAlignment = Alignment.Center
             ) {
                 Text(
-                    Utils.getInitials(agendamento.nome),
+                    Utils.pegaIniciais(agendamento.nome),
                     style = TextStyle(),
                     fontSize = 16.sp,
                     color = BackgroundColor,

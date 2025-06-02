@@ -2,7 +2,9 @@ package br.com.casa_guido.screens.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Home
@@ -19,12 +21,17 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.casa_guido.screens.Pessoa
+import br.com.casa_guido.models.Pessoa
 import br.com.casa_guido.ui.theme.GreenBlack
 
 @Composable
-fun Escolaridade(modifier: Modifier = Modifier,pessoa: Pessoa, onChangeEscolaridade : (String, String) -> Unit) {
+fun Escolaridade(
+    modifier: Modifier = Modifier,
+    pessoa: Pessoa,
+    onChangeEscolaridade: (String, String) -> Unit
+) {
 
     var escolaridadeState by remember {
         mutableStateOf(
@@ -45,21 +52,21 @@ fun Escolaridade(modifier: Modifier = Modifier,pessoa: Pessoa, onChangeEscolarid
     )
 
     val serieFundamental = listOf(
-        DropDownMenuItem(nome = "1", icone = Icons.Filled.Check,  id = "1"),
-        DropDownMenuItem(nome = "2", icone = Icons.Filled.Check,  id = "2"),
-        DropDownMenuItem(nome = "3", icone = Icons.Filled.Check,  id = "3"),
-        DropDownMenuItem(nome = "4", icone = Icons.Filled.Check,  id = "4"),
-        DropDownMenuItem(nome = "5", icone = Icons.Filled.Check,  id = "5"),
-        DropDownMenuItem(nome = "6", icone = Icons.Filled.Check,  id = "6"),
-        DropDownMenuItem(nome = "7", icone = Icons.Filled.Check,  id = "7"),
-        DropDownMenuItem(nome = "8", icone = Icons.Filled.Check,  id = "8"),
-        DropDownMenuItem(nome = "9", icone = Icons.Filled.Check,  id = "9"),
+        DropDownMenuItem(nome = "1", icone = Icons.Filled.Check, id = "1"),
+        DropDownMenuItem(nome = "2", icone = Icons.Filled.Check, id = "2"),
+        DropDownMenuItem(nome = "3", icone = Icons.Filled.Check, id = "3"),
+        DropDownMenuItem(nome = "4", icone = Icons.Filled.Check, id = "4"),
+        DropDownMenuItem(nome = "5", icone = Icons.Filled.Check, id = "5"),
+        DropDownMenuItem(nome = "6", icone = Icons.Filled.Check, id = "6"),
+        DropDownMenuItem(nome = "7", icone = Icons.Filled.Check, id = "7"),
+        DropDownMenuItem(nome = "8", icone = Icons.Filled.Check, id = "8"),
+        DropDownMenuItem(nome = "9", icone = Icons.Filled.Check, id = "9"),
     )
 
     val serieMedio = listOf(
-        DropDownMenuItem(nome = "1", icone = Icons.Filled.Home,  id = "1"),
-        DropDownMenuItem(nome = "2", icone = Icons.Filled.Settings,  id = "2"),
-        DropDownMenuItem(nome = "3", icone = Icons.Filled.Settings,  id = "3"),
+        DropDownMenuItem(nome = "1", icone = Icons.Filled.Home, id = "1"),
+        DropDownMenuItem(nome = "2", icone = Icons.Filled.Settings, id = "2"),
+        DropDownMenuItem(nome = "3", icone = Icons.Filled.Settings, id = "3"),
     )
 
     val opcoesDefault = listOf(
@@ -69,9 +76,9 @@ fun Escolaridade(modifier: Modifier = Modifier,pessoa: Pessoa, onChangeEscolarid
     Column(
         modifier = modifier
     ) {
-        Row (
+        Row(
             Modifier.fillMaxWidth(.9f)
-        ){
+        ) {
             Text(
                 "Escolaridade",
                 style = TextStyle(
@@ -83,19 +90,19 @@ fun Escolaridade(modifier: Modifier = Modifier,pessoa: Pessoa, onChangeEscolarid
             )
         }
 
-
+        Spacer(Modifier.size(5.dp))
         DropDownMenu(
             opcoes = escolaridade,
             valorPreenchido = escolaridade[pessoa.escolaridade],
-            modifier = Modifier.fillMaxWidth(.9f)
         ) {
             escolaridadeState = it
         }
 
+        Spacer(Modifier.size(10.dp))
 
-        Row (
+        Row(
             Modifier.fillMaxWidth(.9f)
-        ){
+        ) {
             Text(
                 "Série",
                 style = TextStyle(
@@ -106,10 +113,9 @@ fun Escolaridade(modifier: Modifier = Modifier,pessoa: Pessoa, onChangeEscolarid
                 ), maxLines = 1, overflow = TextOverflow.Ellipsis
             )
         }
-
+        Spacer(Modifier.size(5.dp))
         DropDownMenu(
-            modifier = Modifier.fillMaxWidth(.9f),
-            valorPreenchido = when(escolaridadeState.id) {
+            valorPreenchido = when (escolaridadeState.id) {
                 "1" -> serieFundamental[pessoa.serie]
                 "2" -> serieMedio[pessoa.serie]
                 else -> opcoesDefault[0]

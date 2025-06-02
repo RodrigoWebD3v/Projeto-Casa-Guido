@@ -105,7 +105,7 @@ fun Main(
     )
 
     val pagerState = rememberPagerState(pageCount = {
-        3
+        2
     })
 
     val coroutineScope = rememberCoroutineScope()
@@ -247,7 +247,7 @@ fun Main(
             )
         }
     ) { paddingValues ->
-        HorizontalPager(state = pagerState, beyondViewportPageCount = 3) { page ->
+        HorizontalPager(state = pagerState, beyondViewportPageCount = 2) { page ->
             when (page) {
                 0 -> {
                     HomeScreen(

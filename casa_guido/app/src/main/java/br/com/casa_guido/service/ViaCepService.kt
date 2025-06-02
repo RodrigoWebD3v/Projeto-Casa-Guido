@@ -1,7 +1,7 @@
 package br.com.casa_guido.service
 
 import br.com.casa_guido.repository.ViaCepRepository
-import br.com.casa_guido.screens.Endereco
+import br.com.casa_guido.models.Endereco
 
 class ViaCepService(
     private val viaCepRepository: ViaCepRepository
