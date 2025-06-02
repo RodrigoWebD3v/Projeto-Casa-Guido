@@ -104,7 +104,7 @@ fun SplashScreen(modifier: Modifier = Modifier, setResultado: (Status) -> Unit) 
 
             Conexao.SemConexao -> {
                 snackbarHostState.showSnackbar(
-                    message = "Dispositivo não conectado a internet",
+                    message = "Dispositivo não conectado à internet",
                     actionLabel = "Fechar",
                     duration = SnackbarDuration.Short
                 )

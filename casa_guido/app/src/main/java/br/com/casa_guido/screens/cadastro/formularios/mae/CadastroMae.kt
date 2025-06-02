@@ -35,8 +35,6 @@ import br.com.casa_guido.customizacao.VisualTransformationCustom
 import br.com.casa_guido.models.Pessoa
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
-import br.com.casa_guido.screens.cadastro.formularios.pai.CamposResponsavel
-import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.CamposSocioEconomico
 import br.com.casa_guido.screens.components.BotaoPersonalizadoComIcones
 import br.com.casa_guido.screens.components.CheckBoxComp
 import br.com.casa_guido.screens.components.DataPicker

@@ -130,7 +130,7 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
             Conexao.SemConexao -> {
                 corSnackbar = Color.Red
                 snackbarHostState.showSnackbar(
-                    message = "Dispositivo não conectado a internet",
+                    message = "Dispositivo não conectado à internet",
                     actionLabel = "Fechar",
                     duration = SnackbarDuration.Short
                 )

@@ -262,7 +262,7 @@ fun CadastroOutro(
                     )
 
                     TextFieldSimples(
-                        nomeCampo = "Celular",
+                        nomeCampo = "Telefone",
                         valorPreenchido = outro.telefone,
                         visualTransformation = VisualTransformationCustom.PhoneVisualTransformation(),
                         placeholder = "(48) 99963-9821",
