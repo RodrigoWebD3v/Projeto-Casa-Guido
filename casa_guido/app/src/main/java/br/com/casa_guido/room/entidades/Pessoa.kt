@@ -8,14 +8,14 @@ import java.util.UUID
 data class Pessoa(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val nome: String,
-    val contato: String? = null, // Equivalente ao "telefone"
-    val dataNascimento: String, // renomeado para camelCase, mantendo legibilidade
+    val contato: String? = null,
+    val dataNascimento: String,
     val cpf: String? = null,
     val identidade: String? = null, // equivalente ao "rg"
     val naturalidade: String? = null,
     val genero: String? = null,
-    val escolaridade: Int? = 0,
-    val serie: Int? = 0,
+    val escolaridade: Int = 0,
+    val serie: Int = 0,
     val estadoCivil: Int? = null, // mantido como Int para enums
     val situacaoProfissional: Int? = null, // idem
     val salario: String? = null, // manter como String, tratado como decimal no backend

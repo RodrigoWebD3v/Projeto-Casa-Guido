@@ -62,7 +62,7 @@ fun SplashScreen(modifier: Modifier = Modifier, setResultado: (Status) -> Unit) 
     val context = LocalContext.current
 
 
-    suspend fun verificarLogin(context : Context){
+     fun verificarLogin(context : Context){
         coroutineScope.launch {
             viewModelAuthMananger.refreshToken(context)
         }

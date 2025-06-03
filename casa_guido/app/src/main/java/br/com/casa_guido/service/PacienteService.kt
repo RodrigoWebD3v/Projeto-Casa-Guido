@@ -58,6 +58,7 @@ class PacienteService(
             diagnostico = this.diagnostico,
             profissionalResponsavel = "123",
             escolaNome = this.escolaNome,
+            //Descontinuar esse campo
             anoEscolar = "1",
             tamRoupa = this.tamRoupa,
             tamCalcado = this.tamCalcado,

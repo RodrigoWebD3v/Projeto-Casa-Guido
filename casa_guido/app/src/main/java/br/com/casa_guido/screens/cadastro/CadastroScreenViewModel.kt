@@ -62,6 +62,8 @@ class CadastroScreenViewModel(
 
     fun save() {
         viewModelScope.launch {
+            Log.i("CadastroScreenViewModel", "save: ${_paciente.value.pessoa.escolaridade}")
+            Log.i("CadastroScreenViewModel", "save: ${_paciente.value.pessoa.serie}")
             criarPacienteService.criarPaciente(_paciente.value)
         }
     }
@@ -83,6 +85,10 @@ class CadastroScreenViewModel(
     }
 
     fun onChangeSocioEconomico(camposSocioEconomico: CamposSocioEconomico, valor: String) {
+        Log.i(
+            "CadastroScreenViewModel",
+            "onChangeSocioEconomico: ${camposSocioEconomico.name} - $valor"
+        )
         when (camposSocioEconomico) {
             CamposSocioEconomico.ESCOLARIDADE -> {
                 _paciente.value = _paciente.value.copy(

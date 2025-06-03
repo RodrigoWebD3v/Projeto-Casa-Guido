@@ -1,5 +1,6 @@
 package br.com.casa_guido.service
 
+import android.util.Log
 import br.com.casa_guido.models.Paciente
 
 class CriarPacienteService(
@@ -16,6 +17,10 @@ class CriarPacienteService(
     suspend fun criarPaciente(paciente: Paciente) {
         pacienteService.createPaciente(paciente)
 
+        Log.i(
+            "CriarPacienteService",
+            "criarPaciente: ${paciente.pessoa.escolaridade} - ${paciente.pessoa.serie}"
+        )
         pessoaService.createPessoa(
             pessoa = paciente.pessoa,
             endereco = paciente.pessoa.endereco

@@ -27,6 +27,7 @@ import br.com.casa_guido.screens.cadastro.formularios.observacao.CadastroObserva
 import br.com.casa_guido.screens.cadastro.formularios.radioterapia.QuimioViewModel
 import br.com.casa_guido.screens.cadastro.formularios.radioterapia.RadioViewModel
 import br.com.casa_guido.screens.cadastro.formularios.pai.OutroViewModel
+import br.com.casa_guido.screens.components.escolaridade.EscolaridadeViewModel
 
 import br.com.casa_guido.screens.home.HomeViewModel
 import br.com.casa_guido.screens.login.LoginViewModel
@@ -143,5 +144,9 @@ val infraModule = module {
     singleOf(::CompartilharArquivoService)
     singleOf(::SincronizarPacientesService)
     singleOf(::SincronizarPacientesRepository)
+}
+
+val componentesModule = module{
+    viewModelOf(::EscolaridadeViewModel)
 }
 

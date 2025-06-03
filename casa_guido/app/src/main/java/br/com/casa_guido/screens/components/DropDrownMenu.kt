@@ -19,7 +19,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import br.com.casa_guido.ui.theme.BackgroundColor
@@ -28,28 +27,19 @@ import java.util.UUID
 
 
 data class DropDownMenuItem(
-    val id: String = UUID.randomUUID().toString(),
-    val nome: String,
-    val icone: ImageVector
+    val id: String = UUID.randomUUID().toString(), val nome: String, val icone: ImageVector
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DropDownMenu(
     modifier: Modifier = Modifier,
-    opcoes: List<DropDownMenuItem> = emptyList(),
-    valorPreenchido: DropDownMenuItem? = null,
-    onSelected: (DropDownMenuItem) -> Unit
+    opcoes: List<Pair<String, Int>> = listOf(Pair("Selecione", 0)),
+    valorPreenchido: Pair<String, Int> = Pair("Selecione", 0),
+    onSelected: (Pair<String, Int>) -> Unit
 ) {
 
-    var selectedItem by remember { mutableStateOf(opcoes.first()) }
     var isExpanded by remember { mutableStateOf(false) }
-
-    LaunchedEffect(Unit) {
-        valorPreenchido?.let {
-            valorPreenchido
-        } ?: opcoes.first()
-    }
 
     Box(
         modifier = modifier,
@@ -62,7 +52,7 @@ fun DropDownMenu(
             },
         ) {
             TextField(
-                value = selectedItem.nome,
+                value = valorPreenchido.first,
                 onValueChange = {},
                 readOnly = true,
                 modifier = Modifier
@@ -89,16 +79,13 @@ fun DropDownMenu(
             ) {
                 opcoes.forEach { item ->
                     DropdownMenuItem(
-                        text = { Text(item.nome) },
+                        text = { Text(item.first) },
                         onClick = {
-                            selectedItem = item
                             isExpanded = false
                             onSelected(item)
                         },
                         leadingIcon = {
-                            if (
-                                item == selectedItem
-                            ) {
+                            if (item.second == valorPreenchido.second) {
                                 Icon(
                                     imageVector = Icons.Default.Check,
                                     contentDescription = "Ícone de cadastro",

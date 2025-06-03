@@ -43,7 +43,7 @@ import br.com.casa_guido.room.entidades.Tratamento
         ProfissionalResponsavel::class,
         Entrevista::class,
     ],
-    version = 17,
+    version = 19,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

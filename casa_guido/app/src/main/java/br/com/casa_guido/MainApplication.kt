@@ -2,6 +2,7 @@ package br.com.casa_guido
 
 import android.app.Application
 import br.com.casa_guido.configuration.di.authModule
+import br.com.casa_guido.configuration.di.componentesModule
 import br.com.casa_guido.configuration.di.composicaoFamiliarModule
 import br.com.casa_guido.configuration.di.coreModule
 import br.com.casa_guido.configuration.di.historicoSaudeModule
@@ -30,7 +31,8 @@ class MainApplication : Application() {
                 composicaoFamiliarModule,
                 historicoSaudeModule,
                 viaCepModule,
-                infraModule
+                infraModule,
+                componentesModule
             )
         }
     }

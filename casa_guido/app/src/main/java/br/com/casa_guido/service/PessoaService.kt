@@ -34,6 +34,11 @@ class PessoaService(
     private fun Pessoa.toEntidade(
         enderecoId: String
     ): PessoaEntidade {
+        Log.i(
+            "PessoaService",
+            "toEntidade: ${this.escolaridade} - ${this.serie}"
+        )
+
         return PessoaEntidade(
             id = this.id,
             nome = this.nome,
@@ -64,13 +69,13 @@ class PessoaService(
             rg = this.identidade?.let { this.identidade } ?: "",
             telefone = this.telefone?.let { this.telefone } ?: "",
             naturalidade = this.naturalidade?.let { this.naturalidade } ?: "",
-            escolaridade = this.escolaridade?.let { this.escolaridade } ?: 0,
+            escolaridade = this.escolaridade.let { this.escolaridade },
             estadoCivil = this.estadoCivil?.let { this.estadoCivil ?: 0 },
             situacaoProfissional = this.situacaoProfissional.let { this.situacaoProfissional ?: 0 },
             salario = this.salario?.let { this.salario } ?: "",
             endereco = this.enderecoId?.let { enderecoService.getById(it) } ?: Endereco(),
             cartaoSus = this.cartaoSus?.let { this.cartaoSus } ?: "",
-            serie = this.serie?.let { this.serie } ?: 0,
+            serie = this.serie.let { this.serie },
             profissao = this.profissao?.let { this.profissao } ?: "",
             respPrincipal = this.respPrincipal?.let { this.respPrincipal } ?: 0,
         )

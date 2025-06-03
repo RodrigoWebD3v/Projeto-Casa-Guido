@@ -1,5 +1,6 @@
 package br.com.casa_guido.screens.cadastro.formularios.socioEconomico
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
@@ -19,7 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.casa_guido.models.Paciente
-import br.com.casa_guido.screens.components.Escolaridade
+import br.com.casa_guido.screens.components.escolaridade.Escolaridade
 import br.com.casa_guido.screens.components.RadioButtonMultOptValores
 import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.Main
@@ -141,13 +142,18 @@ fun CadastroSocioEconomico(
             pessoa = paciente.pessoa,
             modifier = Modifier.fillMaxWidth(.9f),
             onChangeEscolaridade = { valor1, valor2 ->
-                onChangeCampo(
-                    CamposSocioEconomico.ESCOLARIDADE,
-                    valor1
+                Log.i(
+                    "CadastroSocioEconomico",
+                    "Escolaridade alterada: $valor1, Série alterada: $valor2"
                 )
                 onChangeCampo(
+                    CamposSocioEconomico.ESCOLARIDADE,
+                    valor1.toString()
+                )
+
+                onChangeCampo(
                     CamposSocioEconomico.SERIE,
-                    valor2
+                    valor2.toString()
                 )
             }
         )

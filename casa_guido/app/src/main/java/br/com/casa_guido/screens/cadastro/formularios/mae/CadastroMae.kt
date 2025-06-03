@@ -38,7 +38,7 @@ import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
 import br.com.casa_guido.screens.components.BotaoPersonalizadoComIcones
 import br.com.casa_guido.screens.components.CheckBoxComp
 import br.com.casa_guido.screens.components.DataPicker
-import br.com.casa_guido.screens.components.Escolaridade
+import br.com.casa_guido.screens.components.escolaridade.Escolaridade
 import br.com.casa_guido.screens.components.RadioButtonMultOptValores
 import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.Alert
@@ -230,11 +230,11 @@ fun CadastroConjuge(
                         onChangeEscolaridade = { valor1, valor2 ->
                             onChangeCampo(
                                 CamposConjuge.ESCOLARIDADE,
-                                valor1
+                                valor1.toString()
                             )
                             onChangeCampo(
                                 CamposConjuge.SERIE,
-                                valor2
+                                valor2.toString()
                             )
                         }
                     )

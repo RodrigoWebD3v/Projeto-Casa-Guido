@@ -35,11 +35,10 @@ import br.com.casa_guido.customizacao.VisualTransformationCustom
 import br.com.casa_guido.models.Pessoa
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
-import br.com.casa_guido.screens.cadastro.formularios.mae.CamposOutro
 import br.com.casa_guido.screens.components.BotaoPersonalizadoComIcones
 import br.com.casa_guido.screens.components.CheckBoxComp
 import br.com.casa_guido.screens.components.DataPicker
-import br.com.casa_guido.screens.components.Escolaridade
+import br.com.casa_guido.screens.components.escolaridade.Escolaridade
 import br.com.casa_guido.screens.components.RadioButtonMultOptValores
 import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.Alert
@@ -232,11 +231,11 @@ fun CadastroResponsavel(
                         onChangeEscolaridade = { valor1, valor2 ->
                             onChangeCampo(
                                 CamposResponsavel.ESCOLARIDADE,
-                                valor1
+                                valor1.toString()
                             )
                             onChangeCampo(
                                 CamposResponsavel.SERIE,
-                                valor2
+                                valor2.toString()
                             )
                         }
                     )
