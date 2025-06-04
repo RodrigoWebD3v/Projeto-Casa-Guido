@@ -36,7 +36,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -54,6 +56,7 @@ import androidx.navigation.NavHostController
 import br.com.casa_guido.configuration.Status
 import br.com.casa_guido.screens.cadastro.formularios.cirurgia.CadastroCirurgia
 import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.CadastroComposicaoFamiliar
+import br.com.casa_guido.screens.cadastro.formularios.documentos.AdicionarDocumentos
 import br.com.casa_guido.screens.cadastro.formularios.mae.CadastroConjuge
 import br.com.casa_guido.screens.cadastro.formularios.historicoDeSaudeFamiliar.CadastroHistoricoDeSaudeFamiliar
 import br.com.casa_guido.screens.cadastro.formularios.historicoDeSaudePaciente.CadastroHistoricoSaudePaciente
@@ -91,6 +94,9 @@ fun CadastroScreen(
     val viewModel = koinViewModel<CadastroScreenViewModel>()
     val paciente by viewModel.paciente.collectAsState()
     val status by viewModel.status.collectAsState()
+
+
+    var quantidadePaginas by remember { mutableStateOf(14) }
 
     viewModel._context = LocalContext.current
 
@@ -169,7 +175,7 @@ fun CadastroScreen(
         },
 
         ) { innerPadding ->
-        val pagerState = rememberPagerState(pageCount = { 12 })
+        val pagerState = rememberPagerState(pageCount = { quantidadePaginas })
         var percentual by remember { mutableFloatStateOf(.0f) }
         val animatedPercentual by animateFloatAsState(targetValue = percentual, label = "")
 
@@ -205,7 +211,7 @@ fun CadastroScreen(
 
 
 
-            HorizontalPager(state = pagerState, beyondViewportPageCount = 12) { page ->
+            HorizontalPager(state = pagerState, beyondViewportPageCount = quantidadePaginas) { page ->
                 Box(Modifier.fillMaxSize()) {
                     Column(
                         modifier = Modifier
@@ -380,6 +386,13 @@ fun CadastroScreen(
                                         }
                                     )
                                 }
+
+                                13 -> {
+                                    AdicionarDocumentos(
+                                        numeroTela = page + 1,
+                                    )
+                                }
+
                             }
                         }
 

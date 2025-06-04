@@ -907,7 +907,7 @@ class CadastroScreenViewModel(
             CamposConjuge.SERIE -> {
                 _paciente.value = _paciente.value.copy(
                     conjugeResponsavel = _paciente.value.conjugeResponsavel.copy(
-                        escolaridade = valor.toInt()
+                        serie = valor.toInt()
                     )
                 )
             }
