@@ -840,6 +840,7 @@ class CadastroScreenViewModel(
             }
 
             CamposConjuge.ESCOLARIDADE_CONJUGE -> {
+                Log.i("Escolaridade aaaaaaa", valor)
                 _paciente.value = _paciente.value.copy(
                     conjugeResponsavel = _paciente.value.conjugeResponsavel.copy(
                         escolaridade = valor.toInt()

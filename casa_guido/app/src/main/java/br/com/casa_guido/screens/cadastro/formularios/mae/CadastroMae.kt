@@ -1,6 +1,7 @@
 package br.com.casa_guido.screens.cadastro.formularios.mae
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
@@ -35,6 +36,7 @@ import br.com.casa_guido.customizacao.VisualTransformationCustom
 import br.com.casa_guido.models.Pessoa
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
+import br.com.casa_guido.screens.cadastro.formularios.pai.CamposResponsavel
 import br.com.casa_guido.screens.components.BotaoPersonalizadoComIcones
 import br.com.casa_guido.screens.components.CheckBoxComp
 import br.com.casa_guido.screens.components.DataPicker
@@ -228,6 +230,10 @@ fun CadastroConjuge(
                     Escolaridade(
                         pessoa = conjuge,
                         onChangeEscolaridade = { valor1, valor2 ->
+                            Log.i(
+                                "Cadastro Mãe",
+                                "${valor1} - ${valor2}"
+                            )
                             onChangeCampo(
                                 CamposConjuge.ESCOLARIDADE,
                                 valor1.toString()
@@ -241,7 +247,6 @@ fun CadastroConjuge(
                 }
 
                 Row {
-
                     DataPicker(
                         showDataPicker = dataPickerNascimentoShow,
                         valorPreenchido = conjuge.dataNascimento,

@@ -138,14 +138,15 @@ fun CadastroSocioEconomico(
             }
         )
 
+        Log.i(
+                "Cadastro socio economico 2",
+                "Inicializando com escolaridade: ${paciente.pessoa.escolaridade} e série: ${paciente.pessoa.serie}"
+        )
+
         Escolaridade(
             pessoa = paciente.pessoa,
             modifier = Modifier.fillMaxWidth(.9f),
             onChangeEscolaridade = { valor1, valor2 ->
-                Log.i(
-                    "CadastroSocioEconomico",
-                    "Escolaridade alterada: $valor1, Série alterada: $valor2"
-                )
                 onChangeCampo(
                     CamposSocioEconomico.ESCOLARIDADE,
                     valor1.toString()
