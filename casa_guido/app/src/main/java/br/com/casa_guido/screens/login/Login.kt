@@ -118,7 +118,12 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
 
             }
 
-            is Status.Desconectado -> TODO()
+            is Status.Desconectado -> {
+
+            }
+            is Status.Alerta -> {
+
+            }
         }
     }
 
@@ -165,6 +170,10 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
             }
 
             is Status.Sucesso -> {
+            }
+
+            is Status.Alerta -> {
+
             }
         }
     }

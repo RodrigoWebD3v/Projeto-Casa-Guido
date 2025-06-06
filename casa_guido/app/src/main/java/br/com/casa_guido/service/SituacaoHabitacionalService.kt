@@ -20,7 +20,7 @@ class SituacaoHabitacionalService (
     ): SituacaoHabitacional {
         return SituacaoHabitacional(
             id = this.id,
-            pacienteId = this.id,
+            pacienteId = pacienteId,
             comoAdquiriuCasa = this.comoAdquiriuCasa,
             area = this.area,
             meioDeTransporte = this.meioDeTransporte,

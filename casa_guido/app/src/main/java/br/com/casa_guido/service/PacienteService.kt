@@ -101,7 +101,7 @@ class PacienteService(
             nomePai = this.nomePai ?: "",
             nomeOutro = this.nomeOutro ?: "",
             remuneracao = this.remuneracao ?: "",
-            bpc = this.recebeBpc ?: 0,
+            bpc = this.recebeBpc,
             valorBpc = this.valorBpc ?: "",
             diagnostico = this.diagnostico ?: "",
             escolaNome = this.escolaNome ?: "",
@@ -123,7 +123,7 @@ class PacienteService(
             composicaoFamiliar = composicaoFamiliarService.getComposicaoFamiliarPorPaciente(this.id),
             historicoSaude = historicoSaudeService.getHistoricoSaudeByPaciente(this.id)
                 ?: HistoricoSaude(),
-            aptoReceberBpc = this.aptoReceberBpc ?: 0,
+            aptoReceberBpc = this.aptoReceberBpc,
             tipoEscola = tipoEscola ?: 0,
             ubs = Ubs(
                 municipio = this.ubsMunicipio ?: "",

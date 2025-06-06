@@ -69,6 +69,7 @@ import br.com.casa_guido.screens.cadastro.formularios.pai.CadastroResponsavel
 import br.com.casa_guido.screens.cadastro.formularios.situacaoHabitacional.CadastroSituacaoHabitacional
 import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.CadastroSocioEconomico
 import br.com.casa_guido.screens.scaffold_components.TopAppBarComp
+import br.com.casa_guido.ui.theme.Alert
 import br.com.casa_guido.ui.theme.Button
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
@@ -121,7 +122,7 @@ fun CadastroScreen(
             }
 
             is Status.Erro -> {
-                colorSnackBar = Button
+                colorSnackBar = Alert
                 coroutineScope.launch {
                     snackbarHostState.showSnackbar(
                         message =  (status as Status.Erro).mensagem,
@@ -146,17 +147,31 @@ fun CadastroScreen(
                 }
                 viewModel.updateStatus(Status.SemInteracao)
             }
+
+            is Status.Alerta -> {
+                colorSnackBar = Button
+                coroutineScope.launch {
+                    snackbarHostState.showSnackbar(
+                        message =  (status as Status.Alerta).mensagem,
+                        duration = SnackbarDuration.Short,
+                        actionLabel = "Fechar"
+                    )
+                }
+                viewModel.updateStatus(Status.SemInteracao)
+            }
         }
 
     }
 
     LaunchedEffect(Unit) {
         coroutineScope.launch {
-            snackbarHostState.showSnackbar(
-                message = if (pacienteId != null) "Editando paciente" else "Criando paciente",
-                duration = SnackbarDuration.Short,
-                actionLabel = "Fechar"
-            )
+            if(pacienteId != null){
+                colorSnackBar = Button
+                viewModel.updateStatus(Status.Alerta("Editando paciente"))
+            }else{
+                colorSnackBar = Paragraph
+                viewModel.updateStatus(Status.Sucesso("Criando paciente"))
+            }
         }
     }
 

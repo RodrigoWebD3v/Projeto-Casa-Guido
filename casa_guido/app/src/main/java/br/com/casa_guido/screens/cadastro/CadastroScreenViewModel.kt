@@ -67,7 +67,7 @@ class CadastroScreenViewModel(
                 _status.value = Status.Sucesso("Paciente criado com sucesso")
                 onPopBack()
             }else{
-                _status.value = Status.Erro("Nome do paciente não pode ser vazio")
+                _status.value = Status.Alerta("Nome do paciente não pode ser vazio")
             }
         }
     }
@@ -257,7 +257,6 @@ class CadastroScreenViewModel(
                                     endereco = endereco!!
                                 )
                             )
-                            _status.value = Status.Sucesso("Endereço encontrado")
                         }
                     } catch (e: Exception) {
                         _status.value = Status.Erro("Erro ao buscar endereço")
@@ -474,7 +473,6 @@ class CadastroScreenViewModel(
                                     endereco = endereco!!
                                 )
                             )
-                            _status.value = Status.Sucesso("Endereço encontrado")
                         }
                     } catch (e: Exception) {
                         _status.value = Status.Erro("Erro ao buscar endereço")
@@ -578,7 +576,6 @@ class CadastroScreenViewModel(
                                     endereco = endereco!!
                                 )
                             )
-                            _status.value = Status.Sucesso("Endereço encontrado")
                         }
                     } catch (e: Exception) {
                         _status.value = Status.Erro("Erro ao buscar endereço")
