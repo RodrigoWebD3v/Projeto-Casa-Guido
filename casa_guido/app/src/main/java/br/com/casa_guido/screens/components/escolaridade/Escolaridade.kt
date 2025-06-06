@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.sp
 import br.com.casa_guido.models.Pessoa
 import br.com.casa_guido.screens.components.DropDownMenu
 import br.com.casa_guido.ui.theme.GreenBlack
+import br.com.casa_guido.ui.theme.Main
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -48,6 +49,7 @@ fun Escolaridade(
         val serieOptions = when (pessoa.escolaridade) {
             1 -> estado.serieFundamentalOptions
             2 -> estado.serieMedioOptions
+            3 -> estado.serieSuperiorOptions
             else -> estado.default
         }
 

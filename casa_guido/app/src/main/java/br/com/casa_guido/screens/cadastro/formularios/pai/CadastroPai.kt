@@ -315,6 +315,7 @@ fun CadastroResponsavel(
                         visualTransformation = VisualTransformation.None,
                         keyboardType = KeyboardType.Number,
                         placeholder = "1.230",
+                        somenteNumero = true,
                         onChange = {
                             onChangeCampo(
                                 CamposResponsavel.SALARIO_RESPONSAVEL,

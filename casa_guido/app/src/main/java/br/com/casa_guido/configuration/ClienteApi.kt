@@ -14,9 +14,9 @@ import kotlinx.serialization.json.Json
 
 class ClienteApi {
 
-    var localHost: Boolean = false
+    var localHost: Boolean = true
 
-    var endpointPrincipal = if (localHost) "http://10.0.2.2:3000" else "https://a05e-2804-4bd0-482-e200-70bd-90ac-9d36-bf51.ngrok-free.app" //"http://192.168.101.14:3000"
+    var endpointPrincipal = if (localHost) "http://10.0.2.2:3000" else "http://192.168.101.14:3000"
 
     val authEndpoint = "${endpointPrincipal}/api/v1/auth"
 

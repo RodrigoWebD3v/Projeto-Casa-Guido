@@ -62,8 +62,7 @@ class CadastroScreenViewModel(
 
     fun save() {
         viewModelScope.launch {
-            Log.i("CadastroScreenViewModel", "save: ${_paciente.value.pessoa.escolaridade}")
-            Log.i("CadastroScreenViewModel", "save: ${_paciente.value.pessoa.serie}")
+            Log.i("CadastroScreenViewModel tipoEscola", "save: ${_paciente.value.tipoEscola}")
             criarPacienteService.criarPaciente(_paciente.value)
         }
     }
@@ -118,7 +117,7 @@ class CadastroScreenViewModel(
                 )
             }
 
-            CamposSocioEconomico.REMUNERACAO_OPT -> {
+            CamposSocioEconomico.BPC_OPCIONAL -> {
                 Log.i("CadastroScreenViewModel", "onChangeSocioEconomico REMUNERACAO_OPT: $valor")
                 _paciente.value = _paciente.value.copy(
                     bpc = valor.toInt()
@@ -158,6 +157,12 @@ class CadastroScreenViewModel(
             CamposSocioEconomico.PUBLICA_PRIVADA -> {
                 _paciente.value = _paciente.value.copy(
                     tipoEscola = valor.toInt()
+                )
+            }
+
+            CamposSocioEconomico.APTO_RECEBER_BPC -> {
+                _paciente.value = _paciente.value.copy(
+                    aptoReceberBpc = valor.toInt()
                 )
             }
         }

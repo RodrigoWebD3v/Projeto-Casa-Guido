@@ -321,6 +321,7 @@ fun CadastroConjuge(
                         visualTransformation = VisualTransformation.None,
                         keyboardType = KeyboardType.Number,
                         placeholder = "",
+                        somenteNumero = true,
                         onChange = {
                             onChangeCampo(
                                 CamposConjuge.SALARIO_CONJUGE,

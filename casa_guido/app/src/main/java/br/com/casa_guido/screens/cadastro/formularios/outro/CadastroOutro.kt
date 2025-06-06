@@ -309,6 +309,7 @@ fun CadastroOutro(
                         visualTransformation = VisualTransformation.None,
                         keyboardType = KeyboardType.Number,
                         placeholder = "1.230",
+                        somenteNumero = true,
                         onChange = {
                             onChangeCampo(
                                 CamposOutro.SALARIO_OUTRO,

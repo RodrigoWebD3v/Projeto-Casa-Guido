@@ -20,5 +20,6 @@ data class Pessoa(
     val salario: String = "",
     val cartaoSus: String = "",
     val respPrincipal: Int = 0,
-    val profissao: String = ""
+    val profissao: String = "",
+    val tipoEscola: Int? = null, // mantido como Int para enums
 )
