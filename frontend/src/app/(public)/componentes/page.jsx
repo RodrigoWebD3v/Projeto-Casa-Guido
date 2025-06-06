@@ -25,8 +25,8 @@ export default function ComponentGallery() {
   const [simpleText, setSimpleText] = useState('');
 
   const dropOptions = [
-    { id: '1', nome: 'Opção A' },
-    { id: '2', nome: 'Opção B' },
+    { id: '1', nome: 'Opção B' },
+    { id: '2', nome: 'Opção C' },
   ];
 
   const multiOptions = [
