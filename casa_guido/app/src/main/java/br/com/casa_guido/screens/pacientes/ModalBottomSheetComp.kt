@@ -74,7 +74,7 @@ fun ModalBottomSheetComp(
                                 .padding(horizontal = 20.dp),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            Text("Editar Paciente")
+                            Text("Editar Paciente", color = Main)
                             Icon(
                                 imageVector = Icons.Default.Edit,
                                 contentDescription = null
@@ -97,7 +97,7 @@ fun ModalBottomSheetComp(
                                 .padding(horizontal = 20.dp),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            Text("Gerar PDF")
+                            Text("Gerar PDF", color = Main)
                             Icon(
                                 imageVector = Icons.Default.Share,
                                 contentDescription = null

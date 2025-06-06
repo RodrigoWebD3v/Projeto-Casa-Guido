@@ -6,6 +6,7 @@ import br.com.casa_guido.repository.PacienteRepository
 import br.com.casa_guido.models.HistoricoSaude
 import br.com.casa_guido.models.Paciente
 import br.com.casa_guido.models.ProfissionalResponsavel
+import br.com.casa_guido.models.SituacaoHabitacional
 import br.com.casa_guido.models.Ubs
 import kotlinx.coroutines.flow.first
 import br.com.casa_guido.room.entidades.Paciente as PacienteEntidade
@@ -19,7 +20,8 @@ class PacienteService(
     private val cirurgiaService: CirurgiaService,
     private val radioService: RadioService,
     private val composicaoFamiliarService: ComposicaoFamiliarService,
-    private val historicoSaudeService: HistoricoSaudeService
+    private val historicoSaudeService: HistoricoSaudeService,
+    private val situacaoHabitacionalService: SituacaoHabitacionalService,
 ) {
 
     suspend fun getPacientes(): List<Paciente> {
@@ -84,7 +86,7 @@ class PacienteService(
             crasMunicipio = this.cras.municipio,
             ubsMunicipio = this.ubs.municipio,
             crasBairro = this.cras.bairro,
-            ubsBairro = this.ubs.bairro
+            ubsBairro = this.ubs.bairro,
         )
     }
 
@@ -130,7 +132,8 @@ class PacienteService(
             cras = Cras(
                 municipio = this.crasMunicipio ?: "",
                 bairro = this.crasBairro ?: ""
-            )
+            ),
+            situacaoHabitacional = situacaoHabitacionalService.buscaSituacaoHabitacionalPorPaciente(this.id)?: SituacaoHabitacional()
         )
     }
 }

@@ -98,6 +98,9 @@ fun CadastroScreen(
 
     var quantidadePaginas by remember { mutableStateOf(14) }
 
+    var colorSnackBar by remember { mutableStateOf(Button) }
+
+
     viewModel._context = LocalContext.current
 
 
@@ -110,29 +113,38 @@ fun CadastroScreen(
     LaunchedEffect(status) {
         when (status) {
             Status.Carregando -> {
-
+                viewModel.updateStatus(Status.SemInteracao)
             }
 
             is Status.Desconectado -> {
-
+                viewModel.updateStatus(Status.SemInteracao)
             }
 
             is Status.Erro -> {
+                colorSnackBar = Button
                 coroutineScope.launch {
                     snackbarHostState.showSnackbar(
-                        message = "Erro ao carregar paciente",
+                        message =  (status as Status.Erro).mensagem,
                         duration = SnackbarDuration.Short,
                         actionLabel = "Fechar"
                     )
                 }
+                viewModel.updateStatus(Status.SemInteracao)
             }
 
             Status.SemInteracao -> {
-
             }
 
             is Status.Sucesso -> {
-
+                colorSnackBar = Paragraph
+                coroutineScope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = (status as Status.Sucesso).mensagem,
+                        duration = SnackbarDuration.Short,
+                        actionLabel = "Fechar"
+                    )
+                }
+                viewModel.updateStatus(Status.SemInteracao)
             }
         }
 
@@ -160,7 +172,7 @@ fun CadastroScreen(
                         snackbarData = snackbarData,
                         actionColor = GreenBlack,
                         contentColor = GreenBlack,
-                        backgroundColor = if (pacienteId != null) Button else Paragraph,
+                        backgroundColor = colorSnackBar ,
                     )
                 }
             )
@@ -418,13 +430,9 @@ fun CadastroScreen(
                                     icon = Icons.Default.Save,
                                     onClick = {
                                         coroutineScope.launch {
-                                            viewModel.save()
-                                            snackbarHostState.showSnackbar(
-                                                message = "Paciente salvo com sucesso",
-                                                duration = SnackbarDuration.Short,
-                                                actionLabel = "Fechar"
-                                            )
-                                            navHostController.popBackStack()
+                                            viewModel.save{
+                                                navHostController.popBackStack()
+                                            }
                                         }
                                     }
                                 )
@@ -445,13 +453,9 @@ fun CadastroScreen(
                                     modifier = Modifier.padding(end = 20.dp),
                                     onClick = {
                                         coroutineScope.launch {
-                                            viewModel.save()
-                                            snackbarHostState.showSnackbar(
-                                                message = "Paciente salvo com sucesso",
-                                                duration = SnackbarDuration.Short,
-                                                actionLabel = "Fechar"
-                                            )
-                                            navHostController.popBackStack()
+                                            viewModel.save{
+                                                navHostController.popBackStack()
+                                            }
                                         }
                                     }
                                 )
