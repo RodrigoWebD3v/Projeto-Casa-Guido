@@ -40,7 +40,7 @@ export default function ComponentGallery() {
   const multiselectOptions = ['Maçã', 'Banana', 'Pêra', 'Abacaxi'];
 
   const items = [
-  {
+    {
       title: 'SearchBox',
       component: <SearchBox value={search} onValueChange={setSearch} />,
     },
