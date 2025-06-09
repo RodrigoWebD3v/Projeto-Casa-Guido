@@ -1,7 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
-import { Home, UserPlus, Calendar, User } from 'lucide-react';
+import { Home, UserPlus, User, LayoutDashboard } from 'lucide-react';
+
 const stats = [
   { title: 'Total de Pacientes', value: 248, description: '+12% este mês' },
   { title: 'Hoje', value: 12, description: '+4% em relação a ontem' },
@@ -36,16 +38,33 @@ export default function Dashboard() {
     <div className="flex min-h-screen text-main">
       {/* Sidebar */}
       <aside className="w-44 bg-gray-700 shadow-sm p-6">
-        <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><Home size={20} /> Menu </h2>
+        <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+          <Home size={20} /> Menu
+        </h2>
         <nav className="flex flex-col gap-4">
-          <a href="#" className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition"><UserPlus size={18} /> Cadastrar</a>
-          <a href="#" className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition"> <User size={18} /> Pacientes </a>
+          <Link
+            href="#"
+            className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition"
+          >
+            <UserPlus size={18} /> Cadastrar
+          </Link>
+
+          <Link
+            href="/listagem-pacientes"
+            className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition"
+          >
+            <User size={18} /> Pacientes
+          </Link>
         </nav>
+
       </aside>
 
       {/* Conteúdo principal */}
       <main className="flex-1 p-6 bg-background">
-        <h1 className="text-2xl font-bold mb-6 text-center">Dashboard</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">
+          <LayoutDashboard size={20} />
+          Dashboard
+        </h1>
 
         {/* Cards de estatísticas */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
@@ -62,7 +81,6 @@ export default function Dashboard() {
 
         {/* Caixa de título dos agendamentos */}
         <p className="text-md text-main font-semibold">Agendamentos para hoje:</p>
-
 
         {/* Lista com scroll */}
         <div className="flex flex-col gap-4 max-h-[550px] overflow-y-auto text-black">
