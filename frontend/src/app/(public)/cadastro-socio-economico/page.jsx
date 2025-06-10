@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Users, User, UserPlus, Home, LayoutDashboard } from 'lucide-react';
+import { User, Home, LayoutDashboard } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { ChevronLeft, Save, ChevronRight } from 'lucide-react';
 import DropDownMenu from '@/components/DropDownMenu/DropDrownMenu';
@@ -63,7 +63,7 @@ export default function SocioEconomicForm() {
                         <LayoutDashboard size={18} /> <span>Dashboard</span>
                     </Link>
                     <Link
-                        href="#"
+                        href="/listagem-pacientes"
                         className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition text-white"
                     >
                         <User size={18} /> <span>Pacientes</span>
@@ -72,86 +72,88 @@ export default function SocioEconomicForm() {
             </aside>
 
             <main className="flex-1 p-8 ">
-                <div className="max-w-6xl mx-auto">
+                <div className="max-w-10xl mx-auto">
                     <h1 className="text-2xl font-bold text-main mb-2">Cadastro</h1>
-                    <h2 className="text-xl font-semibold text-main-700 mb-4">2. Sócio econômico</h2>
-                    <h3 className="text-main mb-8">Informações sócio econômicas do paciente:</h3>
+                    <div className="bg-white p-6 rounded-lg shadow">
+                        <h2 className="text-xl text-gray-700 font-semibold text-main-700 mb-4">2. Sócio econômico</h2>
+                        <h3 className="text-gray-800 mb-8">Informações sócio econômicas do paciente:</h3>
 
-                    <div className="space-y-6">
-                        <div className="bg-white p-6 rounded-lg shadow">
-                            <h3 className="text-lg font-medium text-gray-700 mb-4">Remuneração</h3>
-                            <div className="flex items-center gap-4">
-                                <InputTextField
-                                    nomeCampo="Digite o valor: R$"
-                                    valorPreenchido={remuneracao}
-                                    onChange={setRemuneracao}
-                                    somenteNumero={true}
-                                    className="bg-gray-50 border border-gray-300 rounded-md p-2 transition focus:outline-none focus:ring-2 focus:ring-green-600"
-                                    style={{ boxSizing: 'border-box' }}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col justify-start bg-white p-6 rounded-lg shadow">
-                            <div>
-                                <MultiOptionRadioGroup
-                                    labelTitulo="BPC"
-                                    selected={bpc}
-                                    onChange={setBpc}
-                                    options={[["Não", 0], ["Sim", 1]]}
-                                    inline={true}
-                                    className="gap-4"
-                                />
-                            </div>
-                            {bpc === 1 && (
-                                <>
-                                    <h3 className="text-lg font-medium text-gray-700 mb-4 mt-4">Valor</h3>
-                                    <div>
-                                        <InputTextField
-                                            nomeCampo="Digite o valor: R$"
-                                            valorPreenchido={valor}
-                                            onChange={setValor}
-                                            somenteNumero={true}
-                                        />
-                                    </div>
-                                </>
-                            )}
-                        </div>
-
-                        <div className="bg-white p-6 rounded-lg shadow">
-                            <h3 className="text-lg font-medium text-gray-700 mb-4">Escolaridade</h3>
-
-                            <div className="flex gap-6">
-                                <div className="w-1/2">
-                                    <SimpleTextField
-                                        nomeCampo="Instituição de ensino"
-                                        placeholder="Nome da instituição"
-                                        valorPreenchido={instituicaoEnsino}
-                                        onChange={setInstituicaoEnsino}
+                        <div className="space-y-6">
+                            <div className="bg-white p-6 rounded-lg shadow">
+                                <h3 className="text-lg font-medium text-gray-700 mb-4">Remuneração</h3>
+                                <div className="flex items-center gap-4">
+                                    <InputTextField
+                                        nomeCampo="Digite o valor: R$"
+                                        valorPreenchido={remuneracao}
+                                        onChange={setRemuneracao}
+                                        somenteNumero={true}
                                         className="bg-gray-50 border border-gray-300 rounded-md p-2 transition focus:outline-none focus:ring-2 focus:ring-green-600"
+                                        style={{ boxSizing: 'border-box' }}
                                     />
                                 </div>
+                            </div>
 
-                                <div className="w-1/2 flex flex-col gap-4 border border-gray-300 rounded-md p-4 bg-gray-50">
-                                    <div className="flex items-center gap-2">
-                                        <p className="text-sm font-medium text-gray-700 w-20">Nível:</p>
-                                        <DropDownMenu
-                                            options={escolaridadeOptions}
-                                            onSelected={setEscolaridade}
-                                            selected={escolaridade.id === '' ? { id: '', nome: 'Nível' } : escolaridade}
-                                            className="bg-white border border-gray-300 rounded-md flex-1 p-2 transition focus:outline-none focus:ring-2 focus:ring-green-600"
+                            <div className="flex flex-col justify-start bg-white p-6 rounded-lg shadow">
+                                <div>
+                                    <MultiOptionRadioGroup
+                                        labelTitulo="BPC"
+                                        selected={bpc}
+                                        onChange={setBpc}
+                                        options={[["Não", 0], ["Sim", 1]]}
+                                        inline={true}
+                                        className="gap-4"
+                                    />
+                                </div>
+                                {bpc === 1 && (
+                                    <>
+                                        <h3 className="text-lg font-medium text-gray-700 mb-4 mt-4">Valor</h3>
+                                        <div>
+                                            <InputTextField
+                                                nomeCampo="Digite o valor: R$"
+                                                valorPreenchido={valor}
+                                                onChange={setValor}
+                                                somenteNumero={true}
+                                            />
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+
+                            <div className="bg-white p-6 rounded-lg shadow">
+                                <h3 className="text-lg font-medium text-gray-700 mb-4">Escolaridade</h3>
+
+                                <div className="flex gap-6">
+                                    <div className="w-1/2">
+                                        <SimpleTextField
+                                            nomeCampo="Instituição de ensino"
+                                            placeholder="Nome da instituição"
+                                            valorPreenchido={instituicaoEnsino}
+                                            onChange={setInstituicaoEnsino}
+                                            className="bg-gray-50 border border-gray-300 rounded-md p-2 transition focus:outline-none focus:ring-2 focus:ring-green-600"
                                         />
                                     </div>
 
-                                    <div className="flex items-center gap-2">
-                                        <p className="text-sm font-medium text-gray-700 w-20">Série:</p>
-                                        <DropDownMenu
-                                            options={serieOptions}
-                                            onSelected={setSerie}
-                                            selected={serie.id === '' ? { id: '', nome: 'Série' } : serie}
-                                            className="bg-white border border-gray-300 rounded-md flex-1 p-2 transition focus:outline-none focus:ring-2 focus:ring-green-600"
-                                            disabled={serieOptions.length === 0}
-                                        />
+                                    <div className="w-1/2 flex flex-col gap-4 border border-gray-300 rounded-md p-4 bg-gray-50">
+                                        <div className="flex items-center gap-2">
+                                            <p className="text-sm font-medium text-gray-700 w-20">Nível:</p>
+                                            <DropDownMenu
+                                                options={escolaridadeOptions}
+                                                onSelected={setEscolaridade}
+                                                selected={escolaridade.id === '' ? { id: '', nome: 'Nível' } : escolaridade}
+                                                className="bg-white border border-gray-300 rounded-md flex-1 p-2 transition focus:outline-none focus:ring-2 focus:ring-green-600"
+                                            />
+                                        </div>
+
+                                        <div className="flex items-center gap-2">
+                                            <p className="text-sm font-medium text-gray-700 w-20">Série:</p>
+                                            <DropDownMenu
+                                                options={serieOptions}
+                                                onSelected={setSerie}
+                                                selected={serie.id === '' ? { id: '', nome: 'Série' } : serie}
+                                                className="bg-white border border-gray-300 rounded-md flex-1 p-2 transition focus:outline-none focus:ring-2 focus:ring-green-600"
+                                                disabled={serieOptions.length === 0}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

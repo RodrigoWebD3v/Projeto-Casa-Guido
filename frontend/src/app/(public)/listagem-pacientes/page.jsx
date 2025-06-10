@@ -3,39 +3,30 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Eye, Edit, Trash, Users, UserPlus, Home, LayoutDashboard } from 'lucide-react';
-
-const pacientes = [
-    { id: 1, nome: 'Ana Silva', idade: 29, telefone: '(11) 91234-5678' },
-    { id: 2, nome: 'Carlos Oliveira', idade: 45, telefone: '(21) 99876-5432' },
-    { id: 3, nome: 'Juliana Lima', idade: 34, telefone: '(31) 98765-4321' },
-    { id: 4, nome: 'Mariana Santos', idade: 22, telefone: '(41) 92345-6789' },
-    { id: 5, nome: 'Pedro Costa', idade: 38, telefone: '(51) 93456-7890' },
-    { id: 6, nome: 'Roberta Almeida', idade: 27, telefone: '(61) 94567-8901' },
-    { id: 7, nome: 'Fernanda Rocha', idade: 31, telefone: '(71) 95678-9012' },
-    { id: 8, nome: 'Ricardo Martins', idade: 40, telefone: '(81) 96789-0123' },
-    { id: 9, nome: 'Tatiane Souza', idade: 26, telefone: '(91) 97890-1234' },
-    { id: 10, nome: 'Lucas Pereira', idade: 33, telefone: '(85) 98901-2345' },
-    { id: 11, nome: 'Gabriel Fernandes', idade: 30, telefone: '(61) 99012-3456' }
-];
+import { pacientes } from './pacientes';
 
 export default function ListaPacientes() {
-    const [search, setSearch] = useState('');
-    const [termoFiltrado, setTermoFiltrado] = useState('');
+    const [searchNome, setSearchNome] = useState('');
+    const [searchCpf, setSearchCpf] = useState('');
+    const [termoNomeFiltrado, setTermoNomeFiltrado] = useState('');
+    const [termoCpfFiltrado, setTermoCpfFiltrado] = useState('');
 
     const pacientesFiltrados = pacientes.filter((paciente) =>
-        paciente.nome.toLowerCase().includes(termoFiltrado.toLowerCase())
+        paciente.nome.toLowerCase().includes(termoNomeFiltrado.toLowerCase()) &&
+        paciente.cpf.includes(termoCpfFiltrado)
     );
 
     const handleBuscar = (e) => {
         e.preventDefault();
-        setTermoFiltrado(search);
+        setTermoNomeFiltrado(searchNome);
+        setTermoCpfFiltrado(searchCpf);
     };
 
     return (
         <div className="flex min-h-screen bg-background text-main">
             {/* Menu lateral */}
             <aside
-                className="w-44 bg-gray-700 p-6 "
+                className="w-44 bg-gray-700 p-6"
                 style={{ boxShadow: '4px 0 8px rgba(0, 0, 0, 0.2)' }}
             >
                 <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-white">
@@ -57,7 +48,6 @@ export default function ListaPacientes() {
                 </nav>
             </aside>
 
-
             {/* Conteúdo principal */}
             <main className="flex-1 p-6">
                 <h1 className="flex items-center gap-3 text-2xl font-bold mb-4 text-main">
@@ -65,33 +55,39 @@ export default function ListaPacientes() {
                 </h1>
 
                 {/* Formulário de busca */}
-                <form onSubmit={handleBuscar} className="mb-6 max-w-md">
-                    <div className="flex gap-2">
-                        <input
-                            type="text"
-                            placeholder="Buscar por nome"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="flex-1 p-2 border rounded text-black"
-                        />
-                        <button
-                            type="submit"
-                            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 transition"
-                        >
-                            Buscar
-                        </button>
-                    </div>
+                <form onSubmit={handleBuscar} className="mb-6 max-w-md flex gap-2">
+                    <input
+                        type="text"
+                        placeholder="Buscar por nome"
+                        value={searchNome}
+                        onChange={(e) => setSearchNome(e.target.value)}
+                        className="flex-1 p-2 border rounded text-black"
+                    />
+                    <input
+                        type="text"
+                        placeholder="Buscar por CPF"
+                        value={searchCpf}
+                        onChange={(e) => setSearchCpf(e.target.value)}
+                        className="flex-1 p-2 border rounded text-black"
+                    />
+                    <button
+                        type="submit"
+                        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 transition"
+                    >
+                        Buscar
+                    </button>
                 </form>
 
                 {/* Tabela de pacientes */}
-                <div className="overflow-x-auto rounded shadow">
+                <div className="overflow-x-auto max-h-[730px] rounded shadow">
                     <table className="min-w-full bg-white rounded">
                         <thead>
                             <tr className="bg-gray-200 text-left text-sm uppercase tracking-wider text-black">
-                                <th className="p-4">Nome</th>
-                                <th className="p-4">Idade</th>
-                                <th className="p-4">Telefone</th>
-                                <th className="p-4 text-center">Ações</th>
+                                <th className="p-4 border-r border-gray-300">Nome</th>
+                                <th className="p-4 border-r border-gray-300">CPF</th>
+                                <th className="p-4 border-r border-gray-300">Idade</th>
+                                <th className="p-4 border-r border-gray-300">Telefone</th>
+                                <th className="p-4 border-r border-gray-300 text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -101,34 +97,37 @@ export default function ListaPacientes() {
                                         key={paciente.id}
                                         className="border-b hover:bg-gray-100 transition text-black"
                                     >
-                                        <td className="p-4">{paciente.nome}</td>
-                                        <td className="p-4">{paciente.idade}</td>
-                                        <td className="p-4">{paciente.telefone}</td>
-                                        <td className="p-4 text-center flex justify-center gap-4">
-                                            <button
-                                                className="text-blue-600 hover:text-blue-800"
-                                                title="Visualizar paciente"
-                                            >
-                                                <Eye size={18} />
-                                            </button>
-                                            <button
-                                                className="text-yellow-600 hover:text-yellow-800"
-                                                title="Editar paciente"
-                                            >
-                                                <Edit size={18} />
-                                            </button>
-                                            <button
-                                                className="text-red-600 hover:text-red-800"
-                                                title="Excluir paciente"
-                                            >
-                                                <Trash size={18} />
-                                            </button>
+                                        <td className="p-4 border-r border-gray-300">{paciente.nome}</td>
+                                        <td className="p-4 border-r border-gray-300">{paciente.cpf}</td>
+                                        <td className="p-4 border-r border-gray-300">{paciente.idade}</td>
+                                        <td className="p-4 border-r border-gray-300">{paciente.telefone}</td>
+                                        <td className="p-4 border-r border-gray-300">
+                                            <div className="flex justify-center gap-4">
+                                                <button
+                                                    className="text-blue-600 hover:text-blue-800"
+                                                    title="Visualizar paciente"
+                                                >
+                                                    <Eye size={18} />
+                                                </button>
+                                                <button
+                                                    className="text-yellow-600 hover:text-yellow-800"
+                                                    title="Editar paciente"
+                                                >
+                                                    <Edit size={18} />
+                                                </button>
+                                                <button
+                                                    className="text-red-600 hover:text-red-800"
+                                                    title="Excluir paciente"
+                                                >
+                                                    <Trash size={18} />
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan={4} className="text-center p-4 text-gray-500">
+                                    <td colSpan={5} className="text-center p-4 text-gray-500">
                                         Nenhum paciente encontrado.
                                     </td>
                                 </tr>

@@ -1,32 +1,93 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
 import { Home, UserPlus, User, LayoutDashboard } from 'lucide-react';
+import { agendamentos } from './agendamentos';
+import { useState, useEffect } from 'react';
 
-const stats = [
-  { title: 'Total de Pacientes', value: 248, description: '+12% este mês' },
-  { title: 'Hoje', value: 12, description: '+4% em relação a ontem' },
-  { title: 'Semana', value: 42, description: '+8% vs anterior' },
-  { title: 'Comparecimento', value: '92%', description: '-2% este mês' },
-];
+function calcularStats(agendamentos) {
+  const hoje = new Date();
+  const hojeStr = hoje.toISOString().split('T')[0];
 
-const agendamentos = [
-  { nome: 'Ana Silva', hora: '08:00', tipo: 'Consulta inicial', status: 'CONFIRMADO' },
-  { nome: 'Carlos Oliveira', hora: '09:00', tipo: 'Retorno', status: 'PENDENTE' },
-  { nome: 'Mariana Santos', hora: '10:00', tipo: 'Exame', status: 'CONFIRMADO' },
-  { nome: 'Pedro Costa', hora: '10:00', tipo: 'Procedimento', status: 'CONFIRMADO' },
-  { nome: 'Juliana Lima', hora: '10:00', tipo: 'Exame', status: 'PENDENTE' },
-  { nome: 'Mariana Santos', hora: '10:00', tipo: 'Consulta inicial', status: 'CONFIRMADO' },
-  { nome: 'Pedro Costa', hora: '10:00', tipo: 'Exame', status: 'CONFIRMADO' },
-  { nome: 'Pedro Costa', hora: '10:00', tipo: 'Exame', status: 'CONFIRMADO' },
-  { nome: 'Pedro Costa', hora: '10:00', tipo: 'Exame', status: 'PENDENTE' },
-  { nome: 'Pedro Costa', hora: '10:00', tipo: 'Exame', status: 'CONFIRMADO' }
-];
+  const ontem = new Date(hoje);
+  ontem.setDate(hoje.getDate() - 1);
+  const ontemStr = ontem.toISOString().split('T')[0];
+
+  const seteDiasAtras = new Date();
+  seteDiasAtras.setDate(hoje.getDate() - 6);
+
+  const semanaAnteriorInicio = new Date(seteDiasAtras);
+  semanaAnteriorInicio.setDate(seteDiasAtras.getDate() - 7);
+  const semanaAnteriorFim = new Date(seteDiasAtras);
+  semanaAnteriorFim.setDate(seteDiasAtras.getDate() - 1);
+
+  const agendamentosHoje = agendamentos.filter(a => a.data === hojeStr);
+  const agendamentosOntem = agendamentos.filter(a => a.data === ontemStr);
+
+  const agendamentosSemana = agendamentos.filter(a => {
+    const data = new Date(a.data);
+    return data >= seteDiasAtras && data <= hoje;
+  });
+
+  const agendamentosSemanaAnterior = agendamentos.filter(a => {
+    const data = new Date(a.data);
+    return data >= semanaAnteriorInicio && data <= semanaAnteriorFim;
+  });
+
+  const totalPacientes = new Set(agendamentos.map(a => a.nome)).size;
+  const hojeCount = agendamentosHoje.length;
+  const ontemCount = agendamentosOntem.length;
+  const semanaCount = agendamentosSemana.length;
+  const semanaAnteriorCount = agendamentosSemanaAnterior.length;
+
+  const confirmadosHoje = agendamentosHoje.filter(a => a.status === 'CONFIRMADO').length;
+
+  const comparecimento = hojeCount > 0
+    ? `${Math.round((confirmadosHoje / hojeCount) * 100)}%`
+    : '0%';
+
+  const getDiffPercent = (hoje, ontem) => {
+    if (ontem === 0) return hoje > 0 ? 'Sem dados' : '—';
+    const diff = Math.round(((hoje - ontem) / ontem) * 100);
+    return `${diff >= 0 ? '+' : ''}${diff}%`;
+  };
+
+  return [
+    {
+      title: 'Total de Pacientes',
+      value: totalPacientes,
+      description: getDiffPercent(totalPacientes, totalPacientes - 5) + ' este mês',
+    },
+    {
+      title: 'Hoje',
+      value: hojeCount,
+      description: getDiffPercent(hojeCount, ontemCount) + ' em relação a ontem',
+    },
+    {
+      title: 'Semana',
+      value: semanaCount,
+      description: getDiffPercent(semanaCount, semanaAnteriorCount) + ' vs anterior',
+    },
+    {
+      title: 'Comparecimento',
+      value: comparecimento,
+      description: getDiffPercent(confirmadosHoje, 5) + ' este mês',
+    },
+  ];
+}
 
 export default function Dashboard() {
-  const getStatusColor = (status) =>
-    status === 'CONFIRMADO' ? 'bg-green-600' : 'bg-yellow-500';
+  const [stats, setStats] = useState(null);
+
+  useEffect(() => {
+    setStats(calcularStats(agendamentos));
+  }, []);
+
+  const getStatusColor = (status) => {
+    if (status === 'CONFIRMADO') return 'bg-green-600';
+    if (status === 'CANCELADO') return 'bg-red-600';
+    return 'bg-yellow-500';
+  };
 
   const getDescriptionColor = (description) => {
     if (description.startsWith('+')) return 'text-green-600';
@@ -34,12 +95,28 @@ export default function Dashboard() {
     return 'text-gray-400';
   };
 
+  const getIniciais = (nome) => {
+    return nome
+      .split(' ')
+      .filter((n) => n)
+      .slice(0, 2)
+      .map((n) => n[0].toUpperCase())
+      .join('');
+  };
+
+  if (!stats) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background text-main">
+        <p>Carregando...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen bg-background text-main">
-
+      {/* Sidebar */}
       <aside
-        className="w-44 bg-gray-700 p-6 "
+        className="w-44 bg-gray-700 p-6"
         style={{ boxShadow: '4px 0 8px rgba(0, 0, 0, 0.2)' }}
       >
         <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-white">
@@ -83,33 +160,38 @@ export default function Dashboard() {
 
         {/* Caixa de título dos agendamentos */}
         <p className="text-md text-main font-semibold">Agendamentos para hoje:</p>
-
-        {/* Lista com scroll */}
-        <div className="flex flex-col gap-4 max-h-[550px] overflow-y-auto text-black">
-          {agendamentos.map((item, idx) => (
-            <div
-              key={idx}
-              className="flex items-center justify-between bg-white p-4 rounded-lg shadow"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-green-200 text-green-800 flex items-center justify-center font-bold uppercase">
-                  {item.nome.split(' ').map((n) => n[0]).join('')}
-                </div>
-                <div>
-                  <p className="font-semibold">{item.nome}</p>
-                  <p className="text-sm text-gray-500">
-                    {item.hora} — {item.tipo}
-                  </p>
-                </div>
-              </div>
-              <span
-                className={`text-white px-3 py-1 rounded-full text-sm ${getStatusColor(item.status)}`}
+        <div className="space-y-3 max-h-[550px] overflow-y-auto">
+          {agendamentos
+            .filter(item => item.data === new Date().toISOString().split('T')[0])
+            .map((item, idx) => (
+              <div
+                key={idx}
+                className="flex items-center justify-between bg-white p-4 rounded-lg shadow"
               >
-                {item.status}
-              </span>
-            </div>
-          ))}
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-green-200 text-green-800 flex items-center justify-center font-bold uppercase">
+                    {getIniciais(item.nome)}
+                  </div>
+                  <div>
+                    <p className="font-semibold">{item.nome}</p>
+                    <p className="text-sm text-gray-500">
+                      {item.hora} — {item.tipo}
+                    </p>
+                  </div>
+                </div>
+                <span
+                  className={`text-white px-3 py-1 rounded-full text-sm ${getStatusColor(item.status)}`}
+                >
+                  {item.status}
+                </span>
+              </div>
+            ))
+          }
         </div>
+
+        {agendamentos.filter(item => item.data === new Date().toISOString().split('T')[0]).length === 0 && (
+          <p className="text-center text-gray-500 mt-4">Nenhum agendamento para hoje</p>
+        )}
       </main>
     </div>
   );
