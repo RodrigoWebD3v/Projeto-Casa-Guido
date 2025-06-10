@@ -73,14 +73,32 @@ export default function ListaPacientes() {
                         type="text"
                         placeholder="Buscar por nome"
                         value={searchNome}
-                        onChange={(e) => setSearchNome(e.target.value)}
+                        onChange={(e) => {
+                            const apenasLetras = e.target.value.replace(/[0-9]/g, ''); // remove números
+                            setSearchNome(apenasLetras);
+                        }}
                         className="flex-1 p-2 border rounded text-black"
                     />
+
                     <input
                         type="text"
                         placeholder="Buscar por CPF"
                         value={searchCpf}
-                        onChange={(e) => setSearchCpf(e.target.value)}
+                        onChange={(e) => {
+                            let valor = e.target.value.replace(/\D/g, '').slice(0, 11);
+
+                            // Aplica a formatação do CPF
+                            if (valor.length > 9) {
+                                valor = valor.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
+                            } else if (valor.length > 6) {
+                                valor = valor.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');
+                            } else if (valor.length > 3) {
+                                valor = valor.replace(/(\d{3})(\d{1,3})/, '$1.$2');
+                            }
+
+                            setSearchCpf(valor);
+                        }}
+                        maxLength={14}
                         className="flex-1 p-2 border rounded text-black"
                     />
                     <button

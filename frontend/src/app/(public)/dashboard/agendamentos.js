@@ -12,7 +12,7 @@ export const agendamentos = [
     { nome: 'Gabriel', data: '2025-06-10', hora: '08:00', tipo: 'Exame', status: 'CONFIRMADO' },
     { nome: 'Ana', data: '2025-06-12', hora: '09:30', tipo: 'Consulta', status: 'CONFIRMADO' },
     { nome: 'Carlos', data: '2025-06-00', hora: '10:45', tipo: 'Exame', status: 'PENDENTE' },
-    { nome: 'Juliana', data: '2025-06-11', hora: '13:30', tipo: 'Retorno', status: 'CANCELADO' },
+    { nome: 'Juliana', data: '2025-06-10', hora: '13:30', tipo: 'Retorno', status: 'CANCELADO' },
     { nome: 'Mariana', data: '2025-06-14', hora: '11:15', tipo: 'Consulta', status: 'CONFIRMADO' },
     { nome: 'Pedro', data: '2025-06-13', hora: '12:00', tipo: 'Exame', status: 'CONFIRMADO' },
     { nome: 'Roberta', data: '2025-06-10', hora: '10:00', tipo: 'Retorno', status: 'PENDENTE' },
