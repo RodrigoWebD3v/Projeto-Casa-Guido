@@ -34,33 +34,35 @@ export default function Dashboard() {
     return 'text-gray-400';
   };
 
+
   return (
-    <div className="flex min-h-screen text-main">
-      {/* Sidebar */}
-      <aside className="w-44 bg-gray-700 shadow-sm p-6">
-        <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-          <Home size={20} /> Menu
+    <div className="flex min-h-screen bg-background text-main">
+
+      <aside
+        className="w-44 bg-gray-700 p-6 "
+        style={{ boxShadow: '4px 0 8px rgba(0, 0, 0, 0.2)' }}
+      >
+        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-white">
+          <Home size={18} /> <span>Menu</span>
         </h2>
         <nav className="flex flex-col gap-4">
           <Link
-            href="#"
-            className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition"
-          >
-            <UserPlus size={18} /> Cadastrar
-          </Link>
-
-          <Link
             href="/listagem-pacientes"
-            className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition"
+            className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition text-white"
           >
-            <User size={18} /> Pacientes
+            <User size={18} /> <span>Pacientes</span>
+          </Link>
+          <Link
+            href="#"
+            className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition text-white"
+          >
+            <UserPlus size={18} /> <span>Cadastrar</span>
           </Link>
         </nav>
-
       </aside>
 
       {/* Conteúdo principal */}
-      <main className="flex-1 p-6 bg-background">
+      <main className="flex-1 p-6">
         <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">
           <LayoutDashboard size={20} />
           Dashboard

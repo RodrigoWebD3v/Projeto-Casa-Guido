@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Eye, Edit, Trash, Users, UserPlus, Home, LayoutDashboard } from 'lucide-react';
-import SearchBox from '@/components/SearchBox/SearchBox';
 
 const pacientes = [
     { id: 1, nome: 'Ana Silva', idade: 29, telefone: '(11) 91234-5678' },
@@ -21,33 +20,43 @@ const pacientes = [
 
 export default function ListaPacientes() {
     const [search, setSearch] = useState('');
+    const [termoFiltrado, setTermoFiltrado] = useState('');
 
     const pacientesFiltrados = pacientes.filter((paciente) =>
-        paciente.nome.toLowerCase().includes(search.toLowerCase())
+        paciente.nome.toLowerCase().includes(termoFiltrado.toLowerCase())
     );
+
+    const handleBuscar = (e) => {
+        e.preventDefault();
+        setTermoFiltrado(search);
+    };
 
     return (
         <div className="flex min-h-screen bg-background text-main">
             {/* Menu lateral */}
-            <aside className="w-44 bg-gray-700 shadow-sm p-6">
-                <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                    <Home size={20} /> Menu
+            <aside
+                className="w-44 bg-gray-700 p-6 "
+                style={{ boxShadow: '4px 0 8px rgba(0, 0, 0, 0.2)' }}
+            >
+                <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-white">
+                    <Home size={18} /> <span>Menu</span>
                 </h2>
                 <nav className="flex flex-col gap-4">
                     <Link
                         href="/dashboard"
-                        className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition"
+                        className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition text-white"
                     >
-                        <LayoutDashboard size={18} /> Dashboard
+                        <LayoutDashboard size={18} /> <span>Dashboard</span>
                     </Link>
                     <Link
                         href="#"
-                        className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition"
+                        className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition text-white"
                     >
-                        <UserPlus size={18} /> Cadastrar
+                        <UserPlus size={18} /> <span>Cadastrar</span>
                     </Link>
                 </nav>
             </aside>
+
 
             {/* Conteúdo principal */}
             <main className="flex-1 p-6">
@@ -55,10 +64,26 @@ export default function ListaPacientes() {
                     Lista de Pacientes <Users size={24} />
                 </h1>
 
-                <div className="mb-6 max-w-md">
-                    <SearchBox value={search} onValueChange={setSearch} />
-                </div>
+                {/* Formulário de busca */}
+                <form onSubmit={handleBuscar} className="mb-6 max-w-md">
+                    <div className="flex gap-2">
+                        <input
+                            type="text"
+                            placeholder="Buscar por nome"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            className="flex-1 p-2 border rounded text-black"
+                        />
+                        <button
+                            type="submit"
+                            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 transition"
+                        >
+                            Buscar
+                        </button>
+                    </div>
+                </form>
 
+                {/* Tabela de pacientes */}
                 <div className="overflow-x-auto rounded shadow">
                     <table className="min-w-full bg-white rounded">
                         <thead>

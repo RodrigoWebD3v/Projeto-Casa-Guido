@@ -47,29 +47,32 @@ export default function SocioEconomicForm() {
     }, [escolaridade]);
 
     return (
-        <div className="flex min-h-screen text-main">
-          <aside className="w-44 bg-gray-700 shadow-sm p-6 text-left">
-    <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-white">
-        <Home size={20} /> Menu
-    </h2>
-    <nav className="flex flex-col gap-4 items-start">
-        <Link
-            href="/dashboard"
-            className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition text-white"
-        >
-            <LayoutDashboard size={18} /> Dashboard
-        </Link>
-        <Link
-            href="/listagem-pacientes"
-            className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition text-white"
-        >
-            <User size={18} /> Pacientes
-        </Link>
-    </nav>
-</aside>
+        <div className="flex min-h-screen text-main bg-background">
+            <aside
+                className="w-44 bg-gray-700 p-6 "
+                style={{ boxShadow: '4px 0 8px rgba(0, 0, 0, 0.2)' }}
+            >
+                <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-white">
+                    <Home size={18} /> <span>Menu</span>
+                </h2>
+                <nav className="flex flex-col gap-4">
+                    <Link
+                        href="/dashboard"
+                        className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition text-white"
+                    >
+                        <LayoutDashboard size={18} /> <span>Dashboard</span>
+                    </Link>
+                    <Link
+                        href="#"
+                        className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition text-white"
+                    >
+                        <User size={18} /> <span>Pacientes</span>
+                    </Link>
+                </nav>
+            </aside>
 
-            <main className="flex-1 p-8 bg-background">
-                <div className="max-w-4xl mx-auto">
+            <main className="flex-1 p-8 ">
+                <div className="max-w-6xl mx-auto">
                     <h1 className="text-2xl font-bold text-main mb-2">Cadastro</h1>
                     <h2 className="text-xl font-semibold text-main-700 mb-4">2. Sócio econômico</h2>
                     <h3 className="text-main mb-8">Informações sócio econômicas do paciente:</h3>
