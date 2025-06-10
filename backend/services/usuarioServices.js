@@ -1,5 +1,5 @@
 const { buscarUsuarioPorEmail } = require('../repository/userRepository');
-const { consultaUsuarioDTO } = require('../dto/usuarioDTO');
+const { consultaUsuarioDTO } = require('../dto/auth/usuarioDTO');
 
 const buscarUsuario = async (email) => {
 

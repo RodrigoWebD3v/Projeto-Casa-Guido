@@ -147,6 +147,7 @@ fun CadastroSocioEconomico(
                     nomeCampo = "Valor",
                     valorPreenchido = paciente.valorBpc,
                     placeholder = "180",
+                    somenteNumero = true,
                     onChange = {
                         onChangeCampo(
                             CamposSocioEconomico.VALOR_BPC,

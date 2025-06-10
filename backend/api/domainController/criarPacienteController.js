@@ -7,8 +7,9 @@ const AppError = require("../../handlerException/appError")
   
 const criarPacienteController = async (req, res) => {
     try {
-      const paciente = await criarPacienteService(req.body);
-      res.status(200).json(paciente);
+      const pacienteData = req.body; // JSON no formato do seu DTO
+      const pacienteCriado = await criarPacienteService(pacienteData);
+      res.status(201).json(pacienteCriado);
     } catch (error) {
       if (error instanceof AppError) {
         return res.status(error.statusCode).json({ error: error.message });
