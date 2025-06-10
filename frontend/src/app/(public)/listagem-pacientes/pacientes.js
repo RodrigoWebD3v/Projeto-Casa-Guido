@@ -1,6 +1,6 @@
 export const pacientes = [
     { id: 1, nome: 'Ana Silva', cpf: '123.456.789-00', idade: 29, telefone: '(11) 91234-5678' },
-    { id: 2, nome: 'Carlos Oliveira', cpf: '234.567.890-11', idade: 45, telefone: '(21) 99876-5432' },
+    { id: 2, nome: 'Carlos Oliveira', cpf: '123.567.890-11', idade: 45, telefone: '(21) 99876-5432' },
     { id: 3, nome: 'Juliana Lima', cpf: '345.678.901-22', idade: 34, telefone: '(31) 98765-4321' },
     { id: 4, nome: 'Mariana Santos', cpf: '456.789.012-33', idade: 22, telefone: '(41) 92345-6789' },
     { id: 5, nome: 'Pedro Costa', cpf: '567.890.123-44', idade: 38, telefone: '(51) 93456-7890' },
@@ -19,5 +19,5 @@ export const pacientes = [
     { id: 18, nome: 'Fernanda Lima', cpf: '888.999.000-11', idade: 32, telefone: '(71) 96789-0123' },
     { id: 19, nome: 'Ricardo Rocha', cpf: '999.000.111-22', idade: 41, telefone: '(81) 97890-1234' },
     { id: 20, nome: 'Tatiane Martins', cpf: '000.111.222-33', idade: 25, telefone: '(91) 98901-2345' }
-    
+
 ];

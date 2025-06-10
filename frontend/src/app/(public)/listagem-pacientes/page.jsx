@@ -26,7 +26,9 @@ export default function ListaPacientes() {
         const cpfValido = termoCpf === '' || cpfPaciente.startsWith(termoCpf);
 
         return nomeValido && cpfValido;
-    });
+    })
+        .slice()
+        .sort((a, b) => a.nome.localeCompare(b.nome));
 
     const handleBuscar = (e) => {
         e.preventDefault();
