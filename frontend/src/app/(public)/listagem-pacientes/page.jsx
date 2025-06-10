@@ -5,23 +5,34 @@ import { useState } from 'react';
 import { Eye, Edit, Trash, Users, UserPlus, Home, LayoutDashboard } from 'lucide-react';
 import { pacientes } from './pacientes';
 
+function limparCpf(cpf) {
+    return cpf.replace(/[.\-]/g, '');
+}
+
 export default function ListaPacientes() {
     const [searchNome, setSearchNome] = useState('');
     const [searchCpf, setSearchCpf] = useState('');
     const [termoNomeFiltrado, setTermoNomeFiltrado] = useState('');
     const [termoCpfFiltrado, setTermoCpfFiltrado] = useState('');
 
-    const pacientesFiltrados = pacientes.filter((paciente) =>
-        paciente.nome.toLowerCase().includes(termoNomeFiltrado.toLowerCase()) &&
-        paciente.cpf.includes(termoCpfFiltrado)
-    );
+    const pacientesFiltrados = pacientes.filter((paciente) => {
+        const nomePaciente = paciente.nome.toLowerCase();
+        const termoNome = termoNomeFiltrado.toLowerCase();
+
+        const cpfPaciente = limparCpf(paciente.cpf);
+        const termoCpf = limparCpf(termoCpfFiltrado);
+
+        const nomeValido = termoNome === '' || nomePaciente.startsWith(termoNome);
+        const cpfValido = termoCpf === '' || cpfPaciente.startsWith(termoCpf);
+
+        return nomeValido && cpfValido;
+    });
 
     const handleBuscar = (e) => {
         e.preventDefault();
         setTermoNomeFiltrado(searchNome);
         setTermoCpfFiltrado(searchCpf);
     };
-
     return (
         <div className="flex min-h-screen bg-background text-main">
             {/* Menu lateral */}
