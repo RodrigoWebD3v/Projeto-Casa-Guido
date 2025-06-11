@@ -52,7 +52,7 @@ export default function SocioEconomicForm() {
                 className="w-44 bg-darkgray p-6 "
                 style={{ boxShadow: '4px 0 8px rgba(0, 0, 0, 0.2)' }}
             >
-                <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-offwhite">
+                <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-main">
                     <Home size={18} /> <span>Menu</span>
                 </h2>
                 <nav className="flex flex-col gap-4">
@@ -131,7 +131,18 @@ export default function SocioEconomicForm() {
                                             onChange={setInstituicaoEnsino}
                                             className="bg-graylight border border-graymedium rounded-md p-2 transition focus:outline-none focus:ring-2 focus:ring-greenstrong"
                                         />
+
+                                        <div className="mt-2 ml-1"> { }
+                                            <MultiOptionRadioGroup
+                                                labelTitulo="Escola"
+                                                selected={escola}
+                                                onChange={setEscola}
+                                                options={[["Pública", 0], ["Privada", 1]]}
+                                                className="gap-4"
+                                            />
+                                        </div>
                                     </div>
+
 
                                     <div className="w-1/2 flex flex-col gap-4 border border-graymedium rounded-md p-4 bg-graylight">
                                         <div className="flex items-center gap-2">
@@ -157,20 +168,23 @@ export default function SocioEconomicForm() {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
-                        <div className="flex justify-between mt-8 pt-6 border-t border-graymedium">
-                            <button className="flex items-center gap-2 px-6 py-2 bg-graymedium text-darkgray rounded-md hover:bg-main text-sm transition">
+                        <div className="flex items-center mt-8 pt-6 border-t border-graymedium">
+                            <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
                                 <ChevronLeft size={18} /> Anterior
                             </button>
-                            <div className="flex gap-4">
-                                <button className="flex items-center gap-2 px-6 py-2 bg-graymedium text-darkgray rounded-md hover:bg-main text-sm transition">
+
+                            <div className="flex-grow flex justify-center">
+                                <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
                                     <Save size={18} /> Salvar
                                 </button>
-                                <button className="flex items-center gap-2 px-6 py-2 bg-greenstrong text-offwhite rounded-md hover:bg-green transition text-sm">
-                                    Próximo <ChevronRight size={18} />
-                                </button>
                             </div>
+
+                            <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
+                                Próximo <ChevronRight size={18} />
+                            </button>
                         </div>
 
                     </div>
