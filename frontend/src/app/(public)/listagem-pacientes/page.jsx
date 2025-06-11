@@ -62,7 +62,7 @@ export default function ListaPacientes() {
 
             {/* Conteúdo principal */}
             <main className="flex-1 p-6 mt-4">
-                <h1 className="flex items-center gap-3 text-2xl font-bold mb-4 text-main">
+                <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">
                     Lista de Pacientes <Users size={24} />
                 </h1>
 

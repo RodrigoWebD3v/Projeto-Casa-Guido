@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { User, Home, LayoutDashboard } from 'lucide-react';
+import { User, Home, LayoutDashboard, UserPlus } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { ChevronLeft, Save, ChevronRight } from 'lucide-react';
 import DropDownMenu from '@/components/DropDownMenu/DropDrownMenu';
@@ -73,7 +73,7 @@ export default function SocioEconomicForm() {
 
             <main className="flex-1 p-6 mt-4 ">
                 <div className="max-w-10xl mx-auto">
-                    <h1 className="text-2xl font-bold text-main mb-2">Cadastro</h1>
+                    <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">Cadastro <UserPlus size={18} /></h1>
                     <div className="bg-offwhite p-6 rounded-lg shadow">
                         <h2 className="text-xl text-darkgray font-semibold mb-4">2. Sócio econômico</h2>
                         <h3 className="text-darkgray mb-8">Informações sócio econômicas do paciente:</h3>
@@ -189,7 +189,7 @@ export default function SocioEconomicForm() {
 
                     </div>
                 </div>
-            </main>
-        </div>
+            </main >
+        </div >
     );
 }

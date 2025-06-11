@@ -140,8 +140,9 @@ export default function Dashboard() {
       {/* Conteúdo principal */}
       <main className="flex-1 p-6 mt-4">
         <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">
-          <LayoutDashboard size={20} />
+
           Dashboard
+          <LayoutDashboard size={20} />
         </h1>
 
         {/* Cards de estatísticas */}
