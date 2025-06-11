@@ -35,26 +35,25 @@ export default function ListaPacientes() {
         setTermoNomeFiltrado(searchNome);
         setTermoCpfFiltrado(searchCpf);
     };
+
     return (
         <div className="flex min-h-screen bg-background text-main">
             {/* Menu lateral */}
-            <aside
-                className="w-44 bg-gray-700 p-6"
-                style={{ boxShadow: '4px 0 8px rgba(0, 0, 0, 0.2)' }}
-            >
-                <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-white">
+            <aside className="w-44 bg-darkgray p-6 shadow-lg"
+                style={{ boxShadow: '4px 0 8px rgba(0, 0, 0, 0.2)' }}>
+                <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-main">
                     <Home size={18} /> <span>Menu</span>
                 </h2>
                 <nav className="flex flex-col gap-4">
                     <Link
                         href="/dashboard"
-                        className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition text-white"
+                        className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
                     >
                         <LayoutDashboard size={18} /> <span>Dashboard</span>
                     </Link>
                     <Link
                         href="#"
-                        className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition text-white"
+                        className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
                     >
                         <UserPlus size={18} /> <span>Cadastrar</span>
                     </Link>
@@ -62,7 +61,7 @@ export default function ListaPacientes() {
             </aside>
 
             {/* Conteúdo principal */}
-            <main className="flex-1 p-6">
+            <main className="flex-1 p-6 mt-4">
                 <h1 className="flex items-center gap-3 text-2xl font-bold mb-4 text-main">
                     Lista de Pacientes <Users size={24} />
                 </h1>
@@ -74,20 +73,17 @@ export default function ListaPacientes() {
                         placeholder="Buscar por nome"
                         value={searchNome}
                         onChange={(e) => {
-                            const apenasLetras = e.target.value.replace(/[0-9]/g, ''); // remove números
+                            const apenasLetras = e.target.value.replace(/[0-9]/g, '');
                             setSearchNome(apenasLetras);
                         }}
-                        className="flex-1 p-2 border rounded text-black"
+                        className="flex-1 p-2 border rounded text-blacktext"
                     />
-
                     <input
                         type="text"
                         placeholder="Buscar por CPF"
                         value={searchCpf}
                         onChange={(e) => {
                             let valor = e.target.value.replace(/\D/g, '').slice(0, 11);
-
-                            // Aplica a formatação do CPF
                             if (valor.length > 9) {
                                 valor = valor.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
                             } else if (valor.length > 6) {
@@ -95,30 +91,39 @@ export default function ListaPacientes() {
                             } else if (valor.length > 3) {
                                 valor = valor.replace(/(\d{3})(\d{1,3})/, '$1.$2');
                             }
-
                             setSearchCpf(valor);
                         }}
                         maxLength={14}
-                        className="flex-1 p-2 border rounded text-black"
+                        className="flex-1 p-2 border rounded text-blacktext"
                     />
                     <button
                         type="submit"
-                        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 transition"
+                        className="bg-button text-offwhite px-4 py-2 rounded hover:bg-success transition"
                     >
                         Buscar
                     </button>
                 </form>
 
                 {/* Tabela de pacientes */}
-                <div className="overflow-x-auto max-h-[730px] rounded shadow">
-                    <table className="min-w-full bg-white rounded">
-                        <thead>
-                            <tr className="bg-gray-200 text-left text-sm uppercase tracking-wider text-black">
-                                <th className="p-4 border-r border-gray-300">Nome</th>
-                                <th className="p-4 border-r border-gray-300">CPF</th>
-                                <th className="p-4 border-r border-gray-300">Idade</th>
-                                <th className="p-4 border-r border-gray-300">Telefone</th>
-                                <th className="p-4 border-r border-gray-300 text-center">Ações</th>
+                <div className="overflow-x-auto max-h-[700px] rounded shadow relative">
+                    <table className="min-w-full bg-offwhite">
+                        <thead className="bg-success">
+                            <tr className="text-left text-sm uppercase tracking-wider text-greendark">
+                                <th className="sticky top-0 bg-success z-30 p-4 border-l border-r border-darkgray shadow-sm">
+                                    Nome
+                                </th>
+                                <th className="sticky top-0 bg-success z-30 p-4 border-r border-darkgray shadow-sm">
+                                    CPF
+                                </th>
+                                <th className="sticky top-0 bg-success z-30 p-4 border-r border-darkgray shadow-sm">
+                                    Idade
+                                </th>
+                                <th className="sticky top-0 bg-success z-30 p-4 border-r border-darkgray shadow-sm">
+                                    Telefone
+                                </th>
+                                <th className="sticky top-0 bg-success z-30 p-4 border-r border-darkgray text-center shadow-sm">
+                                    Ações
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -126,13 +131,13 @@ export default function ListaPacientes() {
                                 pacientesFiltrados.map((paciente) => (
                                     <tr
                                         key={paciente.id}
-                                        className="border-b hover:bg-gray-100 transition text-black"
+                                        className="border-b hover:bg-success/40 transition text-greendark"
                                     >
-                                        <td className="p-4 border-r border-gray-300">{paciente.nome}</td>
-                                        <td className="p-4 border-r border-gray-300">{paciente.cpf}</td>
-                                        <td className="p-4 border-r border-gray-300">{paciente.idade}</td>
-                                        <td className="p-4 border-r border-gray-300">{paciente.telefone}</td>
-                                        <td className="p-4 border-r border-gray-300">
+                                        <td className="p-4 border-l border-r border-darkgray">{paciente.nome}</td>
+                                        <td className="p-4 border-r border-darkgray">{paciente.cpf}</td>
+                                        <td className="p-4 border-r border-darkgray">{paciente.idade}</td>
+                                        <td className="p-4 border-r border-darkgray">{paciente.telefone}</td>
+                                        <td className="p-4 border-r border-darkgray">
                                             <div className="flex justify-center gap-4">
                                                 <button
                                                     className="text-blue-600 hover:text-blue-800"
@@ -158,7 +163,7 @@ export default function ListaPacientes() {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan={5} className="text-center p-4 text-gray-500">
+                                    <td colSpan={5} className="text-center p-4 text-blacktext">
                                         Nenhum paciente encontrado.
                                     </td>
                                 </tr>

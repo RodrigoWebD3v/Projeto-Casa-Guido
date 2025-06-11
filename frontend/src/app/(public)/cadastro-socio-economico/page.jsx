@@ -49,51 +49,50 @@ export default function SocioEconomicForm() {
     return (
         <div className="flex min-h-screen text-main bg-background">
             <aside
-                className="w-44 bg-gray-700 p-6 "
+                className="w-44 bg-darkgray p-6 "
                 style={{ boxShadow: '4px 0 8px rgba(0, 0, 0, 0.2)' }}
             >
-                <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-white">
+                <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-offwhite">
                     <Home size={18} /> <span>Menu</span>
                 </h2>
                 <nav className="flex flex-col gap-4">
                     <Link
                         href="/dashboard"
-                        className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition text-white"
+                        className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
                     >
                         <LayoutDashboard size={18} /> <span>Dashboard</span>
                     </Link>
                     <Link
                         href="/listagem-pacientes"
-                        className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition text-white"
+                        className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
                     >
                         <User size={18} /> <span>Pacientes</span>
                     </Link>
                 </nav>
             </aside>
 
-            <main className="flex-1 p-8 ">
+            <main className="flex-1 p-6 mt-4 ">
                 <div className="max-w-10xl mx-auto">
                     <h1 className="text-2xl font-bold text-main mb-2">Cadastro</h1>
-                    <div className="bg-white p-6 rounded-lg shadow">
-                        <h2 className="text-xl text-gray-700 font-semibold text-main-700 mb-4">2. Sócio econômico</h2>
-                        <h3 className="text-gray-800 mb-8">Informações sócio econômicas do paciente:</h3>
+                    <div className="bg-offwhite p-6 rounded-lg shadow">
+                        <h2 className="text-xl text-darkgray font-semibold mb-4">2. Sócio econômico</h2>
+                        <h3 className="text-darkgray mb-8">Informações sócio econômicas do paciente:</h3>
 
                         <div className="space-y-6">
-                            <div className="bg-white p-6 rounded-lg shadow">
-                                <h3 className="text-lg font-medium text-gray-700 mb-4">Remuneração</h3>
+                            <div className="bg-offwhite p-6 rounded-lg shadow">
+                                <h3 className="text-lg font-medium text-darkgray mb-4">Remuneração</h3>
                                 <div className="flex items-center gap-4">
                                     <InputTextField
                                         nomeCampo="Digite o valor: R$"
                                         valorPreenchido={remuneracao}
                                         onChange={setRemuneracao}
                                         somenteNumero={true}
-                                        className="bg-gray-50 border border-gray-300 rounded-md p-2 transition focus:outline-none focus:ring-2 focus:ring-green-600"
-                                        style={{ boxSizing: 'border-box' }}
+                                        className="bg-graylight border border-graymedium rounded-md p-2 transition focus:outline-none focus:ring-2 focus:ring-greenstrong w-full"
                                     />
                                 </div>
                             </div>
 
-                            <div className="flex flex-col justify-start bg-white p-6 rounded-lg shadow">
+                            <div className="flex flex-col justify-start bg-offwhite p-6 rounded-lg shadow">
                                 <div>
                                     <MultiOptionRadioGroup
                                         labelTitulo="BPC"
@@ -106,21 +105,22 @@ export default function SocioEconomicForm() {
                                 </div>
                                 {bpc === 1 && (
                                     <>
-                                        <h3 className="text-lg font-medium text-gray-700 mb-4 mt-4">Valor</h3>
+                                        <h3 className="text-lg font-medium text-darkgray mb-4 mt-4">Valor</h3>
                                         <div>
                                             <InputTextField
                                                 nomeCampo="Digite o valor: R$"
                                                 valorPreenchido={valor}
                                                 onChange={setValor}
                                                 somenteNumero={true}
+                                                className="bg-graylight border border-graymedium rounded-md p-2 transition focus:outline-none focus:ring-2 focus:ring-greenstrong w-full"
                                             />
                                         </div>
                                     </>
                                 )}
                             </div>
 
-                            <div className="bg-white p-6 rounded-lg shadow">
-                                <h3 className="text-lg font-medium text-gray-700 mb-4">Escolaridade</h3>
+                            <div className="bg-offwhite p-6 rounded-lg shadow">
+                                <h3 className="text-lg font-medium text-darkgray mb-4">Escolaridade</h3>
 
                                 <div className="flex gap-6">
                                     <div className="w-1/2">
@@ -129,28 +129,28 @@ export default function SocioEconomicForm() {
                                             placeholder="Nome da instituição"
                                             valorPreenchido={instituicaoEnsino}
                                             onChange={setInstituicaoEnsino}
-                                            className="bg-gray-50 border border-gray-300 rounded-md p-2 transition focus:outline-none focus:ring-2 focus:ring-green-600"
+                                            className="bg-graylight border border-graymedium rounded-md p-2 transition focus:outline-none focus:ring-2 focus:ring-greenstrong"
                                         />
                                     </div>
 
-                                    <div className="w-1/2 flex flex-col gap-4 border border-gray-300 rounded-md p-4 bg-gray-50">
+                                    <div className="w-1/2 flex flex-col gap-4 border border-graymedium rounded-md p-4 bg-graylight">
                                         <div className="flex items-center gap-2">
-                                            <p className="text-sm font-medium text-gray-700 w-20">Nível:</p>
+                                            <p className="text-sm font-medium text-darkgray w-20">Nível:</p>
                                             <DropDownMenu
                                                 options={escolaridadeOptions}
                                                 onSelected={setEscolaridade}
                                                 selected={escolaridade.id === '' ? { id: '', nome: 'Nível' } : escolaridade}
-                                                className="bg-white border border-gray-300 rounded-md flex-1 p-2 transition focus:outline-none focus:ring-2 focus:ring-green-600"
+                                                className="bg-offwhite border border-graymedium rounded-md flex-1 p-2 transition focus:outline-none focus:ring-2 focus:ring-greenstrong"
                                             />
                                         </div>
 
                                         <div className="flex items-center gap-2">
-                                            <p className="text-sm font-medium text-gray-700 w-20">Série:</p>
+                                            <p className="text-sm font-medium text-darkgray w-20">Série:</p>
                                             <DropDownMenu
                                                 options={serieOptions}
                                                 onSelected={setSerie}
                                                 selected={serie.id === '' ? { id: '', nome: 'Série' } : serie}
-                                                className="bg-white border border-gray-300 rounded-md flex-1 p-2 transition focus:outline-none focus:ring-2 focus:ring-green-600"
+                                                className="bg-offwhite border border-graymedium rounded-md flex-1 p-2 transition focus:outline-none focus:ring-2 focus:ring-greenstrong"
                                                 disabled={serieOptions.length === 0}
                                             />
                                         </div>
@@ -159,19 +159,20 @@ export default function SocioEconomicForm() {
                             </div>
                         </div>
 
-                        <div className="flex justify-between mt-8 pt-6 border-t border-gray-200">
-                            <button className="flex items-center gap-2 px-6 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">
+                        <div className="flex justify-between mt-8 pt-6 border-t border-graymedium">
+                            <button className="flex items-center gap-2 px-6 py-2 bg-graymedium text-darkgray rounded-md hover:bg-main text-sm transition">
                                 <ChevronLeft size={18} /> Anterior
                             </button>
                             <div className="flex gap-4">
-                                <button className="flex items-center gap-2 px-6 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">
+                                <button className="flex items-center gap-2 px-6 py-2 bg-graymedium text-darkgray rounded-md hover:bg-main text-sm transition">
                                     <Save size={18} /> Salvar
                                 </button>
-                                <button className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+                                <button className="flex items-center gap-2 px-6 py-2 bg-greenstrong text-offwhite rounded-md hover:bg-green transition text-sm">
                                     Próximo <ChevronRight size={18} />
                                 </button>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </main>
