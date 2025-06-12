@@ -76,7 +76,6 @@ fun CadastroOutro(
                     || outro.endereco.numero.isEmpty()
                     || outro.endereco.logradouro.isEmpty()
                     || outro.endereco.bairro.isEmpty()
-                    || outro.endereco.referencia.isEmpty()
                     || outro.endereco.localidade.isEmpty()
                     || outro.endereco.uf.isEmpty())
         ) GreenBlack else Alert

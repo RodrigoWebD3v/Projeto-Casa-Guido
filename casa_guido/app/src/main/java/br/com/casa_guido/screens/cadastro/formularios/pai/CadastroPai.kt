@@ -75,7 +75,6 @@ fun CadastroResponsavel(
                     || responsavel.endereco.numero.isEmpty()
                     || responsavel.endereco.logradouro.isEmpty()
                     || responsavel.endereco.bairro.isEmpty()
-                    || responsavel.endereco.referencia.isEmpty()
                     || responsavel.endereco.localidade.isEmpty()
                     || responsavel.endereco.uf.isEmpty())
         ) GreenBlack else Alert
@@ -84,7 +83,6 @@ fun CadastroResponsavel(
                     || responsavel.endereco.numero.isEmpty()
                     || responsavel.endereco.logradouro.isEmpty()
                     || responsavel.endereco.bairro.isEmpty()
-                    || responsavel.endereco.referencia.isEmpty()
                     || responsavel.endereco.localidade.isEmpty()
                     || responsavel.endereco.uf.isEmpty())
         ) Icons.Default.Check else Icons.Default.Close

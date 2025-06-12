@@ -35,7 +35,6 @@ export default function ListaPacientes() {
         setTermoNomeFiltrado(searchNome);
         setTermoCpfFiltrado(searchCpf);
     };
-
     return (
         <div className="flex min-h-screen bg-background text-main">
             {/* Menu lateral */}
@@ -73,6 +72,7 @@ export default function ListaPacientes() {
                         placeholder="Buscar por nome"
                         value={searchNome}
                         onChange={(e) => {
+
                             const apenasLetras = e.target.value.replace(/[0-9]/g, '');
                             setSearchNome(apenasLetras);
                         }}

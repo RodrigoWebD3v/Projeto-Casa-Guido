@@ -1,9 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { User, Home, LayoutDashboard, UserPlus } from 'lucide-react';
+import { User, Home, LayoutDashboard, UserPlus, ChevronLeft, Save, ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { ChevronLeft, Save, ChevronRight } from 'lucide-react';
 import DropDownMenu from '@/components/DropDownMenu/DropDrownMenu';
 import InputTextField from '@/components/TextField/InputTextField';
 import SimpleTextField from '@/components/TextField/SimpleTextField';
@@ -132,7 +131,7 @@ export default function SocioEconomicForm() {
                                             className="bg-graylight border border-graymedium rounded-md p-2 transition focus:outline-none focus:ring-2 focus:ring-greenstrong"
                                         />
 
-                                        <div className="mt-2 ml-1"> { }
+                                        <div className="mt-2 ml-1">
                                             <MultiOptionRadioGroup
                                                 labelTitulo="Escola"
                                                 selected={escola}
@@ -142,7 +141,6 @@ export default function SocioEconomicForm() {
                                             />
                                         </div>
                                     </div>
-
 
                                     <div className="w-1/2 flex flex-col gap-4 border border-graymedium rounded-md p-4 bg-graylight">
                                         <div className="flex items-center gap-2">
@@ -168,7 +166,6 @@ export default function SocioEconomicForm() {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
                         <div className="flex items-center mt-8 pt-6 border-t border-graymedium">
@@ -186,10 +183,9 @@ export default function SocioEconomicForm() {
                                 Próximo <ChevronRight size={18} />
                             </button>
                         </div>
-
                     </div>
                 </div>
-            </main >
-        </div >
+            </main>
+        </div>
     );
 }

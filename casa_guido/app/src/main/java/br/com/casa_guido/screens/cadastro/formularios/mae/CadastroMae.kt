@@ -77,7 +77,6 @@ fun CadastroConjuge(
                     || conjuge.endereco.numero.isEmpty()
                     || conjuge.endereco.logradouro.isEmpty()
                     || conjuge.endereco.bairro.isEmpty()
-                    || conjuge.endereco.referencia.isEmpty()
                     || conjuge.endereco.localidade.isEmpty()
                     || conjuge.endereco.uf.isEmpty())
         ) GreenBlack else Alert
@@ -86,7 +85,6 @@ fun CadastroConjuge(
                     || conjuge.endereco.numero.isEmpty()
                     || conjuge.endereco.logradouro.isEmpty()
                     || conjuge.endereco.bairro.isEmpty()
-                    || conjuge.endereco.referencia.isEmpty()
                     || conjuge.endereco.localidade.isEmpty()
                     || conjuge.endereco.uf.isEmpty())
         ) Icons.Default.Check else Icons.Default.Close
