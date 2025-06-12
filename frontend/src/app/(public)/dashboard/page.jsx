@@ -84,15 +84,15 @@ export default function Dashboard() {
   }, []);
 
   const getStatusColor = (status) => {
-    if (status === 'CONFIRMADO') return 'bg-green-600';
-    if (status === 'CANCELADO') return 'bg-red-600';
-    return 'bg-yellow-500';
+    if (status === 'CONFIRMADO') return 'bg-success text-greendark';
+    if (status === 'CANCELADO') return 'bg-error text-main';
+    return 'bg-button text-greendark';
   };
 
   const getDescriptionColor = (description) => {
-    if (description.startsWith('+')) return 'text-green-600';
-    if (description.startsWith('-')) return 'text-red-600';
-    return 'text-gray-400';
+    if (description.startsWith('+')) return 'text-green';
+    if (description.startsWith('-')) return 'text-error';
+    return 'text-greendark';
   };
 
   const getIniciais = (nome) => {
@@ -116,22 +116,21 @@ export default function Dashboard() {
     <div className="flex min-h-screen bg-background text-main">
       {/* Sidebar */}
       <aside
-        className="w-44 bg-gray-700 p-6"
-        style={{ boxShadow: '4px 0 8px rgba(0, 0, 0, 0.2)' }}
+        className="w-44 bg-darkgray p-6 shadow-[4px_0_8px_rgba(0,0,0,0.2)]"
       >
-        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-white">
+        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-main">
           <Home size={18} /> <span>Menu</span>
         </h2>
         <nav className="flex flex-col gap-4">
           <Link
             href="/listagem-pacientes"
-            className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition text-white"
+            className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
           >
             <User size={18} /> <span>Pacientes</span>
           </Link>
           <Link
             href="#"
-            className="flex items-center gap-2 p-2 rounded border border-transparent hover:border-white hover:bg-gray-400 hover:text-green-600 transition text-white"
+            className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
           >
             <UserPlus size={18} /> <span>Cadastrar</span>
           </Link>
@@ -139,18 +138,19 @@ export default function Dashboard() {
       </aside>
 
       {/* Conteúdo principal */}
-      <main className="flex-1 p-6">
+      <main className="flex-1 p-6 mt-4">
         <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">
-          <LayoutDashboard size={20} />
+
           Dashboard
+          <LayoutDashboard size={20} />
         </h1>
 
         {/* Cards de estatísticas */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {stats.map((stat, idx) => (
-            <div key={idx} className="bg-white p-4 rounded-lg shadow-md">
-              <p className="text-sm text-black">{stat.title}</p>
-              <p className="text-2xl font-bold text-gray-500">{stat.value}</p>
+            <div key={idx} className="bg-main text-greendark p-4 rounded-lg shadow-md">
+              <p className="text-sm">{stat.title}</p>
+              <p className="text-2xl font-bold">{stat.value}</p>
               <p className={`text-sm ${getDescriptionColor(stat.description)}`}>
                 {stat.description}
               </p>
@@ -159,39 +159,38 @@ export default function Dashboard() {
         </div>
 
         {/* Caixa de título dos agendamentos */}
-        <p className="text-md text-main font-semibold">Agendamentos para hoje:</p>
+        <p className="text-md text-main font-semibold mb-4">Agendamentos para hoje:</p>
         <div className="space-y-3 max-h-[550px] overflow-y-auto">
           {agendamentos
             .filter(item => item.data === new Date().toISOString().split('T')[0])
             .map((item, idx) => (
               <div
                 key={idx}
-                className="flex items-center justify-between bg-white p-4 rounded-lg shadow"
+                className="flex items-center justify-between bg-main text-greendark p-4 rounded-lg shadow"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-green-200 text-green-800 flex items-center justify-center font-bold uppercase">
+                  <div className="w-10 h-10 rounded-full bg-success text-greendark flex items-center justify-center font-bold uppercase select-none">
                     {getIniciais(item.nome)}
                   </div>
                   <div>
                     <p className="font-semibold">{item.nome}</p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-greendark">
                       {item.hora} — {item.tipo}
                     </p>
                   </div>
                 </div>
                 <span
-                  className={`text-white px-3 py-1 rounded-full text-sm ${getStatusColor(item.status)}`}
+                  className={`px-3 py-1 rounded-full text-sm font-semibold ${getStatusColor(item.status)}`}
                 >
                   {item.status}
                 </span>
               </div>
             ))
           }
+          {agendamentos.filter(item => item.data === new Date().toISOString().split('T')[0]).length === 0 && (
+            <p className="text-center text-greendark mt-4">Nenhum agendamento para hoje</p>
+          )}
         </div>
-
-        {agendamentos.filter(item => item.data === new Date().toISOString().split('T')[0]).length === 0 && (
-          <p className="text-center text-gray-500 mt-4">Nenhum agendamento para hoje</p>
-        )}
       </main>
     </div>
   );

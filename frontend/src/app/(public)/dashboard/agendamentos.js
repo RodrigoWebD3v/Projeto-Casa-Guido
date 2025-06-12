@@ -1,5 +1,5 @@
 export const agendamentos = [
-    { nome: 'Ana', data: '2025-06-01', hora: '08:30', tipo: 'Consulta', status: 'PENDENTE' },
+    { nome: 'Ana Carolina', data: '2025-06-10', hora: '08:30', tipo: 'Consulta', status: 'PENDENTE' },
     { nome: 'Carlos', data: '2025-06-13', hora: '11:00', tipo: 'Exame', status: 'CANCELADO' },
     { nome: 'Juliana', data: '2025-06-11', hora: '14:45', tipo: 'Retorno', status: 'CONFIRMADO' },
     { nome: 'Mariana', data: '2025-06-08', hora: '09:15', tipo: 'Consulta', status: 'PENDENTE' },
@@ -17,7 +17,7 @@ export const agendamentos = [
     { nome: 'Pedro', data: '2025-06-13', hora: '12:00', tipo: 'Exame', status: 'CONFIRMADO' },
     { nome: 'Roberta', data: '2025-06-10', hora: '10:00', tipo: 'Retorno', status: 'PENDENTE' },
     { nome: 'Fernanda', data: '2025-06-10', hora: '15:45', tipo: 'Consulta', status: 'CONFIRMADO' },
-    { nome: 'Ricardo', data: '2025-06-11', hora: '16:00', tipo: 'Exame', status: 'CANCELADO' },
+    { nome: 'Ricardo', data: '2025-06-11', hora: '16:00', tipo: 'Exame', status: 'PENDENTE' },
     { nome: 'Tatiane', data: '2025-06-09', hora: '17:45', tipo: 'Retorno', status: 'PENDENTE' },
     { nome: 'Lucas', data: '2025-06-10', hora: '18:30', tipo: 'Consulta', status: 'CONFIRMADO' },
     { nome: 'Gabriel', data: '2025-06-10', hora: '08:15', tipo: 'Exame', status: 'CONFIRMADO' }
