@@ -1,17 +1,16 @@
 'use client';
 
-import { useState } from 'react';
-import { CheckCircleIcon } from '@heroicons/react/24/solid';
 
-import SearchBox from '@/components/SearchBox/SearchBox';
-import DatePickerInput from '@/components/DatePicker/DatePicker';
-import DropDownMenu from '@/components/DropDownMenu/DropDrownMenu';
-import RadioButtonWithLabel from '@/components/Button/RadioButtonWithLabel';
-import RadioButtonWithFixedLabel from '@/components/Button/RadioButtonWithFixedLabel';
-import MultiOptionRadioGroup from '@/components/Button/MultiOptionRadioGroup';
-import MultiSelectableRadioGroup from '@/components/Button/MultiSelectableRadioGroup';
-import InputTextField from '@/components/TextField/InputTextField';
-import SimpleTextField from '@/components/TextField/SimpleTextField';
+import MultiOptionRadioGroup from '../components/Button/MultiOptionRadioGroup';
+import MultiSelectableRadioGroup from '../components/Button/MultiSelectableRadioGroup';
+import RadioButtonWithFixedLabel from '../components/Button/RadioButtonWithFixedLabel';
+import RadioButtonWithLabel from '../components/Button/RadioButtonWithLabel';
+import DatePickerInput from '../components/DatePicker/DatePicker';
+import DropDownMenu from '../components/DropDownMenu/DropDrownMenu';
+import InputTextField from '../components/TextField/InputTextField';
+import SimpleTextField from '../components/TextField/SimpleTextField';
+import { useState } from 'react';
+
 
 
 export default function ComponentGallery() {
@@ -26,8 +25,8 @@ export default function ComponentGallery() {
   const [simpleText, setSimpleText] = useState('');
 
   const dropOptions = [
-    { id: '1', nome: 'Opção A' },
-    { id: '2', nome: 'Opção B' },
+    { id: '1', nome: 'Opção B' },
+    { id: '2', nome: 'Opção C' },
   ];
 
   const multiOptions = [
@@ -40,10 +39,10 @@ export default function ComponentGallery() {
   const multiselectOptions = ['Maçã', 'Banana', 'Pêra', 'Abacaxi'];
 
   const items = [
-    {
-      title: 'SearchBox',
-      component: <SearchBox value={search} onValueChange={setSearch} />,
-    },
+  // {
+  //     title: 'SearchBox',
+  //     component: <SearchBox value={search} onValueChange={setSearch} />,
+  //   },
     {
       title: 'DatePickerInput',
       component: <DatePickerInput title="Data de Nascimento" value={date} onChange={setDate} />,
@@ -125,7 +124,7 @@ export default function ComponentGallery() {
   ];
 
   return (
-    <div className="p-6 bg-background text-main min-h-screen">
+    <div className="p- bg-background text-main min-h-screen">
       <h1 className="text-2xl font-bold mb-8">Catálogo de Componentes</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {items.map((item, idx) => (
