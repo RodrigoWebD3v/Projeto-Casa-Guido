@@ -7,6 +7,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
 import br.com.casa_guido.configuration.Status
+import br.com.casa_guido.configuration.Status.*
 import br.com.casa_guido.navigation.navHost.AppNavHost
 import br.com.casa_guido.navigation.navHost.AuthNavHost
 import br.com.casa_guido.screens.splashScreen.SplashScreen
@@ -52,7 +53,7 @@ fun RootNavHost(
             AppNavHost(
                 navHostController = rootNavHostController,
                 onLogout = {
-                    viewModelAuthMananger.setStatus(Status.Desconectado("Sessão finalziada com sucesso"))
+                    viewModelAuthMananger.setStatus(Desconectado("Sessão finalziada com sucesso"))
                 },
                 mensagemSucesso = state
             )
@@ -62,6 +63,8 @@ fun RootNavHost(
             viewModelAuthMananger.setStatus(Status.Carregando)
         }
 
+        is Status.Alerta -> {
 
+        }
     }
 }

@@ -6,7 +6,8 @@ data class EscolaridadeUiState(
     var escolaridadeOptions: List<Pair<String, Int>> = listOf(
         Pair("Selecione", 0),
         Pair("Fundamental", 1),
-        Pair("Médio", 2)
+        Pair("Médio", 2),
+        Pair("Superior", 3)
     ),
     var serieMedioOptions: List<Pair<String, Int>> = listOf(
         Pair("Selecione", 0),
@@ -15,7 +16,7 @@ data class EscolaridadeUiState(
         Pair("3º", 3)
     ),
     var serieFundamentalOptions: List<Pair<String, Int>> = listOf(
-        Pair("Selecioneº", 1),
+        Pair("Selecione", 0),
         Pair("1º", 1),
         Pair("2º", 2),
         Pair("3º", 3),
@@ -25,6 +26,12 @@ data class EscolaridadeUiState(
         Pair("7º", 7),
         Pair("8º", 8),
         Pair("9º", 9)
+    ),
+    var serieSuperiorOptions: List<Pair<String, Int>> = listOf(
+        Pair("Selecione", 0),
+        Pair("Completo", 1),
+        Pair("Incompleto", 2),
+        Pair("Cursando", 3),
     ),
     var default: List<Pair<String, Int>> = listOf(Pair("Selecione", 0))
 )

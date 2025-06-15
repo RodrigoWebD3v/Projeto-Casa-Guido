@@ -21,6 +21,7 @@ data class Paciente(
 
     val recebeBpc: Int? = null,
     val valorBpc: String? = null, // tratar como decimal no backend
+    val aptoReceberBpc: Int? = null,
 
     val diagnostico: String? = null,
     val profissionalResponsavel: String? = null,
@@ -36,4 +37,10 @@ data class Paciente(
     val responsavelId: String? = null,
     val conjugeResponsavelId: String? = null,
     val outroResponsavelId: String? = null,
+    val tipoEscola: Int? = null, // mantido como Int para enums
+    val crasMunicipio : String? = null,
+    val ubsMunicipio : String? = null,
+    val crasBairro: String? = null,
+    val ubsBairro: String? = null,
+
 )

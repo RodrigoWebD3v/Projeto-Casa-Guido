@@ -35,7 +35,8 @@ fun RadioButtonMultOptValores(
     selected: Int?,
     labelTitulo: String,
     opcoesLista: List<Pair<String, Int>> = listOf("Sim" to 0, "Não" to 1),
-    onClickListener: (Int) -> Unit
+    onClickListener: (Int) -> Unit,
+
 ) {
     if (opcoesLista.size > 2) {
         Row {

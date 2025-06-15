@@ -45,6 +45,7 @@ import br.com.casa_guido.screens.components.TextFieldSimples
 import br.com.casa_guido.ui.theme.BackgroundColor
 import br.com.casa_guido.ui.theme.Button
 import br.com.casa_guido.ui.theme.GreenBlack
+import br.com.casa_guido.ui.theme.Main
 import br.com.casa_guido.ui.theme.Paragraph
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -59,6 +60,9 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
 
     val state by viewModelAuthMananger.status.collectAsState()
     val conexao by viewModelAuthMananger.conexao.collectAsState()
+
+    val email by viewModelAuthMananger.email.collectAsState()
+    val password by viewModelAuthMananger.password.collectAsState()
 
     var carregando by remember {
         mutableStateOf(false)
@@ -75,8 +79,8 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
 
     suspend fun login(
         context: Context,
-        email: String = "joao1@example.com",
-        password: String = "senha123"
+        email: String,
+        password: String
     ) {
         coroutineScope {
             viewModelAuthMananger.login(
@@ -118,7 +122,12 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
 
             }
 
-            is Status.Desconectado -> TODO()
+            is Status.Desconectado -> {
+
+            }
+            is Status.Alerta -> {
+
+            }
         }
     }
 
@@ -166,6 +175,10 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
 
             is Status.Sucesso -> {
             }
+
+            is Status.Alerta -> {
+
+            }
         }
     }
 
@@ -205,24 +218,30 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
             ) {
                 TextFieldSimples(
                     placeholder = "email",
-                    onChange = {},
-                    valorPreenchido = "joao1@example.com",
-                    nomeCampo = "Email"
+                    onChange = {
+                        viewModelAuthMananger.setEmail(it)
+                    },
+                    valorPreenchido = email,
+                    nomeCampo = "Email",
+                    textColor = Main
                 )
 
                 TextFieldSimples(
                     placeholder = "password",
-                    onChange = {},
+                    onChange = {
+                        viewModelAuthMananger.setPassword(it)
+                    },
                     visualTransformation = PasswordVisualTransformation(),
-                    valorPreenchido = "senha123",
-                    nomeCampo = "Senha"
+                    valorPreenchido = password,
+                    nomeCampo = "Senha",
+                    textColor = Main
                 )
 
                 Button(
                     onClick = {
                         carregando = true
                         coroutineScope.launch {
-                            login(context)
+                            login(context, email, password)
                         }
                     },
                     enabled = !carregando,

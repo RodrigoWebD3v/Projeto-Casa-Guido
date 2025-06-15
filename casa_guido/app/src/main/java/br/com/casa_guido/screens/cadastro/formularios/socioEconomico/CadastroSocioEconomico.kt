@@ -2,7 +2,10 @@ package br.com.casa_guido.screens.cadastro.formularios.socioEconomico
 
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -80,6 +83,7 @@ fun CadastroSocioEconomico(
     ) {
         TextFieldSimples(
             nomeCampo = "Remuneração",
+            somenteNumero = true,
             valorPreenchido = paciente.remuneracao,
             placeholder = "1.500",
             onChange = {
@@ -90,6 +94,9 @@ fun CadastroSocioEconomico(
             }
         )
 
+        Column {
+
+        }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -99,31 +106,56 @@ fun CadastroSocioEconomico(
         ) {
 
             RadioButtonMultOptValores(
-                opcoesLista = listOf("Sim" to 0, "Não" to 1, "Apto a receber" to 2),
+                opcoesLista = listOf("Não" to 0, "Sim" to 1),
                 labelTitulo = "BPC",
                 selected = paciente.bpc
             ) {
                 onChangeCampo(
-                    CamposSocioEconomico.REMUNERACAO_OPT,
+                    CamposSocioEconomico.BPC_OPCIONAL,
                     it.toString()
                 )
             }
         }
-
-        AnimatedVisibility(
-            visible = paciente.bpc == 0
-        ) {
-            TextFieldSimples(
-                nomeCampo = "Valor",
-                valorPreenchido = paciente.valorBpc,
-                placeholder = "180",
-                onChange = {
-                    onChangeCampo(
-                        CamposSocioEconomico.VALOR_BPC,
-                        it
-                    )
+        if (paciente.bpc == 0) {
+            AnimatedVisibility(
+                visible = paciente.bpc == 0
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    RadioButtonMultOptValores(
+                        opcoesLista = listOf("Não" to 0, "Sim" to 1),
+                        labelTitulo = "Apto a receber",
+                        selected = paciente.aptoReceberBpc
+                    ) {
+                        onChangeCampo(
+                            CamposSocioEconomico.APTO_RECEBER_BPC,
+                            it.toString()
+                        )
+                    }
                 }
-            )
+            }
+        } else {
+            AnimatedVisibility(
+                visible = paciente.bpc == 1,
+            ) {
+                TextFieldSimples(
+                    nomeCampo = "Valor",
+                    valorPreenchido = paciente.valorBpc,
+                    placeholder = "180",
+                    somenteNumero = true,
+                    onChange = {
+                        onChangeCampo(
+                            CamposSocioEconomico.VALOR_BPC,
+                            it
+                        )
+                    }
+                )
+            }
         }
 
         TextFieldSimples(
@@ -139,8 +171,8 @@ fun CadastroSocioEconomico(
         )
 
         Log.i(
-                "Cadastro socio economico 2",
-                "Inicializando com escolaridade: ${paciente.pessoa.escolaridade} e série: ${paciente.pessoa.serie}"
+            "Cadastro socio economico 2",
+            "Inicializando com escolaridade: ${paciente.pessoa.escolaridade} e série: ${paciente.pessoa.serie}"
         )
 
         Escolaridade(

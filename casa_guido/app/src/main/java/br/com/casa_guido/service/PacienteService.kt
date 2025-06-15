@@ -1,9 +1,13 @@
 package br.com.casa_guido.service
 
+import android.util.Log
+import br.com.casa_guido.models.Cras
 import br.com.casa_guido.repository.PacienteRepository
 import br.com.casa_guido.models.HistoricoSaude
 import br.com.casa_guido.models.Paciente
 import br.com.casa_guido.models.ProfissionalResponsavel
+import br.com.casa_guido.models.SituacaoHabitacional
+import br.com.casa_guido.models.Ubs
 import kotlinx.coroutines.flow.first
 import br.com.casa_guido.room.entidades.Paciente as PacienteEntidade
 import br.com.casa_guido.models.Paciente as PacienteUI
@@ -16,7 +20,8 @@ class PacienteService(
     private val cirurgiaService: CirurgiaService,
     private val radioService: RadioService,
     private val composicaoFamiliarService: ComposicaoFamiliarService,
-    private val historicoSaudeService: HistoricoSaudeService
+    private val historicoSaudeService: HistoricoSaudeService,
+    private val situacaoHabitacionalService: SituacaoHabitacionalService,
 ) {
 
     suspend fun getPacientes(): List<Paciente> {
@@ -39,12 +44,20 @@ class PacienteService(
     }
 
     suspend fun createPaciente(paciente: PacienteUI) {
+        Log.i(
+            "PacienteService A",
+            "createPaciente: ${paciente.cras.municipio} - ${paciente.cras.bairro} - ${paciente.ubs.municipio} - ${paciente.ubs.bairro}"
+        )
         pacienteRepository.insert(
             paciente.toEntidade()
         )
     }
 
     private fun PacienteUI.toEntidade(): PacienteEntidade {
+        Log.i(
+            "PacienteService B",
+            "tipoEscola: ${this.tipoEscola}"
+        )
         return PacienteEntidade(
             id = this.id,
             pessoaId = this.pessoa.id,
@@ -60,6 +73,7 @@ class PacienteService(
             escolaNome = this.escolaNome,
             //Descontinuar esse campo
             anoEscolar = "1",
+
             tamRoupa = this.tamRoupa,
             tamCalcado = this.tamCalcado,
             origenInfoOng = this.origen_info_ong,
@@ -67,6 +81,12 @@ class PacienteService(
             responsavelId = this.responsavel.id,
             conjugeResponsavelId = this.conjugeResponsavel.id,
             outroResponsavelId = this.outroResponsavel.id,
+            aptoReceberBpc = if (this.bpc != null && this.bpc == 1) 1 else this.aptoReceberBpc ?: 0,
+            tipoEscola = this.tipoEscola,
+            crasMunicipio = this.cras.municipio,
+            ubsMunicipio = this.ubs.municipio,
+            crasBairro = this.cras.bairro,
+            ubsBairro = this.ubs.bairro,
         )
     }
 
@@ -76,24 +96,24 @@ class PacienteService(
         return PacienteUI(
             id = this.id,
             pessoa = getPessoaById(this.pessoaId),
-            status = this.status?: false,
-            nomeMae = this.nomeMae?:"",
-            nomePai = this.nomePai?:"",
-            nomeOutro = this.nomeOutro?:"",
-            remuneracao = this.remuneracao?:"",
-            bpc = this.recebeBpc?:0,
-            valorBpc = this.valorBpc?:"",
-            diagnostico = this.diagnostico?:"",
-            escolaNome = this.escolaNome?:"",
-            tamRoupa = this.tamRoupa?:"",
-            tamCalcado = this.tamCalcado?:"",
-            origen_info_ong = this.origenInfoOng?:"",
-            observacoes = this.observacoes?: arrayOf(""),
-            responsavel = getPessoaById(this.responsavelId?:""),
-            conjugeResponsavel = getPessoaById(this.conjugeResponsavelId?:""),
-            outroResponsavel = getPessoaById(this.outroResponsavelId?:""),
+            status = this.status ?: false,
+            nomeMae = this.nomeMae ?: "",
+            nomePai = this.nomePai ?: "",
+            nomeOutro = this.nomeOutro ?: "",
+            remuneracao = this.remuneracao ?: "",
+            bpc = this.recebeBpc,
+            valorBpc = this.valorBpc ?: "",
+            diagnostico = this.diagnostico ?: "",
+            escolaNome = this.escolaNome ?: "",
+            tamRoupa = this.tamRoupa ?: "",
+            tamCalcado = this.tamCalcado ?: "",
+            origen_info_ong = this.origenInfoOng ?: "",
+            observacoes = this.observacoes ?: arrayOf(""),
+            responsavel = getPessoaById(this.responsavelId ?: ""),
+            conjugeResponsavel = getPessoaById(this.conjugeResponsavelId ?: ""),
+            outroResponsavel = getPessoaById(this.outroResponsavelId ?: ""),
             profissionalResponsavel = ProfissionalResponsavel(
-                id = this.profissionalResponsavel?:"",
+                id = this.profissionalResponsavel ?: "",
                 nome = "Profissional Responsável",
                 crm = "",
             ),
@@ -102,7 +122,18 @@ class PacienteService(
             radios = radioService.getRadiosByPaciente(this.id),
             composicaoFamiliar = composicaoFamiliarService.getComposicaoFamiliarPorPaciente(this.id),
             historicoSaude = historicoSaudeService.getHistoricoSaudeByPaciente(this.id)
-                ?: HistoricoSaude()
+                ?: HistoricoSaude(),
+            aptoReceberBpc = this.aptoReceberBpc,
+            tipoEscola = tipoEscola ?: 0,
+            ubs = Ubs(
+                municipio = this.ubsMunicipio ?: "",
+                bairro = this.ubsBairro ?: ""
+            ),
+            cras = Cras(
+                municipio = this.crasMunicipio ?: "",
+                bairro = this.crasBairro ?: ""
+            ),
+            situacaoHabitacional = situacaoHabitacionalService.buscaSituacaoHabitacionalPorPaciente(this.id)?: SituacaoHabitacional()
         )
     }
 }

@@ -19,6 +19,7 @@ data class Paciente(
     val remuneracao: String = "",
     val bpc: Int? = null,
     val valorBpc: String = "",
+    val aptoReceberBpc: Int? = null,
     val tipoEscola: Int? = null,
     val escolaNome: String = "",
     val tamRoupa: String = "",

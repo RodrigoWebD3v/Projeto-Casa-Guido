@@ -58,14 +58,17 @@ fun DropDownMenu(
                 modifier = Modifier
                     .menuAnchor()
                     .fillMaxWidth(),
-                label = { Text("Selecione uma opcao") },
+                label = { Text("Selecione uma opcao", color = Main) },
                 trailingIcon = {
                     ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded)
                 },
                 colors = TextFieldDefaults.colors(
                     unfocusedIndicatorColor = BackgroundColor,
                     focusedContainerColor = BackgroundColor,
-                    unfocusedContainerColor = BackgroundColor
+                    unfocusedContainerColor = BackgroundColor,
+                    disabledTextColor = Main,
+                    focusedTextColor = Main,
+                    unfocusedTextColor = Main,
                 ),
                 // shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
             )
@@ -79,7 +82,7 @@ fun DropDownMenu(
             ) {
                 opcoes.forEach { item ->
                     DropdownMenuItem(
-                        text = { Text(item.first) },
+                        text = { Text(item.first, color = Main) },
                         onClick = {
                             isExpanded = false
                             onSelected(item)

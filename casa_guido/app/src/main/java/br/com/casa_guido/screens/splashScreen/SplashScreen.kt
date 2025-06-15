@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.casa_guido.configuration.Conexao
 import br.com.casa_guido.configuration.Status
+import br.com.casa_guido.configuration.Status.*
 import br.com.casa_guido.navigation.root.ViewModelAuthMananger
 import br.com.casa_guido.ui.theme.Button
 import br.com.casa_guido.ui.theme.GreenBlack
@@ -79,11 +80,11 @@ fun SplashScreen(modifier: Modifier = Modifier, setResultado: (Status) -> Unit) 
             }
 
             is Status.Erro -> {
-                setResultado(Status.Erro(""))
+                setResultado(Erro(""))
             }
 
             is Status.Sucesso -> {
-                setResultado(Status.Sucesso(""))
+                setResultado(Sucesso(""))
             }
 
             Status.SemInteracao -> {
@@ -91,6 +92,10 @@ fun SplashScreen(modifier: Modifier = Modifier, setResultado: (Status) -> Unit) 
             }
 
             is Status.Desconectado -> {
+
+            }
+
+            is Status.Alerta -> {
 
             }
         }

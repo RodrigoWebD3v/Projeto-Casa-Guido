@@ -7,33 +7,40 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
 model User {
   id        String   @id @default(uuid())
   name      String
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
+
+  @@map("users")
 }
 
 model Pessoa {
-  id              String   @id @default(uuid())
-  nome            String
-  contato         String?
-  dataNascimento  String
-  cpf             String?
-  identidade      String?
-  naturalidade    String?
-  genero          String?
-  escolaridade    String?
-  estadoCivil     Int?
-  situacaoProfissional Int?
-  salario         String?
-  enderecoId      String?
-  telefone        String?
-  cartaoSus       String?
+  id                  String   @id @default(uuid())
+  nome                String
+  contato             String?  // pode ser removido se usar apenas telefone
+  dataNascimento      String @map("data_nascimento")
+  cpf                 String?
+  identidade          String?  // mapeia para 'rg' no JSON
+  naturalidade        String?
+  genero              String?  // não está no JSON mas pode ser útil
+  escolaridade        Int?     
+  serie               Int?     
+  estadoCivil         Int? @map("estado_civil")
+  situacaoProfissional Int? @map("situacao_profissional")
+  salario             String?
+  enderecoId          String? @map("endereco_id")
+  telefone            String?
+  cartaoSus           String? @map("cartao_sus")
+  profissao           String?  // novo campo
 
-  endereco        Endereco? @relation(fields: [enderecoId], references: [id])
-  paciente        Paciente? @relation("PessoaPaciente")
+  endereco            Endereco? @relation(fields: [enderecoId], references: [id])
+  paciente            Paciente? @relation("PessoaPaciente")
+
+  @@map("pessoas")
 }
 
 model Endereco {
@@ -41,131 +48,115 @@ model Endereco {
   cep         String
   logradouro  String
   numero      String
-  complemento String
-  unidade     String
+  complemento String  // corrigi o nome (estava "complemento" no JSON)
+  unidade     String? // marcado como opcional
   bairro      String
-  estado      String
-  uf          String
-  regiao      String
   localidade  String
-  referencia  String
-  pais        String?
+  uf          String
+  estado      String  // equivalente a "Santa Catarina" no JSON
+  regiao      String? // marcado como opcional
+  referencia  String? // marcado como opcional
+  pais        String? @default("Brasil") // opcional com valor padrão
 
   pessoas     Pessoa[] // relação inversa
+
+  @@map("enderecos")
 }
 
 model Paciente {
   id                     String   @id @default(uuid())
-  pessoaId               String   @unique
+  pessoaId               String   @unique @map("pessoa_id")
   pessoa                 Pessoa   @relation("PessoaPaciente", fields: [pessoaId], references: [id])
-  status                 Boolean?
-  nomeMae                String?
-  nomePai                String?
-  nomeOutro              String?
-  recebeRemuneracao      Int?
-  remuneracao            String?
-  recebeBpc              Int?
-  valorBpc               String?
-  diagnostico            String?
-  profissionalResponsavel String?
-  escolaNome             String?
-  anoEscolar             String?
-  tamRoupa               String?
-  tamCalcado             String?
-  origenInfoOng          String?
-  observacoes            String[] // usar @db.Text[] se for PostgreSQL
-  responsavelId          String?
-  conjugeResponsavelId   String?
-  outroResponsavelId     String?
+  status                 Boolean? // true no JSON
+  nomeMae                String? @map("nome_mae")
+  nomePai                String? @map("nome_pai")
+  nomeOutro              String? @map("nome_outro")
+  remuneracao            String?  
+  recebeBpc              Int?    @map("recebe_bpc") 
+  valorBpc               String? @map("valor_bpc")   
+  aptoReceberBpc         Int?    @map("apto_receber_bpc")   
+  tipoEscola             Int?    @map("tipo_escola")   
+  escolaNome             String? @map("escola_nome")     
+  // Campos existentes não presentes no JSON:
+  observacoes            String[]
+  responsavelId          String?  @map("responsavel_id") 
+  conjugeResponsavelId   String?  @map("conjugeResponsavel_id") 
+  outroResponsavelId     String?  @map("outroResponsavel_id") 
 
-  entrevistas            Entrevista[]
+  // Relacionamentos (mantidos):
   historicoSaude         HistoricoSaude[]
   quimioterapias         Quimioterapia[]
   radioterapias          RadioTerapia[]
-  tratamentos            Tratamento[]
   composicaoFamiliar     ComposicaoFamiliar[]
   cirurgias              Cirurgia[]
   profissionais          ProfissionalResponsavel[]
-}
+  cras                   Cras?
+  ubs                    Ubs?
+  situacaoHabitacional   SituacaoHabitacional?
 
-model Entrevista {
-  id              String  @id @default(uuid())
-  pacienteId      String
-  entrevistadoId  String?
-  cidade          String?
-  data            String?
-  como_soube      String?
-  observacoes     String?
-  entrevistador   String?
 
-  paciente        Paciente @relation(fields: [pacienteId], references: [id])
+  @@map("pacientes")
 }
 
 model HistoricoSaude {
-  id                       String   @id @default(uuid())
-  pacienteId               String
-  recebe_beneficio         Int?
-  beneficio_descricao      String?
-  medicamentos_uso_continuo String?
-  local_procura_atendimento Int[]
-  doencasFamilia           Int[]
+  id                      String    @id @default(uuid())
+  pacienteId              String    @map("paciente_id") 
+  doencasFamilia          Int[]     @default([]) @map("doencas_familia") 
+  paciente                Paciente  @relation(fields: [pacienteId], references: [id])
 
-  paciente                 Paciente @relation(fields: [pacienteId], references: [id])
+  @@map("historicos_saude")
 }
 
 model Quimioterapia {
   id               String  @id @default(uuid())
-  pacienteId       String
-  dataInicio       String?
-  dataUltimaSessao String?
+  pacienteId       String  @map("paciente_id") 
+  dataInicio       String? @map("data_inicio") 
+  dataUltimaSessao String? @map("data_ultimaSessao") 
 
   paciente         Paciente @relation(fields: [pacienteId], references: [id])
+
+  @@map("quimioterapias")
 }
 
 model RadioTerapia {
   id               String  @id @default(uuid())
-  pacienteId       String
-  dataInicio       String?
-  dataUltimaSessao String?
+  pacienteId       String  @map("paciente_id") 
+  dataInicio       String? @map("data_inicio") 
+  dataUltimaSessao String? @map("data_ultimaSessao") 
 
   paciente         Paciente @relation(fields: [pacienteId], references: [id])
-}
 
-model Tratamento {
-  id                 String  @id @default(uuid())
-  pacienteId         String
-  tipo               String?
-  data_inicio        String?
-  data_ultima_sessao String?
-  observacoes        String?
-  outros_tratamentos String?
+  @@map("radioterapias")
 
-  paciente           Paciente @relation(fields: [pacienteId], references: [id])
 }
 
 model ProfissionalResponsavel {
   id         String  @id @default(uuid())
-  pacienteId String
+  pacienteId String  @map("paciente_id") 
   tipo       String?
   nome       String
   crm        String?
 
   paciente   Paciente @relation(fields: [pacienteId], references: [id])
+
+  @@map("profissionais_responsaveis")
 }
 
 model Cirurgia {
   id          String  @id @default(uuid())
-  pacienteId  String
+  pacienteId  String  @map("paciente_id") 
   nome        String?
   data        String?
-  descricao   String?
+  cid   String?
 
   paciente    Paciente @relation(fields: [pacienteId], references: [id])
+
+  @@map("cirurgias")
 }
 
 model ComposicaoFamiliar {
   id              String  @id @default(uuid())
-  pacienteId      String
+  pacienteId      String  @map("paciente_id") 
   nome            String?
   parentesco      String?
   data_nascimento String?
@@ -176,22 +167,47 @@ model ComposicaoFamiliar {
   idade           Int?
 
   paciente        Paciente @relation(fields: [pacienteId], references: [id])
+
+  @@map("composicoes_familiar")
 }
 
 model SituacaoHabitacional {
-  id                 String  @id @default(uuid())
-  responsavelId      String?
-  tipo_moradia       String?
-  propriedade        Boolean?
-  area               String?
-  caracteristicas    String?
-  eletrodomesticos   String?
-  bens_imovel        String?
-  meios_transporte   String?
-  meios_comunicacao  String?
-  possui_banheiro    Boolean?
-  dentro_de_casa     Boolean?
-  destino_lixo       String?
-  tipo_agua          String?
-  valor_total        String?
+  id                 String   @id @default(uuid())
+  pacienteId         String   @unique @map("paciente_id")
+
+  comoAdquiriuCasa   Int? @map("como_adquiriu_casa") 
+  area               Int?
+  numeroComodos      Int? @map("numero_comodos") 
+  material           Int?
+  bens               Int[]
+  meioDeTransporte   Int? @map("meio_de_transporte") 
+  meioDeComunicacao  Int? @map("meio_de_comunicacao") 
+  possuiBanheiros    Int? @map("possui_banheiros") 
+  dentroDeCasa       Boolean? @map("dentro_de_casa") 
+
+  paciente           Paciente @relation(fields: [pacienteId], references: [id])
+
+  @@map("situacoes_habitacional")
+}
+
+model Ubs {
+  id               String  @id @default(uuid())
+  paciente         Paciente? @relation(fields: [pacienteId], references: [id])
+  pacienteId       String? @unique @map("paciente_id")
+  municipio        String?
+  bairro           String?
+
+
+  @@map("ubs")
+}
+
+model Cras {
+  id               String  @id @default(uuid())
+  paciente         Paciente? @relation(fields: [pacienteId], references: [id])
+  pacienteId       String? @unique @map("paciente_id")
+  municipio        String?
+  bairro           String?
+
+  @@map("cras")
+
 }

@@ -76,7 +76,6 @@ fun CadastroOutro(
                     || outro.endereco.numero.isEmpty()
                     || outro.endereco.logradouro.isEmpty()
                     || outro.endereco.bairro.isEmpty()
-                    || outro.endereco.referencia.isEmpty()
                     || outro.endereco.localidade.isEmpty()
                     || outro.endereco.uf.isEmpty())
         ) GreenBlack else Alert
@@ -309,6 +308,7 @@ fun CadastroOutro(
                         visualTransformation = VisualTransformation.None,
                         keyboardType = KeyboardType.Number,
                         placeholder = "1.230",
+                        somenteNumero = true,
                         onChange = {
                             onChangeCampo(
                                 CamposOutro.SALARIO_OUTRO,

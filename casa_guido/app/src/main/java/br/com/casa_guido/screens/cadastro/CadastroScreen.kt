@@ -69,6 +69,7 @@ import br.com.casa_guido.screens.cadastro.formularios.pai.CadastroResponsavel
 import br.com.casa_guido.screens.cadastro.formularios.situacaoHabitacional.CadastroSituacaoHabitacional
 import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.CadastroSocioEconomico
 import br.com.casa_guido.screens.scaffold_components.TopAppBarComp
+import br.com.casa_guido.ui.theme.Alert
 import br.com.casa_guido.ui.theme.Button
 import br.com.casa_guido.ui.theme.GreenBlack
 import br.com.casa_guido.ui.theme.Main
@@ -98,6 +99,9 @@ fun CadastroScreen(
 
     var quantidadePaginas by remember { mutableStateOf(14) }
 
+    var colorSnackBar by remember { mutableStateOf(Button) }
+
+
     viewModel._context = LocalContext.current
 
 
@@ -110,29 +114,50 @@ fun CadastroScreen(
     LaunchedEffect(status) {
         when (status) {
             Status.Carregando -> {
-
+                viewModel.updateStatus(Status.SemInteracao)
             }
 
             is Status.Desconectado -> {
-
+                viewModel.updateStatus(Status.SemInteracao)
             }
 
             is Status.Erro -> {
+                colorSnackBar = Alert
                 coroutineScope.launch {
                     snackbarHostState.showSnackbar(
-                        message = "Erro ao carregar paciente",
+                        message =  (status as Status.Erro).mensagem,
                         duration = SnackbarDuration.Short,
                         actionLabel = "Fechar"
                     )
                 }
+                viewModel.updateStatus(Status.SemInteracao)
             }
 
             Status.SemInteracao -> {
-
             }
 
             is Status.Sucesso -> {
+                colorSnackBar = Paragraph
+                coroutineScope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = (status as Status.Sucesso).mensagem,
+                        duration = SnackbarDuration.Short,
+                        actionLabel = "Fechar"
+                    )
+                }
+                viewModel.updateStatus(Status.SemInteracao)
+            }
 
+            is Status.Alerta -> {
+                colorSnackBar = Button
+                coroutineScope.launch {
+                    snackbarHostState.showSnackbar(
+                        message =  (status as Status.Alerta).mensagem,
+                        duration = SnackbarDuration.Short,
+                        actionLabel = "Fechar"
+                    )
+                }
+                viewModel.updateStatus(Status.SemInteracao)
             }
         }
 
@@ -140,11 +165,13 @@ fun CadastroScreen(
 
     LaunchedEffect(Unit) {
         coroutineScope.launch {
-            snackbarHostState.showSnackbar(
-                message = if (pacienteId != null) "Editando paciente" else "Criando paciente",
-                duration = SnackbarDuration.Short,
-                actionLabel = "Fechar"
-            )
+            if(pacienteId != null){
+                colorSnackBar = Button
+                viewModel.updateStatus(Status.Alerta("Editando paciente"))
+            }else{
+                colorSnackBar = Paragraph
+                viewModel.updateStatus(Status.Sucesso("Criando paciente"))
+            }
         }
     }
 
@@ -160,7 +187,7 @@ fun CadastroScreen(
                         snackbarData = snackbarData,
                         actionColor = GreenBlack,
                         contentColor = GreenBlack,
-                        backgroundColor = if (pacienteId != null) Button else Paragraph,
+                        backgroundColor = colorSnackBar ,
                     )
                 }
             )
@@ -418,13 +445,9 @@ fun CadastroScreen(
                                     icon = Icons.Default.Save,
                                     onClick = {
                                         coroutineScope.launch {
-                                            viewModel.save()
-                                            snackbarHostState.showSnackbar(
-                                                message = "Paciente salvo com sucesso",
-                                                duration = SnackbarDuration.Short,
-                                                actionLabel = "Fechar"
-                                            )
-                                            navHostController.popBackStack()
+                                            viewModel.save{
+                                                navHostController.popBackStack()
+                                            }
                                         }
                                     }
                                 )
@@ -445,13 +468,9 @@ fun CadastroScreen(
                                     modifier = Modifier.padding(end = 20.dp),
                                     onClick = {
                                         coroutineScope.launch {
-                                            viewModel.save()
-                                            snackbarHostState.showSnackbar(
-                                                message = "Paciente salvo com sucesso",
-                                                duration = SnackbarDuration.Short,
-                                                actionLabel = "Fechar"
-                                            )
-                                            navHostController.popBackStack()
+                                            viewModel.save{
+                                                navHostController.popBackStack()
+                                            }
                                         }
                                     }
                                 )

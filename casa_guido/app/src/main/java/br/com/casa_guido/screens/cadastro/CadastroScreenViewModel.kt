@@ -60,11 +60,15 @@ class CadastroScreenViewModel(
         }
     }
 
-    fun save() {
+    fun save(onPopBack: () -> Unit) {
         viewModelScope.launch {
-            Log.i("CadastroScreenViewModel", "save: ${_paciente.value.pessoa.escolaridade}")
-            Log.i("CadastroScreenViewModel", "save: ${_paciente.value.pessoa.serie}")
-            criarPacienteService.criarPaciente(_paciente.value)
+            if(_paciente.value.pessoa.nome.isNotEmpty()){
+                criarPacienteService.criarPaciente(_paciente.value)
+                _status.value = Status.Sucesso("Paciente criado com sucesso")
+                onPopBack()
+            }else{
+                _status.value = Status.Alerta("Nome do paciente não pode ser vazio")
+            }
         }
     }
 
@@ -118,7 +122,7 @@ class CadastroScreenViewModel(
                 )
             }
 
-            CamposSocioEconomico.REMUNERACAO_OPT -> {
+            CamposSocioEconomico.BPC_OPCIONAL -> {
                 Log.i("CadastroScreenViewModel", "onChangeSocioEconomico REMUNERACAO_OPT: $valor")
                 _paciente.value = _paciente.value.copy(
                     bpc = valor.toInt()
@@ -158,6 +162,12 @@ class CadastroScreenViewModel(
             CamposSocioEconomico.PUBLICA_PRIVADA -> {
                 _paciente.value = _paciente.value.copy(
                     tipoEscola = valor.toInt()
+                )
+            }
+
+            CamposSocioEconomico.APTO_RECEBER_BPC -> {
+                _paciente.value = _paciente.value.copy(
+                    aptoReceberBpc = valor.toInt()
                 )
             }
         }
@@ -247,16 +257,9 @@ class CadastroScreenViewModel(
                                     endereco = endereco!!
                                 )
                             )
-                            _status.value = Status.Sucesso("Endereço encontrado")
                         }
                     } catch (e: Exception) {
                         _status.value = Status.Erro("Erro ao buscar endereço")
-                    }
-                } else {
-                    if (Utils.verificarConexao(context = _context!!)) {
-                        _status.update {
-                            Status.Erro("Sem conexão para buscar CEP")
-                        }
                     }
                 }
             }
@@ -470,7 +473,6 @@ class CadastroScreenViewModel(
                                     endereco = endereco!!
                                 )
                             )
-                            _status.value = Status.Sucesso("Endereço encontrado")
                         }
                     } catch (e: Exception) {
                         _status.value = Status.Erro("Erro ao buscar endereço")
@@ -574,7 +576,6 @@ class CadastroScreenViewModel(
                                     endereco = endereco!!
                                 )
                             )
-                            _status.value = Status.Sucesso("Endereço encontrado")
                         }
                     } catch (e: Exception) {
                         _status.value = Status.Erro("Erro ao buscar endereço")
@@ -1204,14 +1205,6 @@ class CadastroScreenViewModel(
                 )
             }
 
-            CamposSituacaoHabitacional.COMP_PROPRIEDADE -> {
-                _paciente.value = _paciente.value.copy(
-                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
-                        compPropriedade = valor.toInt()
-                    )
-                )
-            }
-
             CamposSituacaoHabitacional.AREA -> {
                 _paciente.value = _paciente.value.copy(
                     situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
@@ -1223,7 +1216,7 @@ class CadastroScreenViewModel(
             CamposSituacaoHabitacional.NUMERO_COMODOS -> {
                 _paciente.value = _paciente.value.copy(
                     situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
-                        numeroComodos = valor
+                        numeroComodos = valor.toInt()
                     )
                 )
             }
@@ -1234,25 +1227,6 @@ class CadastroScreenViewModel(
                         material = valor.toInt()
                     )
                 )
-            }
-
-            CamposSituacaoHabitacional.ELETRODOMESTICOS -> {
-                if (valor.toInt() !in _paciente.value.situacaoHabitacional.eletrodomesticos) {
-                    _paciente.value = _paciente.value.copy(
-                        situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
-                            eletrodomesticos = _paciente.value.situacaoHabitacional.eletrodomesticos + valor.toInt()
-                        )
-                    )
-                } else {
-                    _paciente.value = _paciente.value.copy(
-                        situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
-                            eletrodomesticos = _paciente.value.situacaoHabitacional.eletrodomesticos.filterNot {
-                                it == valor.toInt()
-                            }.toTypedArray()
-                        )
-                    )
-                }
-
             }
 
             CamposSituacaoHabitacional.BENS -> {
@@ -1271,14 +1245,6 @@ class CadastroScreenViewModel(
                         )
                     )
                 }
-            }
-
-            CamposSituacaoHabitacional.VALOR_TOTAL -> {
-                _paciente.value = _paciente.value.copy(
-                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
-                        valorTotal = valor
-                    )
-                )
             }
 
             CamposSituacaoHabitacional.MEIO_TRANSPORTE -> {
@@ -1312,22 +1278,6 @@ class CadastroScreenViewModel(
                     )
                 )
             }
-
-            CamposSituacaoHabitacional.DESCARTE_LIXO -> {
-                _paciente.value = _paciente.value.copy(
-                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
-                        destinoDoLixo = valor.toInt()
-                    )
-                )
-            }
-
-            CamposSituacaoHabitacional.AGUA -> {
-                _paciente.value = _paciente.value.copy(
-                    situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
-                        agua = valor.toInt()
-                    )
-                )
-            }
         }
     }
 
@@ -1353,5 +1303,9 @@ class CadastroScreenViewModel(
                 )
             }
         }
+    }
+
+    fun updateStatus(status: Status) {
+        _status.value = status
     }
 }

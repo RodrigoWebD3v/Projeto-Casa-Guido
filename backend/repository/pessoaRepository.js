@@ -3,7 +3,7 @@ const  PessoaError = require('../handlerException/criarPacienteException')
 
 const prisma = new PrismaClient();
 
-const criarPessoa = async (dtoPessoa) => {
+const criarPessoaRepository = async (dtoPessoa) => {
     try{
         return await prisma.pessoa.create({
             data: {
@@ -28,4 +28,4 @@ const buscarPessoaPorId = async (id) => {
     return await prisma.pessoa.findUnique({ where: dtoPessoa.id  });
 }
 
-module.exports = { criarPessoa, buscarPessoaPorNome, buscarPessoaPorId };
+module.exports = { criarPessoaRepository, buscarPessoaPorNome, buscarPessoaPorId };

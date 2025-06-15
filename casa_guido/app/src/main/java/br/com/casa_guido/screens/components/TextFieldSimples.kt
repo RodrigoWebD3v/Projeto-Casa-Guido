@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -32,6 +33,7 @@ import br.com.casa_guido.ui.theme.Paragraph
 @Composable
 fun TextFieldSimples(
     modifier: Modifier = Modifier,
+    textColor: Color = GreenBlack,
     nomeCampo: String,
     valorPreenchido: String,
     paddingValues: PaddingValues = PaddingValues(20.dp,0.dp),
@@ -78,7 +80,7 @@ fun TextFieldSimples(
                     }
                 },
                 textStyle = LocalTextStyle.current.copy(
-                    color = GreenBlack,
+                    color = textColor,
                     fontSize = 16.sp
                 ),
                 modifier = Modifier

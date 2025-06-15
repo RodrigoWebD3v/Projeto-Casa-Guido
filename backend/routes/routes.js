@@ -9,4 +9,5 @@ routes.get('/usuario', buscarUsuarioController);
 
 routes.post('/paciente', criarPacienteController);
 
+
 module.exports = routes;

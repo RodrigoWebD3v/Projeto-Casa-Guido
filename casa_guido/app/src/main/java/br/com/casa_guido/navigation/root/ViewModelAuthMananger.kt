@@ -34,6 +34,21 @@ class ViewModelAuthMananger(
     private val _usuarioLogado = MutableStateFlow<Boolean>(true)
     val statusUsuario = _usuarioLogado.asStateFlow()
 
+    private val _email = MutableStateFlow<String>("")
+    val email = _email.asStateFlow()
+
+    private val _password = MutableStateFlow<String>("")
+    val password = _password.asStateFlow()
+
+    fun setEmail(email: String) {
+        _email.update { email }
+    }
+
+    fun setPassword(password: String)
+    {
+        _password.update { password }
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun refreshToken(context: Context) {
         viewModelScope.launch {
@@ -139,6 +154,11 @@ class ViewModelAuthMananger(
         _status.update {
             resultado
         }
+    }
+
+    suspend fun login()
+    {
+
     }
 
 
