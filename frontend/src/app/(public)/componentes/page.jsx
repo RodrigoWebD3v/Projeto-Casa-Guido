@@ -1,16 +1,16 @@
 'use client';
 
+
+import MultiOptionRadioGroup from '@/components/Button/MultiOptionRadioGroup';
+import MultiSelectableRadioGroup from '@/components/Button/MultiSelectableRadioGroup';
+import RadioButtonWithFixedLabel from '@/components/Button/RadioButtonWithFixedLabel';
+import RadioButtonWithLabel from '@/components/Button/RadioButtonWithLabel';
+import DatePickerInput from '@/components/DatePicker/DatePicker';
+import DropDownMenu from '@/components/DropDownMenu/DropDrownMenu';
+import InputTextField from '@/components/TextField/InputTextField';
+import SimpleTextField from '@/components/TextField/SimpleTextField';
 import { useState } from 'react';
 
-import SearchBox from '../../../components/SearchBox/SearchBox';
-import DatePickerInput from '../../../components/DatePicker/DatePicker';
-import DropDownMenu from '../../../components/DropDownMenu/DropDrownMenu';
-import RadioButtonWithLabel from '../../../components/Button/RadioButtonWithLabel';
-import RadioButtonWithFixedLabel from '../../../components/Button/RadioButtonWithFixedLabel';
-import MultiOptionRadioGroup from '../../../components/Button/MultiOptionRadioGroup';
-import MultiSelectableRadioGroup from '../../../components/Button/MultiSelectableRadioGroup';
-import InputTextField from '../../../components/TextField/InputTextField';
-import SimpleTextField from '../../../components/TextField/SimpleTextField';
 
 
 export default function ComponentGallery() {
