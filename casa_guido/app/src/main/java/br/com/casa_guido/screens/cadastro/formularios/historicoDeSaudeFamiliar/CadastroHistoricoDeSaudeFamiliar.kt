@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
@@ -292,6 +294,123 @@ fun CadastroHistoricoDeSaudeFamiliar(
                     }
                 )
             }
+        }
+    }
+
+    // Adiciona a seção "Em caso de doença, procura"
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp, vertical = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .height(45.dp)
+                .clip(RoundedCornerShape(10.dp))
+                .background(Paragraph),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Em caso de doenca, procura",
+                style = TextStyle(
+                    fontSize = 16.sp,
+                    color = BackgroundColor,
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Center
+                )
+            )
+        }
+        Spacer(Modifier.height(10.dp))
+        Column(
+            Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.Start
+        ) {
+            Row(
+                Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Hospital",
+                    style = TextStyle(fontSize = 15.sp, color = Color.Black, fontWeight = FontWeight.Medium),
+                    modifier = Modifier.weight(1f)
+                )
+                RadioButtonComLabelWidthIn(
+                    label = "",
+                    selected = historicoDoencas.localProcura == 0,
+                    onClickListener = { onChangeCampo(CamposHistoricoSaude.LOCAL_PROCURA, "0") }
+                )
+            }
+            Row(
+                Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Unidade de Saúde",
+                    style = TextStyle(fontSize = 15.sp, color = Color.Black, fontWeight = FontWeight.Medium),
+                    modifier = Modifier.weight(1f)
+                )
+                RadioButtonComLabelWidthIn(
+                    label = "",
+                    selected = historicoDoencas.localProcura == 1,
+                    onClickListener = { onChangeCampo(CamposHistoricoSaude.LOCAL_PROCURA, "1") }
+                )
+            }
+            Row(
+                Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Farmacia",
+                    style = TextStyle(fontSize = 15.sp, color = Color.Black, fontWeight = FontWeight.Medium),
+                    modifier = Modifier.weight(1f)
+                )
+                RadioButtonComLabelWidthIn(
+                    label = "",
+                    selected = historicoDoencas.localProcura == 2,
+                    onClickListener = { onChangeCampo(CamposHistoricoSaude.LOCAL_PROCURA, "2") }
+                )
+            }
+        }
+    }
+
+    // Botões de navegação
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp, vertical = 16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Button(
+            onClick = { /* ação do botão anterior */ },
+            modifier = Modifier.weight(1f),
+            shape = RoundedCornerShape(10.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Paragraph,
+                contentColor = Color.Black
+            )
+        ) {
+            Text(
+                text = "Anterior",
+                style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+            )
+        }
+        Spacer(Modifier.width(16.dp))
+        Button(
+            onClick = { /* ação do botão próximo */ },
+            modifier = Modifier.weight(1f),
+            shape = RoundedCornerShape(10.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = BackgroundColor,
+                contentColor = Color.White
+            )
+        ) {
+            Text(
+                text = "Proximo",
+                style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+            )
         }
     }
 }

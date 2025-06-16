@@ -120,7 +120,7 @@ fun CadastroComposicaoFamiliar(
             nomeCampo = "Nome",
             valorPreenchido = state.composicaoFamiliarEdicao.nome,
             placeholder = "Digite o nome",
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             viewModel.onChangeComFamiliaEdicao(
                 state.composicaoFamiliarEdicao.copy(
