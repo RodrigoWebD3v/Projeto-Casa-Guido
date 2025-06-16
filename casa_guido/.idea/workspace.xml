@@ -9,17 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9bc01d2-2390-4e59-bcae-4ed6d67e6a6d" name="Changes" comment="Ajustes solicitados&#10;&#10;Ajustado modulo de injecao de dependencia, para melhor compreensao&#10;&#10;Separado informacoes das models">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoDeSaudeFamiliar/CadastroHistoricoDeSaudeFamiliar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoDeSaudeFamiliar/CadastroHistoricoDeSaudeFamiliar.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/identificacaoPaciente/CadastroIdentificacaoPaciente.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/identificacaoPaciente/CadastroIdentificacaoPaciente.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/mae/CadastroMae.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/mae/CadastroMae.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/outro/CadastroOutro.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/outro/CadastroOutro.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/pai/CadastroPai.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/pai/CadastroPai.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/pacientes/componentes/PacienteItem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/pacientes/componentes/PacienteItem.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/CriarPdfService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/CriarPdfService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/util/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/util/Utils.kt" afterDir="false" />
-    </list>
+    <list default="true" id="d9bc01d2-2390-4e59-bcae-4ed6d67e6a6d" name="Changes" comment="Ajustes solicitados&#10;&#10;Ajustado modulo de injecao de dependencia, para melhor compreensao&#10;&#10;Separado informacoes das models" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -128,7 +118,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "com.google.services.firebase.aqiPopupShown": "true",
-    "git-widget-placeholder": "d4636eae",
+    "git-widget-placeholder": "54ebc22c",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Digo/Desktop/Projeto-Casa-Guido/casa_guido/app/src/main/java/br/com/casa_guido/screens/components",
