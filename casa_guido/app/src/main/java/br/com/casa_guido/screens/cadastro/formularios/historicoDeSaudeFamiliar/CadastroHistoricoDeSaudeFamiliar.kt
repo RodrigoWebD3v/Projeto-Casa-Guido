@@ -338,8 +338,8 @@ fun CadastroHistoricoDeSaudeFamiliar(
                 )
                 RadioButtonComLabelWidthIn(
                     label = "",
-                    selected = historicoDoencas.localProcura == 0,
-                    onClickListener = { onChangeCampo(CamposHistoricoSaude.LOCAL_PROCURA, "0") }
+                    selected = historicoDoencas.localProcuraAtendimento.contains(0),
+                    onClickListener = { onChangeCampo(CamposHistoricoSaude.LOCAL_PROCURA_ATENDIMENTO, "0") }
                 )
             }
             Row(
@@ -353,8 +353,8 @@ fun CadastroHistoricoDeSaudeFamiliar(
                 )
                 RadioButtonComLabelWidthIn(
                     label = "",
-                    selected = historicoDoencas.localProcura == 1,
-                    onClickListener = { onChangeCampo(CamposHistoricoSaude.LOCAL_PROCURA, "1") }
+                    selected = historicoDoencas.localProcuraAtendimento.contains(1),
+                    onClickListener = { onChangeCampo(CamposHistoricoSaude.LOCAL_PROCURA_ATENDIMENTO, "1") }
                 )
             }
             Row(
@@ -368,8 +368,8 @@ fun CadastroHistoricoDeSaudeFamiliar(
                 )
                 RadioButtonComLabelWidthIn(
                     label = "",
-                    selected = historicoDoencas.localProcura == 2,
-                    onClickListener = { onChangeCampo(CamposHistoricoSaude.LOCAL_PROCURA, "2") }
+                    selected = historicoDoencas.localProcuraAtendimento.contains(2),
+                    onClickListener = { onChangeCampo(CamposHistoricoSaude.LOCAL_PROCURA_ATENDIMENTO, "2") }
                 )
             }
         }
