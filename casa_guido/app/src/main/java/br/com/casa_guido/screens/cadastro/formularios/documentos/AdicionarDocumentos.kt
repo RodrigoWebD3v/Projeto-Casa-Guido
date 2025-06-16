@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -38,6 +39,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -64,22 +66,20 @@ import br.com.casa_guido.util.Utils
 import org.koin.androidx.compose.koinViewModel
 import java.time.LocalDate
 
+import androidx.compose.material.icons.filled.Delete
+
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AdicionarDocumentos(
-    modifier: Modifier = Modifier,
-    numeroTela: Int
+    modifier: Modifier = Modifier, numeroTela: Int
 ) {
-    var uriText = remember { mutableStateOf<String>("") }
-
     val context = LocalContext.current
+    val arquivosSelecionados = remember { mutableStateListOf<String>() }
+
     val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocument(),
-        onResult = { uri ->
+        contract = ActivityResultContracts.OpenDocument(), onResult = { uri ->
             uri?.let {
-                val cursor = context.contentResolver.query(
-                    uri, null, null, null, null
-                )
+                val cursor = context.contentResolver.query(uri, null, null, null, null)
                 val nameIndex = cursor?.getColumnIndex(OpenableColumns.DISPLAY_NAME)
                 var fileName = "Arquivo não encontrado"
 
@@ -89,70 +89,75 @@ fun AdicionarDocumentos(
                     cursor.close()
                 }
 
-                uriText.value = fileName
+                arquivosSelecionados.add(fileName)
             }
-        }
-    )
+        })
 
     Column(
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .background(Paragraph)
+            .padding(16.dp)
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Column {
-                Text(
-                    "$numeroTela. Adicionar Documentos",
-                    style = TextStyle(
-                        fontSize = 18.sp,
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Start
-                    )
-                )
-                Text(
-                    "Adicionar documentos necessários",
-                    style = TextStyle(
-                        fontSize = 12.sp,
-                        color = Color.Black,
-                        fontWeight = FontWeight.Medium,
-                        textAlign = TextAlign.Start
-                    )
-                )
-            }
-        }
-    }
+        Text(
+            "$numeroTela. Adicionar Documentos", style = TextStyle(
+                fontSize = 18.sp, color = Color.Black, fontWeight = FontWeight.Bold
+            )
+        )
+        Text(
+            "Adicionar documentos necessários", style = TextStyle(
+                fontSize = 12.sp, color = Color.Black, fontWeight = FontWeight.Medium
+            ), modifier = Modifier.padding(bottom = 16.dp)
+        )
 
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(Paragraph)
-    ) {
-        // Botão para selecionar arquivo
         Button(
             onClick = {
                 launcher.launch(arrayOf("application/pdf", "image/*"))
             },
-            colors = ButtonDefaults.buttonColors(containerColor = Main),
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth()
+            colors = ButtonDefaults.buttonColors(containerColor = GreenBlack),
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text("Selecionar Documento")
         }
-    }
 
-    Text(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-            .background(Color.Black),
-        text = uriText.toString()
-    )
+        Spacer(modifier = Modifier.height(16.dp))
+
+        if (arquivosSelecionados.isNotEmpty()) {
+            Text(
+                text = "Documentos Selecionados:",
+                fontWeight = FontWeight.Bold,
+                fontSize = 14.sp,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+
+            arquivosSelecionados.forEachIndexed { index, nomeArquivo ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Color.White)
+                        .padding(8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = nomeArquivo,
+                        fontSize = 13.sp,
+                        color = Color.Black,
+                        modifier = Modifier.weight(1f)
+                    )
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = "Remover documento",
+                        tint = Color.Red,
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable {
+                                arquivosSelecionados.removeAt(index)
+                            })
+                }
+            }
+        }
+    }
 }
