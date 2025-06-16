@@ -267,11 +267,14 @@ fun CadastroResponsavel(
                         valorPreenchido = responsavel.telefone,
                         visualTransformation = VisualTransformationCustom.PhoneVisualTransformation(),
                         placeholder = "(48) 99963-9821",
+                        somenteNumero = true,
                         onChange = {
-                            onChangeCampo(
-                                CamposResponsavel.TELEFONE_RESPONSAVEL,
-                                it
-                            )
+                            if(it.length <= 11) {
+                                onChangeCampo(
+                                    CamposResponsavel.TELEFONE_RESPONSAVEL,
+                                    it
+                                )
+                            }
                         },
                         modifier = Modifier.weight(1f)
                     )

@@ -36,6 +36,7 @@ import br.com.casa_guido.models.Pessoa
 import br.com.casa_guido.screens.cadastro.formularios.mae.CamposOutro
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
 import br.com.casa_guido.screens.cadastro.formularios.endereco.ModalEndereco
+import br.com.casa_guido.screens.cadastro.formularios.identificacaoPaciente.CamposIdentificacao
 import br.com.casa_guido.screens.components.BotaoPersonalizadoComIcones
 import br.com.casa_guido.screens.components.CheckBoxComp
 import br.com.casa_guido.screens.components.DataPicker
@@ -262,11 +263,14 @@ fun CadastroOutro(
                         valorPreenchido = outro.telefone,
                         visualTransformation = VisualTransformationCustom.PhoneVisualTransformation(),
                         placeholder = "(48) 99963-9821",
+                        somenteNumero = true,
                         onChange = {
-                            onChangeCampo(
-                                CamposOutro.TELEFONE_OUTRO,
-                                it
-                            )
+                            if(it.length <= 11) {
+                                onChangeCampo(
+                                    CamposOutro.TELEFONE_OUTRO,
+                                    it
+                                )
+                            }
                         },
                         modifier = Modifier.weight(1f)
                     )
