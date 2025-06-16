@@ -10,17 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9bc01d2-2390-4e59-bcae-4ed6d67e6a6d" name="Changes" comment="Ajustes solicitados&#10;&#10;Ajustado modulo de injecao de dependencia, para melhor compreensao&#10;&#10;Separado informacoes das models">
-      <change beforePath="$PROJECT_DIR$/../backend/dto/pacienteDTO/pacienteDTO.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/dto/pacienteDTO/pacienteDTO.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/prisma/migrations/20250610030759_primeira_migracao/migration.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/repository/pacienteRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/repository/pacienteRepository.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/repository/pessoaRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/repository/pessoaRepository.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/services/criarPacienteService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/services/criarPacienteService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/navigation/root/ViewModelAuthMananger.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/navigation/root/ViewModelAuthMananger.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/compFamiliar/CadastroComposicaoFamiliar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/compFamiliar/CadastroComposicaoFamiliar.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/components/TextFieldSimples.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/components/TextFieldSimples.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/login/Login.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/login/Login.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoDeSaudeFamiliar/CadastroHistoricoDeSaudeFamiliar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/historicoDeSaudeFamiliar/CadastroHistoricoDeSaudeFamiliar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/identificacaoPaciente/CadastroIdentificacaoPaciente.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/identificacaoPaciente/CadastroIdentificacaoPaciente.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/mae/CadastroMae.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/mae/CadastroMae.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/outro/CadastroOutro.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/outro/CadastroOutro.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/pai/CadastroPai.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/pai/CadastroPai.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/pacientes/componentes/PacienteItem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/pacientes/componentes/PacienteItem.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/CriarPdfService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/CriarPdfService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/util/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/util/Utils.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,38 +104,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Android App.App.executor&quot;: &quot;Run&quot;,
-    &quot;Android App.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.casa_guido [signingReport].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ChatTagsLlmMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ClientConfigCleanupMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyAccountHistoryMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyAccountsIdsRefresh&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyAssignOrphanedChatsToActiveAccount&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyConvertUrlToCodebaseName&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyHistoryLlmMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyMigrateChatHistory-v2&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyProjectSettingsMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.DeprecatedChatLlmMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ToggleCodyToolWindowAfterMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;3c9a0dd7&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Digo/Desktop/Projeto-Casa-Guido/casa_guido/app/src/main/java/br/com/casa_guido/screens/components&quot;,
-    &quot;memory.settings.postsync.last.time.stamp&quot;: &quot;1748033249392&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.sourcegraph.cody.config.ui.CodyConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.App.executor": "Run",
+    "Android App.Unnamed.executor": "Run",
+    "Android App.app.executor": "Run",
+    "Gradle.casa_guido [signingReport].executor": "Run",
+    "RunOnceActivity.ChatTagsLlmMigration": "true",
+    "RunOnceActivity.ClientConfigCleanupMigration": "true",
+    "RunOnceActivity.CodyAccountHistoryMigration": "true",
+    "RunOnceActivity.CodyAccountsIdsRefresh": "true",
+    "RunOnceActivity.CodyAssignOrphanedChatsToActiveAccount": "true",
+    "RunOnceActivity.CodyConvertUrlToCodebaseName": "true",
+    "RunOnceActivity.CodyHistoryLlmMigration": "true",
+    "RunOnceActivity.CodyMigrateChatHistory-v2": "true",
+    "RunOnceActivity.CodyProjectSettingsMigration": "true",
+    "RunOnceActivity.DeprecatedChatLlmMigration": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.ToggleCodyToolWindowAfterMigration": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "git-widget-placeholder": "d4636eae",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Digo/Desktop/Projeto-Casa-Guido/casa_guido/app/src/main/java/br/com/casa_guido/screens/components",
+    "memory.settings.postsync.last.time.stamp": "1748033249392",
+    "settings.editor.selected.configurable": "com.sourcegraph.cody.config.ui.CodyConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Digo\Desktop\Projeto-Casa-Guido\casa_guido\app\src\main\java\br\com\casa_guido\screens\components" />

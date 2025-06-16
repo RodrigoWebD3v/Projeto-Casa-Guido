@@ -51,4 +51,18 @@ object Utils {
         return diferencaAnos.toString()
     }
 
+    fun formatarTelefone(numero: String): String {
+        val somenteNumeros = numero.filter { it.isDigit() }
+
+        return if (somenteNumeros.length == 11) {
+            val ddd = somenteNumeros.substring(0, 2)
+            val parte1 = somenteNumeros.substring(2, 7)
+            val parte2 = somenteNumeros.substring(7, 11)
+            "($ddd) $parte1-$parte2"
+        } else {
+            numero
+        }
+    }
+
+
 }
