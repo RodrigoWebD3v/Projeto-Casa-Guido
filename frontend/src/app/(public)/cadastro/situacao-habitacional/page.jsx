@@ -5,6 +5,7 @@ import MultiOptionRadioGroup from "@/components/Button/MultiOptionRadioGroup";
 import SimpleTextField from "@/components/TextField/SimpleTextField";
 import Link from 'next/link';
 import { Home, LayoutDashboard, User, UserPlus, ChevronLeft, ChevronRight } from 'lucide-react';
+import RadioButtonWithLabel from "@/components/Button/RadioButtonWithLabel";
 
 export default function SituacaoHabitacional() {
   const [comoAdquiriu, setComoAdquiriu] = useState(null);
@@ -62,22 +63,44 @@ export default function SituacaoHabitacional() {
 
                 {/* Comp. Propriedade */}
                 <div className="bg-offwhite p-6 rounded-lg shadow">
-                  <MultiOptionRadioGroup
-                    labelTitulo="Comp. Propriedade"
-                    options={[["Sim", 0], ["Não", 1]]}
-                    selected={compPropriedade}
-                    onChange={setCompPropriedade}
-                  />
+                  <div className="w-full h-[60px] mb-2 rounded-[10px] bg-success flex items-center justify-center">
+                    <span className="text-background text-[16px] font-semibold text-center">
+                      Comp. Propriedade
+                    </span>
+                  </div>
+                  <div className="flex justify-center gap-4">
+                    <RadioButtonWithLabel
+                      label="Sim"
+                      selected={compPropriedade === 0}
+                      onClick={() => setCompPropriedade(0)}
+                    />
+                    <RadioButtonWithLabel
+                      label="Não"
+                      selected={compPropriedade === 1}
+                      onClick={() => setCompPropriedade(1)}
+                    />
+                  </div>
                 </div>
 
                 {/* Área */}
                 <div className="bg-offwhite p-6 rounded-lg shadow">
-                  <MultiOptionRadioGroup
-                    labelTitulo="Área"
-                    options={[["Pública", 0], ["Particular", 1]]}
-                    selected={area}
-                    onChange={setArea}
-                  />
+                  <div className="w-full h-[60px] mb-2 rounded-[10px] bg-success flex items-center justify-center">
+                    <span className="text-background text-[16px] font-semibold text-center">
+                      Área
+                    </span>
+                  </div>
+                  <div className="flex justify-center gap-4">
+                    <RadioButtonWithLabel
+                      label="Pública"
+                      selected={area === 0}
+                      onClick={() => setArea(0)}
+                    />
+                    <RadioButtonWithLabel
+                      label="Particular"
+                      selected={area === 1}
+                      onClick={() => setArea(1)}
+                    />
+                  </div>
                 </div>
 
                 {/* Número de Cômodos */}

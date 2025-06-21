@@ -95,7 +95,7 @@ export default function ComposicaoFamiliar() {
                     </div>
                   </div>
                   <div className="flex flex-col md:flex-row gap-0 mt-0">
-                    <div className="flex-1 flex items-center gap-1">
+                    <div className="flex items-center gap-1">
                       <span className="min-w-[90px] h-[35px] rounded-[10px] bg-success flex items-center justify-center px-2 text-background font-semibold">Estuda</span>
                       <RadioButtonWithLabel label="Sim" selected={estuda === 0} onClick={() => setEstuda(0)} />
                       <RadioButtonWithLabel label="Não" selected={estuda === 1} onClick={() => setEstuda(1)} />
@@ -109,7 +109,7 @@ export default function ComposicaoFamiliar() {
                     </div>
                   </div>
                   <div className="flex flex-col md:flex-row gap-0 mt-0">
-                    <div className="flex-1 flex items-center gap-1">
+                    <div className="flex items-center gap-1">
                       <span className="min-w-[90px] h-[35px] rounded-[10px] bg-success flex items-center justify-center px-2 text-background font-semibold">Trabalha</span>
                       <RadioButtonWithLabel label="Sim" selected={trabalha === 0} onClick={() => setTrabalha(0)} />
                       <RadioButtonWithLabel label="Não" selected={trabalha === 1} onClick={() => setTrabalha(1)} />
