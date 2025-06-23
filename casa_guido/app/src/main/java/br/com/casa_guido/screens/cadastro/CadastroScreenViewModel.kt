@@ -26,9 +26,11 @@ import br.com.casa_guido.screens.cadastro.formularios.pai.CamposResponsavel
 import br.com.casa_guido.screens.cadastro.formularios.situacaoHabitacional.CamposSituacaoHabitacional
 import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.CamposSocioEconomico
 import br.com.casa_guido.service.CriarPacienteService
+import br.com.casa_guido.service.ArquivoUploadService
 import br.com.casa_guido.service.PacienteService
 import br.com.casa_guido.service.ViaCepService
 import br.com.casa_guido.util.Utils
+import java.io.File
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -38,6 +40,7 @@ class CadastroScreenViewModel(
     private val viaCepService: ViaCepService,
     private val pacienteService: PacienteService,
     private val criarPacienteService: CriarPacienteService,
+    private val arquivoUploadService: ArquivoUploadService,
 ) : ViewModel() {
 
     private val _status = MutableStateFlow<Status>(Status.SemInteracao)
@@ -66,6 +69,11 @@ class CadastroScreenViewModel(
         viewModelScope.launch {
             if (_paciente.value.pessoa.nome.isNotEmpty()) {
                 criarPacienteService.criarPaciente(_paciente.value)
+                _paciente.value.arquivos.forEach { arquivo ->
+                    arquivo.uri?.let { path ->
+                        arquivoUploadService.uploadArquivo(File(path), _paciente.value.id)
+                    }
+                }
                 _status.value = Status.Sucesso("Paciente criado com sucesso")
                 onPopBack()
             } else {
