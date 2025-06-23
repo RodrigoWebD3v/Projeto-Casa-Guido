@@ -188,7 +188,7 @@ export default function Dashboard() {
             ))
           }
           {agendamentos.filter(item => item.data === new Date().toISOString().split('T')[0]).length === 0 && (
-            <p className="text-center text-greendark mt-4">Nenhum agendamento para hoje</p>
+            <p className="text-center text-main mt-4">Nenhum agendamento para hoje.</p>
           )}
         </div>
       </main>
