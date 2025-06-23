@@ -25,7 +25,7 @@ export default function SimpleTextField({
       <label className="block text-[14px] font-medium text-greendark mb-1">
         {nomeCampo}
       </label>
-      <div className="w-full border border-paragraph rounded-[8px] min-h-[45px] max-h-[300px] px-3 py-2">
+      <div className="w-full border border-[#b7d7d2] rounded-[8px] min-h-[45px] max-h-[300px] px-3 py-2">
         <input
           type={somenteNumero ? 'tel' : 'text'}
           value={valorPreenchido}
