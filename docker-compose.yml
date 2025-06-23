@@ -1,4 +1,4 @@
-version: '3.8' # Especifica a versão do arquivo docker-compose.
+# version: '3.8' # Especifica a versão do arquivo docker-compose.
 
 services: # Define os serviços que serão executados.
   postgres: # Define o serviço PostgreSQL.

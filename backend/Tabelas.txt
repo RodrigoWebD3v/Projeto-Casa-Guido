@@ -29,7 +29,7 @@ CREATE TABLE responsavel(
 	dataNascResponsavel DATE NOT NULL,
 	cartaoSusResponsavel VARCHAR(30) NOT NULL,
 	identidadeResponsavel VARCHAR(20) NOT NULL,
-    cpfResponsavel VARCHAR(11) NOT NULL UNIQUE,
+    	cpfResponsavel VARCHAR(11) NOT NULL UNIQUE,
 	escResponsavel VARCHAR(1) NOT NULL  ,
 	naturResponsavel VARCHAR(15) NOT NULL,
 	telefoneResponsavel VARCHAR(60) NOT NULL,
