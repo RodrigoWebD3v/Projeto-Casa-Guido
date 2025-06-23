@@ -60,7 +60,7 @@ export default function ComposicaoFamiliar() {
         </nav>
       </aside>
 
-      <div className="bg-background min-h-screen flex-1">
+      <div className="min-h-screen flex-1">
         <main className="p-6 mt-4">
           <div className="max-w-10xl mx-auto">
             <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">Cadastro <UserPlus size={18} /></h1>
