@@ -22,6 +22,7 @@ class PacienteService(
     private val composicaoFamiliarService: ComposicaoFamiliarService,
     private val historicoSaudeService: HistoricoSaudeService,
     private val situacaoHabitacionalService: SituacaoHabitacionalService,
+    private val arquivo: ArquivoService
 ) {
 
     suspend fun getPacientes(): List<Paciente> {
@@ -133,7 +134,8 @@ class PacienteService(
                 municipio = this.crasMunicipio ?: "",
                 bairro = this.crasBairro ?: ""
             ),
-            situacaoHabitacional = situacaoHabitacionalService.buscaSituacaoHabitacionalPorPaciente(this.id)?: SituacaoHabitacional()
+            situacaoHabitacional = situacaoHabitacionalService.buscaSituacaoHabitacionalPorPaciente(this.id)?: SituacaoHabitacional(),
+            arquivos = arquivo.getArquivosPorPaciente(this.id)?: emptyList()
         )
     }
 }

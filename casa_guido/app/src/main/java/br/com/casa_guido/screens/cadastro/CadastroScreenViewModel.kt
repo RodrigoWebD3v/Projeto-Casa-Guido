@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.casa_guido.configuration.Status
+import br.com.casa_guido.models.Arquivo
 import br.com.casa_guido.models.Cirurgia
 import br.com.casa_guido.models.ComposicaoFamiliar
 import br.com.casa_guido.models.Paciente
@@ -12,6 +13,7 @@ import br.com.casa_guido.models.Quimio
 import br.com.casa_guido.models.Radio
 import br.com.casa_guido.screens.cadastro.formularios.cirurgia.CamposCirurgia
 import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.CamposCompFamiliar
+import br.com.casa_guido.screens.cadastro.formularios.documentos.CamposDocumentos
 import br.com.casa_guido.screens.cadastro.formularios.mae.CamposConjuge
 import br.com.casa_guido.screens.cadastro.formularios.mae.CamposOutro
 import br.com.casa_guido.screens.cadastro.formularios.endereco.CamposEndereco
@@ -62,11 +64,11 @@ class CadastroScreenViewModel(
 
     fun save(onPopBack: () -> Unit) {
         viewModelScope.launch {
-            if(_paciente.value.pessoa.nome.isNotEmpty()){
+            if (_paciente.value.pessoa.nome.isNotEmpty()) {
                 criarPacienteService.criarPaciente(_paciente.value)
                 _status.value = Status.Sucesso("Paciente criado com sucesso")
                 onPopBack()
-            }else{
+            } else {
                 _status.value = Status.Alerta("Nome do paciente não pode ser vazio")
             }
         }
@@ -1171,6 +1173,7 @@ class CadastroScreenViewModel(
                     )
                 )
             }
+
             CamposHistoricoSaude.BAIRRO_CRAS -> {
                 _paciente.value = _paciente.value.copy(
                     cras = _paciente.value.cras.copy(
@@ -1178,6 +1181,7 @@ class CadastroScreenViewModel(
                     )
                 )
             }
+
             CamposHistoricoSaude.MUNICIPIO_UBS -> {
                 _paciente.value = _paciente.value.copy(
                     ubs = _paciente.value.ubs.copy(
@@ -1185,6 +1189,7 @@ class CadastroScreenViewModel(
                     )
                 )
             }
+
             CamposHistoricoSaude.BAIRRO_UBS -> {
                 _paciente.value = _paciente.value.copy(
                     ubs = _paciente.value.ubs.copy(
@@ -1300,6 +1305,30 @@ class CadastroScreenViewModel(
                     observacoes = _paciente.value.observacoes
                         .filterIndexed { index, _ -> index != valor.toInt() }
                         .toTypedArray()
+                )
+            }
+        }
+    }
+
+    fun onChangeArquivo(campo: CamposDocumentos, valor: Arquivo) {
+        when (campo) {
+            CamposDocumentos.ADICIONA_ARQUIVO -> {
+                _paciente.value = _paciente.value.copy(
+                    arquivos = _paciente.value.arquivos + Arquivo(
+                        nome = valor.nome,
+                        pacienteId = _paciente.value.id,
+                        idServidor = valor.idServidor,
+                        conteudoArquivo = valor.conteudoArquivo,
+                        uri = valor.uri
+                    )
+                )
+            }
+
+            CamposDocumentos.REMOVE_ARQUIVO -> {
+                _paciente.value = _paciente.value.copy(
+                    arquivos = _paciente.value.arquivos.filter { arquivo ->
+                        arquivo.uri != valor.uri
+                    }
                 )
             }
         }

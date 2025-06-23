@@ -67,14 +67,18 @@ import org.koin.androidx.compose.koinViewModel
 import java.time.LocalDate
 
 import androidx.compose.material.icons.filled.Delete
+import br.com.casa_guido.models.Arquivo
+import br.com.casa_guido.screens.cadastro.formularios.observacao.CamposObservacao
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AdicionarDocumentos(
-    modifier: Modifier = Modifier, numeroTela: Int
+    modifier: Modifier = Modifier,
+    numeroTela: Int,
+    documentos: MutableList<Arquivo>,
+    onChangeCampo: (CamposDocumentos, Arquivo) -> Unit,
 ) {
     val context = LocalContext.current
-    val arquivosSelecionados = remember { mutableStateListOf<String>() }
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocument(), onResult = { uri ->
@@ -89,7 +93,14 @@ fun AdicionarDocumentos(
                     cursor.close()
                 }
 
-                arquivosSelecionados.add(fileName)
+                onChangeCampo(
+                    CamposDocumentos.ADICIONA_ARQUIVO, Arquivo(
+                        nome = fileName,
+                        uri = uri.toString(),
+                        conteudoArquivo = "",
+                        pacienteId = "",
+                    )
+                )
             }
         })
 
@@ -122,7 +133,7 @@ fun AdicionarDocumentos(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        if (arquivosSelecionados.isNotEmpty()) {
+        if (documentos.isNotEmpty()) {
             Text(
                 text = "Documentos Selecionados:",
                 fontWeight = FontWeight.Bold,
@@ -130,7 +141,7 @@ fun AdicionarDocumentos(
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
-            arquivosSelecionados.forEachIndexed { index, nomeArquivo ->
+            documentos.forEachIndexed { index, arquivo ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -142,7 +153,7 @@ fun AdicionarDocumentos(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = nomeArquivo,
+                        text = arquivo.nome ?: "",
                         fontSize = 13.sp,
                         color = Color.Black,
                         modifier = Modifier.weight(1f)
@@ -154,7 +165,7 @@ fun AdicionarDocumentos(
                         modifier = Modifier
                             .size(24.dp)
                             .clickable {
-                                arquivosSelecionados.removeAt(index)
+                                documentos.removeAt(index)
                             })
                 }
             }

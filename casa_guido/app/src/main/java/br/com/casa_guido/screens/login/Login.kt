@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -223,9 +224,10 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
                     },
                     valorPreenchido = email,
                     nomeCampo = "Email",
+                    labelColor = Main,
                     textColor = Main
                 )
-
+                Spacer(Modifier.size(10.dp))
                 TextFieldSimples(
                     placeholder = "password",
                     onChange = {
@@ -234,6 +236,7 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
                     visualTransformation = PasswordVisualTransformation(),
                     valorPreenchido = password,
                     nomeCampo = "Senha",
+                    labelColor = Main,
                     textColor = Main
                 )
 
@@ -246,7 +249,7 @@ fun Login(modifier: Modifier = Modifier, onLoginSuccess: () -> Unit, resultado: 
                     },
                     enabled = !carregando,
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .fillMaxWidth(.9f)
                         .padding(top = 24.dp)
                         .height(50.dp),
                     shape = RoundedCornerShape(12.dp),

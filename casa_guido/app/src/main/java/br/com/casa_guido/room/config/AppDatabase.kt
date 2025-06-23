@@ -4,6 +4,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import br.com.casa_guido.room.Converters
+import br.com.casa_guido.room.dao.ArquivoDao
 import br.com.casa_guido.room.dao.CirurgiaDao
 import br.com.casa_guido.room.dao.ComposicaoFamiliarDao
 import br.com.casa_guido.room.dao.EnderecoDao
@@ -15,6 +16,7 @@ import br.com.casa_guido.room.dao.QuimioterapiaDao
 import br.com.casa_guido.room.dao.RadioTerapiaDao
 import br.com.casa_guido.room.dao.SituacaoHabitacionalDao
 import br.com.casa_guido.room.dao.TratamentoDao
+import br.com.casa_guido.room.entidades.Arquivo
 import br.com.casa_guido.room.entidades.Cirurgia
 import br.com.casa_guido.room.entidades.ComposicaoFamiliar
 import br.com.casa_guido.room.entidades.Endereco
@@ -42,8 +44,9 @@ import br.com.casa_guido.room.entidades.Tratamento
         RadioTerapia::class,
         ProfissionalResponsavel::class,
         Entrevista::class,
+        Arquivo::class, // Uncomment if Arquivo entity is defined
     ],
-    version = 23,
+    version = 24,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -59,6 +62,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun situacaoHabitacionalDao(): SituacaoHabitacionalDao
     abstract fun composicaoFamiliarDao(): ComposicaoFamiliarDao
     abstract fun profissionalResponsavelDao(): ProfissionalResponsavelDao
+    abstract fun arquivoDao(): ArquivoDao
 
     companion object {
         @Volatile private var INSTANCE: AppDatabase? = null
