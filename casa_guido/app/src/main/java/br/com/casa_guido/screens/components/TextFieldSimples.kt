@@ -33,6 +33,7 @@ import br.com.casa_guido.ui.theme.Paragraph
 @Composable
 fun TextFieldSimples(
     modifier: Modifier = Modifier,
+    labelColor: Color = GreenBlack,
     textColor: Color = GreenBlack,
     nomeCampo: String,
     valorPreenchido: String,
@@ -55,7 +56,7 @@ fun TextFieldSimples(
             nomeCampo,
             style = TextStyle(
                 fontSize = 14.sp,
-                color = GreenBlack,
+                color = labelColor,
                 fontWeight = FontWeight.Medium,
                 textAlign = TextAlign.Start
             ), maxLines = 1, overflow = TextOverflow.Ellipsis
@@ -93,7 +94,7 @@ fun TextFieldSimples(
                     if (valorPreenchido.isEmpty()) {
                         Text(
                             text = "",
-                            color = BackgroundColor,
+                            color = textColor,
                             fontSize = 16.sp
                         )
                     }

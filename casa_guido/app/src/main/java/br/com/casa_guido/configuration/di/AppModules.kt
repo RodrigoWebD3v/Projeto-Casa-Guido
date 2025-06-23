@@ -7,6 +7,7 @@ import androidx.room.Room
 import br.com.casa_guido.configuration.ApiViaCepConfig
 import br.com.casa_guido.configuration.ClienteApi
 import br.com.casa_guido.navigation.root.ViewModelAuthMananger
+import br.com.casa_guido.repository.ArquivoRepository
 import br.com.casa_guido.repository.AuthRepository
 import br.com.casa_guido.repository.CirurgiaRepository
 import br.com.casa_guido.repository.ComposicaoFamiliarRepository
@@ -19,6 +20,7 @@ import br.com.casa_guido.repository.RadioRepository
 import br.com.casa_guido.repository.SincronizarPacientesRepository
 import br.com.casa_guido.repository.SituacaoHabitacionalRepository
 import br.com.casa_guido.repository.ViaCepRepository
+import br.com.casa_guido.room.dao.ArquivoDao
 import br.com.casa_guido.screens.cadastro.CadastroScreenViewModel
 import br.com.casa_guido.screens.cadastro.formularios.cirurgia.CirurgiaViewModel
 import br.com.casa_guido.screens.cadastro.formularios.compFamiliar.ComposicaoFamiliarViewModel
@@ -34,6 +36,7 @@ import br.com.casa_guido.screens.home.HomeViewModel
 import br.com.casa_guido.screens.login.LoginViewModel
 import br.com.casa_guido.screens.main.MainViewModel
 import br.com.casa_guido.screens.pacientes.PacientesViewModel
+import br.com.casa_guido.service.ArquivoService
 import br.com.casa_guido.service.AuthService
 import br.com.casa_guido.service.CirurgiaService
 import br.com.casa_guido.service.CompartilharArquivoService
@@ -83,6 +86,8 @@ val coreModule = module {
     single { get<AppDatabase>().situacaoHabitacionalDao() }
     single { get<AppDatabase>().composicaoFamiliarDao() }
     single { get<AppDatabase>().profissionalResponsavelDao() }
+    single { get<AppDatabase>().arquivoDao() }
+
 }
 
 val pessoaModule = module {
@@ -106,6 +111,8 @@ val pacienteModule = module {
     singleOf(::PacienteRepository)
     singleOf(::SituacaoHabitacionalService)
     singleOf(::SituacaoHabitacionalRepository)
+    singleOf(::ArquivoService)
+    singleOf(::ArquivoRepository)
 }
 
 val tratamentosModule = module {

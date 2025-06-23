@@ -301,11 +301,14 @@ fun CadastroIdentificacaoPaciente(
                 valorPreenchido = paciente.pessoa.telefone,
                 visualTransformation = VisualTransformationCustom.PhoneVisualTransformation(),
                 placeholder = "(48) 99963-9821",
+                somenteNumero = true,
                 onChange = {
-                    onChangeCampo(
-                        CamposIdentificacao.TELEFONE,
-                        it
-                    )
+                    if(it.length <= 11){
+                        onChangeCampo(
+                            CamposIdentificacao.TELEFONE,
+                            it
+                        )
+                    }
                 },
                 modifier = Modifier.weight(1f)
             )

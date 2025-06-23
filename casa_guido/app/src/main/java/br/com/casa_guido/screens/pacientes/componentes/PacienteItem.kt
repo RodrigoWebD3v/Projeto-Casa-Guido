@@ -99,11 +99,11 @@ fun PacienteItem(paciente: Paciente, onUpId: (String) -> Unit) {
                     )
 
                     Text(
-                        paciente.pessoa.telefone,
+                        Utils.formatarTelefone(paciente.pessoa.telefone),
                         style = TextStyle(),
                         fontSize = 12.sp,
                         color = BackgroundColor,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium,
                     )
                 }
             }

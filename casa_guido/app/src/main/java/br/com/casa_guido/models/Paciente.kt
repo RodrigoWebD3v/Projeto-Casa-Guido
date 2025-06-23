@@ -38,4 +38,5 @@ data class Paciente(
     val composicaoFamiliar: List<ComposicaoFamiliar> = emptyList(),
     val historicoSaude: HistoricoSaude = HistoricoSaude(),
     val situacaoHabitacional: SituacaoHabitacional = SituacaoHabitacional(),
+    val arquivos: List<Arquivo> = emptyList()
 )

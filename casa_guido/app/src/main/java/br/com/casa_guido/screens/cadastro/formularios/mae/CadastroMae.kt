@@ -274,11 +274,14 @@ fun CadastroConjuge(
                         valorPreenchido = conjuge.telefone,
                         visualTransformation = VisualTransformationCustom.PhoneVisualTransformation(),
                         placeholder = "(48) 99963-9821",
+                        somenteNumero = true,
                         onChange = {
-                            onChangeCampo(
-                                CamposConjuge.TELEFONE_CONJUGE,
-                                it
-                            )
+                            if(it.length <= 11) {
+                                onChangeCampo(
+                                    CamposConjuge.TELEFONE_CONJUGE,
+                                    it
+                                )
+                            }
                         },
                         modifier = Modifier.weight(1f)
                     )

@@ -12,7 +12,8 @@ class CriarPacienteService(
     private val radioService: RadioService,
     private val composicaoFamiliarService: ComposicaoFamiliarService,
     private val historicoSaudeService: HistoricoSaudeService,
-    private val situacaoHabitacionalService: SituacaoHabitacionalService
+    private val situacaoHabitacionalService: SituacaoHabitacionalService,
+    private val arquivoService: ArquivoService
 ) {
 
     suspend fun criarPaciente(paciente: Paciente) {
@@ -93,6 +94,7 @@ class CriarPacienteService(
             )
         }
 
+
         historicoSaudeService.createHistoricoSaude(
             historicoSaude = paciente.historicoSaude,
             pacienteId = paciente.id
@@ -102,5 +104,13 @@ class CriarPacienteService(
             situacaoHabitacional = paciente.situacaoHabitacional,
             pacienteId = paciente.id
         )
+
+        paciente.arquivos.forEach{
+            arquivoService.createArquivo(
+                entidade = it,
+                pacienteId = paciente.id
+            )
+        }
+
     }
 }
