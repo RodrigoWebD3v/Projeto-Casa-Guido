@@ -1,52 +1,74 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { Home, LayoutDashboard, User, ChevronLeft, ChevronRight, Save, X } from 'lucide-react'
+import { useState, useEffect } from 'react';
+import MultiOptionRadioGroup from '@/components/Button/MultiOptionRadioGroup';
+import DatePickerInput from '@/components/DatePicker/DatePicker';
+import { ChevronLeft, ChevronRight, Save, Home, LayoutDashboard, User } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Quimio() {
-  const [quimioSelecionado, setQuimioSelecionado] = useState('')
-  const [dataInicio, setDataInicio] = useState('')
-  const [dataFim, setDataFim] = useState('')
-  const [quimios, setQuimios] = useState([])
-  const [aviso, setAviso] = useState(false)
+  const [quimioSelecionado, setQuimioSelecionado] = useState('');
+  const [dataInicio, setDataInicio] = useState(null);
+  const [dataFim, setDataFim] = useState(null);
+  const [quimios, setQuimios] = useState([]);
+  const [aviso, setAviso] = useState(false);
+
+  useEffect(() => {
+    console.log('quimios:', quimios);
+  }, [quimios]);
 
   const formatarData = (data) => {
-    if (!data) return ''
-    const [ano, mes, dia] = data.split('-')
-    return `${dia}/${mes}/${ano}`
-  }
+    if (!data) return '';
+    const dt = data instanceof Date ? data : new Date(data);
+    if (isNaN(dt)) return '';
+    const ano = dt.getFullYear();
+    const mes = (dt.getMonth() + 1).toString().padStart(2, '0');
+    const dia = dt.getDate().toString().padStart(2, '0');
+    return `${ano}/${mes}/${dia}`;
+  };
 
   const adicionarQuimio = () => {
-    if (!quimioSelecionado || (quimioSelecionado === 'Sim' && !dataInicio)) {
-      return setAviso(true)
-    }
+    if (quimioSelecionado === 'Sim') {
+      if (!dataInicio) {
+        setAviso(true);
+        return;
+      }
+      if (dataFim && dataFim < dataInicio) {
+        alert('Data de fim não pode ser anterior à data de início.');
+        return;
+      }
 
-    const novaQuimio = {
-      dataInicio: quimioSelecionado === 'Sim' ? dataInicio : null,
-      dataFim: quimioSelecionado === 'Sim' ? dataFim : null,
-    }
+      const novaQuimio = {
+        dataInicio,
+        dataFim,
+        fezQuimio: true,
+      };
 
-    setQuimios([...quimios, novaQuimio])
-    setQuimioSelecionado('')
-    setDataInicio('')
-    setDataFim('')
-    setAviso(false)
-  }
+      setQuimios([...quimios, novaQuimio]);
+      setQuimioSelecionado('');
+      setDataInicio(null);
+      setDataFim(null);
+      setAviso(false);
+    } else if (quimioSelecionado === 'Não') {
+      setAviso(false);
+      setQuimioSelecionado('');
+      setDataInicio(null);
+      setDataFim(null);
+    } else {
+      setAviso(true);
+    }
+  };
 
   const excluirQuimio = (index) => {
-    const confirmar = window.confirm('Tem certeza que deseja excluir esta quimio?')
-    if (!confirmar) return
-    const novaLista = quimios.filter((_, idx) => idx !== index)
-    setQuimios(novaLista)
-  }
+    const confirmar = window.confirm('Tem certeza que deseja excluir esta quimio?');
+    if (!confirmar) return;
+    setQuimios(quimios.filter((_, idx) => idx !== index));
+  };
 
-  const fecharAviso = () => setAviso(false)
+  const fecharAviso = () => setAviso(false);
 
   return (
     <div className="flex min-h-screen text-main bg-background">
-
-      {/* Menu lateral */}
       <aside
         className="w-44 bg-darkgray p-6"
         style={{ boxShadow: '4px 0 8px rgba(0, 0, 0, 0.2)' }}
@@ -70,85 +92,69 @@ export default function Quimio() {
         </nav>
       </aside>
 
-      {/* Conteúdo principal */}
       <main className="flex-1 p-6 mt-4">
         <div className="max-w-10xl mx-auto">
-          <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">Cadastro de Quimioterapia</h1>
+          <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">
+            Cadastro de Quimioterapia
+          </h1>
 
           <div className="bg-offwhite p-6 rounded-lg shadow">
             <h2 className="text-xl text-background font-semibold mb-4">4. Quimioterapia</h2>
             <h3 className="text-background mb-8">Informações sobre sessões de quimioterapia:</h3>
 
-            {/* Seletor de quimio */}
-            <div className="flex flex-col md:flex-row items-center gap-6 mb-4">
-              <span className="bg-green-100 text-background px-3 py-1 rounded font-semibold">
-                Quimio
-              </span>
-
-              <div className="flex gap-4">
-                <label className="flex items-center gap-2 text-background">
-                  <input
-                    type="radio"
-                    value="Sim"
-                    checked={quimioSelecionado === 'Sim'}
-                    onChange={() => setQuimioSelecionado('Sim')}
-                  />
-                  Sim
-                </label>
-                <label className="flex items-center gap-2 text-background">
-                  <input
-                    type="radio"
-                    value="Não"
-                    checked={quimioSelecionado === 'Não'}
-                    onChange={() => setQuimioSelecionado('Não')}
-                  />
-                  Não
-                </label>
+            <div className="flex flex-col md:flex-row md:items-start md:gap-6 mb-4">
+              <div className="flex-1">
+                <MultiOptionRadioGroup
+                  labelTitulo="Quimio"
+                  selected={quimioSelecionado}
+                  onChange={setQuimioSelecionado}
+                  options={[['Sim', 'Sim'], ['Não', 'Não']]}
+                  inline={true}
+                  className="gap-4"
+                />
               </div>
-            </div>
 
-            {quimioSelecionado === 'Sim' && (
-              <div className="text-background grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className="block mb-1 font-medium">Data de início *</label>
-                  <input
-                    type="date"
-                    className="w-full border rounded px-3 py-2"
-                    value={dataInicio}
-                    onChange={(e) => setDataInicio(e.target.value)}
-                  />
-                </div>
-                <div>
-                  <label className="block mb-1 font-medium">Data de fim (opcional)</label>
-                  <input
-                    type="date"
-                    className="w-full border rounded px-3 py-2"
-                    value={dataFim}
-                    onChange={(e) => setDataFim(e.target.value)}
-                  />
+              <div className="flex-1 mt-4 md:mt-0">
+                {quimioSelecionado === 'Sim' && (
+                  <div className="bg-offwhite p-6 rounded-lg shadow text-background grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <label className="block mb-1 font-medium">Data de início *</label>
+                      <DatePickerInput value={dataInicio} onChange={setDataInicio} />
+                    </div>
+                    <div>
+                      <label className="block mb-1 font-medium">Data de fim (opcional)</label>
+                      <DatePickerInput
+                        value={dataFim}
+                        onChange={(date) => {
+                          if (date && dataInicio && date < dataInicio) {
+                            alert('A data de fim não pode ser anterior à data de início.');
+                            return;
+                          }
+                          setDataFim(date);
+                        }}
+                        minDate={dataInicio}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex justify-end mr-4">
+                  <button
+                    onClick={adicionarQuimio}
+                    className="bg-success text-background font-semibold py-2 px-6 rounded hover:bg-green transition"
+                  >
+                    Adicionar
+                  </button>
                 </div>
               </div>
-            )}
-
-            <div className="flex justify-center">
-              <button
-                onClick={adicionarQuimio}
-                className="bg-success text-background font-semibold py-2 px-6 rounded hover:bg-green transition"
-              >
-                Adicionar
-              </button>
             </div>
 
             {aviso && (
               <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-3 rounded mt-4 flex justify-between items-start">
                 <span>Aviso: Preencha os campos obrigatórios antes de adicionar.</span>
-                <button onClick={fecharAviso} className="ml-4 hover:text-yellow-900">
-                  <X size={16} />
-                </button>
               </div>
             )}
 
-            {/* Lista de quimios */}
             <div className="mt-6">
               <h2 className="text-xl text-darkgray font-semibold mb-4">Quimios Cadastradas</h2>
 
@@ -163,22 +169,21 @@ export default function Quimio() {
                     >
                       <div>
                         <p className="font-bold">Quimio {idx + 1}</p>
-                        {item.dataInicio ? (
-                          <>
-                            <p className="text-sm text-background">Início: {formatarData(item.dataInicio)}</p>
-                            <p className="text-sm text-background">
-                              {item.dataFim ? `Fim: ${formatarData(item.dataFim)}` : (
-                                <span className="text-green-700 font-semibold">Em andamento</span>
-                              )}
-                            </p>
-                          </>
-                        ) : (
-                          <p className="text-background font-semibold">Não</p>
-                        )}
+
+                        <p className="text-md text-background">
+                          Início: {formatarData(item.dataInicio)}
+                        </p>
+                        <p className="text-md text-background">
+                          {item.dataFim ? (
+                            `Fim: ${formatarData(item.dataFim)}`
+                          ) : (
+                            <span className="text-green-700 font-semibold">Em andamento</span>
+                          )}
+                        </p>
                       </div>
                       <button
                         onClick={() => excluirQuimio(idx)}
-                        className="text-red-600 hover:text-red-800"
+                        className="text-red-500 hover:text-red-700 transition"
                         title="Remover"
                       >
                         <X size={20} />
@@ -189,7 +194,6 @@ export default function Quimio() {
               )}
             </div>
 
-            {/* Botões de navegação - Dentro da Box */}
             <div className="flex items-center mt-8 pt-6 border-t border-graymedium">
               <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
                 <ChevronLeft size={18} /> Anterior
@@ -209,5 +213,5 @@ export default function Quimio() {
         </div>
       </main>
     </div>
-  )
+  );
 }

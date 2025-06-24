@@ -1,14 +1,14 @@
 'use client';
 
 
-import MultiOptionRadioGroup from '../components/Button/MultiOptionRadioGroup';
-import MultiSelectableRadioGroup from '../components/Button/MultiSelectableRadioGroup';
-import RadioButtonWithFixedLabel from '../components/Button/RadioButtonWithFixedLabel';
-import RadioButtonWithLabel from '../components/Button/RadioButtonWithLabel';
-import DatePickerInput from '../components/DatePicker/DatePicker';
-import DropDownMenu from '../components/DropDownMenu/DropDrownMenu';
-import InputTextField from '../components/TextField/InputTextField';
-import SimpleTextField from '../components/TextField/SimpleTextField';
+import MultiOptionRadioGroup from '@/components/Button/MultiOptionRadioGroup';
+import MultiSelectableRadioGroup from '@/components/Button/MultiSelectableRadioGroup';
+import RadioButtonWithFixedLabel from '@/components/Button/RadioButtonWithFixedLabel';
+import RadioButtonWithLabel from '@/components/Button/RadioButtonWithLabel';
+import DatePickerInput from '@/components/DatePicker/DatePicker';
+import DropDownMenu from '@/components/DropDownMenu/DropDrownMenu';
+import InputTextField from '@/components/TextField/InputTextField';
+import SimpleTextField from '@/components/TextField/SimpleTextField';
 import { useState } from 'react';
 
 
@@ -39,10 +39,10 @@ export default function ComponentGallery() {
   const multiselectOptions = ['Maçã', 'Banana', 'Pêra', 'Abacaxi'];
 
   const items = [
-  // {
-  //     title: 'SearchBox',
-  //     component: <SearchBox value={search} onValueChange={setSearch} />,
-  //   },
+    // {
+    //     title: 'SearchBox',
+    //     component: <SearchBox value={search} onValueChange={setSearch} />,
+    //   },
     {
       title: 'DatePickerInput',
       component: <DatePickerInput title="Data de Nascimento" value={date} onChange={setDate} />,

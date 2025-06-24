@@ -1,51 +1,79 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { Home, LayoutDashboard, User, ChevronLeft, ChevronRight, Save, X } from 'lucide-react'
+import { useState, useEffect } from 'react';
+import DatePickerInput from '@/components/DatePicker/DatePicker';
+import MultiOptionRadioGroup from '@/components/Button/MultiOptionRadioGroup';
+import {
+  ChevronLeft, ChevronRight, Save, Home, LayoutDashboard, User,
+} from 'lucide-react';
+import Link from 'next/link';
 
 export default function Radioterapia() {
-  const [radioterapiaSelecionada, setRadioterapiaSelecionada] = useState('')
-  const [dataInicio, setDataInicio] = useState('')
-  const [dataFim, setDataFim] = useState('')
-  const [radioterapias, setRadioterapias] = useState([])
-  const [aviso, setAviso] = useState(false)
+  const [radioterapiaSelecionada, setRadioterapiaSelecionada] = useState('');
+  const [dataInicio, setDataInicio] = useState(null);
+  const [dataFim, setDataFim] = useState(null);
+  const [radioterapias, setRadioterapias] = useState([]);
+  const [aviso, setAviso] = useState(false);
+
+  useEffect(() => {
+    console.log('radioterapias:', radioterapias);
+  }, [radioterapias]);
 
   const formatarData = (data) => {
-    if (!data) return ''
-    const [ano, mes, dia] = data.split('-')
-    return `${dia}/${mes}/${ano}`
-  }
+    if (!data) return '';
+    const dt = data instanceof Date ? data : new Date(data);
+    if (isNaN(dt)) return '';
+    const dia = dt.getDate().toString().padStart(2, '0');
+    const mes = (dt.getMonth() + 1).toString().padStart(2, '0');
+    const ano = dt.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+  };
 
   const adicionarRadioterapia = () => {
-    if (!radioterapiaSelecionada || (radioterapiaSelecionada === 'Sim' && !dataInicio)) {
-      return setAviso(true)
-    }
+    if (radioterapiaSelecionada === 'Sim') {
+      if (!dataInicio) {
+        setAviso(true);
+        return;
+      }
+      if (dataFim && dataFim < dataInicio) {
+        alert('A data de fim não pode ser anterior à data de início.');
+        return;
+      }
 
-    const novaRadioterapia = {
-      dataInicio: radioterapiaSelecionada === 'Sim' ? dataInicio : null,
-      dataFim: radioterapiaSelecionada === 'Sim' ? dataFim : null,
-    }
+      const novaRadioterapia = {
+        dataInicio,
+        dataFim,
+        fezRadioterapia: true,
+      };
 
-    setRadioterapias([...radioterapias, novaRadioterapia])
-    setRadioterapiaSelecionada('')
-    setDataInicio('')
-    setDataFim('')
-    setAviso(false)
-  }
+      setRadioterapias([...radioterapias, novaRadioterapia]);
+      setRadioterapiaSelecionada('');
+      setDataInicio(null);
+      setDataFim(null);
+      setAviso(false);
+    } else if (radioterapiaSelecionada === 'Não') {
+      // Caso "Não" selecionado, só reseta campos e não adiciona
+      setAviso(false);
+      setRadioterapiaSelecionada('');
+      setDataInicio(null);
+      setDataFim(null);
+    } else {
+      setAviso(true);
+    }
+  };
 
   const excluirRadioterapia = (index) => {
-    const confirmar = window.confirm('Tem certeza que deseja excluir esta radioterapia?')
-    if (!confirmar) return
-    const novaLista = radioterapias.filter((_, idx) => idx !== index)
-    setRadioterapias(novaLista)
-  }
+    const confirmar = window.confirm(
+      'Tem certeza que deseja excluir esta radioterapia?'
+    );
+    if (!confirmar) return;
+    setRadioterapias(radioterapias.filter((_, idx) => idx !== index));
+  };
 
-  const fecharAviso = () => setAviso(false)
+  const fecharAviso = () => setAviso(false);
 
   return (
     <div className="flex min-h-screen text-main bg-background">
-
       {/* Menu lateral */}
       <aside
         className="w-44 bg-darkgray p-6"
@@ -73,84 +101,92 @@ export default function Radioterapia() {
       {/* Conteúdo principal */}
       <main className="flex-1 p-6 mt-4">
         <div className="max-w-10xl mx-auto">
-          <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">Cadastro de Radioterapia</h1>
+          <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">
+            Cadastro de Radioterapia
+          </h1>
 
           <div className="bg-offwhite p-6 rounded-lg shadow">
-            <h2 className="text-xl text-background font-semibold mb-4">5. Radioterapia</h2>
-            <h3 className="text-background mb-8">Informações sobre sessões de radioterapia:</h3>
+            <h2 className="text-xl text-background font-semibold mb-4">
+              5. Radioterapia
+            </h2>
+            <h3 className="text-background mb-8">
+              Informações sobre sessões de radioterapia:
+            </h3>
 
-            {/* Seletor */}
-            <div className="flex flex-col md:flex-row items-center gap-6 mb-4">
-              <span className="bg-green-100 text-background px-3 py-1 rounded font-semibold">
-                Radioterapia
-              </span>
-
-              <div className="flex gap-4">
-                <label className="flex items-center gap-2 text-background">
-                  <input
-                    type="radio"
-                    value="Sim"
-                    checked={radioterapiaSelecionada === 'Sim'}
-                    onChange={() => setRadioterapiaSelecionada('Sim')}
-                  />
-                  Sim
-                </label>
-                <label className="flex items-center gap-2 text-background">
-                  <input
-                    type="radio"
-                    value="Não"
-                    checked={radioterapiaSelecionada === 'Não'}
-                    onChange={() => setRadioterapiaSelecionada('Não')}
-                  />
-                  Não
-                </label>
+            <div className="flex flex-col md:flex-row md:items-start md:gap-6 mb-4">
+              <div className="flex-1">
+                <MultiOptionRadioGroup
+                  labelTitulo="Radioterapia"
+                  selected={radioterapiaSelecionada}
+                  onChange={setRadioterapiaSelecionada}
+                  options={[
+                    ['Sim', 'Sim'],
+                    ['Não', 'Não'],
+                  ]}
+                  inline={true}
+                  className="gap-4"
+                />
               </div>
-            </div>
 
-            {radioterapiaSelecionada === 'Sim' && (
-              <div className=" text-background grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className="block mb-1 font-medium">Data de início *</label>
-                  <input
-                    type="date"
-                    className="w-full border rounded px-3 py-2"
-                    value={dataInicio}
-                    onChange={(e) => setDataInicio(e.target.value)}
-                  />
-                </div>
-                <div>
-                  <label className="block mb-1 font-medium">Data de fim (opcional)</label>
-                  <input
-                    type="date"
-                    className="w-full border rounded px-3 py-2"
-                    value={dataFim}
-                    onChange={(e) => setDataFim(e.target.value)}
-                  />
+              <div className="flex-1 mt-4 md:mt-0">
+                {radioterapiaSelecionada === 'Sim' && (
+                  <div className="bg-offwhite p-6 rounded-lg shadow text-background grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <label className="block mb-1 font-medium">
+                        Data de início *
+                      </label>
+                      <DatePickerInput value={dataInicio} onChange={setDataInicio} />
+                    </div>
+                    <div>
+                      <label className="block mb-1 font-medium">
+                        Data de fim (opcional)
+                      </label>
+                      <DatePickerInput
+                        value={dataFim}
+                        onChange={(date) => {
+                          if (date && dataInicio && date < dataInicio) {
+                            alert('A data de fim não pode ser anterior à data de início.');
+                            return;
+                          }
+                          setDataFim(date);
+                        }}
+                        minDate={dataInicio}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex justify-end mr-4">
+                  <button
+                    onClick={adicionarRadioterapia}
+                    className="bg-success text-background font-semibold py-2 px-6 rounded hover:bg-green transition"
+                  >
+                    Adicionar
+                  </button>
                 </div>
               </div>
-            )}
-
-            <div className="flex justify-center">
-              <button
-                onClick={adicionarRadioterapia}
-                className="bg-success text-background font-semibold py-2 px-6 rounded hover:bg-green transition"
-              >
-                Adicionar
-              </button>
             </div>
 
             {aviso && (
               <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-3 rounded mt-4 flex justify-between items-start">
-                <span>Aviso: Preencha os campos obrigatórios antes de adicionar.</span>
-                <button onClick={fecharAviso} className="ml-4 hover:text-yellow-900">
+                <span>
+                  Aviso: Preencha os campos obrigatórios antes de adicionar.
+                </span>
+                <button
+                  onClick={fecharAviso}
+                  className="ml-4 hover:text-yellow-900"
+                  title="Fechar aviso"
+                >
                   <X size={16} />
                 </button>
               </div>
             )}
 
-            {/* Lista */}
+            {/* Lista de radioterapias */}
             <div className="mt-6">
-              <h2 className="text-xl text-darkgray font-semibold mb-4">Radioterapias Cadastradas</h2>
+              <h2 className="text-xl text-darkgray font-semibold mb-4">
+                Radioterapias Cadastradas
+              </h2>
 
               {radioterapias.length === 0 ? (
                 <p className="text-darkgray">Nenhuma radioterapia cadastrada.</p>
@@ -163,22 +199,22 @@ export default function Radioterapia() {
                     >
                       <div>
                         <p className="font-bold">Radioterapia {idx + 1}</p>
-                        {item.dataInicio ? (
-                          <>
-                            <p className="text-sm text-gray-600">Início: {formatarData(item.dataInicio)}</p>
-                            <p className="text-sm text-gray-600">
-                              {item.dataFim ? `Fim: ${formatarData(item.dataFim)}` : (
-                                <span className="text-green-700 font-semibold">Em andamento</span>
-                              )}
-                            </p>
-                          </>
-                        ) : (
-                          <p className="text-green-700 font-semibold">Não</p>
-                        )}
+                        <p className="text-md text-background">
+                          Início: {formatarData(item.dataInicio)}
+                        </p>
+                        <p className="text-md text-background">
+                          {item.dataFim ? (
+                            `Fim: ${formatarData(item.dataFim)}`
+                          ) : (
+                            <span className="text-green-700 font-semibold">
+                              Em andamento
+                            </span>
+                          )}
+                        </p>
                       </div>
                       <button
                         onClick={() => excluirRadioterapia(idx)}
-                        className="text-red-600 hover:text-red-800"
+                        className="text-red-500 hover:text-red-700 transition"
                         title="Remover"
                       >
                         <X size={20} />
@@ -209,5 +245,5 @@ export default function Radioterapia() {
         </div>
       </main>
     </div>
-  )
+  );
 }
