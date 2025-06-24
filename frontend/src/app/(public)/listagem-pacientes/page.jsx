@@ -74,7 +74,7 @@ export default function ListaPacientes() {
             <LayoutDashboard size={18} /> <span>Dashboard</span>
           </Link>
           <Link
-            href="#"
+            href="/cadastro/identificacao-paciente"
             className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
           >
             <UserPlus size={18} /> <span>Cadastrar</span>

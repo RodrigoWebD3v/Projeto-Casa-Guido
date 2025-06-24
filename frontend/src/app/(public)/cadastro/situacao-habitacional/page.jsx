@@ -4,7 +4,7 @@ import { useState } from "react";
 import MultiOptionRadioGroup from "@/components/Button/MultiOptionRadioGroup";
 import SimpleTextField from "@/components/TextField/SimpleTextField";
 import Link from 'next/link';
-import { Home, LayoutDashboard, User, UserPlus, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Home, LayoutDashboard, User, UserPlus, ChevronLeft, ChevronRight, Save } from 'lucide-react';
 import RadioButtonWithLabel from "@/components/Button/RadioButtonWithLabel";
 
 export default function SituacaoHabitacional() {
@@ -47,7 +47,7 @@ export default function SituacaoHabitacional() {
             </h1>
 
             <div className="bg-offwhite p-6 rounded-lg shadow">
-              <h2 className="text-xl text-darkgray font-semibold mb-4">11. Situação Habitacional</h2>
+              <h2 className="text-xl text-darkgray font-semibold mb-4">10. Situação Habitacional</h2>
               <h3 className="text-darkgray mb-8">Informações habitacionais:</h3>
 
               <div className="space-y-6">
@@ -131,13 +131,19 @@ export default function SituacaoHabitacional() {
 
               {/* Botões de navegação */}
               <div className="flex items-center mt-8 pt-6 border-t border-graymedium">
-                <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
+                <Link href="/cadastro/historico-saude" className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
                   <ChevronLeft size={18} /> Anterior
-                </button>
-                <div className="flex-grow flex justify-center"></div>
-                <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
+                </Link>
+
+                <div className="flex-grow flex justify-center">
+                  <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
+                    <Save size={18} /> Salvar
+                  </button>
+                </div>
+
+                <Link href="/cadastro/endereco" className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
                   Próximo <ChevronRight size={18} />
-                </button>
+                </Link>
               </div>
             </div>
           </div>

@@ -81,7 +81,7 @@ export default function EnderecoForm() {
                     </h1>
 
                     <div className="bg-offwhite p-6 rounded-lg shadow">
-                        <h2 className="text-xl text-darkgray font-semibold mb-4">7. Endereço</h2>
+                        <h2 className="text-xl text-darkgray font-semibold mb-4">11. Endereço</h2>
                         <h3 className="text-darkgray mb-8">Informações de endereço do paciente:</h3>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -130,9 +130,9 @@ export default function EnderecoForm() {
 
                         {/* Botões */}
                         <div className="flex items-center mt-8 pt-6 border-t border-graymedium">
-                            <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
+                            <Link href="/cadastro/situacao-habitacional" className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
                                 <ChevronLeft size={18} /> Anterior
-                            </button>
+                            </Link>
 
                             <div className="flex-grow flex justify-center">
                                 <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
@@ -140,9 +140,9 @@ export default function EnderecoForm() {
                                 </button>
                             </div>
 
-                            <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
+                            <Link href="/cadastro/demais-dados" className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
                                 Próximo <ChevronRight size={18} />
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

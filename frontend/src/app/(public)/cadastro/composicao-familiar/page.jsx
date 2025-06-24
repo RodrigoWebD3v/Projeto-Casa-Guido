@@ -6,7 +6,7 @@ import DatePickerInput from "@/components/DatePicker/DatePicker";
 import RadioButtonWithLabel from "@/components/Button/RadioButtonWithLabel";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
-import { Home, LayoutDashboard, User, UserPlus } from 'lucide-react';
+import { Home, LayoutDashboard, User, UserPlus, Save } from 'lucide-react';
 
 export default function ComposicaoFamiliar() {
   const [nome, setNome] = useState("");
@@ -54,9 +54,12 @@ export default function ComposicaoFamiliar() {
       <div className="min-h-screen flex-1">
         <main className="p-6 mt-4">
           <div className="max-w-10xl mx-auto">
-            <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">Cadastro <UserPlus size={18} /></h1>
+            <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">
+              Cadastro <UserPlus size={18} />
+            </h1>
+
             <div className="bg-offwhite p-6 rounded-lg shadow">
-              <h2 className="text-xl text-darkgray font-semibold mb-4">9. Composição Familiar</h2>
+              <h2 className="text-xl text-darkgray font-semibold mb-4">8. Composição Familiar</h2>
               <h3 className="text-darkgray mb-8">Informações da composição familiar:</h3>
 
               <div className="space-y-6">
@@ -98,7 +101,7 @@ export default function ComposicaoFamiliar() {
 
                   <div className="flex justify-center mt-6">
                     <button
-                      className="w-2/3 bg-[#08544f] text-white font-semibold rounded-[10px] py-2 text-[16px] border-2 border-[#08544f] hover:bg-success hover:text-main transition-colors"
+                      className="w-2/3 bg-success text-background font-semibold rounded-[10px] py-2 text-[16px] hover:bg-green transition-colors"
                       onClick={adicionarIntegrante}
                     >
                       Adicionar integrante
@@ -112,7 +115,7 @@ export default function ComposicaoFamiliar() {
                     className="flex items-center justify-between cursor-pointer mb-2 bg-success rounded-md px-4 py-2"
                     onClick={() => setListaAberta(!listaAberta)}
                   >
-                    <span className="text-background text-[16px] font-semibold">Componentes</span>
+                    <span className="text-background text-[16px] font-semibold">Familiares</span>
                     <span className="text-background text-[16px] font-medium">Quantidade: {componentes.length}</span>
                     <span className="text-background text-[22px] ml-2">{listaAberta ? "▲" : "▼"}</span>
                   </div>
@@ -122,17 +125,45 @@ export default function ComposicaoFamiliar() {
                         <div className="text-center text-greendark text-[15px]">Nenhum integrante adicionado.</div>
                       )}
                       {componentes.map((item, idx) => (
-                        <div key={idx} className="bg-paragraph rounded-md p-2 mb-2">
-                          <div className="text-[14px] text-greendark font-semibold">Nome: <span className="font-normal">{item.nome}</span></div>
-                          <div className="text-[14px] text-greendark font-semibold">Parentesco: <span className="font-normal">{item.parentesco}</span></div>
-                          <div className="text-[14px] text-greendark font-semibold">Data de Nascimento: <span className="font-normal">{item.dataNascimento}</span></div>
-                          <div className="text-[14px] text-greendark font-semibold">Estuda: <span className="font-normal">{item.estuda === 0 ? "Sim" : "Não"}</span></div>
+                        <div key={idx} className="bg-paragraph rounded-md p-2 mb-2 relative">
+                          <button
+                            onClick={() => {
+                              setComponentes((prev) => prev.filter((_, i) => i !== idx));
+                            }}
+                            className="absolute top-2 right-2 text-red-600 hover:text-red-800 text-sm underline"
+                          >
+                            Remover
+                          </button>
+
+                          <div className="text-[14px] text-greendark font-semibold">
+                            Nome: <span className="font-normal">{item.nome}</span>
+                          </div>
+                          <div className="text-[14px] text-greendark font-semibold">
+                            Parentesco: <span className="font-normal">{item.parentesco}</span>
+                          </div>
+                          <div className="text-[14px] text-greendark font-semibold">
+                            Data de Nascimento:{" "}
+                            <span className="font-normal">
+                              {item.dataNascimento instanceof Date
+                                ? item.dataNascimento.toLocaleDateString()
+                                : item.dataNascimento}
+                            </span>
+                          </div>
+                          <div className="text-[14px] text-greendark font-semibold">
+                            Estuda: <span className="font-normal">{item.estuda === 0 ? "Sim" : "Não"}</span>
+                          </div>
                           {item.estuda === 0 && (
-                            <div className="text-[14px] text-greendark font-semibold">Ano: <span className="font-normal">{item.ano}</span></div>
+                            <div className="text-[14px] text-greendark font-semibold">
+                              Ano: <span className="font-normal">{item.ano}</span>
+                            </div>
                           )}
-                          <div className="text-[14px] text-greendark font-semibold">Trabalha: <span className="font-normal">{item.trabalha === 0 ? "Sim" : "Não"}</span></div>
+                          <div className="text-[14px] text-greendark font-semibold">
+                            Trabalha: <span className="font-normal">{item.trabalha === 0 ? "Sim" : "Não"}</span>
+                          </div>
                           {item.trabalha === 0 && (
-                            <div className="text-[14px] text-greendark font-semibold">Renda: <span className="font-normal">{item.renda}</span></div>
+                            <div className="text-[14px] text-greendark font-semibold">
+                              Renda: <span className="font-normal">{item.renda}</span>
+                            </div>
                           )}
                         </div>
                       ))}
@@ -142,13 +173,19 @@ export default function ComposicaoFamiliar() {
               </div>
 
               <div className="flex items-center mt-8 pt-6 border-t border-graymedium">
-                <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
+                <Link href="/cadastro/responsavel-opcional" className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
                   <ChevronLeft size={18} /> Anterior
-                </button>
-                <div className="flex-grow flex justify-center"></div>
-                <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
+                </Link>
+
+                <div className="flex-grow flex justify-center">
+                  <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
+                    <Save size={18} /> Salvar
+                  </button>
+                </div>
+
+                <Link href="/cadastro/historico-saude" className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
                   Próximo <ChevronRight size={18} />
-                </button>
+                </Link>
               </div>
             </div>
           </div>

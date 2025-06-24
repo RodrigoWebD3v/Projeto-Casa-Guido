@@ -67,36 +67,18 @@ export default function DemaisDados() {
               {/* Botão adicionar observação */}
               <div className="flex justify-center">
                 <button
-                  className="w-full bg-main text-background font-semibold rounded-[10px] py-2 my-2 text-[16px] border-2 border-main hover:bg-success hover:text-main transition-colors"
+                  className="w-full bg-success text-background font-semibold rounded-[10px] py-2 my-2 text-[16px] border-2 border-main hover:bg-green transition"
                   onClick={adicionarObservacao}
                 >
                   Adicionar observação
                 </button>
               </div>
-              {/* Lista de observações */}
-              <div className="w-full rounded-[10px] bg-success flex items-center justify-between px-4 py-3 cursor-pointer mb-2" onClick={() => setListaAberta(!listaAberta)}>
-                <span className="text-background text-[16px] font-semibold">Observações</span>
-                <span className="text-greendark text-[16px] font-medium">Quantidade: {observacoes.length}</span>
-                <span className="text-black text-[22px] ml-2">{listaAberta ? "▲" : "▼"}</span>
-              </div>
-              {listaAberta && (
-                <div className="w-full mb-2">
-                  {observacoes.length === 0 && (
-                    <div className="text-center text-greendark text-[15px]">Nenhuma observação adicionada.</div>
-                  )}
-                  {observacoes.map((obs, idx) => (
-                    <div key={idx} className="bg-paragraph rounded-md p-2 mb-2">
-                      <div className="text-[14px] text-greendark font-semibold">Como conheceu: <span className="font-normal">{obs.comoConheceu}</span></div>
-                      <div className="text-[14px] text-greendark font-semibold">Descrição: <span className="font-normal">{obs.descricaoObs}</span></div>
-                    </div>
-                  ))}
-                </div>
-              )}
+
               {/* Botões de navegação */}
               <div className="flex items-center mt-8 pt-6 border-t border-graymedium">
-                <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
+                <Link href="/cadastro/endereco" className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
                   <ChevronLeft size={18} /> Anterior
-                </button>
+                </Link>
                 <div className="flex-grow flex justify-center"></div>
                 <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
                   <Save size={18} /> Salvar Paciente

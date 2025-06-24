@@ -3,7 +3,7 @@
 import { useState } from "react";
 import RadioButtonWithFixedLabel from "@/components/Button/RadioButtonWithFixedLabel";
 import Link from 'next/link';
-import { Home, LayoutDashboard, User, UserPlus, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Home, LayoutDashboard, User, UserPlus, ChevronLeft, ChevronRight, Save } from 'lucide-react';
 
 const DOENCAS_ESQUERDA = [
   "Alcoolismo",
@@ -75,67 +75,98 @@ export default function HistoricoSaude() {
           </Link>
         </nav>
       </aside>
-      <div className=" min-h-screen flex-1">
+
+      <div className="min-h-screen flex-1">
         <main className="p-6 mt-4">
           <div className="max-w-10xl mx-auto">
-            <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">Cadastro <UserPlus size={18} /></h1>
+            <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">
+              Cadastro <UserPlus size={18} />
+            </h1>
+
             <div className="bg-offwhite p-6 rounded-lg shadow">
-              <h2 className="text-xl text-darkgray font-semibold mb-4">10. Histórico de Saúde</h2>
+              <h2 className="text-xl text-darkgray font-semibold mb-4">9. Histórico de Saúde</h2>
               <h3 className="text-darkgray mb-8">Informações do histórico de saúde:</h3>
+
               {/* Doenças existentes na família */}
               <div className="w-full h-[45px] mb-2 rounded-[10px] bg-success flex items-center justify-center">
                 <span className="text-background text-[16px] font-semibold text-center">
                   Doenças existentes na família
                 </span>
               </div>
+
               <div className="w-full flex flex-row gap-4 mb-2">
-                <div className="flex flex-col gap-2 flex-1">
+                {/* Coluna Esquerda */}
+                <div className="flex flex-col flex-1">
                   {DOENCAS_ESQUERDA.map((nome, idx) => (
-                    <RadioButtonWithFixedLabel
-                      key={nome}
-                      label={nome}
-                      selected={doencasSelecionadas.includes(nome)}
-                      onClick={() => toggleDoenca(nome)}
-                    />
+                    <div key={nome}>
+                      <RadioButtonWithFixedLabel
+                        label={nome}
+                        selected={doencasSelecionadas.includes(nome)}
+                        onClick={() => toggleDoenca(nome)}
+                      />
+                      {idx < DOENCAS_ESQUERDA.length - 1 && (
+                        <div className="h-[1px] bg-graymedium hover:bg-graydark transition-colors my-1 w-full" />
+                      )}
+                    </div>
                   ))}
                 </div>
+
                 <div className="w-[1px] bg-greendark" />
-                <div className="flex flex-col gap-2 flex-1">
+
+                {/* Coluna Direita */}
+                <div className="flex flex-col flex-1">
                   {DOENCAS_DIREITA.map((nome, idx) => (
-                    <RadioButtonWithFixedLabel
-                      key={nome}
-                      label={nome}
-                      selected={doencasSelecionadas.includes(nome)}
-                      onClick={() => toggleDoenca(nome)}
-                    />
+                    <div key={nome}>
+                      <RadioButtonWithFixedLabel
+                        label={nome}
+                        selected={doencasSelecionadas.includes(nome)}
+                        onClick={() => toggleDoenca(nome)}
+                      />
+                      {idx < DOENCAS_DIREITA.length - 1 && (
+                        <div className="h-[1px] bg-graymedium hover:bg-graydark transition-colors my-1 w-full" />
+                      )}
+                    </div>
                   ))}
                 </div>
               </div>
+
               {/* Em caso de doença, procura */}
               <div className="w-full h-[45px] my-2 rounded-[10px] bg-success flex items-center justify-center">
                 <span className="text-background text-[16px] font-semibold text-center">
                   Em caso de doença, procura
                 </span>
               </div>
+
               <div className="w-full flex flex-col gap-2 mb-2">
-                {OPCOES_PROCURA.map((opcao) => (
-                  <RadioButtonWithFixedLabel
-                    key={opcao}
-                    label={opcao}
-                    selected={procuraSelecionada.includes(opcao)}
-                    onClick={() => toggleProcura(opcao)}
-                  />
+                {OPCOES_PROCURA.map((opcao, idx) => (
+                  <div key={opcao}>
+                    <RadioButtonWithFixedLabel
+                      label={opcao}
+                      selected={procuraSelecionada.includes(opcao)}
+                      onClick={() => toggleProcura(opcao)}
+                    />
+                    {idx < OPCOES_PROCURA.length - 1 && (
+                      <div className="h-[1px] bg-graymedium hover:bg-graydark transition-colors my-1 w-full" />
+                    )}
+                  </div>
                 ))}
               </div>
+
               {/* Botões de navegação */}
               <div className="flex items-center mt-8 pt-6 border-t border-graymedium">
-                <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
+                <Link href="/cadastro/composicao-familiar" className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
                   <ChevronLeft size={18} /> Anterior
-                </button>
-                <div className="flex-grow flex justify-center"></div>
-                <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
+                </Link>
+
+                <div className="flex-grow flex justify-center">
+                  <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
+                    <Save size={18} /> Salvar
+                  </button>
+                </div>
+
+                <Link href="/cadastro/situacao-habitacional" className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
                   Próximo <ChevronRight size={18} />
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -143,4 +174,4 @@ export default function HistoricoSaude() {
       </div>
     </div>
   );
-} 
+}

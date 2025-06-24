@@ -169,9 +169,9 @@ export default function SocioEconomicForm() {
                         </div>
 
                         <div className="flex items-center mt-8 pt-6 border-t border-graymedium">
-                            <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
+                            <Link href="/cadastro/identificacao-paciente" className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
                                 <ChevronLeft size={18} /> Anterior
-                            </button>
+                            </Link>
 
                             <div className="flex-grow flex justify-center">
                                 <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
@@ -179,9 +179,9 @@ export default function SocioEconomicForm() {
                                 </button>
                             </div>
 
-                            <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
+                            <Link href="/cadastro/cirurgias" className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
                                 Próximo <ChevronRight size={18} />
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
