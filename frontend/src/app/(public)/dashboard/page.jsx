@@ -113,85 +113,88 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex min-h-screen bg-background text-main">
-      {/* Sidebar */}
-      <aside
-        className="w-44 bg-darkgray p-6 shadow-[4px_0_8px_rgba(0,0,0,0.2)]"
-      >
-        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-main">
-          <Home size={18} /> <span>Menu</span>
-        </h2>
-        <nav className="flex flex-col gap-4">
-          <Link
-            href="/listagem-pacientes"
-            className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
-          >
-            <User size={18} /> <span>Pacientes</span>
-          </Link>
-          <Link
-            href="/cadastro/identificacao-paciente"
-            className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
-          >
-            <UserPlus size={18} /> <span>Cadastrar</span>
-          </Link>
-        </nav>
-      </aside>
+    <div className="flex flex-col min-h-screen bg-background text-main">
+      <div className="flex flex-1">
+        {/* Sidebar */}
+        <aside className="w-44 bg-darkgray p-6 shadow-[4px_0_8px_rgba(0,0,0,0.2)]">
+          <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-main">
+            <Home size={18} /> <span>Menu</span>
+          </h2>
+          <nav className="flex flex-col gap-4">
+            <Link
+              href="/listagem-pacientes"
+              className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
+            >
+              <User size={18} /> <span>Pacientes</span>
+            </Link>
+            <Link
+              href="/cadastro/identificacao-paciente"
+              className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
+            >
+              <UserPlus size={18} /> <span>Cadastrar</span>
+            </Link>
+          </nav>
+        </aside>
 
-      {/* Conteúdo principal */}
-      <main className="flex-1 p-6 mt-4">
-        <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">
+        {/* Conteúdo principal */}
+        <main className="flex-1 p-6 mt-4">
+          <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">
+            Dashboard
+            <LayoutDashboard size={20} />
+          </h1>
 
-          Dashboard
-          <LayoutDashboard size={20} />
-        </h1>
-
-        {/* Cards de estatísticas */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {stats.map((stat, idx) => (
-            <div key={idx} className="bg-main text-greendark p-4 rounded-lg shadow-md">
-              <p className="text-sm">{stat.title}</p>
-              <p className="text-2xl font-bold">{stat.value}</p>
-              <p className={`text-sm ${getDescriptionColor(stat.description)}`}>
-                {stat.description}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Caixa de título dos agendamentos */}
-        <p className="text-md text-main font-semibold mb-4">Agendamentos para hoje:</p>
-        <div className="space-y-3 max-h-[550px] overflow-y-auto">
-          {agendamentos
-            .filter(item => item.data === new Date().toISOString().split('T')[0])
-            .map((item, idx) => (
-              <div
-                key={idx}
-                className="flex items-center justify-between bg-main text-greendark p-4 rounded-lg shadow"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-success text-greendark flex items-center justify-center font-bold uppercase select-none">
-                    {getIniciais(item.nome)}
-                  </div>
-                  <div>
-                    <p className="font-semibold">{item.nome}</p>
-                    <p className="text-sm text-greendark">
-                      {item.hora} — {item.tipo}
-                    </p>
-                  </div>
-                </div>
-                <span
-                  className={`px-3 py-1 rounded-full text-sm font-semibold ${getStatusColor(item.status)}`}
-                >
-                  {item.status}
-                </span>
+          {/* Cards de estatísticas */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {stats.map((stat, idx) => (
+              <div key={idx} className="bg-main text-greendark p-4 rounded-lg shadow-md">
+                <p className="text-sm">{stat.title}</p>
+                <p className="text-2xl font-bold">{stat.value}</p>
+                <p className={`text-sm ${getDescriptionColor(stat.description)}`}>
+                  {stat.description}
+                </p>
               </div>
-            ))
-          }
-          {agendamentos.filter(item => item.data === new Date().toISOString().split('T')[0]).length === 0 && (
-            <p className="text-center text-main mt-4">Nenhum agendamento para hoje.</p>
-          )}
-        </div>
-      </main>
+            ))}
+          </div>
+
+          {/* Lista de agendamentos de hoje */}
+          <p className="text-md text-main font-semibold mb-4">Agendamentos para hoje:</p>
+          <div className="space-y-3 max-h-[550px] overflow-y-auto">
+            {agendamentos
+              .filter(item => item.data === new Date().toISOString().split('T')[0])
+              .map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center justify-between bg-main text-greendark p-4 rounded-lg shadow"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-success text-greendark flex items-center justify-center font-bold uppercase select-none">
+                      {getIniciais(item.nome)}
+                    </div>
+                    <div>
+                      <p className="font-semibold">{item.nome}</p>
+                      <p className="text-sm text-greendark">
+                        {item.hora} — {item.tipo}
+                      </p>
+                    </div>
+                  </div>
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-semibold ${getStatusColor(item.status)}`}
+                  >
+                    {item.status}
+                  </span>
+                </div>
+              ))}
+            {agendamentos.filter(item => item.data === new Date().toISOString().split('T')[0]).length === 0 && (
+              <p className="text-center text-main mt-4">Nenhum agendamento para hoje.</p>
+            )}
+          </div>
+        </main>
+      </div>
+
+      {/* Footer */}
+      <footer className="w-full mt-auto text-center text-xs text-main bg-darkgray p-6 shadow-[4px_0_8px_rgba(0,0,0,0.2)]">
+        © {new Date().getFullYear()} Sistema de Gestão de Pacientes - Todos os direitos reservados.
+      </footer>
     </div>
   );
 }
