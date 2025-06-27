@@ -1,5 +1,5 @@
 'use client';
-
+import Sidebar from '@/components/Sidebar/sidebar';
 import { useState } from 'react';
 import Link from 'next/link';
 import {
@@ -13,87 +13,112 @@ import MultiOptionRadioGroup from '@/components/Button/MultiOptionRadioGroup';
 export default function ResponsavelForm() {
     const [nomeCompleto, setNomeCompleto] = useState('');
     const [cpf, setCpf] = useState('');
+    const [cpfInvalido, setCpfInvalido] = useState(false);
     const [rg, setRg] = useState('');
+    const [rgInvalido, setRgInvalido] = useState(false);
     const [naturalidade, setNaturalidade] = useState('');
     const [escolaridade, setEscolaridade] = useState('');
     const [dataNascimento, setDataNascimento] = useState('');
     const [celular, setCelular] = useState('');
     const [cartaoSus, setCartaoSus] = useState('');
+    const [cartaoSusInvalido, setCartaoSusInvalido] = useState(false);
     const [salario, setSalario] = useState('');
     const [estadoCivil, setEstadoCivil] = useState(null);
     const [cadastroAberto, setCadastroAberto] = useState(true);
 
+    // Funções de formatação e validação CPF
+    function formatarCpf(valor) {
+        const cpfNumeros = valor.replace(/\D/g, '').slice(0, 11);
+        return cpfNumeros
+            .replace(/^(\d{3})(\d)/, '$1.$2')
+            .replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3')
+            .replace(/\.(\d{3})(\d)/, '.$1-$2');
+    }
+
+    function validarCpf(cpf) {
+        const cpfLimpo = cpf.replace(/[^\d]+/g, '');
+        if (cpfLimpo.length !== 11 || /^(\d)\1+$/.test(cpfLimpo)) return false;
+
+        let soma = 0;
+        for (let i = 0; i < 9; i++) soma += parseInt(cpfLimpo.charAt(i)) * (10 - i);
+        let resto = (soma * 10) % 11;
+        if (resto === 10 || resto === 11) resto = 0;
+        if (resto !== parseInt(cpfLimpo.charAt(9))) return false;
+
+        soma = 0;
+        for (let i = 0; i < 10; i++) soma += parseInt(cpfLimpo.charAt(i)) * (11 - i);
+        resto = (soma * 10) % 11;
+        if (resto === 10 || resto === 11) resto = 0;
+        return resto === parseInt(cpfLimpo.charAt(10));
+    }
+
+    function handleCpfChange(valor) {
+        const formatado = formatarCpf(valor);
+        setCpf(formatado);
+        setCpfInvalido(formatado.length === 14 && !validarCpf(formatado));
+    }
+
+    // Funções formatação e validação RG
+    function formatarRg(valor) {
+        const numeros = valor.replace(/\D/g, '').slice(0, 9);
+        return numeros
+            .replace(/^(\d{2})(\d)/, '$1.$2')
+            .replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3')
+            .replace(/\.(\d{3})(\d)/, '.$1-$2');
+    }
+
+    function validarRg(rg) {
+        const rgLimpo = rg.replace(/\D/g, '');
+        if (rgLimpo.length !== 9) return false;
+        if (/^(\d)\1+$/.test(rgLimpo)) return false;
+        return true;
+    }
+
+    function handleRgChange(valor) {
+        const formatado = formatarRg(valor);
+        setRg(formatado);
+        setRgInvalido(formatado.length === 13 && !validarRg(formatado));
+    }
+
+    // Funções formatação e validação Cartão SUS
+    function formatarCartaoSus(valor) {
+        const numeros = valor.replace(/\D/g, '').slice(0, 15);
+        return numeros
+            .replace(/^(\d{3})(\d)/, '$1 $2')
+            .replace(/^(\d{3}) (\d{4})(\d)/, '$1 $2 $3')
+            .replace(/^(\d{3}) (\d{4}) (\d{4})(\d)/, '$1 $2 $3 $4');
+    }
+
+    function validarCartaoSus(cartao) {
+        const susLimpo = cartao.replace(/\D/g, '');
+        return susLimpo.length === 15;
+    }
+    function formatarCelular(valor) {
+        const numeros = valor.replace(/\D/g, '').slice(0, 11);
+        return numeros
+            .replace(/^(\d{2})(\d)/, '($1) $2')
+            .replace(/^(\(\d{2}\)) (\d{5})(\d)/, '$1 $2-$3');
+    }
+
+    function handleCelularChange(valor) {
+        setCelular(formatarCelular(valor));
+    }
+
+
+    function handleCartaoSusChange(valor) {
+        const formatado = formatarCartaoSus(valor);
+        setCartaoSus(formatado);
+        setCartaoSusInvalido(formatado.replace(/\D/g, '').length === 15 && !validarCartaoSus(formatado));
+    }
+
     return (
         <div className="flex min-h-screen text-main bg-background">
-            <aside
-                className="w-64 bg-darkgray p-6 overflow-y-auto"
-                style={{ boxShadow: '4px 0 8px rgba(0, 0, 0, 0.2)' }}
-            >
-                <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-main">
-                    <Home size={18} /> <span>Menu</span>
-                </h2>
-
-                <nav className="flex flex-col gap-4 text-sm">
-                    <Link
-                        href="/dashboard"
-                        className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
-                    >
-                        <LayoutDashboard size={18} /> <span>Dashboard</span>
-                    </Link>
-                    <Link
-                        href="/listagem-pacientes"
-                        className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
-                    >
-                        <User size={18} /> <span>Pacientes</span>
-                    </Link>
-
-                    <div>
-                        <button
-                            onClick={() => setCadastroAberto(!cadastroAberto)}
-                            className="w-full flex items-center justify-between p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
-                        >
-                            <span className="flex items-center gap-2">
-                                <UserPlus size={18} /> Cadastro
-                            </span>
-                            {cadastroAberto ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                        </button>
-
-                        {cadastroAberto && (
-                            <ul className="mt-2 flex flex-col gap-3">
-                                {[
-                                    ['1 - Identificação do Paciente', '/cadastro/identificacao-paciente'],
-                                    ['2 - Socioeconômico', '/cadastro/socio-economico'],
-                                    ['3 - Cirurgias', '/cadastro/cirurgias'],
-                                    ['4 - Quimioterapia', '/cadastro/quimio'],
-                                    ['5 - Radioterapia', '/cadastro/radio'],
-                                    ['6 - Responsável', '/cadastro/responsavel'],
-                                    ['7 - Responsável (Opcional)', '/cadastro/responsavel-opcional'],
-                                    ['8 - Composição Familiar', '/cadastro/composicao-familiar'],
-                                    ['9 - Histórico de Saúde', '/cadastro/historico-saude'],
-                                    ['10 - Situação Habitacional', '/cadastro/situacao-habitacional'],
-                                    ['11 - Endereço', '/cadastro/endereco'],
-                                    ['12 - Demais Dados', '/cadastro/demais-dados'],
-                                ].map(([label, href], idx) => (
-                                    <li
-                                        key={idx}
-                                        className="rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
-                                    >
-                                        <Link href={href} className="block px-2 py-1 hover:text-greendark">
-                                            {label}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-                </nav>
-            </aside>
+            <Sidebar />
             <main className="flex-1 p-6 mt-4">
                 <div className="max-w-10xl mx-auto">
                     <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">
                         Cadastro <UserPlus size={18} />
                     </h1>
-
 
                     <div className="bg-offwhite rounded-lg shadow max-h-[calc(88vh-200px)] flex flex-col">
                         {/* Cabeçalho fixo */}
@@ -110,12 +135,28 @@ export default function ResponsavelForm() {
 
                                 {/* CPF */}
                                 <div className="bg-offwhite p-4 rounded-lg shadow">
-                                    <SimpleTextField nomeCampo="Cpf" valorPreenchido={cpf} onChange={setCpf} somenteNumero={true} />
+                                    <SimpleTextField
+                                        nomeCampo="CPF"
+                                        valorPreenchido={cpf}
+                                        onChange={handleCpfChange}
+                                        className={cpfInvalido ? 'border border-red-500' : ''}
+                                    />
+                                    {cpfInvalido && (
+                                        <p className="text-red-500 text-sm mt-1">CPF inválido</p>
+                                    )}
                                 </div>
 
                                 {/* RG */}
                                 <div className="bg-offwhite p-4 rounded-lg shadow">
-                                    <SimpleTextField nomeCampo="Rg" valorPreenchido={rg} onChange={setRg} />
+                                    <SimpleTextField
+                                        nomeCampo="RG"
+                                        valorPreenchido={rg}
+                                        onChange={handleRgChange}
+                                        className={rgInvalido ? 'border border-red-500' : ''}
+                                    />
+                                    {rgInvalido && (
+                                        <p className="text-red-500 text-sm mt-1">RG inválido</p>
+                                    )}
                                 </div>
 
                                 {/* Naturalidade */}
@@ -135,12 +176,25 @@ export default function ResponsavelForm() {
 
                                 {/* Celular */}
                                 <div className="bg-offwhite p-4 rounded-lg shadow">
-                                    <SimpleTextField nomeCampo="Celular" valorPreenchido={celular} onChange={setCelular} somenteNumero={true} />
+                                    <SimpleTextField
+                                        nomeCampo="Celular"
+                                        valorPreenchido={celular}
+                                        onChange={handleCelularChange}
+                                        somenteNumero={true}
+                                    />
                                 </div>
 
                                 {/* Cartão SUS */}
                                 <div className="bg-offwhite p-4 rounded-lg shadow">
-                                    <SimpleTextField nomeCampo="Cartão do SUS" valorPreenchido={cartaoSus} onChange={setCartaoSus} somenteNumero={true} />
+                                    <SimpleTextField
+                                        nomeCampo="Cartão do SUS"
+                                        valorPreenchido={cartaoSus}
+                                        onChange={handleCartaoSusChange}
+                                        className={cartaoSusInvalido ? 'border border-red-500' : ''}
+                                    />
+                                    {cartaoSusInvalido && (
+                                        <p className="text-red-500 text-sm mt-1">Cartão SUS inválido</p>
+                                    )}
                                 </div>
 
                                 {/* Salário */}
@@ -160,9 +214,6 @@ export default function ResponsavelForm() {
                                 />
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
                 <div className="flex items-center mt-3 pt-6 border-t border-graymedium">

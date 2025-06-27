@@ -116,22 +116,22 @@ export default function Dashboard() {
     <div className="flex flex-col min-h-screen bg-background text-main">
       <div className="flex flex-1">
         {/* Sidebar */}
-        <aside className="w-44 bg-darkgray p-6 shadow-[4px_0_8px_rgba(0,0,0,0.2)]">
-          <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-main">
+        <aside className="w-44 bg-sidebarbg p-6 shadow-[4px_0_8px_rgba(0,0,0,0.2)]">
+          <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-sidebaricon">
             <Home size={18} /> <span>Menu</span>
           </h2>
           <nav className="flex flex-col gap-4">
             <Link
               href="/listagem-pacientes"
-              className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
+              className="flex items-center gap-2 p-2 rounded border border-transparent text-sidebartext hover:border-greendark hover:bg-sidebarhoverbg hover:text-success transition"
             >
-              <User size={18} /> <span>Pacientes</span>
+              <User size={18} className="text-sidebaricon" /> <span>Pacientes</span>
             </Link>
             <Link
               href="/cadastro/identificacao-paciente"
-              className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
+              className="flex items-center gap-2 p-2 rounded border border-transparent text-sidebartext hover:border-greendark hover:bg-sidebarhoverbg hover:text-success transition"
             >
-              <UserPlus size={18} /> <span>Cadastrar</span>
+              <UserPlus size={18} className="text-sidebaricon" /> <span>Cadastrar</span>
             </Link>
           </nav>
         </aside>
@@ -192,7 +192,7 @@ export default function Dashboard() {
       </div>
 
       {/* Footer */}
-      <footer className="w-full mt-auto text-center text-xs text-main bg-darkgray p-6 shadow-[4px_0_8px_rgba(0,0,0,0.2)]">
+      <footer className="w-full mt-auto text-center text-xs text-sidebartext bg-sidebarbg p-6 shadow-[4px_0_8px_rgba(0,0,0,0.2)]">
         © {new Date().getFullYear()} Sistema de Gestão de Pacientes - Todos os direitos reservados.
       </footer>
     </div>

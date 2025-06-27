@@ -23,7 +23,12 @@ module.exports = {
         graymedium: "#d1d5db",// Example color
         hoverBg: "#abd1c6", // Example color
         blacktext: "#000000",  // Example color
-        offwhite: "#f5fafa"// Example color
+        offwhite: "#f5fafa",// Example color
+        sidebarbg: "#17302f",           // fundo do aside
+        sidebartext: "#e0f2f1",         // texto padrão no sidebar
+        sidebarhighlight: "#A7FFEB",    // título principal
+        sidebaricon: "#80CBC4",         // ícones comuns
+        sidebarhoverbg: "#195851"    // fundo hover
       },
     },
   },

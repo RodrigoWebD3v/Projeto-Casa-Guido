@@ -1,5 +1,5 @@
 'use client';
-
+import Sidebar from '@/components/Sidebar/sidebar';
 import { useState, useEffect } from 'react';
 import MultiOptionRadioGroup from '@/components/Button/MultiOptionRadioGroup';
 import DatePickerInput from '@/components/DatePicker/DatePicker';
@@ -73,69 +73,7 @@ export default function Quimio() {
 
   return (
     <div className="flex min-h-screen text-main bg-background">
-      <aside
-        className="w-64 bg-darkgray p-6 overflow-y-auto"
-        style={{ boxShadow: '4px 0 8px rgba(0, 0, 0, 0.2)' }}
-      >
-        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-main">
-          <Home size={18} /> <span>Menu</span>
-        </h2>
-
-        <nav className="flex flex-col gap-4 text-sm">
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
-          >
-            <LayoutDashboard size={18} /> <span>Dashboard</span>
-          </Link>
-          <Link
-            href="/listagem-pacientes"
-            className="flex items-center gap-2 p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
-          >
-            <User size={18} /> <span>Pacientes</span>
-          </Link>
-
-          <div>
-            <button
-              onClick={() => setCadastroAberto(!cadastroAberto)}
-              className="w-full flex items-center justify-between p-2 rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
-            >
-              <span className="flex items-center gap-2">
-                <UserPlus size={18} /> Cadastro
-              </span>
-              {cadastroAberto ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-            </button>
-
-            {cadastroAberto && (
-              <ul className="mt-2 flex flex-col gap-3">
-                {[
-                  ['1 - Identificação do Paciente', '/cadastro/identificacao-paciente'],
-                  ['2 - Socioeconômico', '/cadastro/socio-economico'],
-                  ['3 - Cirurgias', '/cadastro/cirurgias'],
-                  ['4 - Quimioterapia', '/cadastro/quimio'],
-                  ['5 - Radioterapia', '/cadastro/radio'],
-                  ['6 - Responsável', '/cadastro/responsavel'],
-                  ['7 - Responsável (Opcional)', '/cadastro/responsavel-opcional'],
-                  ['8 - Composição Familiar', '/cadastro/composicao-familiar'],
-                  ['9 - Histórico de Saúde', '/cadastro/historico-saude'],
-                  ['10 - Situação Habitacional', '/cadastro/situacao-habitacional'],
-                  ['11 - Endereço', '/cadastro/endereco'],
-                  ['12 - Demais Dados', '/cadastro/demais-dados'],
-                ].map(([label, href], idx) => (
-                  <li
-                    key={idx}
-                    className="rounded border border-transparent text-main hover:border-greendark hover:bg-button hover:text-greendark transition"
-                  >
-                    <Link href={href} className="block px-2 py-1 hover:text-greendark">
-                      {label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </nav>
-      </aside>
+      <Sidebar />
 
       <main className="flex-1 p-6 mt-4">
         <div className="max-w-10xl mx-auto">
