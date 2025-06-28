@@ -19,16 +19,15 @@ export default function ListaPacientes() {
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState('');
 
-  // Requisição para o backend
   useEffect(() => {
     axios
       .get('http://localhost:3001/api/pessoas')
       .then((res) => {
         setPacientes(res.data);
         setLoading(false);
-        console.log(res.data)
+        console.log(res.data);
       })
-      .catch((err) => {
+      .catch(() => {
         setErro('Erro ao buscar pacientes');
         setLoading(false);
       });
