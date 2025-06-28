@@ -1,8 +1,9 @@
 const radioterapiaDTO = (objetoRadioterapia, pacienteId) => {
     return {
-        pacienteId: pacienteId,
+        paciente: pacienteId,
         dataInicio:  objetoRadioterapia.dataInicio,
         dataUltimaSessao:  objetoRadioterapia.dataUltimaSessao,
+        observacoes: objetoRadioterapia.observacoes
     }
 };
 

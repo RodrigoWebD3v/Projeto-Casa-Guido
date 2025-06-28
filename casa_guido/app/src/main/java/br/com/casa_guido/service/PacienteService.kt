@@ -38,17 +38,24 @@ class PacienteService(
     suspend fun getById(id: String): PacienteUI? {
         val paciente = pacienteRepository.getById(id)
         return paciente?.toUI(
-            getPessoaById = { id ->
-                pessoaService.getById(id) ?: PessoaUI()
+            getPessoaById = {
+                pessoaService.getById(it) ?: PessoaUI()
             }
         )
     }
 
+    suspend fun getPacientesAlterados(status: Boolean): List<PacienteUI>? {
+        val pacientes = pacienteRepository.getAlterado(status)
+        return pacientes?.map {
+            it.toUI(
+                getPessoaById = { id ->
+                    pessoaService.getById(id) ?: PessoaUI()
+                }
+            )
+        }
+    }
+
     suspend fun createPaciente(paciente: PacienteUI) {
-        Log.i(
-            "PacienteService A",
-            "createPaciente: ${paciente.cras.municipio} - ${paciente.cras.bairro} - ${paciente.ubs.municipio} - ${paciente.ubs.bairro}"
-        )
         pacienteRepository.insert(
             paciente.toEntidade()
         )
@@ -72,6 +79,7 @@ class PacienteService(
             diagnostico = this.diagnostico,
             profissionalResponsavel = "123",
             escolaNome = this.escolaNome,
+
             //Descontinuar esse campo
             anoEscolar = "1",
 
@@ -88,6 +96,7 @@ class PacienteService(
             ubsMunicipio = this.ubs.municipio,
             crasBairro = this.cras.bairro,
             ubsBairro = this.ubs.bairro,
+            alterado = this.alterado
         )
     }
 
@@ -135,7 +144,8 @@ class PacienteService(
                 bairro = this.crasBairro ?: ""
             ),
             situacaoHabitacional = situacaoHabitacionalService.buscaSituacaoHabitacionalPorPaciente(this.id)?: SituacaoHabitacional(),
-            arquivos = arquivo.getArquivosPorPaciente(this.id)?: emptyList()
+            arquivos = arquivo.getArquivosPorPaciente(this.id),
+            alterado = this.alterado
         )
     }
 }

@@ -1,23 +1,30 @@
-const { PrismaClient } = require('@prisma/client');
+const User = require('../models/User');
+const connectMongoose = require('../mongoose');
 
-const prisma = new PrismaClient();
-
-const criarUsuario = async (name, email, hashedPassword) => {
-    return await prisma.user.create({
-        data: {
-          name,
-          email,
-          password: hashedPassword,
-        },
-      });
-}
+const criarUsuarioRepository = async (name, email, hashedPassword) => {
+  try {
+    await connectMongoose();
+    const user = new User({
+      name,
+      email,
+      password: hashedPassword
+    });
+    const save = await user.save();
+    return save;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
 
 const buscarUsuarioPorEmail = async (email) => {
-    return await prisma.user.findUnique({ where: { email } });
-}
+  await connectMongoose();
+  return await User.findOne({ email });
+};
 
 const buscarUsuarioPorId = async (id) => {
-    return await prisma.user.findUnique({ where: { id } });
-}
+  await connectMongoose();
+  return await User.findById(id);
+};
 
-module.exports = { criarUsuario, buscarUsuarioPorEmail, buscarUsuarioPorId };
+module.exports = { criarUsuarioRepository, buscarUsuarioPorEmail, buscarUsuarioPorId };

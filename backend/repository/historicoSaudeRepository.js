@@ -1,14 +1,19 @@
-const { PrismaClient } = require('@prisma/client');
+const HistoricoSaude = require('../models/HistoricoSaude');
 
-const prisma = new PrismaClient();
+const criarHistoricoSaudeRepository = async (data) => new HistoricoSaude(data).save();
+const buscarPorId = async (id) => HistoricoSaude.findById(id);
+const listar = async () => HistoricoSaude.find();
+const atualizar = async (id, data) => HistoricoSaude.findByIdAndUpdate(id, data, { new: true });
+const deletar = async (id) => HistoricoSaude.findByIdAndDelete(id);
+const buscarHistoricoSaudePorPaciente = async (pacienteId) => HistoricoSaude.findOne({ paciente: pacienteId });
+const atualizarHistoricoSaude = async (id, data) => HistoricoSaude.findByIdAndUpdate(id, data, { new: true });
 
-const criarHistoricoSaudeRepository = async (dtoHistoricoSaude) => {
-    console.log("Historico de saude",dtoHistoricoSaude);
-    return await prisma.historicoSaude.create({
-        data: {
-            ...dtoHistoricoSaude
-        },
-    });
-}
-
-module.exports = { criarHistoricoSaudeRepository };
+module.exports = { 
+    criarHistoricoSaudeRepository, 
+    buscarPorId, 
+    listar, 
+    atualizar, 
+    deletar, 
+    buscarHistoricoSaudePorPaciente, 
+    atualizarHistoricoSaude 
+};

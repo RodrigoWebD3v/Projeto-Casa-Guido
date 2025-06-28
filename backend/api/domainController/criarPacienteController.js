@@ -3,11 +3,10 @@ const {
   } = require("../../services/criarPacienteService");
 const AppError = require("../../handlerException/appError")
   
-  
-  
+
 const criarPacienteController = async (req, res) => {
     try {
-      const pacienteData = req.body; // JSON no formato do seu DTO
+      const pacienteData = req.body; 
       const pacienteCriado = await criarPacienteService(pacienteData);
       res.status(201).json(pacienteCriado);
     } catch (error) {

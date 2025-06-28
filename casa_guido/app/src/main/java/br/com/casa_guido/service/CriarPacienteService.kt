@@ -19,10 +19,6 @@ class CriarPacienteService(
     suspend fun criarPaciente(paciente: Paciente) {
         pacienteService.createPaciente(paciente)
 
-        Log.i(
-            "CriarPacienteService",
-            "criarPaciente: ${paciente.pessoa.escolaridade} - ${paciente.pessoa.serie}"
-        )
         pessoaService.createPessoa(
             pessoa = paciente.pessoa,
             endereco = paciente.pessoa.endereco
@@ -87,13 +83,13 @@ class CriarPacienteService(
         }
 
         composicaoFamiliarService.deleteComposicaoFamiliar(pacienteId = paciente.id)
+
         paciente.composicaoFamiliar.forEach {
             composicaoFamiliarService.createComposicaoFamiliar(
                 componenteFamiliar = it,
                 pacienteId = paciente.id
             )
         }
-
 
         historicoSaudeService.createHistoricoSaude(
             historicoSaude = paciente.historicoSaude,
@@ -104,13 +100,5 @@ class CriarPacienteService(
             situacaoHabitacional = paciente.situacaoHabitacional,
             pacienteId = paciente.id
         )
-
-        paciente.arquivos.forEach{
-            arquivoService.createArquivo(
-                entidade = it,
-                pacienteId = paciente.id
-            )
-        }
-
     }
 }

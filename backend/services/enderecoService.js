@@ -1,6 +1,5 @@
-
 const { enderecoDTO } = require("../dto/pacienteDTO/enderecoDTO");
-const { criarEnderecoRepository } = require("../repository/enderecoRepository");
+const { criarEnderecoRepository, atualizarEndereco } = require("../repository/enderecoRepository");
 
 const criarEnderecoService = async (endereco) => {
   try {
@@ -8,8 +7,20 @@ const criarEnderecoService = async (endereco) => {
     const dadosSalvos = await criarEnderecoRepository(enderecoDT);
     return dadosSalvos;
   } catch (e) {
-    return [];
+    console.error("Erro ao criar endereço:", e);
+    throw e;
   }
 };
 
-module.exports = { criarEnderecoService };
+const editarEnderecoService = async (idPessoa, endereco) => {
+  try {
+    const enderecoDT = await enderecoDTO(endereco);
+    const dadosAtualizados = await atualizarEndereco(idPessoa, enderecoDT);
+    return dadosAtualizados;
+  } catch (e) {
+    console.error("Erro ao editar endereço:", e);
+    throw e;
+  }
+};
+
+module.exports = { criarEnderecoService, editarEnderecoService };

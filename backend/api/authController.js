@@ -18,6 +18,8 @@ const registrar = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(email, password)
+    
     const tokens = await loginUser(email, password);
     res.status(200).json(tokens)
   } catch (error) {

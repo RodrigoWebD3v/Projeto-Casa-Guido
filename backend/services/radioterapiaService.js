@@ -1,16 +1,25 @@
-
 const { radioterapiaDTO } = require("../dto/pacienteDTO/radioterapiaDTO");
-const { criarRadioterapiaRepository } = require("../repository/radioterapiaRepository");
+const { criarRadioTerapiaRepository, atualizarRadioterapia } = require("../repository/radioterapiaRepository");
 
-
-const criarRadioterapiaService = async (radioterapia) => {
+const criarRadioterapiaService = async (radioterapia, pacienteId) => {
   try {
-    const radioterapiaDT = await radioterapiaDTO(radioterapia);
-    const dadosSalvos = await criarRadioterapiaRepository(radioterapiaDT);
+    const radioterapiaDT = await radioterapiaDTO(radioterapia, pacienteId);
+    const dadosSalvos = await criarRadioTerapiaRepository(radioterapiaDT);
     return dadosSalvos;
   } catch (e) {
     return [];
   }
 };
 
-module.exports = { criarRadioterapiaService };
+const editarRadioterapiaService = async (radioterapiaId, radioterapia, pacienteId) => {
+  try {
+    const radioterapiaDT = await radioterapiaDTO(radioterapia, pacienteId);
+    const dadosAtualizados = await atualizarRadioterapia(radioterapiaId, radioterapiaDT);
+    return dadosAtualizados;
+  } catch (e) {
+    console.log("Erro ao editar radioterapia:", e);
+    throw e;
+  }
+};
+
+module.exports = { criarRadioterapiaService, editarRadioterapiaService };

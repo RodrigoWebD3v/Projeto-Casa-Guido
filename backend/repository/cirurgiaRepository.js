@@ -1,13 +1,21 @@
-const { PrismaClient } = require('@prisma/client');
+const Cirurgia = require('../models/Cirurgia');
 
-const prisma = new PrismaClient();
+const criarCirurgiaRepository = async (data) => new Cirurgia(data).save();
+const buscarPorId = async (id) => Cirurgia.findById(id);
+const buscarPorPaciente = async (pacienteId) => Cirurgia.find({ paciente: pacienteId });
+const listar = async () => Cirurgia.find();
+const atualizar = async (id, data) => Cirurgia.findByIdAndUpdate(id, data, { new: true });
+const deletar = async (id) => Cirurgia.findByIdAndDelete(id);
+const deletarPorPaciente = async (pacienteId) => Cirurgia.deleteMany({ paciente: pacienteId });
+const atualizarCirurgia = async (id, data) => Cirurgia.findByIdAndUpdate(id, data, { new: true });
 
-const criarCirurgiaRepository = async (dtoCirurgia) => {
-    return await prisma.cirurgia.create({
-        data: {
-            ...dtoCirurgia
-        },
-    });
-}
-
-module.exports = { criarCirurgiaRepository };
+module.exports = { 
+  criarCirurgiaRepository, 
+  buscarPorId, 
+  buscarPorPaciente,
+  listar, 
+  atualizar, 
+  deletar,
+  deletarPorPaciente,
+  atualizarCirurgia
+};

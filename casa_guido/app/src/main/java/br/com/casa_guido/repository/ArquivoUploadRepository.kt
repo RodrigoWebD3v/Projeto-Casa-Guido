@@ -2,13 +2,13 @@ package br.com.casa_guido.repository
 
 import br.com.casa_guido.configuration.ClienteApi
 import io.ktor.client.call.body
+import io.ktor.client.request.forms.MultiPartFormDataContent
+import io.ktor.client.request.forms.formData
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
-import io.ktor.http.content.MultiPartFormDataContent
 import io.ktor.http.content.PartData
-import io.ktor.http.content.formData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -22,7 +22,7 @@ class ArquivoUploadRepository(
                 val response = clienteApi.client.post("${'$'}{clienteApi.pacienteEndpoint}/arquivos") {
                     setBody(
                         MultiPartFormDataContent(
-                            formData {
+                            formData() {
                                 append("pacienteId", pacienteId)
                                 append(
                                     "arquivo",

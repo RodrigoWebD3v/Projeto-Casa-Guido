@@ -1,27 +1,22 @@
-const pacienteDTO = (objetoPaciente, pessoaPaciente,  pessoaPai = null, pessoaMae = null, pessoaOutro = null) => {
-  
-  console.log("PacieteDTO", pessoaPaciente);
-  console.log("PacieteDTO", pessoaPai);
-  console.log("PacieteDTO", pessoaMae);
-  console.log("PacieteDTO", pessoaOutro);
+const pacienteDTO = (paciente, pessoaPaciente,  pessoaPai = null, pessoaMae = null, pessoaOutro = null) => {
 
   return {
-    pessoaId                : pessoaPaciente, 
-    status                  : objetoPaciente.status, 
-    nomeMae                 : objetoPaciente.nomeMae, 
-    nomePai                 : objetoPaciente.nomePai, 
-    nomeOutro               : objetoPaciente.nomeOutro, 
-    remuneracao             : objetoPaciente.remuneracao, 
-    recebeBpc               : objetoPaciente.recebeBpc, 
-    valorBpc                : objetoPaciente.valorBpc,
-    aptoReceberBpc          : objetoPaciente.aptoReceberBpc,
-    tipoEscola              : objetoPaciente.tipoEscola,
-    escolaNome              : objetoPaciente.escolaNome,
-    origenInfoOng           : objetoPaciente.origenInfoOng,
-    observacoes             : objetoPaciente.observacoes,
-    responsavelId           : pessoaPai,
-    conjugeResponsavelId    : pessoaMae,
-    outroResponsavelId      : pessoaOutro,
+    pessoa                  : pessoaPaciente, 
+    status                  : paciente.status         || null, 
+    nomeMae                 : paciente.nomeMae        || null, 
+    nomePai                 : paciente.nomePai        || null, 
+    nomeOutro               : paciente.nomeOutro      || null, 
+    remuneracao             : paciente.remuneracao    || null, 
+    recebeBpc               : paciente.recebeBpc      || null, 
+    valorBpc                : paciente.valorBpc       || null,
+    aptoReceberBpc          : paciente.aptoReceberBpc || null,
+    tipoEscola              : paciente.tipoEscola     || null,
+    escolaNome              : paciente.escolaNome     || null,
+    origenInfoOng           : paciente.origenInfoOng  || null,
+    observacoes             : paciente.observacoes    || null,
+    responsavel             : pessoaPai,
+    conjugeResponsavel      : pessoaMae,
+    outroResponsavel        : pessoaOutro,
   };
 };
 

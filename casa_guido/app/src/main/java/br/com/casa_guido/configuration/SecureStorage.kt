@@ -16,7 +16,7 @@ object SecureStorage {
     private const val REFRESH_TOKEN_KEY = "refresh_token"
     private const val TIME_TO_DISCONECT = "time_to_disconect"
 
-    // Função segura que lida com falhas de criptografia e limpa os dados se necessário
+
     private fun getSafeEncryptedSharedPreferences(context: Context) = try {
         EncryptedSharedPreferences.create(
             context,

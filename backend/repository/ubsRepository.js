@@ -1,13 +1,9 @@
-const { PrismaClient } = require('@prisma/client');
+const Ubs = require('../models/Ubs');
 
-const prisma = new PrismaClient();
+const criarUbsRepository = async (data) => new Ubs(data).save();
+const buscarPorId = async (id) => Ubs.findById(id);
+const listar = async () => Ubs.find();
+const atualizar = async (id, data) => Ubs.findByIdAndUpdate(id, data, { new: true });
+const deletar = async (id) => Ubs.findByIdAndDelete(id);
 
-const criarUbsRepository = async (dtoUbs) => {
-    return await prisma.ubs.create({
-        data: {
-            ...dtoUbs
-        },
-    });
-}
-
-module.exports = { criarUbsRepository };
+module.exports = { criarUbsRepository, buscarPorId, listar, atualizar, deletar };

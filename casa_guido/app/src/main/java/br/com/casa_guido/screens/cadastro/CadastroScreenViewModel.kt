@@ -67,17 +67,24 @@ class CadastroScreenViewModel(
 
     fun save(onPopBack: () -> Unit) {
         viewModelScope.launch {
-            if (_paciente.value.pessoa.nome.isNotEmpty()) {
-                criarPacienteService.criarPaciente(_paciente.value)
-                _paciente.value.arquivos.forEach { arquivo ->
-                    arquivo.uri?.let { path ->
-                        arquivoUploadService.uploadArquivo(File(path), _paciente.value.id)
-                    }
+            try{
+                if (_paciente.value.pessoa.nome.isNotEmpty()) {
+
+                    _paciente.value = _paciente.value.copy(
+                        alterado = true
+                    )
+
+                    criarPacienteService.criarPaciente(_paciente.value)
+
+                    _status.value = Status.Sucesso("Paciente criado com sucesso")
+
+                    onPopBack()
+                } else {
+                    _status.value = Status.Alerta("Nome do paciente não pode ser vazio")
                 }
-                _status.value = Status.Sucesso("Paciente criado com sucesso")
-                onPopBack()
-            } else {
-                _status.value = Status.Alerta("Nome do paciente não pode ser vazio")
+            }catch (e : Exception) {
+                Log.e("CadastroScreenViewModel", "Error saving paciente: ${e.message}")
+                _status.value = Status.Erro("Erro ao salvar paciente: ${e.message}")
             }
         }
     }

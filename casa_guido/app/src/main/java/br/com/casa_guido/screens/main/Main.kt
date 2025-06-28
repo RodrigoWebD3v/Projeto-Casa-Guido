@@ -115,6 +115,11 @@ fun Main(
         selectedItem = items.first { it.id == pagerState.currentPage }
     }
 
+    LaunchedEffect(Unit) {
+        viewModelMain.setContext(contexto)
+        viewModelMain.SincronizarPacientes()
+    }
+
     LaunchedEffect(statusUsuario) {
         when (statusUsuario) {
             true -> {
