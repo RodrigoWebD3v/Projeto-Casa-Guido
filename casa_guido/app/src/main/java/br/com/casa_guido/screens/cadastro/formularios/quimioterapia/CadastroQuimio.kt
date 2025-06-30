@@ -126,7 +126,6 @@ fun CadastroQuimio(
                         viewModel.toggleDataPickerQuimioInicio()
                     },
                     onChange = {
-                        Log.i("QuimioCadastro 0", "onChange: $it")
                         viewModel.onChangeQuimioInicio(it)
                     },
                     onClick = {
@@ -143,7 +142,6 @@ fun CadastroQuimio(
                         viewModel.toggleDataPickerQuimioFim()
                     },
                     onChange = {
-                        Log.i("QuimioCadastro 1", "onChange: $it")
                         viewModel.onChangeQuimioFim(it)
                     },
                     onClick = {
@@ -164,7 +162,6 @@ fun CadastroQuimio(
                         viewModel.newQuimio()
                         viewModel.onChangeQuimioInicio(Utils.formataDataPadraoBr(LocalDate.now())!!)
                         viewModel.onChangeQuimioFim(Utils.formataDataPadraoBr(LocalDate.now())!!)
-                        Log.i("QuimioCadastro", "${listaQuimios.size}")
                     }
                 },
                 modifier = Modifier

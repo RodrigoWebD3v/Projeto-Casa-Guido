@@ -61,6 +61,12 @@ class PacienteService(
         )
     }
 
+    suspend fun atualizaPaciente(paciente: PacienteUI) {
+        pacienteRepository.update(
+            paciente.toEntidade()
+        )
+    }
+
     private fun PacienteUI.toEntidade(): PacienteEntidade {
         Log.i(
             "PacienteService B",
@@ -96,7 +102,8 @@ class PacienteService(
             ubsMunicipio = this.ubs.municipio,
             crasBairro = this.cras.bairro,
             ubsBairro = this.ubs.bairro,
-            alterado = this.alterado
+            alterado = this.alterado,
+            idBackend = this.idBackend
         )
     }
 
@@ -145,7 +152,8 @@ class PacienteService(
             ),
             situacaoHabitacional = situacaoHabitacionalService.buscaSituacaoHabitacionalPorPaciente(this.id)?: SituacaoHabitacional(),
             arquivos = arquivo.getArquivosPorPaciente(this.id),
-            alterado = this.alterado
+            alterado = this.alterado,
+            idBackend = this.idBackend
         )
     }
 }

@@ -10,7 +10,6 @@ class EnderecoRepository(
     suspend fun insert(endereco: EnderecoEntidade) {
         dao.insert(endereco)
         val test = dao.getById(endereco.id)
-        Log.d("EnderecoRepository", "Confirmando insert: $test")
     }
 
     val enderecos get() = dao.getAll()

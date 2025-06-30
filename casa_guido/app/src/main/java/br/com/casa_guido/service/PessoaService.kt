@@ -20,10 +20,6 @@ class PessoaService(
     }
 
     suspend fun createPessoa(pessoa: PessoaUI, endereco: Endereco) {
-        Log.i(
-            "PessoaService",
-            "createPessoa: ${pessoa.situacaoProfissional} - ${pessoa.estadoCivil}"
-        )
         pessoaRepository.insert(
             pessoa.toEntidade(
                 enderecoId = endereco.id
@@ -34,10 +30,6 @@ class PessoaService(
     private fun Pessoa.toEntidade(
         enderecoId: String
     ): PessoaEntidade {
-        Log.i(
-            "PessoaService",
-            "toEntidade: ${this.escolaridade} - ${this.serie}"
-        )
 
         return PessoaEntidade(
             id = this.id,

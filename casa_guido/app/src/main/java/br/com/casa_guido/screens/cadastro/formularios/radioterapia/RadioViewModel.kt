@@ -41,7 +41,6 @@ class RadioViewModel : ViewModel() {
     }
 
     fun onChangeRadioFim(data: String) {
-        Log.i("QuimioViewModel", "onChangeQuimioEdicao Fim: $data")
         _uiState.update {
             it.copy(
                 radioEdicao = it.radioEdicao.copy(

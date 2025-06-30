@@ -13,6 +13,11 @@ data class PacientesRequest(
 
 @Serializable
 data class PacientesResponse(
-    val status: Boolean,
+    val id: String,
+    val nome: String
+)
 
+@Serializable
+data class DataResponse(
+    val data: PacientesResponse,
 )

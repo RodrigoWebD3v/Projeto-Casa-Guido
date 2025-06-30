@@ -39,7 +39,8 @@ data class Paciente(
     val composicaoFamiliar: List<ComposicaoFamiliar> = emptyList(),
     val historicoSaude: HistoricoSaude = HistoricoSaude(),
     val situacaoHabitacional: SituacaoHabitacional = SituacaoHabitacional(),
-    val arquivos: List<Arquivo> = emptyList()
+    val arquivos: List<Arquivo> = emptyList(),
+    val idBackend: String? = null
 )
 
 @Serializable
@@ -73,7 +74,8 @@ data class PacienteRequestDTO(
     val profissionalResponsavel: ProfissionalResponsavelDTO,
     val composicaoFamiliar: List<ComposicaoFamiliarDTO>,
     val historicoSaude: HistoricoSaudeDTO,
-    val situacaoHabitacional: SituacaoHabitacionalDTO
+    val situacaoHabitacional: SituacaoHabitacionalDTO,
+    val idBackend: String? = null
 )
 
 fun Paciente.toRequestDTO(): PacienteRequestDTO {
@@ -107,6 +109,7 @@ fun Paciente.toRequestDTO(): PacienteRequestDTO {
         profissionalResponsavel = profissionalResponsavel.toRequestDTO(),
         composicaoFamiliar = composicaoFamiliar.map { it.toRequestDTO() },
         historicoSaude = historicoSaude.toRequestDTO(),
-        situacaoHabitacional = situacaoHabitacional.toRequestDTO()
+        situacaoHabitacional = situacaoHabitacional.toRequestDTO(),
+        idBackend = idBackend,
     )
 }

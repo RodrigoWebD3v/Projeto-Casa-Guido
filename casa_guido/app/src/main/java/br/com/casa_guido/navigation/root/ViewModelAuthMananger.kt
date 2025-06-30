@@ -59,13 +59,11 @@ class ViewModelAuthMananger(
                         _status.update {
                             Status.Sucesso("Conexão offline permitida")
                         }
-                        Log.i("AuthMananger", "Entrou  Offline permitido")
                         return@launch
                     } else {
                         _status.update {
                             Status.Erro("Erro ao fazer login")
                         }
-                        Log.i("AuthMananger", "Entrou  Offline não permitido")
                         return@launch
                     }
                 }
@@ -74,14 +72,8 @@ class ViewModelAuthMananger(
                     Status.Sucesso("Sessão valida")
                 }
                 setaTempoOfflinePermitido(context)
-                Log.i("AuthMananger", "Login realizado com sucesso via refresh token")
             } catch (e: Exception) {
-                Log.i("AuthMananger", "Erro ao tentar buscar refreshtoken")
                 if (!OfflinePermitido(context)) {
-                    Log.i(
-                        "AuthMananger",
-                        "Redirecionando para tela de login porque offline não permitido"
-                    )
                     Sessao.setaStatusSessao(context, false)
                     _status.update {
                         Status.Erro(e.message ?: "Erro ao fazer login")
@@ -89,14 +81,9 @@ class ViewModelAuthMananger(
                     clearTempoOffline(context)
                     return@launch
                 }
-                Log.i(
-                    "AuthMananger",
-                    "Redirecionando para dashboard porque offline permitido"
-                )
                 _status.update {
                     Status.Sucesso("Login realizado com sucesso")
                 }
-                Log.i("AuthMananger", "Entrou  Offline permitido")
                 return@launch
             }
         }
@@ -108,7 +95,6 @@ class ViewModelAuthMananger(
         viewModelScope.launch {
             try {
                 if (!Utils.verificarConexao(context)) {
-                    Log.i("AuthMananger", "Login Sem conexão")
                     _conexao.update { Conexao.SemConexao }
                     setStatus(Status.Erro("Sem conexão com a internet"))
                     return@launch
@@ -122,7 +108,6 @@ class ViewModelAuthMananger(
                 setaTempoOfflinePermitido(context)
             } catch (e: Exception) {
                 val erroTratado = errosApp(e)
-                Log.i("AuthMananger", erroTratado.toString())
                 Sessao.setaStatusSessao(context, false)
                 _status.update {
                     Status.Erro(e.message ?: "Erro ao fazer login")
@@ -142,7 +127,6 @@ class ViewModelAuthMananger(
                     false
                 }
             } catch (e: Exception) {
-                Log.i("AuthMananger", "Erro ao fazer logout")
                 _status.update {
                     Status.Erro(e.message ?: "Erro ao fazer logout")
                 }

@@ -14,7 +14,6 @@ class ComposicaoFamiliarViewModel: ViewModel() {
     val uiState = _uiState.asStateFlow()
 
     fun onChangeComFamiliaEdicao(composicaoFamiliar: ComposicaoFamiliar) {
-        Log.d("teste", "onChangeComFamiliaEdicao: $composicaoFamiliar")
         _uiState.value = _uiState.value.copy(
             composicaoFamiliarEdicao = composicaoFamiliar
         )

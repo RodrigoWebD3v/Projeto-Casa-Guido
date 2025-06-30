@@ -20,4 +20,8 @@ class PacienteRepository(
         return dao.getAlterado(status)
     }
 
+    suspend fun update(paciente: PacienteEntidade) {
+        dao.update(paciente)
+    }
+
 }

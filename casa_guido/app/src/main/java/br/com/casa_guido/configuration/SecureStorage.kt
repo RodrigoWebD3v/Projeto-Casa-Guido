@@ -28,7 +28,6 @@ object SecureStorage {
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
     } catch (e: Exception) {
-        Log.e("SecureStorage", "Erro ao acessar EncryptedSharedPreferences, limpando preferências...", e)
         // Remove os dados corrompidos
         context.deleteSharedPreferences(PREFS_NAME)
         // Tenta novamente com prefs limpos

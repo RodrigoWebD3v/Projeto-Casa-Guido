@@ -15,7 +15,6 @@ class EnderecoService(
         val enderecos = enderecoRepository.enderecos
         val listaEnderecos = enderecos.map {
             it.map { endereco ->
-                Log.d("EnderecoService", "Endereco: $endereco")
                 endereco.toUI()
             }
         }
@@ -27,12 +26,10 @@ class EnderecoService(
     }
 
     suspend fun createEndereco(endereco: EnderecoUI) {
-        Log.d("EnderecoService", "Inserting: $endereco")
         enderecoRepository.insert(endereco.toEntidade())
     }
 
     private fun EnderecoUI.toEntidade(): EnderecoEntidade {
-        Log.d("EnderecoService", this.id + " - " + this.logradouro)
         return EnderecoEntidade(
             id = this.id,
             logradouro = this.logradouro,

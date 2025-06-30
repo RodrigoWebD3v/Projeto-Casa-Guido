@@ -1,15 +1,12 @@
 package br.com.casa_guido.screens.main
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import br.com.casa_guido.service.SincronizarPacientesService
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val sincronizarPacientesService: SincronizarPacientesService
