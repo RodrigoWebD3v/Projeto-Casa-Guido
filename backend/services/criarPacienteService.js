@@ -6,6 +6,7 @@ const { criarSituacaoHabitacionalService } = require('./situacaoHabitacionalServ
 const { criarCirurgiaService } = require('./cirurgiaService');
 const { criarQuimioterapiaService } = require('./quimioterapiaService');
 const { criarRadioterapiaService } = require('./radioterapiaService');
+const { createPacienteResponseDTO } = require('./../dto/responseDTO/createPacienteDTO');
 
 const criarPacienteService = async (body) => {
 
@@ -83,11 +84,17 @@ const criarPacienteService = async (body) => {
          }
       }
 
-      return pacienteSalvo;
+      const dtoResponse = createPacienteResponseDTO(pacienteSalvo)
+
+      console.log(dtoResponse)
+
+      return dtoResponse;
    } catch(e) {
       console.log("Erro ao criar paciente", e);
       throw e; 
    }
 };
+
+
 
 module.exports = { criarPacienteService };
