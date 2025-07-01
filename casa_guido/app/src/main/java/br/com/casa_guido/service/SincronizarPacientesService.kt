@@ -18,10 +18,11 @@ class SincronizarPacientesService(
             val token = SecureStorage.getToken(context)
 
             pacienteService.getPacientesAlterados(true)?.forEach { paciente ->
+
                 if (paciente.idBackend.isNullOrBlank()) {
-                    SincronizarCriarPaciente(context, paciente, token ?: "")
-                }else{
-                    SincronizarAtualizarPacientes(context, paciente, token ?: "")
+                    SincronizarCriarPaciente(paciente, token ?: "")
+                } else {
+                    SincronizarAtualizarPacientes(paciente, token ?: "")
                 }
             }
         } catch (e: Exception) {
@@ -29,7 +30,7 @@ class SincronizarPacientesService(
         }
     }
 
-    suspend fun SincronizarCriarPaciente(context: Context, paciente: Paciente, token: String) {
+    suspend fun SincronizarCriarPaciente(paciente: Paciente, token: String) {
         try {
             val dtoPaciente = PacientesRequest(paciente.toRequestDTO(), token)
             val dataResponse: DataResponse =
@@ -47,7 +48,7 @@ class SincronizarPacientesService(
         }
     }
 
-    suspend fun SincronizarAtualizarPacientes(context: Context, paciente: Paciente, token: String) {
+    suspend fun SincronizarAtualizarPacientes(paciente: Paciente, token: String) {
         try {
 
             val dtoPaciente = PacientesRequest(paciente.toRequestDTO(), token)
@@ -61,6 +62,23 @@ class SincronizarPacientesService(
 
         } catch (e: Exception) {
             Log.e("SincronizarPacientesService", "Erro ao sincronizar pacientes", e)
+        }
+    }
+
+     suspend fun SincronizarPaciente(paciente: Paciente, context: Context) {
+
+        Log.i("SincronizarPacientesService", "Iniciando sincronização do paciente SincronizarPaciente: ${paciente.pessoa.nome}")
+
+         val token = SecureStorage.getToken(context)
+
+        try {
+            if (paciente.idBackend.isNullOrBlank()) {
+                SincronizarCriarPaciente(paciente, token?:"")
+            } else {
+                SincronizarAtualizarPacientes(paciente, token?:"")
+            }
+        } catch (e: Exception) {
+            Log.e("SincronizarPacientesService", "Erro ao sincronizar paciente", e)
         }
     }
 

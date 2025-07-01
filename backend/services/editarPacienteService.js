@@ -127,4 +127,17 @@ const editarPacienteService = async (id, body) => {
    }
 };
 
-module.exports = { editarPacienteService }; 
+const buscarPacientePorIdService = async (id) => {
+   try {
+      const paciente = await buscarPacientePorIdRepository(id);
+      if (!paciente) {
+         throw new AppError('Paciente não encontrado', 404);
+      }
+      return paciente;
+   } catch (e) {
+      console.log("Erro ao buscar paciente por id", e);
+      throw e;
+   }
+}
+
+module.exports = { editarPacienteService, buscarPacientePorIdService }; 
