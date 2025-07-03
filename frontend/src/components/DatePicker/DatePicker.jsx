@@ -3,55 +3,72 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { format } from 'date-fns';
+import { Calendar, X } from 'lucide-react';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function DatePickerInput({
   title,
-  value = '',
-  onChange = () => {},
+  value = null, // agora espera Date ou null
+  onChange = () => { },
+  minDate = null,
 }) {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  // Controla o estado local para controlar o valor do datepicker
+  const [selectedDate, setSelectedDate] = useState(value);
 
   useEffect(() => {
-    onChange(format(selectedDate, 'dd/MM/yyyy'));
-  }, [selectedDate]);
+    setSelectedDate(value);
+  }, [value]);
+
+  const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
+    <div
+      onClick={onClick}
+      ref={ref}
+      className="w-full h-[45px] bg-success border border-success rounded-md flex items-center justify-between cursor-pointer px-4 relative"
+    >
+      <span className={`text-[16px] font-semibold ${value ? 'text-background' : 'text-background'}`}>
+        {value || 'Selecione a data'}
+      </span>
+      <div className="flex items-center gap-2">
+        {value && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedDate(null);
+              onChange(null);
+            }}
+            className="text-red-500 hover:text-red-700 transition"
+            title="Limpar data"
+          >
+            <X size={16} />
+          </button>
+        )}
+        <Calendar size={20} className="text-background" />
+      </div>
+    </div>
+  ));
+  CustomInput.displayName = 'CustomInput';
 
   return (
     <div className="w-full px-5">
-      <label className="text-[14px] text-greendark font-medium block mb-1">
-        {title}
-      </label>
-      <div
-        className="w-full h-[45px] bg-success border border-success rounded-md flex items-center justify-center cursor-pointer"
-      >
-        <DatePicker
-          selected={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
-          dateFormat="dd/MM/yyyy"
-          className="w-full bg-transparent text-background px-4 text-[16px] font-semibold focus:outline-none"
-          calendarClassName="rounded-lg border-none shadow-lg"
-        />
-      </div>
+      {title && (
+        <label className="text-[14px] text-background font-medium block mb-1">
+          {title}
+        </label>
+      )}
+
+      <DatePicker
+        selected={selectedDate}
+        onChange={(date) => {
+          setSelectedDate(date);
+          onChange(date);
+        }}
+        dateFormat="dd/MM/yyyy"
+        customInput={<CustomInput />}
+        calendarClassName="rounded-lg border-none shadow-lg"
+        minDate={minDate}
+        placeholderText="Selecione a data"
+      />
     </div>
   );
 }
-
-/*
-"use client";
-
-import DatePickerInput from "@/components/DatePicker/DatePicker";
-import { useState } from "react";
-
-export default function Home() {
-  const [data, setData] = useState('');
-
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-background">
-     <DatePickerInput
-        title="Data de nascimento"
-        value={data}
-        onChange={(novaData) => setData(novaData)}
-      />
-    </main>
-  );
-}
-*/
