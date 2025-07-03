@@ -127,7 +127,6 @@ fun RadioCadastro(
                         viewModel.toggleDataPickerRadioInicio()
                     },
                     onChange = {
-                        Log.i("RadioCadastro 0", "onChange: $it")
                         viewModel.onChangeRadio(it)
                     },
                     onClick = {
@@ -148,7 +147,6 @@ fun RadioCadastro(
                         viewModel.toggleDataPickerRadioFim()
                     },
                     onChange = {
-                        Log.i("RadioCadastro 1", "onChange: $it")
                         viewModel.onChangeRadioFim(it)
                     },
                     onClick = {

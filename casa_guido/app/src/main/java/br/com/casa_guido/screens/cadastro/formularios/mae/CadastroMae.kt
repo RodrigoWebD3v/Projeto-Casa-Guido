@@ -228,10 +228,6 @@ fun CadastroConjuge(
                     Escolaridade(
                         pessoa = conjuge,
                         onChangeEscolaridade = { valor1, valor2 ->
-                            Log.i(
-                                "Cadastro Mãe",
-                                "${valor1} - ${valor2}"
-                            )
                             onChangeCampo(
                                 CamposConjuge.ESCOLARIDADE,
                                 valor1.toString()

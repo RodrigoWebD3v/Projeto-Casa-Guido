@@ -16,7 +16,7 @@ object SecureStorage {
     private const val REFRESH_TOKEN_KEY = "refresh_token"
     private const val TIME_TO_DISCONECT = "time_to_disconect"
 
-    // Função segura que lida com falhas de criptografia e limpa os dados se necessário
+
     private fun getSafeEncryptedSharedPreferences(context: Context) = try {
         EncryptedSharedPreferences.create(
             context,
@@ -28,7 +28,6 @@ object SecureStorage {
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
     } catch (e: Exception) {
-        Log.e("SecureStorage", "Erro ao acessar EncryptedSharedPreferences, limpando preferências...", e)
         // Remove os dados corrompidos
         context.deleteSharedPreferences(PREFS_NAME)
         // Tenta novamente com prefs limpos

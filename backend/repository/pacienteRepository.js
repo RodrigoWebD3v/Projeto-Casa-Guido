@@ -1,17 +1,12 @@
-const { PrismaClient } = require('@prisma/client');
+const Paciente = require('../models/Paciente');
 
-const prisma = new PrismaClient();
+const criarPacienteRepository = async (data) => {
+    const paciente = await new Paciente(data).save();
+    return paciente;
+};
+const buscarPacientePorIdRepository = async (id) => Paciente.findById(id);
+const listarPacientesRepository = async () => Paciente.find();
+const editarPacienteRepository = async (id, data) => Paciente.findByIdAndUpdate(id, data, { new: true });
+const deletarPacienteRepository = async (id) => Paciente.findByIdAndDelete(id);
 
-const criarPacineteRepository = async (dtoPaciente) => {
-    return await prisma.paciente.create({
-        data: {
-         ...dtoPaciente
-        },
-      });
-}
-
-const buscarUsuarioPorId = async (id) => {
-    return await prisma.user.findUnique({ where: { id } });
-}
-
-module.exports = {criarPacineteRepository, buscarUsuarioPorId };
+module.exports = { criarPacienteRepository, buscarPacientePorIdRepository, listarPacientesRepository, editarPacienteRepository, deletarPacienteRepository };

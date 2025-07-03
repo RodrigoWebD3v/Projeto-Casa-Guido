@@ -1,13 +1,9 @@
-const { PrismaClient } = require('@prisma/client');
+const ComposicaoFamiliar = require('../models/ComposicaoFamiliar');
 
-const prisma = new PrismaClient();
+const criarComposicaoFamiliarRepository = async (data) => new ComposicaoFamiliar(data).save();
+const buscarPorId = async (id) => ComposicaoFamiliar.findById(id);
+const listar = async () => ComposicaoFamiliar.find();
+const atualizar = async (id, data) => ComposicaoFamiliar.findByIdAndUpdate(id, data, { new: true });
+const deletar = async (id) => ComposicaoFamiliar.findByIdAndDelete(id);
 
-const criarComposicaoFamiliarRepository = async (dtoComposicaoFamiliar) => {
-    return await prisma.composicaoFamiliar.create({
-        data: {
-            ...dtoComposicaoFamiliar
-        },
-    });
-}
-
-module.exports = { criarComposicaoFamiliarRepository };
+module.exports = { criarComposicaoFamiliarRepository, buscarPorId, listar, atualizar, deletar };

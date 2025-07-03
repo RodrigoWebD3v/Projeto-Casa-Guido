@@ -1,31 +1,13 @@
-const { PrismaClient } = require('@prisma/client');
-const  PessoaError = require('../handlerException/criarPacienteException')
+const Pessoa = require('../models/Pessoa');
 
-const prisma = new PrismaClient();
+const criarPessoaRepository = async (data) => {
+  const pessoa = new Pessoa(data);
+  return await pessoa.save();
+};
 
-const criarPessoaRepository = async (dtoPessoa) => {
-    try{
-        return await prisma.pessoa.create({
-            data: {
-                ...dtoPessoa
-            },
-          });
-    }catch(error){
-        if (error.code === 'P2002' && error.meta?.target?.includes('cpf')) {
-            throw PessoaError.cpfDuplicado();
-        }
-        // Outros erros desconhecidos
-        throw error;
-    }
-   
-}
+const buscarPorId = async (id) => Pessoa.findById(id);
+const listar = async () => Pessoa.find();
+const atualizar = async (id, data) => Pessoa.findByIdAndUpdate(id, data, { new: true });
+const deletar = async (id) => Pessoa.findByIdAndDelete(id);
 
-const buscarPessoaPorNome = async (dtoPessoa) => {
-    return await prisma.pessoa.findUnique({ where:  dtoPessoa.nome  });
-}
-
-const buscarPessoaPorId = async (id) => {
-    return await prisma.pessoa.findUnique({ where: dtoPessoa.id  });
-}
-
-module.exports = { criarPessoaRepository, buscarPessoaPorNome, buscarPessoaPorId };
+module.exports = { criarPessoaRepository, buscarPorId, listar, atualizar, deletar };

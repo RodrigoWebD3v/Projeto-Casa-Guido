@@ -1,11 +1,9 @@
-
 const { quimioterapiaDTO } = require("../dto/pacienteDTO/quimioterapiaDTO");
-const { criarQuimioterapiaRepository } = require("../repository/quimioterapiaRepository");
+const { criarQuimioterapiaRepository, atualizarQuimioterapia } = require("../repository/quimioterapiaRepository");
 
-
-const criarQuimioterapiaService = async (quimioterapia) => {
+const criarQuimioterapiaService = async (quimioterapia, pacienteId) => {
   try {
-    const quimioterapiaDT = await quimioterapiaDTO(quimioterapia);
+    const quimioterapiaDT = await quimioterapiaDTO(quimioterapia, pacienteId);
     const dadosSalvos = await criarQuimioterapiaRepository(quimioterapiaDT);
     return dadosSalvos;
   } catch (e) {
@@ -13,4 +11,15 @@ const criarQuimioterapiaService = async (quimioterapia) => {
   }
 };
 
-module.exports = { criarQuimioterapiaService };
+const editarQuimioterapiaService = async (quimioterapiaId, quimioterapia, pacienteId) => {
+  try {
+    const quimioterapiaDT = await quimioterapiaDTO(quimioterapia, pacienteId);
+    const dadosAtualizados = await atualizarQuimioterapia(quimioterapiaId, quimioterapiaDT);
+    return dadosAtualizados;
+  } catch (e) {
+    console.log("Erro ao editar quimioterapia:", e);
+    throw e;
+  }
+};
+
+module.exports = { criarQuimioterapiaService, editarQuimioterapiaService };

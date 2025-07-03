@@ -1,9 +1,10 @@
 const cirurgiaDTO = (objetoCirurgia, pacienteId) => {
     return {
-        pacienteId: pacienteId,
+        paciente: pacienteId,
         nome:  objetoCirurgia.nome,
         data:  objetoCirurgia.data,
         cid :  objetoCirurgia.cid,
+        observacoes: objetoCirurgia.observacoes
     }
 };
 

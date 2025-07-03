@@ -1,13 +1,19 @@
-const { PrismaClient } = require('@prisma/client');
+const SituacaoHabitacional = require('../models/SituacaoHabitacional');
 
-const prisma = new PrismaClient();
+const criarSituacaoHabitacionalRepository = async (data) => new SituacaoHabitacional(data).save();
+const buscarPorId = async (id) => SituacaoHabitacional.findById(id);
+const listar = async () => SituacaoHabitacional.find();
+const atualizar = async (id, data) => SituacaoHabitacional.findByIdAndUpdate(id, data, { new: true });
+const deletar = async (id) => SituacaoHabitacional.findByIdAndDelete(id);
+const buscarSituacaoHabitacionalPorPaciente = async (pacienteId) => SituacaoHabitacional.findOne({ paciente: pacienteId });
+const atualizarSituacaoHabitacional = async (id, data) => SituacaoHabitacional.findByIdAndUpdate(id, data, { new: true });
 
-const criarSituacaoHabitacionalRepository = async (dtoSituacaoHabitacional) => {
-    return await prisma.situacaoHabitacional.create({
-        data: {
-            ...dtoSituacaoHabitacional
-        },
-    });
-}
-
-module.exports = { criarSituacaoHabitacionalRepository };
+module.exports = { 
+    criarSituacaoHabitacionalRepository, 
+    buscarPorId, 
+    listar, 
+    atualizar, 
+    deletar, 
+    buscarSituacaoHabitacionalPorPaciente, 
+    atualizarSituacaoHabitacional 
+};

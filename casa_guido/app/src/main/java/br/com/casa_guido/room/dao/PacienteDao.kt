@@ -20,4 +20,7 @@ interface PacienteDao {
 
     @Query("SELECT * FROM paciente WHERE id = :id")
     suspend fun getById(id: String): Paciente?
+
+    @Query("SELECT * FROM paciente WHERE alterado = :status")
+    suspend fun getAlterado(status: Boolean): List<Paciente>?
 }

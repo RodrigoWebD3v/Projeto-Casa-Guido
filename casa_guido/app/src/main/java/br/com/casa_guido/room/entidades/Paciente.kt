@@ -42,5 +42,6 @@ data class Paciente(
     val ubsMunicipio : String? = null,
     val crasBairro: String? = null,
     val ubsBairro: String? = null,
-
+    val alterado: Boolean = false,
+    val idBackend: String? = null
 )

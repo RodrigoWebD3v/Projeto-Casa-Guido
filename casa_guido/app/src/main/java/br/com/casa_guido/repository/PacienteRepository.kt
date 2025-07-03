@@ -16,4 +16,12 @@ class PacienteRepository(
 
     val pacientes get() = dao.getAll()
 
+    suspend fun getAlterado(status: Boolean): List<PacienteEntidade>? {
+        return dao.getAlterado(status)
+    }
+
+    suspend fun update(paciente: PacienteEntidade) {
+        dao.update(paciente)
+    }
+
 }

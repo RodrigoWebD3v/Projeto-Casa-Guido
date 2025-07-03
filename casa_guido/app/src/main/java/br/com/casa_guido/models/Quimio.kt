@@ -9,3 +9,16 @@ data class Quimio(
     val dataInicio: String = "",
     val dataUltimaSessao: String = "",
 )
+
+@Serializable
+data class QuimioDTO(
+    val dataInicio: String = "",
+    val dataUltimaSessao: String = "",
+)
+
+fun Quimio.toRequestDTO(): QuimioDTO {
+    return QuimioDTO(
+        dataInicio = this.dataInicio,
+        dataUltimaSessao = this.dataUltimaSessao
+    )
+}

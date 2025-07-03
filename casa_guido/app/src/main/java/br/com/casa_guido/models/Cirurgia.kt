@@ -10,3 +10,18 @@ data class Cirurgia(
     val id : String = UUID.randomUUID().toString(),
     val cid: String = "",
 )
+
+@Serializable
+data class CirurgiaDTO(
+    val nome: String = "",
+    val data: String = "",
+    val cid: String = "",
+)
+
+fun Cirurgia.toRequestDTO(): CirurgiaDTO {
+    return CirurgiaDTO(
+        nome = this.nome,
+        data = this.data,
+        cid = this.cid
+    )
+}

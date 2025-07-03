@@ -24,7 +24,6 @@ class AuthService(private val authRepository: AuthRepository )
             saveToken(context, response.token, response.refreshToken)
             return response
         } catch (e: Exception) {
-            Log.i("AuthMananger", e.message.toString())
             Sessao.setaStatusSessao(context, false)
             throw Exception(e)
         }

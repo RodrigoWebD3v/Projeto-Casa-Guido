@@ -1,17 +1,17 @@
 const enderecoDTO = (objetoEndereco) => {
     return {
-        cep         : objetoEndereco.cep,
-        logradouro  : objetoEndereco.logradouro,
-        numero      : objetoEndereco.numero,
-        complemento : objetoEndereco.complemento,  
-        unidade     : objetoEndereco.unidade, 
-        bairro      : objetoEndereco.bairro,
-        localidade  : objetoEndereco.localidade,
-        uf          : objetoEndereco.uf,
-        estado      : objetoEndereco.estado,
-        regiao      : objetoEndereco.regiao,
-        referencia  : objetoEndereco.referencia,
-        pais        : objetoEndereco.pais,
+        cep         : objetoEndereco.cep || null,
+        logradouro  : objetoEndereco.logradouro || null,
+        numero      : objetoEndereco.numero || null,
+        complemento : objetoEndereco.complemento || null,  
+        unidade     : objetoEndereco.unidade || null, 
+        bairro      : objetoEndereco.bairro || null,
+        localidade  : objetoEndereco.localidade || null,
+        uf          : objetoEndereco.uf || null,
+        estado      : objetoEndereco.estado || null,
+        regiao      : objetoEndereco.regiao || null,
+        referencia  : objetoEndereco.referencia || null,
+        pais        : objetoEndereco.pais || null,
     }
 };
 

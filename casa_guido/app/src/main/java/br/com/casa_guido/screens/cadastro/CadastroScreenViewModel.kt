@@ -26,9 +26,11 @@ import br.com.casa_guido.screens.cadastro.formularios.pai.CamposResponsavel
 import br.com.casa_guido.screens.cadastro.formularios.situacaoHabitacional.CamposSituacaoHabitacional
 import br.com.casa_guido.screens.cadastro.formularios.socioEconomico.CamposSocioEconomico
 import br.com.casa_guido.service.CriarPacienteService
+import br.com.casa_guido.service.ArquivoUploadService
 import br.com.casa_guido.service.PacienteService
 import br.com.casa_guido.service.ViaCepService
 import br.com.casa_guido.util.Utils
+import java.io.File
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -38,6 +40,7 @@ class CadastroScreenViewModel(
     private val viaCepService: ViaCepService,
     private val pacienteService: PacienteService,
     private val criarPacienteService: CriarPacienteService,
+    private val arquivoUploadService: ArquivoUploadService,
 ) : ViewModel() {
 
     private val _status = MutableStateFlow<Status>(Status.SemInteracao)
@@ -64,12 +67,23 @@ class CadastroScreenViewModel(
 
     fun save(onPopBack: () -> Unit) {
         viewModelScope.launch {
-            if (_paciente.value.pessoa.nome.isNotEmpty()) {
-                criarPacienteService.criarPaciente(_paciente.value)
-                _status.value = Status.Sucesso("Paciente criado com sucesso")
-                onPopBack()
-            } else {
-                _status.value = Status.Alerta("Nome do paciente não pode ser vazio")
+            try{
+                if (_paciente.value.pessoa.nome.isNotEmpty()) {
+
+                    _paciente.value = _paciente.value.copy(
+                        alterado = true
+                    )
+
+                    criarPacienteService.criarPaciente(_paciente.value)
+
+                    _status.value = Status.Sucesso("Paciente criado com sucesso")
+
+                    onPopBack()
+                } else {
+                    _status.value = Status.Alerta("Nome do paciente não pode ser vazio")
+                }
+            }catch (e : Exception) {
+                _status.value = Status.Erro("Erro ao salvar paciente: ${e.message}")
             }
         }
     }
@@ -91,10 +105,6 @@ class CadastroScreenViewModel(
     }
 
     fun onChangeSocioEconomico(camposSocioEconomico: CamposSocioEconomico, valor: String) {
-        Log.i(
-            "CadastroScreenViewModel",
-            "onChangeSocioEconomico: ${camposSocioEconomico.name} - $valor"
-        )
         when (camposSocioEconomico) {
             CamposSocioEconomico.ESCOLARIDADE -> {
                 _paciente.value = _paciente.value.copy(
@@ -125,7 +135,6 @@ class CadastroScreenViewModel(
             }
 
             CamposSocioEconomico.BPC_OPCIONAL -> {
-                Log.i("CadastroScreenViewModel", "onChangeSocioEconomico REMUNERACAO_OPT: $valor")
                 _paciente.value = _paciente.value.copy(
                     bpc = valor.toInt()
                 )
@@ -178,7 +187,6 @@ class CadastroScreenViewModel(
     fun onChangeEndereco(camposEndereco: CamposEndereco, valor: String) {
         when (camposEndereco) {
             CamposEndereco.LOGRADOURO -> {
-                Log.i("CadastroScreenViewModel", "onChangeEndereco LOGRADOURO: $valor")
                 _paciente.value = _paciente.value.copy(
                     pessoa = _paciente.value.pessoa.copy(
                         endereco = _paciente.value.pessoa.endereco.copy(
@@ -209,7 +217,6 @@ class CadastroScreenViewModel(
             }
 
             CamposEndereco.BAIRRO -> {
-                Log.i("CadastroScreenViewModel", "onChangeEndereco BAIRRO: $valor")
                 _paciente.value = _paciente.value.copy(
                     pessoa = _paciente.value.pessoa.copy(
                         endereco = _paciente.value.pessoa.endereco.copy(
@@ -281,7 +288,6 @@ class CadastroScreenViewModel(
     fun onChangeEnderecoResponsavel(camposEndereco: CamposEndereco, valor: String) {
         when (camposEndereco) {
             CamposEndereco.LOGRADOURO -> {
-                Log.i("CadastroScreenViewModel", "onChangeEndereco LOGRADOURO: $valor")
                 _paciente.value = _paciente.value.copy(
                     responsavel = _paciente.value.responsavel.copy(
                         endereco = _paciente.value.responsavel.endereco.copy(
@@ -312,7 +318,6 @@ class CadastroScreenViewModel(
             }
 
             CamposEndereco.BAIRRO -> {
-                Log.i("CadastroScreenViewModel", "onChangeEndereco BAIRRO: $valor")
                 _paciente.value = _paciente.value.copy(
                     responsavel = _paciente.value.responsavel.copy(
                         endereco = _paciente.value.responsavel.endereco.copy(
@@ -385,7 +390,6 @@ class CadastroScreenViewModel(
     fun onChangeEnderecoConjuge(camposEndereco: CamposEndereco, valor: String) {
         when (camposEndereco) {
             CamposEndereco.LOGRADOURO -> {
-                Log.i("CadastroScreenViewModel", "onChangeEndereco LOGRADOURO: $valor")
                 _paciente.value = _paciente.value.copy(
                     conjugeResponsavel = _paciente.value.conjugeResponsavel.copy(
                         endereco = _paciente.value.conjugeResponsavel.endereco.copy(
@@ -416,7 +420,6 @@ class CadastroScreenViewModel(
             }
 
             CamposEndereco.BAIRRO -> {
-                Log.i("CadastroScreenViewModel", "onChangeEndereco BAIRRO: $valor")
                 _paciente.value = _paciente.value.copy(
                     conjugeResponsavel = _paciente.value.conjugeResponsavel.copy(
                         endereco = _paciente.value.conjugeResponsavel.endereco.copy(
@@ -488,7 +491,6 @@ class CadastroScreenViewModel(
     fun onChangeEnderecoOutro(camposEndereco: CamposEndereco, valor: String) {
         when (camposEndereco) {
             CamposEndereco.LOGRADOURO -> {
-                Log.i("CadastroScreenViewModel", "onChangeEndereco LOGRADOURO: $valor")
                 _paciente.value = _paciente.value.copy(
                     outroResponsavel = _paciente.value.outroResponsavel.copy(
                         endereco = _paciente.value.outroResponsavel.endereco.copy(
@@ -519,7 +521,6 @@ class CadastroScreenViewModel(
             }
 
             CamposEndereco.BAIRRO -> {
-                Log.i("CadastroScreenViewModel", "onChangeEndereco BAIRRO: $valor")
                 _paciente.value = _paciente.value.copy(
                     outroResponsavel = _paciente.value.outroResponsavel.copy(
                         endereco = _paciente.value.outroResponsavel.endereco.copy(
@@ -750,7 +751,6 @@ class CadastroScreenViewModel(
             }
 
             CamposResponsavel.CARTAO_SUS -> {
-                Log.i("CadastroScreenViewModel", "onChangeEndereco: $valor")
                 _paciente.value = _paciente.value.copy(
                     responsavel = _paciente.value.responsavel.copy(
                         cartaoSus = valor
@@ -843,7 +843,6 @@ class CadastroScreenViewModel(
             }
 
             CamposConjuge.ESCOLARIDADE_CONJUGE -> {
-                Log.i("Escolaridade aaaaaaa", valor)
                 _paciente.value = _paciente.value.copy(
                     conjugeResponsavel = _paciente.value.conjugeResponsavel.copy(
                         escolaridade = valor.toInt()

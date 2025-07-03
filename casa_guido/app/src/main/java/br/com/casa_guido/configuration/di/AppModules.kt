@@ -8,6 +8,7 @@ import br.com.casa_guido.configuration.ApiViaCepConfig
 import br.com.casa_guido.configuration.ClienteApi
 import br.com.casa_guido.navigation.root.ViewModelAuthMananger
 import br.com.casa_guido.repository.ArquivoRepository
+import br.com.casa_guido.repository.ArquivoUploadRepository
 import br.com.casa_guido.repository.AuthRepository
 import br.com.casa_guido.repository.CirurgiaRepository
 import br.com.casa_guido.repository.ComposicaoFamiliarRepository
@@ -37,6 +38,7 @@ import br.com.casa_guido.screens.login.LoginViewModel
 import br.com.casa_guido.screens.main.MainViewModel
 import br.com.casa_guido.screens.pacientes.PacientesViewModel
 import br.com.casa_guido.service.ArquivoService
+import br.com.casa_guido.service.ArquivoUploadService
 import br.com.casa_guido.service.AuthService
 import br.com.casa_guido.service.CirurgiaService
 import br.com.casa_guido.service.CompartilharArquivoService
@@ -153,6 +155,8 @@ val infraModule = module {
     singleOf(::ClienteApi)
     singleOf(::CriarPdfService)
     singleOf(::CompartilharArquivoService)
+    singleOf(::ArquivoUploadService)
+    singleOf(::ArquivoUploadRepository)
     singleOf(::SincronizarPacientesService)
     singleOf(::SincronizarPacientesRepository)
 }

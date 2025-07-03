@@ -26,10 +26,6 @@ class PacientesViewModel(
     val loading = _loading.asStateFlow()
 
     fun carregarPacientes() {
-        Log.i(
-            "ViewModelPacientes",
-            "Carregando pacientes"
-        )
         viewModelScope.launch {
             _uiState.update { state ->
                 state.copy(

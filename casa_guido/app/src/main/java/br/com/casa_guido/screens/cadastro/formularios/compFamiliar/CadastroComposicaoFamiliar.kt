@@ -316,7 +316,6 @@ fun CadastroComposicaoFamiliar(
         Button(
             onClick = {
                 if (state.composicaoFamiliarEdicao.nome.isNotEmpty()) {
-                    Log.d("ComposicaoFamiliarScreen", "Novo")
                     onChangeCampo(
                         CamposCompFamiliar.ADD_COM_FAMILIA,
                         state.composicaoFamiliarEdicao
