@@ -20,5 +20,14 @@ export const agendamentos = [
     { nome: 'Ricardo Mendes', data: '2025-06-11', hora: '16:00', tipo: 'Exame', status: 'PENDENTE' },
     { nome: 'Tatiane Ribeiro', data: '2025-06-09', hora: '17:45', tipo: 'Retorno', status: 'PENDENTE' },
     { nome: 'Lucas Martins', data: '2025-07-03', hora: '18:30', tipo: 'Consulta', status: 'CONFIRMADO' },
-    { nome: 'Gabriel Costa', data: '2025-07-03', hora: '08:15', tipo: 'Exame', status: 'CONFIRMADO' }
+    { nome: 'Gabriel Costa', data: '2025-07-03', hora: '08:15', tipo: 'Exame', status: 'CONFIRMADO' },
+    { nome: 'Ana Oliveira', data: '2025-07-04', hora: '09:00', tipo: 'Consulta', status: 'CANCELADO' },
+    { nome: 'Carlos Ferreira', data: '2025-06-10', hora: '10:30', tipo: 'Exame', status: 'PENDENTE' },
+    { nome: 'Juliana Lima', data: '2025-06-11', hora: '11:45', tipo: 'Retorno', status: 'CONFIRMADO' },
+    { nome: 'Mariana Duarte', data: '2025-06-12', hora: '13:00', tipo: 'Consulta', status: 'CANCELADO' },
+    { nome: 'Pedro Almeida', data: '2025-07-04', hora: '14:15', tipo: 'Exame', status: 'CONFIRMADO' },
+    { nome: 'Roberta Nunes', data: '2025-07-04', hora: '15:30', tipo: 'Retorno', status: 'PENDENTE' },
+    { nome: 'Fernanda Castro', data: '2025-06-13', hora: '16:45', tipo: 'Consulta', status: 'CONFIRMADO' },
+    { nome: 'Ricardo Mendes', data: '2025-06-14', hora: '17:00', tipo: 'Exame', status: 'PENDENTE' },
+    { nome: 'Tatiane Ribeiro', data: '2025-07-04', hora: '18:15', tipo: 'Retorno', status: 'CONFIRMADO' },
 ];

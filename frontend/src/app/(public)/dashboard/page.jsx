@@ -157,7 +157,7 @@ export default function Dashboard() {
           </div>
 
           {/* Lista de agendamentos de hoje */}
-          <p className="text-md text-main font-semibold mb-4">Agendamentos para hoje:</p>
+          <p className="cc">Agendamentos para hoje:</p>
           <div className="space-y-3 max-h-[550px] overflow-y-auto">
             {agendamentos
               .filter(item => item.data === new Date().toISOString().split('T')[0])

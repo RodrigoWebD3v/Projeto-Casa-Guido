@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { UserPlus, Save } from 'lucide-react';
+import Footer from '@/components/Footer/Footer';
 
 export default function ComposicaoFamiliar() {
   const [nome, setNome] = useState("");
@@ -21,10 +22,8 @@ export default function ComposicaoFamiliar() {
   const [renda, setRenda] = useState("");
   const [componentes, setComponentes] = useState([]);
   const [listaAberta, setListaAberta] = useState(false);
-  const [cadastroAberto, setCadastroAberto] = useState(true);
   const [mediaRenda, setMediaRenda] = useState(0);
 
-  // Atualiza média de renda sempre que a lista muda
   useEffect(() => {
     if (componentes.length === 0) {
       setMediaRenda(0);
@@ -55,11 +54,14 @@ export default function ComposicaoFamiliar() {
   };
 
   return (
-    <div className="flex min-h-screen w-full text-main bg-background">
-      <Sidebar />
+    <div className="flex flex-col min-h-screen text-main bg-background">
+      {/* Container flex para sidebar + main, altura total menos footer */}
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar />
 
-      <div className="min-h-screen flex-1">
-        <main className="p-6 mt-4">
+        <main className="flex-1 p-6 mt-4 overflow-y-auto max-h-[calc(100vh-72px)]">
+          {/* Ajuste o 72px para a altura do footer real, se for diferente */}
+
           <div className="max-w-10xl mx-auto">
             <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">
               Cadastro <UserPlus size={18} />
@@ -81,9 +83,7 @@ export default function ComposicaoFamiliar() {
                     <DatePickerInput title="Data de Nascimento" value={dataNascimento} onChange={setDataNascimento} />
                   </div>
 
-                  {/* Estuda e Ensino Superior juntos */}
                   <div className="flex flex-col md:flex-row gap-4 mt-4 items-center">
-                    {/* Grupo Estuda */}
                     <div className="flex items-center gap-1 min-w-[180px]">
                       <span className="min-w-[90px] h-[35px] rounded-[10px] bg-success flex items-center justify-center px-2 text-background font-semibold">
                         Estuda
@@ -92,7 +92,6 @@ export default function ComposicaoFamiliar() {
                       <RadioButtonWithLabel label="Não" selected={estuda === 1} onClick={() => setEstuda(1)} />
                     </div>
 
-                    {/* Grupo Ensino Superior, só aparece se estuda === 0 */}
                     {estuda === 0 && (
                       <div className="flex items-center gap-1 min-w-[220px]">
                         <span className="min-w-[120px] h-[35px] rounded-[10px] bg-success flex items-center justify-center px-2 text-background font-semibold">
@@ -104,14 +103,12 @@ export default function ComposicaoFamiliar() {
                     )}
                   </div>
 
-                  {/* Campo Ano fica abaixo, com espaçamento */}
                   {estuda === 0 && (
                     <div className="mt-4 w-full md:w-1/3">
                       <SimpleTextField nomeCampo="Ano" valorPreenchido={ano} onChange={setAno} />
                     </div>
                   )}
 
-                  {/* Trabalha */}
                   <div className="flex flex-col md:flex-row gap-0 mt-4 items-center">
                     <div className="flex items-center gap-1">
                       <span className="min-w-[90px] h-[35px] rounded-[10px] bg-success flex items-center justify-center px-2 text-background font-semibold">Trabalha</span>
@@ -135,12 +132,10 @@ export default function ComposicaoFamiliar() {
                   </div>
                 </div>
 
-                {/* Média de renda */}
                 <div className="bg-offwhite p-4 rounded-lg shadow mb-6">
                   <h3 className="text-md font-semibold text-darkgray">Média de Renda: R$ {mediaRenda.toFixed(2)}</h3>
                 </div>
 
-                {/* Lista de Integrantes */}
                 <div className="bg-offwhite p-6 rounded-lg shadow">
                   <div
                     className="flex items-center justify-between cursor-pointer mb-2 bg-success rounded-md px-4 py-2"
@@ -167,7 +162,6 @@ export default function ComposicaoFamiliar() {
                           >
                             Remover
                           </button>
-                          {/* resto das infos */}
                         </div>
                       ))}
                     </div>
@@ -175,25 +169,28 @@ export default function ComposicaoFamiliar() {
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="flex items-center mt-3 pt-6 border-t border-graymedium">
-            <Link href="/cadastro/responsavel-opcional" className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
-              <ChevronLeft size={18} /> Anterior
-            </Link>
+            {/* Aqui está a parte que pode ter dado problema: */}
+            <div className="flex items-center mt-3 pt-6 border-t border-graymedium">
+              <Link href="/cadastro/responsavel-opcional" className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
+                <ChevronLeft size={18} /> Anterior
+              </Link>
 
-            <div className="flex-grow flex justify-center">
-              <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
-                <Save size={18} /> Salvar
-              </button>
+              <div className="flex-grow flex justify-center">
+                <button className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green text-sm transition">
+                  <Save size={18} /> Salvar
+                </button>
+              </div>
+
+              <Link href="/cadastro/historico-saude" className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
+                Próximo <ChevronRight size={18} />
+              </Link>
             </div>
-
-            <Link href="/cadastro/historico-saude" className="flex items-center gap-2 px-6 py-2 bg-success text-background rounded-md hover:bg-green transition text-sm">
-              Próximo <ChevronRight size={18} />
-            </Link>
           </div>
         </main>
       </div>
+
+      <Footer />
     </div>
   );
 }

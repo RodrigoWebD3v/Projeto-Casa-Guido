@@ -60,7 +60,7 @@ export default function ListaPacientes() {
           </h2>
           <nav className="flex flex-col gap-4">
             <Link
-              href="/listagem-pacientes"
+              href="/dashboard"
               className="flex items-center gap-2 p-2 rounded border border-transparent text-sidebartext hover:border-greendark hover:bg-sidebarhoverbg hover:text-success transition"
             >
               <LayoutDashboard size={18} className="text-sidebaricon" /> <span>Dashboard</span>
@@ -116,10 +116,10 @@ export default function ListaPacientes() {
             </button>
           </form>
 
-          {loading && <p className="text-blacktext mb-4">Carregando pacientes...</p>}
+          {loading && <p className="text-darkgray mb-4">Carregando pacientes...</p>}
           {erro && <p className="text-red-600 mb-4">{erro}</p>}
 
-          <div className="overflow-x-auto max-h-[700px] rounded shadow relative">
+          <div className="overflow-x-auto max-h-[550px] rounded shadow relative">
             <table className="min-w-full bg-offwhite">
               <thead className="bg-success">
                 <tr className="text-left text-sm uppercase tracking-wider text-greendark">
