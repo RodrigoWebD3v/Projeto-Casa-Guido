@@ -24,7 +24,7 @@ class AuthRepository(
             email = email,
             password = senha
         )
-
+        //Log.i("LOGIN","${clienteApi.authEndpoint}/login")
         return try {
             withContext(Dispatchers.IO) {
                 val response =

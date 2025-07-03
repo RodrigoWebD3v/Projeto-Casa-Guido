@@ -2,6 +2,7 @@ package br.com.casa_guido.screens.cadastro.formularios.documentos
 
 import android.os.Build
 import android.provider.OpenableColumns
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -75,6 +76,7 @@ import br.com.casa_guido.screens.cadastro.formularios.observacao.CamposObservaca
 fun AdicionarDocumentos(
     modifier: Modifier = Modifier,
     numeroTela: Int,
+    pacienteId: String,
     documentos: MutableList<Arquivo>,
     onChangeCampo: (CamposDocumentos, Arquivo) -> Unit,
 ) {
@@ -97,8 +99,11 @@ fun AdicionarDocumentos(
                     CamposDocumentos.ADICIONA_ARQUIVO, Arquivo(
                         nome = fileName,
                         uri = uri.toString(),
-                        conteudoArquivo = "",
-                        pacienteId = "",
+                        conteudoArquivo = Utils.converterEmByteArray(
+                            context,
+                            uri
+                        ),
+                        pacienteId = pacienteId,
                     )
                 )
             }
@@ -165,7 +170,13 @@ fun AdicionarDocumentos(
                         modifier = Modifier
                             .size(24.dp)
                             .clickable {
-                                documentos.removeAt(index)
+                                Log.i(
+                                    "AdicionarDocumentos",
+                                    "Removendo documento: ${arquivo.nome} at index $index"
+                                )
+                                onChangeCampo(
+                                    CamposDocumentos.REMOVE_ARQUIVO, arquivo
+                                )
                             })
                 }
             }

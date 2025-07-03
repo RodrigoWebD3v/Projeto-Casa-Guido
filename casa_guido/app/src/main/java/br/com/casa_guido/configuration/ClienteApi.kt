@@ -16,11 +16,13 @@ class ClienteApi {
 
     var localHost: Boolean = true
 
-    var endpointPrincipal = if (localHost) "http://10.0.2.2:3001" else "http://192.168.101.14:3001"
+    var endpointPrincipal = if (localHost) "http://192.168.101.14:3001/api/v1" else "https://43d5-2804-4bd0-48b-a00-5c7e-7638-29f0-3528.ngrok-free.app/api/v1"
 
-    val authEndpoint = "${endpointPrincipal}/api/v1/auth"
+    val authEndpoint = "${endpointPrincipal}/auth"
 
-    val pacienteEndpoint = "http://10.0.2.2:3001/api/v1/paciente" //"https://webhook.site/6baf3350-0ad7-45c2-952b-e136b6bef9b5" 
+    val pacienteEndpoint = "${endpointPrincipal}/paciente" //"https://webhook.site/6baf3350-0ad7-45c2-952b-e136b6bef9b5"
+
+    val arquivoEndpoint = "${endpointPrincipal}/arquivo"
 
     val client = HttpClient(Android) {
         install(ContentNegotiation) {

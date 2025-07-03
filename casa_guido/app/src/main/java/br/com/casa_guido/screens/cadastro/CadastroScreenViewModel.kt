@@ -76,6 +76,7 @@ class CadastroScreenViewModel(
 
                     criarPacienteService.criarPaciente(_paciente.value)
 
+
                     _status.value = Status.Sucesso("Paciente criado com sucesso")
 
                     onPopBack()

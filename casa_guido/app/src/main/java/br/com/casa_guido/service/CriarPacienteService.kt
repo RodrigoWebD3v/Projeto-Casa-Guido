@@ -100,5 +100,13 @@ class CriarPacienteService(
             situacaoHabitacional = paciente.situacaoHabitacional,
             pacienteId = paciente.id
         )
+
+        arquivoService.deleteArquivosPorPaciente(paciente.id)
+        paciente.arquivos.forEach { arquivo ->
+            arquivoService.createArquivo(
+                entidade = arquivo,
+                pacienteId = paciente.id
+            )
+        }
     }
 }

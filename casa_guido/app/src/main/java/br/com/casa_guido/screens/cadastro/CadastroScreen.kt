@@ -418,6 +418,8 @@ fun CadastroScreen(
                                     AdicionarDocumentos(
                                         numeroTela = page + 1,
                                         documentos = paciente.arquivos.toMutableList(),
+                                        pacienteId = paciente.id,
+
                                         onChangeCampo = { campo, valor ->
                                             viewModel.onChangeArquivo(
                                                 campo, valor

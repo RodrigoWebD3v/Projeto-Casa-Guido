@@ -11,7 +11,7 @@ data class Arquivo(
     val pacienteId: String,
     val nome: String? = null,
     val idServidor: String? = null,
-    val conteudoArquivo: String? = null,
+    val conteudoArquivo: ByteArray? = null,
     val uri: String? = null
 
 )

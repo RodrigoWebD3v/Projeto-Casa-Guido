@@ -3,7 +3,11 @@ package br.com.casa_guido.service
 import android.content.Context
 import android.util.Log
 import br.com.casa_guido.configuration.SecureStorage
+import br.com.casa_guido.dto.ArquivoRequest
+import br.com.casa_guido.dto.ArquivosRequest
+import br.com.casa_guido.dto.CreatePacienteResponse
 import br.com.casa_guido.dto.DataResponse
+import br.com.casa_guido.dto.ListaArquivoResponse
 import br.com.casa_guido.dto.PacientesRequest
 import br.com.casa_guido.models.Paciente
 import br.com.casa_guido.models.toRequestDTO
@@ -18,11 +22,10 @@ class SincronizarPacientesService(
             val token = SecureStorage.getToken(context)
 
             pacienteService.getPacientesAlterados(true)?.forEach { paciente ->
-
                 if (paciente.idBackend.isNullOrBlank()) {
-                    SincronizarCriarPaciente(paciente, token ?: "")
+                    SincronizarCriarPaciente(paciente, token ?: "", context)
                 } else {
-                    SincronizarAtualizarPacientes(paciente, token ?: "")
+                    SincronizarAtualizarPacientes(paciente, token ?: "", context)
                 }
             }
         } catch (e: Exception) {
@@ -30,11 +33,11 @@ class SincronizarPacientesService(
         }
     }
 
-    suspend fun SincronizarCriarPaciente(paciente: Paciente, token: String) {
+    suspend fun SincronizarCriarPaciente(paciente: Paciente, token: String, context: Context) {
         try {
             val dtoPaciente = PacientesRequest(paciente.toRequestDTO(), token)
-            val dataResponse: DataResponse =
-                sincronizarPacientesRepository.sincronizarCriarPacientes(dtoPaciente)
+            val dataResponse: DataResponse<CreatePacienteResponse> =
+                sincronizarPacientesRepository.SincronizarCriarPacientesRepository(dtoPaciente)
 
             pacienteService.atualizaPaciente(
                 paciente.copy(
@@ -42,44 +45,86 @@ class SincronizarPacientesService(
                     alterado = false
                 )
             )
-            val pacienteBusca = pacienteService.getById(paciente.id)
+
+            EnviarArquivos(
+                paciente.copy(
+                    idBackend = dataResponse.data.id,
+                ),
+                context
+            )
+
         } catch (e: Exception) {
             Log.e("SincronizarPacientesService", "Erro ao sincronizar pacientes", e)
+            throw Exception("Erro ao sincronizar pacientes: ${e.message}")
         }
     }
 
-    suspend fun SincronizarAtualizarPacientes(paciente: Paciente, token: String) {
+    suspend fun SincronizarAtualizarPacientes(paciente: Paciente, token: String, context: Context) {
         try {
 
             val dtoPaciente = PacientesRequest(paciente.toRequestDTO(), token)
-            sincronizarPacientesRepository.sincronizarAtualizarPacientes(dtoPaciente)
+            sincronizarPacientesRepository.SincronizarAtualizarPacientesRepository(dtoPaciente)
 
             pacienteService.atualizaPaciente(
                 paciente.copy(
                     alterado = false
                 )
             )
-
+            Log.i(
+                "SincronizarPacientesService",
+                "Paciente atualizado com sucesso: ${paciente.idBackend}"
+            )
+            EnviarArquivos(
+                paciente,
+                context
+            )
         } catch (e: Exception) {
             Log.e("SincronizarPacientesService", "Erro ao sincronizar pacientes", e)
         }
     }
 
-     suspend fun SincronizarPaciente(paciente: Paciente, context: Context) {
+    suspend fun EnviarArquivos(paciente: Paciente, context: Context) {
 
-        Log.i("SincronizarPacientesService", "Iniciando sincronização do paciente SincronizarPaciente: ${paciente.pessoa.nome}")
-
-         val token = SecureStorage.getToken(context)
+        Log.i("Enviar Arquivos", "Enviando arquivos para o paciente: ${paciente.idBackend}")
+        val token = SecureStorage.getToken(context)
 
         try {
-            if (paciente.idBackend.isNullOrBlank()) {
-                SincronizarCriarPaciente(paciente, token?:"")
-            } else {
-                SincronizarAtualizarPacientes(paciente, token?:"")
+            var ListaArquivos: MutableList<ArquivoRequest> = mutableListOf();
+
+            if (paciente.arquivos.isNotEmpty()) {
+                paciente.arquivos.forEach { arquivo ->
+
+                    val dtoPaciente = ArquivoRequest(
+                        nome = arquivo.nome,
+                        uri = arquivo.uri,
+                        conteudoArquivo = arquivo.conteudoArquivo
+                    )
+
+                    ListaArquivos.add(dtoPaciente)
+
+                }
+
+                val dtoArquivos = ArquivosRequest(
+                    pacienteIdBackend = paciente.idBackend ?: "",
+                    arquivos = ListaArquivos,
+                    token = token ?: ""
+                )
+
+                sincronizarPacientesRepository.EnviarArquivosRequisicaoRepository(dtoArquivos)
             }
+
+
         } catch (e: Exception) {
             Log.e("SincronizarPacientesService", "Erro ao sincronizar paciente", e)
         }
+    }
+
+    suspend fun BuscarArquivos() {
+        val dados:DataResponse<ListaArquivoResponse>? = sincronizarPacientesRepository.BuscarArquivosRepository()
+        val pacientes = pacienteService.getPacientes()
+
+        dados?.data
+
     }
 
 

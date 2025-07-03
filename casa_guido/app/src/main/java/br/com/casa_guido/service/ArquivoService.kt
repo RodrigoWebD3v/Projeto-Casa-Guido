@@ -32,6 +32,7 @@ class ArquivoService(
             nome = this.nome,
             idServidor = this.idServidor,
             conteudoArquivo = this.conteudoArquivo,
+            uri = this.uri
         )
     }
 
@@ -42,6 +43,7 @@ class ArquivoService(
             nome = this.nome,
             idServidor = this.idServidor,
             conteudoArquivo = this.conteudoArquivo,
+            uri = this.uri
         )
     }
 }
