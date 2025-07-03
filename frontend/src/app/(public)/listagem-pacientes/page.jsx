@@ -2,9 +2,8 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Eye, Edit, Trash, Users, UserPlus, Home, LayoutDashboard } from 'lucide-react';
-import Dashboard from '../dashboard/page';
+import { pacientes as pacientesMock } from './pacientes'; // corrigido o nome aqui
 
 function limparCpf(cpf) {
   if (typeof cpf !== 'string') return '';
@@ -21,17 +20,13 @@ export default function ListaPacientes() {
   const [erro, setErro] = useState('');
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/api/pessoas')
-      .then((res) => {
-        setPacientes(res.data);
-        setLoading(false);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        setErro('Erro ao buscar pacientes');
-        setLoading(false);
-      });
+    try {
+      setPacientes(pacientesMock); // usando a lista importada corretamente
+      setLoading(false);
+    } catch (err) {
+      setErro('Erro ao carregar pacientes');
+      setLoading(false);
+    }
   }, []);
 
   const pacientesFiltrados = pacientes
@@ -58,9 +53,7 @@ export default function ListaPacientes() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-main">
-      {/* Container principal: menu lateral + conteúdo */}
       <div className="flex flex-1">
-        {/* Menu lateral */}
         <aside className="w-44 bg-sidebarbg p-6 shadow-[4px_0_8px_rgba(0,0,0,0.2)]">
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-sidebaricon">
             <Home size={18} /> <span>Menu</span>
@@ -81,13 +74,11 @@ export default function ListaPacientes() {
           </nav>
         </aside>
 
-        {/* Conteúdo principal */}
         <main className="flex-1 p-6 mt-4 overflow-auto">
           <h1 className="flex items-center gap-2 text-2xl font-bold mb-6 text-center">
             Lista de Pacientes <Users size={24} />
           </h1>
 
-          {/* Formulário de busca */}
           <form onSubmit={handleBuscar} className="mb-6 max-w-md flex gap-2">
             <input
               type="text"
@@ -125,61 +116,37 @@ export default function ListaPacientes() {
             </button>
           </form>
 
-          {/* Mensagens de carregamento ou erro */}
           {loading && <p className="text-blacktext mb-4">Carregando pacientes...</p>}
           {erro && <p className="text-red-600 mb-4">{erro}</p>}
 
-          {/* Tabela de pacientes */}
           <div className="overflow-x-auto max-h-[700px] rounded shadow relative">
             <table className="min-w-full bg-offwhite">
               <thead className="bg-success">
                 <tr className="text-left text-sm uppercase tracking-wider text-greendark">
-                  <th className="sticky top-0 bg-success z-30 p-4 border-l border-r border-darkgray shadow-sm">
-                    Nome
-                  </th>
-                  <th className="sticky top-0 bg-success z-30 p-4 border-r border-darkgray shadow-sm">
-                    CPF
-                  </th>
-                  <th className="sticky top-0 bg-success z-30 p-4 border-r border-darkgray shadow-sm">
-                    Idade
-                  </th>
-                  <th className="sticky top-0 bg-success z-30 p-4 border-r border-darkgray shadow-sm">
-                    Telefone
-                  </th>
-                  <th className="sticky top-0 bg-success z-30 p-4 border-r border-darkgray text-center shadow-sm">
-                    Ações
-                  </th>
+                  <th className="sticky top-0 bg-success z-30 p-4 border-l border-r border-darkgray shadow-sm">Nome</th>
+                  <th className="sticky top-0 bg-success z-30 p-4 border-r border-darkgray shadow-sm">CPF</th>
+                  <th className="sticky top-0 bg-success z-30 p-4 border-r border-darkgray shadow-sm">Idade</th>
+                  <th className="sticky top-0 bg-success z-30 p-4 border-r border-darkgray shadow-sm">Telefone</th>
+                  <th className="sticky top-0 bg-success z-30 p-4 border-r border-darkgray text-center shadow-sm">Ações</th>
                 </tr>
               </thead>
               <tbody>
                 {pacientesFiltrados.length > 0 ? (
                   pacientesFiltrados.map((paciente) => (
-                    <tr
-                      key={paciente.id}
-                      className="border-b hover:bg-success/40 transition text-greendark"
-                    >
+                    <tr key={paciente.id} className="border-b hover:bg-success/40 transition text-greendark">
                       <td className="p-4 border-l border-r border-darkgray">{paciente.nome}</td>
                       <td className="p-4 border-r border-darkgray">{paciente.cpf}</td>
                       <td className="p-4 border-r border-darkgray">{paciente.idade}</td>
                       <td className="p-4 border-r border-darkgray">{paciente.telefone}</td>
                       <td className="p-4 border-r border-darkgray">
                         <div className="flex justify-center gap-4">
-                          <button
-                            className="text-blue-600 hover:text-blue-800"
-                            title="Visualizar paciente"
-                          >
+                          <button className="text-blue-600 hover:text-blue-800" title="Visualizar paciente">
                             <Eye size={18} />
                           </button>
-                          <button
-                            className="text-yellow-600 hover:text-yellow-800"
-                            title="Editar paciente"
-                          >
+                          <button className="text-yellow-600 hover:text-yellow-800" title="Editar paciente">
                             <Edit size={18} />
                           </button>
-                          <button
-                            className="text-red-600 hover:text-red-800"
-                            title="Excluir paciente"
-                          >
+                          <button className="text-red-600 hover:text-red-800" title="Excluir paciente">
                             <Trash size={18} />
                           </button>
                         </div>
@@ -199,7 +166,6 @@ export default function ListaPacientes() {
         </main>
       </div>
 
-      {/* Footer */}
       <footer className="w-full mt-auto text-center text-xs text-sidebartext bg-sidebarbg p-6 shadow-[4px_0_8px_rgba(0,0,0,0.2)]">
         © {new Date().getFullYear()} Sistema de Gestão de Pacientes - Todos os direitos reservados.
       </footer>
