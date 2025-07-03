@@ -32,14 +32,17 @@ router.get('/:id', async (req, res) => {
     } catch (error) {}
 })
 
-router.put('/:id', () => {
+router.put('/:id', async (req, res) => {
     try {
-        const paciente = editarPacienteService(req.params.id, req.body);
+        const paciente = await editarPacienteService(req.params.id, req.body);
+
+        console.log(paciente)
         res.status(200).json({
             data: paciente
         });
     } catch (error) {
-        
+        console.error("Erro ao editar paciente:", error);
+        res.status(500).json({ message: error.message });
     }
 });
 

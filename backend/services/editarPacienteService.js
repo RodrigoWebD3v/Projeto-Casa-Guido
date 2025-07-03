@@ -6,25 +6,26 @@ const { editarSituacaoHabitacionalService } = require('./situacaoHabitacionalSer
 const { editarCirurgiaService } = require('./cirurgiaService');
 const { editarQuimioterapiaService } = require('./quimioterapiaService');
 const { editarRadioterapiaService } = require('./radioterapiaService');
+const { criarQuimioterapiaService } = require('./quimioterapiaService');
+const { criarPessoaService } = require('./pessoaService');
+const { updatePacienteResponseDTO } = require('../dto/responseDTO/updatePacienteDTO');
+
+
 const AppError = require('../handlerException/appError');
 
 const editarPacienteService = async (id, body) => {
    try {
-      // Verifica se o paciente existe
       const pacienteExistente = await buscarPacientePorIdRepository(id);
       if (!pacienteExistente) {
          throw new AppError('Paciente não encontrado', 404);
       }
 
-      // Verifica se os dados da pessoa paciente são válidos
       if (!body.pessoa || !body.pessoa.nome) {
          throw new Error('Dados da pessoa paciente são obrigatórios');
       }
 
-      // Atualiza a pessoa paciente
       const pessoaPaciente = await editarPessoaService(pacienteExistente.pessoa, body.pessoa);
-      
-      // Atualiza as pessoas responsáveis apenas se os dados forem fornecidos
+
       let pessoaPai = null;
       let pessoaMae = null;
       let pessoaOutro = null;
@@ -34,7 +35,6 @@ const editarPacienteService = async (id, body) => {
             if (pacienteExistente.responsavel) {
                pessoaPai = await editarPessoaService(pacienteExistente.responsavel, body.responsavel);
             } else {
-               const { criarPessoaService } = require('./pessoaService');
                pessoaPai = await criarPessoaService(body.responsavel);
             }
          } catch (error) {
@@ -48,7 +48,6 @@ const editarPacienteService = async (id, body) => {
             if (pacienteExistente.conjugeResponsavel) {
                pessoaMae = await editarPessoaService(pacienteExistente.conjugeResponsavel, body.conjugeResponsavel);
             } else {
-               const { criarPessoaService } = require('./pessoaService');
                pessoaMae = await criarPessoaService(body.conjugeResponsavel);
             }
          } catch (error) {
@@ -62,7 +61,6 @@ const editarPacienteService = async (id, body) => {
             if (pacienteExistente.outroResponsavel) {
                pessoaOutro = await editarPessoaService(pacienteExistente.outroResponsavel, body.outroResponsavel);
             } else {
-               const { criarPessoaService } = require('./pessoaService');
                pessoaOutro = await criarPessoaService(body.outroResponsavel);
             }
          } catch (error) {
@@ -75,7 +73,6 @@ const editarPacienteService = async (id, body) => {
       
       const pacienteAtualizado = await editarPacienteRepository(id, dadosPaciente);
 
-      // Atualiza os registros relacionados apenas se os dados forem fornecidos
       if (body.historicoSaude) {
          await editarHistoricoSaudeService(pacienteAtualizado.id, body.historicoSaude);
       }
@@ -84,7 +81,6 @@ const editarPacienteService = async (id, body) => {
          await editarSituacaoHabitacionalService(pacienteAtualizado.id, body.situacaoHabitacional);
       }
 
-      // Atualiza as cirurgias como entidades independentes
       if (body.cirurgias && body.cirurgias.length > 0) {
          for (const cirurgia of body.cirurgias) {
             if (cirurgia.id) {
@@ -96,19 +92,16 @@ const editarPacienteService = async (id, body) => {
          }
       }
 
-      // Atualiza as quimioterapias como entidades independentes
       if (body.quimios && body.quimios.length > 0) {
          for (const quimio of body.quimios) {
             if (quimio.id) {
                await editarQuimioterapiaService(quimio.id, quimio, pacienteAtualizado.id);
             } else {
-               const { criarQuimioterapiaService } = require('./quimioterapiaService');
                await criarQuimioterapiaService(quimio, pacienteAtualizado.id);
             }
          }
       }
 
-      // Atualiza as radioterapias como entidades independentes
       if (body.radios && body.radios.length > 0) {
          for (const radio of body.radios) {
             if (radio.id) {
@@ -120,7 +113,9 @@ const editarPacienteService = async (id, body) => {
          }
       }
 
-      return pacienteAtualizado;
+      const dtoResponse = updatePacienteResponseDTO(pacienteAtualizado)
+
+      return dtoResponse;
    } catch(e) {
       console.log("Erro ao editar paciente", e);
       throw e; 

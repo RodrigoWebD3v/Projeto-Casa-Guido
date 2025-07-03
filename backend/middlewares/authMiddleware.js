@@ -1,6 +1,9 @@
 const { verificarToken } = require('../utils/jwt');
 
 const authMiddleware = (req, res, next) => {
+  console.log(
+    "Chamou middleware"
+  )
   const token = req.header('Authorization')?.replace('Bearer ', '');
   if (!token) return res.status(401).json({ error: 'Access denied. No token provided.' });
 
