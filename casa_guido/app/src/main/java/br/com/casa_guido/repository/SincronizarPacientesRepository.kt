@@ -7,6 +7,7 @@ import br.com.casa_guido.dto.CreatePacienteResponse
 import br.com.casa_guido.dto.DataResponse
 import br.com.casa_guido.dto.ListaArquivoResponse
 import br.com.casa_guido.dto.PacientesRequest
+import br.com.casa_guido.models.Paciente
 import br.com.casa_guido.dto.UpdatePacienteResponse
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -131,6 +132,27 @@ class SincronizarPacientesRepository(
     suspend fun buscarPacientes(): List<PacientesRequest> {
         // Implementar lógica para buscar pacientes, se necessário
         return emptyList()
+    }
+
+    suspend fun buscarPacientesSemIdBackend(): List<Paciente>? {
+        return try {
+            val endpoint = "${clienteApi.pacienteEndpoint}/sem-idbackend"
+            withContext(Dispatchers.IO) {
+                val response = clienteApi.client.get(endpoint) {
+                    headers {
+                        append(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+                    }
+                }
+                if (response.status == HttpStatusCode.OK) {
+                    response.body<DataResponse<List<Paciente>>>().data
+                } else {
+                    null
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("SincronizarPacientesRepository", "Erro ao buscar pacientes", e)
+            null
+        }
     }
 
     suspend fun BuscarArquivosRepository(): DataResponse<ListaArquivoResponse>? {

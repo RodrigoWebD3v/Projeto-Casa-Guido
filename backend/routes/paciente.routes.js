@@ -2,6 +2,7 @@ const { Router } = require('express');
 
 const { criarPacienteService } = require('../services/criarPacienteService');
 const { editarPacienteService , buscarPacientePorIdService} = require('../services/editarPacienteService');
+const { buscarPacientesSemIdBackendService } = require('../services/buscarPacientesSemIdBackendService');
 const { escreverLog } = require('../utils/escreverLog');
 
 const router = Router();
@@ -19,6 +20,17 @@ router.post('/', async (req, res) => {
         });
     } catch (error) {
         await escreverLog("Erro ao criar paciente" + error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
+router.get('/sem-idbackend', async (req, res) => {
+    try {
+        const pacientes = await buscarPacientesSemIdBackendService();
+        res.status(200).json({
+            data: pacientes
+        });
+    } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
@@ -46,4 +58,4 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-module.exports = router; 
+module.exports = router;

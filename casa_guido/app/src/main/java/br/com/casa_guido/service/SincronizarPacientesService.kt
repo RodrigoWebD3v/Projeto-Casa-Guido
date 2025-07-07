@@ -127,5 +127,16 @@ class SincronizarPacientesService(
 
     }
 
+    suspend fun baixarPacientesSemIdBackend() {
+        try {
+            val pacientes = sincronizarPacientesRepository.buscarPacientesSemIdBackend()
+            pacientes?.forEach {
+                pacienteService.createPaciente(it)
+            }
+        } catch (e: Exception) {
+            Log.e("SincronizarPacientesService", "Erro ao buscar pacientes", e)
+        }
+    }
+
 
 }

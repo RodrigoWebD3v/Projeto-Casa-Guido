@@ -13,6 +13,7 @@ const pacienteDTO = (paciente, pessoaPaciente,  pessoaPai = null, pessoaMae = nu
     tipoEscola              : paciente.tipoEscola     || null,
     escolaNome              : paciente.escolaNome     || null,
     origenInfoOng           : paciente.origenInfoOng  || null,
+    idBackend               : paciente.idBackend      || null,
     observacoes             : paciente.observacoes    || null,
     responsavel             : pessoaPai,
     conjugeResponsavel      : pessoaMae,

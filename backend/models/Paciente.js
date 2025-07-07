@@ -17,6 +17,7 @@ const PacienteSchema = new mongoose.Schema({
   tamRoupa: String,
   tamCalcado: String,
   origenInfoOng: String,
+  idBackend: String,
   alterado: { type: Boolean, default: false },
   observacoes: [String],
   responsavel: { type: mongoose.Schema.Types.ObjectId, ref: 'Pessoa' },
