@@ -7,23 +7,23 @@ import java.util.UUID
 @Entity(tableName = "pessoa")
 data class Pessoa(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
-    val nome: String,
-    val contato: String? = null,
+    val nome: String = "",
+    val contato: String = "",
     val dataNascimento: String,
-    val cpf: String? = null,
-    val identidade: String? = null, // equivalente ao "rg"
-    val naturalidade: String? = null,
-    val genero: String? = null,
+    val cpf: String = "",
+    val identidade: String = "", // equivalente ao "rg"
+    val naturalidade: String = "",
+    val genero: String = "",
     val escolaridade: Int = 0,
     val serie: Int = 0,
-    val estadoCivil: Int? = null, // mantido como Int para enums
-    val situacaoProfissional: Int? = null, // idem
-    val salario: String? = null, // manter como String, tratado como decimal no backend
-    val enderecoId: String? = null, // UUID compatível com relação
-    val telefone: String? = null,
-    val cartaoSus: String? = null,
-    val profissao: String? = null,
-    val respPrincipal: Int?,
+    val estadoCivil: Int = 0, // mantido como Int para enums
+    val situacaoProfissional: Int = 0, // idem
+    val salario: String = "", // manter como String, tratado como decimal no backend
+    val enderecoId: String = "", // UUID compatível com relação
+    val telefone: String = "",
+    val cartaoSus: String = "",
+    val profissao: String = "",
+    val respPrincipal: Int = 0,
 )
 
 /*

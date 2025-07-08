@@ -10,22 +10,69 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9bc01d2-2390-4e59-bcae-4ed6d67e6a6d" name="Changes" comment="Ajustes solicitados&#10;&#10;Ajustado modulo de injecao de dependencia, para melhor compreensao&#10;&#10;Separado informacoes das models">
-      <change beforePath="$PROJECT_DIR$/../backend/routes/arquivo.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/routes/arquivo.routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/Tabelas.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/models/Cirurgia.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/models/ComposicaoFamiliar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/models/Cras.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/models/Endereco.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/models/HistoricoSaude.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/models/Paciente.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/models/Paciente.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/models/Pessoa.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/models/ProfissionalResponsavel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/models/Quimioterapia.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/models/RadioTerapia.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/models/SituacaoHabitacional.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/models/Ubs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/repository/cirurgiaRepository.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/repository/composicaoFamiliarRepository.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/repository/crasRepository.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/repository/enderecoRepository.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/repository/historicoSaudeRepository.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/repository/pacienteRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/repository/pacienteRepository.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/repository/pessoaRepository.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/repository/profissionalResponsavelRepository.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/repository/quimioterapiaRepository.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/repository/radioterapiaRepository.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/repository/situacaoHabitacionalRepository.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/routes/paciente.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/routes/paciente.routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/services/buscarPacientesSemIdBackendService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/services/cirurgiaService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/services/composicaoFamiliarService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/services/crasService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/services/criarPacienteService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/services/editarPacienteService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/services/enderecoService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/services/historicoSaudeService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/services/pessoaService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/services/quimioterapiaService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/services/radioterapiaService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/services/situacaoHabitacionalService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/services/ubsService.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/configuration/ClienteApi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/configuration/ClienteApi.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/dto/PacientesDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/dto/PacientesDTO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Agendamento.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Agendamento.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Arquivo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Arquivo.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/repository/AuthRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/repository/AuthRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/ComposicaoFamiliar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/ComposicaoFamiliar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/HistoricoSaude.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/HistoricoSaude.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Paciente.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Paciente.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Pessoa.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/Pessoa.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/SituacaoHabitacional.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/models/SituacaoHabitacional.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/repository/SincronizarPacientesRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/repository/SincronizarPacientesRepository.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/config/AppDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/config/AppDatabase.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Arquivo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Arquivo.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/CadastroScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/CadastroScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/CadastroScreenViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/CadastroScreenViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/documentos/AdicionarDocumentos.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/screens/cadastro/formularios/documentos/AdicionarDocumentos.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/ArquivoService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/ArquivoService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/CriarPacienteService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/CriarPacienteService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Cirurgia.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Cirurgia.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/ComposicaoFamiliar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/ComposicaoFamiliar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Endereco.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Endereco.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Entrevista.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Entrevista.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/HistoricoSaude.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/HistoricoSaude.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Paciente.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Paciente.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Pessoa.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Pessoa.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/ProfissionalResponsavel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/ProfissionalResponsavel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Quimioterapia.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Quimioterapia.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/RadioTerapia.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/RadioTerapia.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/SituacaoHabitacional.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/SituacaoHabitacional.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Tratamento.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/room/entidades/Tratamento.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/SincronizarPacientesService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/service/SincronizarPacientesService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/util/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/com/casa_guido/util/Utils.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,10 +125,10 @@
         <option value="Kotlin Data Class" />
         <option value="Kotlin Enum" />
         <option value="Kotlin Object" />
-        <option value="Kotlin File" />
         <option value="Kotlin Interface" />
         <option value="Class" />
         <option value="Kotlin Class" />
+        <option value="Kotlin File" />
       </list>
     </option>
   </component>
@@ -136,7 +183,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "com.google.services.firebase.aqiPopupShown": "true",
-    "git-widget-placeholder": "f0ed7955",
+    "git-widget-placeholder": "e6a3cb0b",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Digo/Desktop/Projeto-Casa-Guido/casa_guido/app/src/main/java/br/com/casa_guido/screens/components",

@@ -9,6 +9,7 @@ import br.com.casa_guido.dto.ListaArquivoResponse
 import br.com.casa_guido.dto.PacientesRequest
 import br.com.casa_guido.models.Paciente
 import br.com.casa_guido.dto.UpdatePacienteResponse
+import br.com.casa_guido.service.SincronizarPacientesService
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.post
@@ -134,14 +135,19 @@ class SincronizarPacientesRepository(
         return emptyList()
     }
 
-    suspend fun buscarPacientesSemIdBackend(): List<Paciente>? {
+    suspend fun buscarPacientesSemIdBackend(token: String, listaId: SincronizarPacientesService.ListaIds): List<Paciente>? {
         return try {
             val endpoint = "${clienteApi.pacienteEndpoint}/sem-idbackend"
             withContext(Dispatchers.IO) {
-                val response = clienteApi.client.get(endpoint) {
+                val response = clienteApi.client.post(endpoint) {
                     headers {
                         append(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+                        append(HttpHeaders.Authorization, token)
                     }
+
+                    setBody(
+                        listaId
+                    )
                 }
                 if (response.status == HttpStatusCode.OK) {
                     response.body<DataResponse<List<Paciente>>>().data

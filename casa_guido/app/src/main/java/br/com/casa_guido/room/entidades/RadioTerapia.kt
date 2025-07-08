@@ -10,10 +10,10 @@ import java.util.UUID
 data class RadioTerapia(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
 
-    val pacienteId: String, // chave estrangeira lógica para Paciente
+    val pacienteId: String = "", // chave estrangeira lógica para Paciente
 
-    val dataInicio: String? = null,
-    val dataUltimaSessao: String? = null
+    val dataInicio: String = "",
+    val dataUltimaSessao: String = ""
 )
 
 /*

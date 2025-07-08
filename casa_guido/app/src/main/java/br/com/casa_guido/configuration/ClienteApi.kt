@@ -27,7 +27,10 @@ class ClienteApi {
     val client = HttpClient(Android) {
         install(ContentNegotiation) {
             json(
-                Json { ignoreUnknownKeys = true },
+                Json { 
+                    ignoreUnknownKeys = true
+                    encodeDefaults = true
+                },
             )
         }
         install(Logging) {

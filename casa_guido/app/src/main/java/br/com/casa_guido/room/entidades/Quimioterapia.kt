@@ -9,10 +9,10 @@ import java.util.UUID
 data class Quimioterapia(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
 
-    val pacienteId: String, // chave estrangeira lógica para Paciente
+    val pacienteId: String = "", // chave estrangeira lógica para Paciente
 
-    val dataInicio: String? = null,
-    val dataUltimaSessao: String? = null
+    val dataInicio: String = "",
+    val dataUltimaSessao: String = ""
 )
 
 /*

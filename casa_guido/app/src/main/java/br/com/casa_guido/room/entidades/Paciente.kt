@@ -10,38 +10,38 @@ data class Paciente(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val pessoaId: String,
 
-    val status: Boolean? = null,
+    val status: Boolean = false,
 
-    val nomeMae: String? = null,
-    val nomePai: String? = null,
-    val nomeOutro: String? = null,
+    val nomeMae: String = "",
+    val nomePai: String = "",
+    val nomeOutro: String = "",
 
-    val recebeRemuneracao: Int? = null,
-    val remuneracao: String? = null, // tratar como decimal no backend
+    val recebeRemuneracao: Int = 0,
+    val remuneracao: String = "", // tratar como decimal no backend
 
-    val recebeBpc: Int? = null,
-    val valorBpc: String? = null, // tratar como decimal no backend
-    val aptoReceberBpc: Int? = null,
+    val recebeBpc: Int = 0,
+    val valorBpc: String = "", // tratar como decimal no backend
+    val aptoReceberBpc: Int = 0,
 
-    val diagnostico: String? = null,
-    val profissionalResponsavel: String? = null,
+    val diagnostico: String = "",
+    val profissionalResponsavel: String = "",
 
-    val escolaNome: String? = null,
-    val anoEscolar: String? = null,
-    val tamRoupa: String? = null,
-    val tamCalcado: String? = null,
+    val escolaNome: String = "",
+    val anoEscolar: String = "",
+    val tamRoupa: String = "",
+    val tamCalcado: String = "",
 
-    val origenInfoOng: String? = null,
-    val observacoes: Array<String>?,
+    val origenInfoOng: String = "",
+    val observacoes: Array<String> = emptyArray(),
 
-    val responsavelId: String? = null,
-    val conjugeResponsavelId: String? = null,
-    val outroResponsavelId: String? = null,
-    val tipoEscola: Int? = null, // mantido como Int para enums
-    val crasMunicipio : String? = null,
-    val ubsMunicipio : String? = null,
-    val crasBairro: String? = null,
-    val ubsBairro: String? = null,
-    val alterado: Boolean = false,
-    val idBackend: String? = null
+    val responsavelId: String? = "",
+    val conjugeResponsavelId: String = "",
+    val outroResponsavelId: String = "",
+    val tipoEscola: Int = 0, // mantido como Int para enums
+    val crasMunicipio : String = "",
+    val ubsMunicipio : String = "",
+    val crasBairro: String = "",
+    val ubsBairro: String = "",
+    val alterado: Boolean  = false,
+    val idBackend: String = ""
 )

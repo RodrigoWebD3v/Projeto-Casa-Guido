@@ -12,6 +12,7 @@ import br.com.casa_guido.dto.PacientesRequest
 import br.com.casa_guido.models.Paciente
 import br.com.casa_guido.models.toRequestDTO
 import br.com.casa_guido.repository.SincronizarPacientesRepository
+import kotlinx.serialization.Serializable
 
 class SincronizarPacientesService(
     private val sincronizarPacientesRepository: SincronizarPacientesRepository,
@@ -28,6 +29,8 @@ class SincronizarPacientesService(
                     SincronizarAtualizarPacientes(paciente, token ?: "", context)
                 }
             }
+
+            baixarPacientesSemIdBackend(context)
         } catch (e: Exception) {
             Log.e("SincronizarPacientesService", "Erro ao sincronizar pacientes", e)
         }
@@ -120,17 +123,33 @@ class SincronizarPacientesService(
     }
 
     suspend fun BuscarArquivos() {
-        val dados:DataResponse<ListaArquivoResponse>? = sincronizarPacientesRepository.BuscarArquivosRepository()
+        val dados: DataResponse<ListaArquivoResponse>? =
+            sincronizarPacientesRepository.BuscarArquivosRepository()
         val pacientes = pacienteService.getPacientes()
 
         dados?.data
 
     }
 
-    suspend fun baixarPacientesSemIdBackend() {
+    @Serializable
+    data class ListaIds(
+        val listaId: List<String>,
+    )
+
+    suspend fun baixarPacientesSemIdBackend(
+        context: Context
+    ) {
         try {
-            val pacientes = sincronizarPacientesRepository.buscarPacientesSemIdBackend()
+            val token = SecureStorage.getToken(context)
+            val listaIds = ListaIds(
+                listaId = pacienteService.getPacientes().map {
+                    it.idBackend
+                }
+            )
+            val pacientes =
+                sincronizarPacientesRepository.buscarPacientesSemIdBackend(token ?: "", listaIds)
             pacientes?.forEach {
+                Log.i("SincronizarPacientesService", "Baixando paciente: ${it.id}")
                 pacienteService.createPaciente(it)
             }
         } catch (e: Exception) {

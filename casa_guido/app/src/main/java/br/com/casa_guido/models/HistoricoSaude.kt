@@ -11,7 +11,7 @@ data class HistoricoSaude(
     val doencasFamilia: Array<Int> = emptyArray(),
     val medicamentosUsoContinuo: String = "",
     val localProcuraAtendimento: Array<Int> = emptyArray(),
-    val recebeBeneficio: Int? = null,
+    val recebeBeneficio: Int = 0,
     val beneficioDescricao: String = "",
 )
 
@@ -20,7 +20,7 @@ data class HistoricoSaudeDTO(
     val doencasFamilia: Array<Int> = emptyArray(),
     val medicamentosUsoContinuo: String = "",
     val localProcuraAtendimento: Array<Int> = emptyArray(),
-    val recebeBeneficio: Int? = null,
+    val recebeBeneficio: Int = 0,
     val beneficioDescricao: String = "",
 )
 

@@ -17,10 +17,10 @@ data class Paciente(
     val quimios: List<Quimio> = emptyList(),
     val radios: List<Radio> = emptyList(),
     val remuneracao: String = "",
-    val bpc: Int? = null,
+    val bpc: Int = 0,
     val valorBpc: String = "",
-    val aptoReceberBpc: Int? = null,
-    val tipoEscola: Int? = null,
+    val aptoReceberBpc: Int = 0,
+    val tipoEscola: Int = 0,
     val escolaNome: String = "",
     val tamRoupa: String = "",
     val tamCalcado: String = "",
@@ -40,7 +40,7 @@ data class Paciente(
     val historicoSaude: HistoricoSaude = HistoricoSaude(),
     val situacaoHabitacional: SituacaoHabitacional = SituacaoHabitacional(),
     val arquivos: List<Arquivo> = emptyList(),
-    val idBackend: String? = null
+    val idBackend: String = ""
 )
 
 @Serializable
@@ -53,16 +53,16 @@ data class PacienteRequestDTO(
     val cirurgias: List<CirurgiaDTO>,
     val quimios: List<QuimioDTO>,
     val radios: List<RadioDTO>,
-    val remuneracao: String,
-    val bpc: Int? = null,
-    val valorBpc: String,
-    val aptoReceberBpc: Int? = null,
-    val tipoEscola: Int? = null,
-    val escolaNome: String,
-    val tamRoupa: String,
-    val tamCalcado: String,
-    val diagnostico: String,
-    val origen_info_ong: String,
+    val remuneracao: String = "",
+    val bpc: Int = 0,
+    val valorBpc: String = "",
+    val aptoReceberBpc: Int = 0,
+    val tipoEscola: Int = 0,
+    val escolaNome: String = "",
+    val tamRoupa: String = "",
+    val tamCalcado: String = "",
+    val diagnostico: String = "",
+    val origen_info_ong: String = "",
     val ubs: Ubs,
     val cras: Cras,
     val observacoes: Array<String>,
@@ -75,7 +75,7 @@ data class PacienteRequestDTO(
     val composicaoFamiliar: List<ComposicaoFamiliarDTO>,
     val historicoSaude: HistoricoSaudeDTO,
     val situacaoHabitacional: SituacaoHabitacionalDTO,
-    val idBackend: String? = null
+    val idBackend: String = ""
 )
 
 fun Paciente.toRequestDTO(): PacienteRequestDTO {

@@ -5,9 +5,9 @@ import java.util.UUID
 
 @Immutable
 data class Agendamento(
-    val nome: String,
-    val horario: String,
-    val tipo: String,
-    val status: Boolean,
+    val nome: String = "",
+    val horario: String = "",
+    val tipo: String = "",
+    val status: Boolean = false,
     val id : String = UUID.randomUUID().toString()
 )
