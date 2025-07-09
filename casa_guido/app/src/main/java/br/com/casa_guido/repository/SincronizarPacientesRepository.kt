@@ -6,6 +6,7 @@ import br.com.casa_guido.dto.ArquivosRequest
 import br.com.casa_guido.dto.CreatePacienteResponse
 import br.com.casa_guido.dto.DataResponse
 import br.com.casa_guido.dto.ListaArquivoResponse
+import br.com.casa_guido.dto.PacienteCompletoDTO
 import br.com.casa_guido.dto.PacientesRequest
 import br.com.casa_guido.models.Paciente
 import br.com.casa_guido.dto.UpdatePacienteResponse
@@ -135,7 +136,7 @@ class SincronizarPacientesRepository(
         return emptyList()
     }
 
-    suspend fun buscarPacientesSemIdBackend(token: String, listaId: SincronizarPacientesService.ListaIds): List<Paciente>? {
+    suspend fun buscarPacientesSemIdBackend(token: String, listaId: SincronizarPacientesService.ListaIds): List<PacienteCompletoDTO>? {
         return try {
             val endpoint = "${clienteApi.pacienteEndpoint}/sem-idbackend"
             withContext(Dispatchers.IO) {
@@ -150,7 +151,11 @@ class SincronizarPacientesRepository(
                     )
                 }
                 if (response.status == HttpStatusCode.OK) {
-                    response.body<DataResponse<List<Paciente>>>().data
+                    Log.i(
+                        "SincronizarPacientesRepository",
+                        "Pacientes recebidos: ${response.body<DataResponse<List<PacienteCompletoDTO>>>().data}"
+                    )
+                    response.body<DataResponse<List<PacienteCompletoDTO>>>().data
                 } else {
                     null
                 }

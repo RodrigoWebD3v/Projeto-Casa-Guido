@@ -19,6 +19,10 @@ class CriarPacienteService(
     suspend fun criarPaciente(paciente: Paciente) {
         pacienteService.createPaciente(paciente)
 
+        Log.i(
+            "CriarPacienteService",
+            "Criando paciente: ${paciente.pessoa.nome} - ${paciente.pessoa.id}"
+        )
         pessoaService.createPessoa(
             pessoa = paciente.pessoa,
             endereco = paciente.pessoa.endereco
