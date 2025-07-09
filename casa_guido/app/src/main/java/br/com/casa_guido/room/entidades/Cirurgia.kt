@@ -11,8 +11,8 @@ data class Cirurgia(
 
     val pacienteId: String,
 
-    val nome: String? = null,
-    val data: String? = null,     
-    val descricao: String? = null,
-    val cid: String? = null,
+    val nome: String = "",
+    val data: String = "",
+    val descricao: String = "",
+    val cid: String = "",
 )

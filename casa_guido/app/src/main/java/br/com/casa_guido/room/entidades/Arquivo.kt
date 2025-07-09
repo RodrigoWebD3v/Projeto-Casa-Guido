@@ -9,9 +9,9 @@ import java.util.UUID
 data class Arquivo(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val pacienteId: String,
-    val nome: String? = null,
-    val idServidor: String? = null,
-    val conteudoArquivo: ByteArray? = null,
-    val uri: String? = null
+    val nome: String = "",
+    val idServidor: String = "",
+    val conteudoArquivo: ByteArray = ByteArray(0),
+    val uri: String = ""
 
 )

@@ -12,8 +12,8 @@ data class Pessoa(
     val cpf: String = "",
     val rg: String = "",
     val endereco: Endereco = Endereco(),
-    val situacaoProfissional: Int? = null,
-    val estadoCivil: Int? = null,
+    val situacaoProfissional: Int = 0,
+    val estadoCivil: Int = 0,
     val naturalidade: String = "",
     val escolaridade: Int = 0,
     val serie: Int = 0,
@@ -21,7 +21,7 @@ data class Pessoa(
     val cartaoSus: String = "",
     val respPrincipal: Int = 0,
     val profissao: String = "",
-    val tipoEscola: Int? = null, // mantido como Int para enums
+    val tipoEscola: Int = 0, // mantido como Int para enums
 )
 
 @Serializable
@@ -32,8 +32,8 @@ data class PessoaDTO(
     val cpf: String = "",
     val rg: String = "",
     val endereco: EnderecoDTO,
-    val situacaoProfissional: Int? = null,
-    val estadoCivil: Int? = null,
+    val situacaoProfissional: Int = 0,
+    val estadoCivil: Int = 0,
     val naturalidade: String = "",
     val escolaridade: Int = 0,
     val serie: Int = 0,
@@ -41,7 +41,7 @@ data class PessoaDTO(
     val cartaoSus: String = "",
     val respPrincipal: Int = 0,
     val profissao: String = "",
-    val tipoEscola: Int? = null,
+    val tipoEscola: Int = 0,
 )
 
 fun Pessoa.toRequestDTO(): PessoaDTO {

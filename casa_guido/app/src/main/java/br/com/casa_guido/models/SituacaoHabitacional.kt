@@ -6,28 +6,28 @@ import java.util.UUID
 @Serializable
 data class SituacaoHabitacional(
     val id: String = UUID.randomUUID().toString(),
-    val comoAdquiriuCasa: Int? = null,
-    val area: Int? = null,
-    val numeroComodos: Int? = null,
-    val material: Int? = null,
+    val comoAdquiriuCasa: Int = 0,
+    val area: Int = 0,
+    val numeroComodos: Int = 0,
+    val material: Int = 0,
     val bens: Array<Int> = emptyArray(),
-    val meioDeTransporte: Int? = null,
-    val meioDeComunicao: Int? = null,
-    val possuiBanheiros: Int? = null,
-    val dentroDeCasa: Int? = null,
+    val meioDeTransporte: Int = 0,
+    val meioDeComunicao: Int = 0,
+    val possuiBanheiros: Int = 0,
+    val dentroDeCasa: Int = 0,
 )
 
 @Serializable
 data class SituacaoHabitacionalDTO(
-    val comoAdquiriuCasa: Int? = null,
-    val area: Int? = null,
-    val numeroComodos: Int? = null,
-    val material: Int? = null,
+    val comoAdquiriuCasa: Int = 0,
+    val area: Int? = 0,
+    val numeroComodos: Int = 0,
+    val material: Int = 0,
     val bens: Array<Int> = emptyArray(),
-    val meioDeTransporte: Int? = null,
-    val meioDeComunicao: Int? = null,
-    val possuiBanheiros: Int? = null,
-    val dentroDeCasa: Int? = null,
+    val meioDeTransporte: Int = 0,
+    val meioDeComunicao: Int  = 0,
+    val possuiBanheiros: Int  = 0,
+    val dentroDeCasa: Int = 0,
 )
 
 fun SituacaoHabitacional.toRequestDTO(): SituacaoHabitacionalDTO {

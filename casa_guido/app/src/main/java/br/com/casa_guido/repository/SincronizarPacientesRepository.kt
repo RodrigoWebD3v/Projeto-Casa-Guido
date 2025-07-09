@@ -6,8 +6,11 @@ import br.com.casa_guido.dto.ArquivosRequest
 import br.com.casa_guido.dto.CreatePacienteResponse
 import br.com.casa_guido.dto.DataResponse
 import br.com.casa_guido.dto.ListaArquivoResponse
+import br.com.casa_guido.dto.PacienteCompletoDTO
 import br.com.casa_guido.dto.PacientesRequest
+import br.com.casa_guido.models.Paciente
 import br.com.casa_guido.dto.UpdatePacienteResponse
+import br.com.casa_guido.service.SincronizarPacientesService
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.post
@@ -131,6 +134,36 @@ class SincronizarPacientesRepository(
     suspend fun buscarPacientes(): List<PacientesRequest> {
         // Implementar lógica para buscar pacientes, se necessário
         return emptyList()
+    }
+
+    suspend fun buscarPacientesSemIdBackend(token: String, listaId: SincronizarPacientesService.ListaIds): List<PacienteCompletoDTO>? {
+        return try {
+            val endpoint = "${clienteApi.pacienteEndpoint}/sem-idbackend"
+            withContext(Dispatchers.IO) {
+                val response = clienteApi.client.post(endpoint) {
+                    headers {
+                        append(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+                        append(HttpHeaders.Authorization, token)
+                    }
+
+                    setBody(
+                        listaId
+                    )
+                }
+                if (response.status == HttpStatusCode.OK) {
+                    Log.i(
+                        "SincronizarPacientesRepository",
+                        "Pacientes recebidos: ${response.body<DataResponse<List<PacienteCompletoDTO>>>().data}"
+                    )
+                    response.body<DataResponse<List<PacienteCompletoDTO>>>().data
+                } else {
+                    null
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("SincronizarPacientesRepository", "Erro ao buscar pacientes", e)
+            null
+        }
     }
 
     suspend fun BuscarArquivosRepository(): DataResponse<ListaArquivoResponse>? {

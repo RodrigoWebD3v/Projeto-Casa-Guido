@@ -7,8 +7,8 @@ import java.util.UUID
 @Entity(tableName = "profissional_responsavel")
 data class ProfissionalResponsavel(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
-    val pacienteId: String,
-    val tipo: String?,         // Ex: Médico, Psicólogo, etc.
-    val nome: String,
-    val crm: String?
+    val pacienteId: String = "",
+    val tipo: String = "",         // Ex: Médico, Psicólogo, etc.
+    val nome: String = "",
+    val crm: String = "",
 )

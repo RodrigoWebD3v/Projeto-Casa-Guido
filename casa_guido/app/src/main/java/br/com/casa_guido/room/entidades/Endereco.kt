@@ -8,17 +8,17 @@ import java.util.UUID
 data class Endereco(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
 
-    val cep: String,
-    val logradouro: String,
-    val numero: String,
-    val complemento: String,
-    val unidade: String,
-    val bairro: String,
-    val estado: String,
-    val uf: String,
-    val regiao: String,
-    val localidade: String,
-    val referencia: String,
-    val pais: String? = "Brasil"
+    val cep: String = "",
+    val logradouro: String = "",
+    val numero: String = "",
+    val complemento: String = "",
+    val unidade: String = "",
+    val bairro: String = "",
+    val estado: String = "",
+    val uf: String = "",
+    val regiao: String = "",
+    val localidade: String = "",
+    val referencia: String = "",
+    val pais: String = "Brasil"
 )
 

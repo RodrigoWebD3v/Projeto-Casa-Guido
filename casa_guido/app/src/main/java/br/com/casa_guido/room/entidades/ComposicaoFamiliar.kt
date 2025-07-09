@@ -7,13 +7,13 @@ import java.util.UUID
 @Entity(tableName = "composicao_familiar")
 data class ComposicaoFamiliar(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
-    val pacienteId: String,
-    val nome: String?,
-    val parentesco: String?,
-    val data_nascimento: String?,
-    val estudaOpc: Int?,
-    val escolaridade: String?,
-    val trabalhaOpc: Int?,
-    val renda: String?,
-    val idade: Int?,
+    val pacienteId: String = "",
+    val nome: String = "",
+    val parentesco: String = "",
+    val data_nascimento: String = "",
+    val estudaOpc: Int = 0,
+    val escolaridade: String = "",
+    val trabalhaOpc: Int = 0,
+    val renda: String = "",
+    val idade: Int = 0,
 )
