@@ -11,15 +11,15 @@ data class Pessoa(
     val contato: String = "",
     val dataNascimento: String,
     val cpf: String = "",
-    val identidade: String = "", // equivalente ao "rg"
+    val identidade: String = "",
     val naturalidade: String = "",
     val genero: String = "",
     val escolaridade: Int = 0,
     val serie: Int = 0,
-    val estadoCivil: Int = 0, // mantido como Int para enums
-    val situacaoProfissional: Int = 0, // idem
-    val salario: String = "", // manter como String, tratado como decimal no backend
-    val enderecoId: String = "", // UUID compatível com relação
+    val estadoCivil: Int? = null,
+    val situacaoProfissional: Int? = null,
+    val salario: String = "",
+    val enderecoId: String = "",
     val telefone: String = "",
     val cartaoSus: String = "",
     val profissao: String = "",

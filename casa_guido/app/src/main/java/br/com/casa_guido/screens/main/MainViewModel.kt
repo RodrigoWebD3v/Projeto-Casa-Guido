@@ -12,7 +12,7 @@ class MainViewModel(
     private val sincronizarPacientesService: SincronizarPacientesService
 ) : ViewModel() {
 
-    private val _status = MutableStateFlow<SincronizandoDados>(SincronizandoDados.Sincronizando)
+    private val _status = MutableStateFlow<SincronizandoDados>(SincronizandoDados.Sincronizando())
     val status = _status.asStateFlow()
 
     private val _context = MutableStateFlow<Context?>(null)
@@ -21,7 +21,7 @@ class MainViewModel(
     val primeiroAcesso = _primeiroAcesso.asStateFlow()
 
 
-    fun togglePrimeiroAcesso(){
+    fun togglePrimeiroAcesso() {
         _primeiroAcesso.update {
             true
         }
@@ -33,7 +33,14 @@ class MainViewModel(
 
     suspend fun SincronizarPacientes() {
         coroutineScope {
-            sincronizarPacientesService.SincronizarPacientes(_context.value!!)
+            val context = _context.value
+            if (context != null) {
+                sincronizarPacientesService.SincronizarPacientes(context)
+                sincronizarPacientesService.SincronizarPacientes(context)
+                _status.update { SincronizandoDados.Sincronizado() }
+            } else {
+                _status.update { SincronizandoDados.Erro }
+            }
         }
 
     }

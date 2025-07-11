@@ -9,13 +9,13 @@ import java.util.UUID
 data class SituacaoHabitacional(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val pacienteId: String = "", //usado
-    val comoAdquiriuCasa: Int = 0, //usado
-    val area: Int = 0,//usado
-    val meioDeTransporte: Int = 0,
-    val meioDeComunicao: Int = 0,
-    val possuiBanheiros: Int = 0,
-    val numeroComodos: Int = 0,
-    val material: Int = 0,
+    val comoAdquiriuCasa: Int? = null, //usado
+    val area: Int? = null,
+    val meioDeTransporte: Int? = null,
+    val meioDeComunicao: Int? = null,
+    val possuiBanheiros: Int? = null,
+    val numeroComodos: String = "",
+    val material: Int? = null,
     val bens: Array<Int> = emptyArray(),
-    val dentroDeCasa: Int = 0
+    val dentroDeCasa: Int? = null
 )

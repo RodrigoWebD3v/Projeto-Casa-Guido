@@ -152,7 +152,7 @@ fun CadastroConjuge(
 
                 CheckBoxComp(
                     modifier = Modifier.padding(20.dp),
-                    labelTitulo = "Resp Principal",
+                    labelTitulo = "Responsável Principal",
                     selected = conjuge.respPrincipal,
                 ) {
                     onChangeCampo(CamposConjuge.RESP_PRINCIPAL, if(it) "1" else "0")

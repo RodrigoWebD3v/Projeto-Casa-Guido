@@ -149,7 +149,7 @@ fun CadastroOutro(
             ) {
                 CheckBoxComp(
                     modifier = Modifier.padding(20.dp),
-                    labelTitulo = "Resp Principal",
+                    labelTitulo = "Responsável Principal",
                     selected = outro.respPrincipal,
                 ) {
                     onChangeCampo(CamposOutro.RESP_PRINCIPAL, if(it) "1" else "0")

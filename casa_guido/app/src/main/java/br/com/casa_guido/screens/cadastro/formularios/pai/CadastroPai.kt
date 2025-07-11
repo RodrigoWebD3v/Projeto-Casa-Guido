@@ -147,7 +147,7 @@ fun CadastroResponsavel(
 
                 CheckBoxComp(
                     modifier = Modifier.padding(20.dp),
-                    labelTitulo = "Resp Principal?",
+                    labelTitulo = "Responsável Principal",
                     selected = responsavel.respPrincipal,
                 ) {
                     onChangeCampo(CamposResponsavel.RESP_PRINCIPAL, if (it) "1" else "0")

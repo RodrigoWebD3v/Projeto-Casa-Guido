@@ -1221,7 +1221,7 @@ class CadastroScreenViewModel(
             CamposSituacaoHabitacional.NUMERO_COMODOS -> {
                 _paciente.value = _paciente.value.copy(
                     situacaoHabitacional = _paciente.value.situacaoHabitacional.copy(
-                        numeroComodos = valor.toInt()
+                        numeroComodos = valor
                     )
                 )
             }

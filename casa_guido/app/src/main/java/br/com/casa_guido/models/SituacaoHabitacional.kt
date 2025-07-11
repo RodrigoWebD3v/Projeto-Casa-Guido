@@ -1,33 +1,36 @@
 package br.com.casa_guido.models
 
+import br.com.casa_guido.util.StringAsIntFallbackSerializer
 import kotlinx.serialization.Serializable
 import java.util.UUID
 
 @Serializable
 data class SituacaoHabitacional(
     val id: String = UUID.randomUUID().toString(),
-    val comoAdquiriuCasa: Int = 0,
-    val area: Int = 0,
-    val numeroComodos: Int = 0,
-    val material: Int = 0,
+    val comoAdquiriuCasa: Int? = null,
+    val area: Int? = null,
+    val numeroComodos: String = "",
+    val material: Int? = null,
     val bens: Array<Int> = emptyArray(),
-    val meioDeTransporte: Int = 0,
-    val meioDeComunicao: Int = 0,
-    val possuiBanheiros: Int = 0,
-    val dentroDeCasa: Int = 0,
+    val meioDeTransporte: Int? = null,
+    val meioDeComunicao: Int? = null,
+    val possuiBanheiros: Int? = null,
+    val dentroDeCasa: Int? = null,
 )
 
 @Serializable
 data class SituacaoHabitacionalDTO(
-    val comoAdquiriuCasa: Int = 0,
-    val area: Int? = 0,
-    val numeroComodos: Int = 0,
-    val material: Int = 0,
+    val comoAdquiriuCasa: Int? = null,
+    val area: Int? = null,
+
+    //@Serializable(with = StringAsIntFallbackSerializer::class)
+    val numeroComodos: String? = "",
+    val material: Int? = null,
     val bens: Array<Int> = emptyArray(),
-    val meioDeTransporte: Int = 0,
-    val meioDeComunicao: Int  = 0,
-    val possuiBanheiros: Int  = 0,
-    val dentroDeCasa: Int = 0,
+    val meioDeTransporte: Int? = null,
+    val meioDeComunicao: Int? = null,
+    val possuiBanheiros: Int? = null,
+    val dentroDeCasa: Int? = null,
 )
 
 fun SituacaoHabitacional.toRequestDTO(): SituacaoHabitacionalDTO {

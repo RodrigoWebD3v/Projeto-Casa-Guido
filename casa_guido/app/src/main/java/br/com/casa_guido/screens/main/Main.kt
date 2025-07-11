@@ -78,8 +78,7 @@ fun Main(
 
     val items = listOf(
         ItemNavBar("Dashboard", Icons.Default.Dashboard, 0),
-        ItemNavBar("Pacientes", Icons.Default.Groups, 1),
-        //ItemNavBar("Ubs", Icons.Default.LocalHospital, 2)
+        ItemNavBar("Pacientes", Icons.Default.Groups, 1)
     )
 
     var selectedItem by remember {
@@ -109,15 +108,14 @@ fun Main(
     })
 
     val coroutineScope = rememberCoroutineScope()
-    val currentPage = pagerState.currentPage
-
-    LaunchedEffect(pagerState.currentPage) {
-        selectedItem = items.first { it.id == pagerState.currentPage }
-    }
 
     LaunchedEffect(Unit) {
         viewModelMain.setContext(contexto)
         viewModelMain.SincronizarPacientes()
+    }
+
+    LaunchedEffect(pagerState.currentPage) {
+        selectedItem = items.first { it.id == pagerState.currentPage }
     }
 
     LaunchedEffect(statusUsuario) {
@@ -125,6 +123,7 @@ fun Main(
             true -> {
 
             }
+
             false -> {
                 onNavigateToLogin()
             }
@@ -143,7 +142,6 @@ fun Main(
             }
             viewModelMain.togglePrimeiroAcesso()
         }
-
     }
 
     Scaffold(

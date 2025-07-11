@@ -117,12 +117,12 @@ fun AdicionarDocumentos(
     ) {
         Text(
             "$numeroTela. Adicionar Documentos", style = TextStyle(
-                fontSize = 18.sp, color = Color.Black, fontWeight = FontWeight.Bold
+                fontSize = 18.sp, color = GreenBlack, fontWeight = FontWeight.Bold
             )
         )
         Text(
             "Adicionar documentos necessários", style = TextStyle(
-                fontSize = 12.sp, color = Color.Black, fontWeight = FontWeight.Medium
+                fontSize = 12.sp, color = GreenBlack, fontWeight = FontWeight.Medium
             ), modifier = Modifier.padding(bottom = 16.dp)
         )
 
@@ -133,7 +133,7 @@ fun AdicionarDocumentos(
             colors = ButtonDefaults.buttonColors(containerColor = GreenBlack),
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Selecionar Documento")
+            Text("Selecionar Documento", color = Main, fontSize = 14.sp)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -160,7 +160,7 @@ fun AdicionarDocumentos(
                     Text(
                         text = arquivo.nome ?: "",
                         fontSize = 13.sp,
-                        color = Color.Black,
+                        color = GreenBlack,
                         modifier = Modifier.weight(1f)
                     )
                     Icon(

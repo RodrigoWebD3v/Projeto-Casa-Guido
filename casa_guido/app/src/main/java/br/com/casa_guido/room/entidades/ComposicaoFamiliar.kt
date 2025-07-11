@@ -11,9 +11,9 @@ data class ComposicaoFamiliar(
     val nome: String = "",
     val parentesco: String = "",
     val data_nascimento: String = "",
-    val estudaOpc: Int = 0,
+    val estudaOpc: Int? = null,
     val escolaridade: String = "",
-    val trabalhaOpc: Int = 0,
+    val trabalhaOpc: Int? = null,
     val renda: String = "",
     val idade: Int = 0,
 )

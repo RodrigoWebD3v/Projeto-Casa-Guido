@@ -156,7 +156,7 @@ fun CadastroComposicaoFamiliar(
                     )
                 },
                 onClick = { dataPickerNascimentoShow = true },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f).padding(end = 20.dp)
             )
         }
 

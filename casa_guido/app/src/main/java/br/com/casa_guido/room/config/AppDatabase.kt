@@ -46,7 +46,7 @@ import br.com.casa_guido.room.entidades.Tratamento
         Entrevista::class,
         Arquivo::class, // Uncomment if Arquivo entity is defined
     ],
-    version = 2,
+    version = 9,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
